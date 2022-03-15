@@ -1,0 +1,103 @@
+Lieu (
+    coord_Lambert_X : double (1),
+    coord_Lambert_Y : double (1),
+    /coord_GPS_X : double,
+    /coord_GPS_Y : double
+)
+
+Observation {abstract} (
+    idObs : int (1),
+    date : Date,
+    heure : Time,
+    @laCoord_Lambert_X : double REF Lieu(coord_Lambert_X) (NN),
+    @laCoord_Lambert_Y : double REF Lieu(coord_Lambert_Y) (NN)
+)
+
+Observateur (
+    idObservateur : int (1), -- auto-incrément
+    nom : String,
+    prenom : String
+)
+
+ObservationObservateur (
+    @unIdObs : int REF Observation(idObs) (1),
+    @unIdObservateur : int REF Observateur(idObservateur) (1)
+)
+
+Obs_Batracien (
+    espece : {calamite, pelodyte},
+    nombreAdultes : int,
+    nombreAmplexus : int,
+    nombrePonte : int,
+    nombreTetard : int,
+    temperature : double,
+    meteo_ciel : {dégagé, semi-dégagé, nuageux},
+    meteo_temp : {froid, moyen, chaud},
+    meteo_vent : {non, léger, moyen, fort},
+    meteo_pluie : {non, léger, moyenne, forte},
+    @uneVege_id : int REF Végétation(vege_id) (NN),
+    @uneZh_id : int REF ZoneHumide(zh_id) (NN)
+)
+
+Végétation (
+    vege_id : int (1),
+    vege_environ : String,
+    vege_bordure : String,
+    vege_ripisyles : String
+)
+
+ZoneHumide (
+    zh_id : int (1),
+    zh_temporaire : boolean,
+    zh_profondeur : double,
+    zh_surface : double,
+    zh_typeMare : {prairie, étang, marais, mare},
+    zh_pente : {raide, abrupte, douce},
+    zh_ouverture : {abritée, semi-abritée, ouverte}
+)
+
+Obs_Loutre (
+    commune : String,
+    lieuDit : String,
+    indice : {positif, négatif, non prospection}
+)
+
+Obs_Hyppocampe (
+    espece  : {Syngnathus acus, Hippocampus guttulatus, Hippocampus hippocampus, Entelurus aequoreus},
+    sexe : {mâle, femelle, inconu}
+    temperatureEau : int,
+    typePeche : {casierCrevette, casierMorgates, petitFilet, verveuxAnguilles},
+    taille : double,
+    gestant : boolean
+)
+
+Obs_CGI (
+    nature : {œuf, poussin, nid},
+    nombre : int,
+    presentsMaisNonObs : boolean,
+    @unIdNid : int REF Nid_CGI(idNid) (NN)
+)
+
+Nid_CGI (
+    idNid : int (1),
+    nomPlage : String,
+    /dateDecouverte : Date,
+    /dateArretObservation : Date,
+    raisonArretObservation : {envol, inconnu, maree, piétinement, prédation},
+    nbEnvol : int,
+    protection : bool,
+    bagueMale : String,
+    bagueFemelle : String
+)
+
+Obs_Chouette (
+    protocole : boolean,
+    typeObs : {Sonore, Visuel, Sonore et Visuel},
+    @unNumIndividu : int REF Chouette(numIndividu) (NN)
+)
+
+Chouette (
+    numIndividu: int (1),
+    espece : {Effraie, Cheveche, Hulotte},
+    sexe : {mâle, femelle, inconnu}   
+)
