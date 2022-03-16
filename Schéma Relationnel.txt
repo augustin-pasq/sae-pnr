@@ -62,9 +62,9 @@ Obs_Loutre (
     indice : {positif, négatif, non prospection}
 )
 
-Obs_Hyppocampe (
+Obs_Hippocampe (
     espece  : {Syngnathus acus, Hippocampus guttulatus, Hippocampus hippocampus, Entelurus aequoreus},
-    sexe : {mâle, femelle, inconu}
+    sexe : {mâle, femelle, inconnu}
     temperatureEau : int,
     typePeche : {casierCrevette, casierMorgates, petitFilet, verveuxAnguilles},
     taille : double,
