@@ -5,16 +5,16 @@ Lieu (
     /coord_GPS_Y : double
 )
 
-Observation {abstract} (
+Observation {abstract} ( -- ne pas s'occuper de abstract pour le moment, implémenter la table normalement + voir TP1 pour la notion de super-classe
     idObs : int (1),
-    date : Date,
-    heure : Time,
+    dateObs : Date,
+    heureObs : Time,
     @laCoord_Lambert_X : double REF Lieu(coord_Lambert_X) (NN),
     @laCoord_Lambert_Y : double REF Lieu(coord_Lambert_Y) (NN)
 )
 
 Observateur (
-    idObservateur : int (1), -- auto-incrément
+    idObservateur : int (1), -- auto-incrément (ne pas s'en occuper pour le moment, implémenter l'attribut normalement)
     nom : String,
     prenom : String
 )
@@ -71,7 +71,7 @@ Obs_Hyppocampe (
     gestant : boolean
 )
 
-Obs_CGI (
+Obs_GCI (
     nature : {œuf, poussin, nid},
     nombre : int,
     presentsMaisNonObs : boolean,
