@@ -64,6 +64,35 @@ CREATE TABLE QuiObserve (
 
 );
 
+CREATE TABLE Végétation (
+
+    vege_id NUMBER
+        CONSTRAINT pk_Végétation PRIMARY KEY,
+    vege_environ VARCHAR(50),
+    vege_bordure VARCHAR(50),
+    vege_ripisyles VARCHAR(50)
+
+);
+
+CREATE TABLE ZoneHumide (
+
+    zh_id NUMBER
+        CONSTRAINT pk_ZoneHumide PRIMARY KEY,
+    zh_temporaire BOOLEAN,
+    zh_profondeur NUMBER,
+    zh_surface NUMBER,
+    zh_typeMare VARCHAR(7)
+        CONSTRAINT ck_ZoneHumide_zh_typeMare 
+            CHECK zh_typeMare IN ('prairie','étang','marais','mare'),
+    zh_pente VARCHAR(7)
+        CONSTRAINT ck_ZoneHumide_zh_pente 
+            CHECK zh_pente IN ('raide','abrupte','douce'),
+    zh_ouverture VARCHAR(20)
+        CONSTRAINT ck_ZoneHumide_zh_ouverture 
+            CHECK zh_ouverture IN ('abritée','semi-abritée','ouverte')
+
+);
+
 CREATE TABLE Obs_Batracien (
 
     idObsBatracien NUMBER
@@ -95,35 +124,6 @@ CREATE TABLE Obs_Batracien (
     uneZh_id NUMBER
         CONSTRAINT fk_Obs_Batracien_ZoneHumide(zh_id)
         CONSTRAINT nn_uneZh_id NOT NULL
-
-);
-
-CREATE TABLE Végétation (
-
-    vege_id NUMBER
-        CONSTRAINT pk_Végétation PRIMARY KEY,
-    vege_environ VARCHAR(50),
-    vege_bordure VARCHAR(50),
-    vege_ripisyles VARCHAR(50)
-
-);
-
-CREATE TABLE ZoneHumide (
-
-    zh_id NUMBER
-        CONSTRAINT pk_ZoneHumide PRIMARY KEY,
-    zh_temporaire BOOLEAN,
-    zh_profondeur NUMBER,
-    zh_surface NUMBER,
-    zh_typeMare VARCHAR(7)
-        CONSTRAINT ck_ZoneHumide_zh_typeMare 
-            CHECK zh_typeMare IN ('prairie','étang','marais','mare'),
-    zh_pente VARCHAR(7)
-        CONSTRAINT ck_ZoneHumide_zh_pente 
-            CHECK zh_pente IN ('raide','abrupte','douce'),
-    zh_ouverture VARCHAR(20)
-        CONSTRAINT ck_ZoneHumide_zh_ouverture 
-            CHECK zh_ouverture IN ('abritée','semi-abritée','ouverte')
 
 );
 
@@ -160,22 +160,6 @@ CREATE TABLE Obs_Hippocampe (
 
 );
 
-CREATE TABLE  Obs_GCI (
-
-    idObsGCI NUMBER
-        CONSTRAINT pk_Obs_GCI PRIMARY KEY
-        CONSTRAINT fk_Obs_GCI_Observation REFERENCES Observation(idObs),
-    nature VARCHAR(7)
-        CONSTRAINT ck_Obs_CGI_nature 
-            CHECK nature IN ('oeuf','poussin','nid');
-    nombre NUMBER,
-    presentsMaisNonObs BOOLEAN,
-    unIdNid : int REF Nid_CGI(idNid) (NN)
-        CONSTRAINT fk_Obs_GCI_unIdNid REFERENCES Nid_GCI(idNid)
-        CONSTRAINT nn_Obs_GCI_unIdNod NOT NULL
-
-);
-
 CREATE TABLE Nid_CGI (
 
     idNid NUMBER
@@ -194,18 +178,19 @@ CREATE TABLE Nid_CGI (
 
 );
 
-CREATE TABLE Obs_Chouette (
+CREATE TABLE  Obs_GCI (
 
-    idObsChouette NUMBER
-        CONSTRAINT pk_Obs_Chouette PRIMARY KEY
-        CONSTRAINT fk_Obs_Chouette_Observation REFERENCES Observation(idObs),
-    protocole BOOLEAN,
-    typeObs VARCHAR(20)
-        CONSTRAINT ck_Obs_Chouette_typeObs 
-            CHECK typeObs IN ('Sonore','Visuel','Sonore et Visuel'),
-    unNumIndividu NUMBER
-        CONSTRAINT fk_ObsChouette_unNumIndividu REFERENCES Chouette(numIndividu)
-        CONSTRAINT nn_Obs_Chouette_unNumIndividu NOT NULL
+    idObsGCI NUMBER
+        CONSTRAINT pk_Obs_GCI PRIMARY KEY
+        CONSTRAINT fk_Obs_GCI_Observation REFERENCES Observation(idObs),
+    nature VARCHAR(7)
+        CONSTRAINT ck_Obs_CGI_nature 
+            CHECK nature IN ('oeuf','poussin','nid');
+    nombre NUMBER,
+    presentsMaisNonObs BOOLEAN,
+    unIdNid : int REF Nid_CGI(idNid) (NN)
+        CONSTRAINT fk_Obs_GCI_unIdNid REFERENCES Nid_GCI(idNid)
+        CONSTRAINT nn_Obs_GCI_unIdNod NOT NULL
 
 );
 
@@ -219,5 +204,20 @@ CREATE TABLE Chouette (
     sexe VARCHAR(7)
         ck_Chouette_sexe 
             CHECK sexe IN ('mâle','femelle','inconnu')  
+
+);
+
+CREATE TABLE Obs_Chouette (
+
+    idObsChouette NUMBER
+        CONSTRAINT pk_Obs_Chouette PRIMARY KEY
+        CONSTRAINT fk_Obs_Chouette_Observation REFERENCES Observation(idObs),
+    protocole BOOLEAN,
+    typeObs VARCHAR(20)
+        CONSTRAINT ck_Obs_Chouette_typeObs 
+            CHECK typeObs IN ('Sonore','Visuel','Sonore et Visuel'),
+    unNumIndividu NUMBER
+        CONSTRAINT fk_ObsChouette_unNumIndividu REFERENCES Chouette(numIndividu)
+        CONSTRAINT nn_Obs_Chouette_unNumIndividu NOT NULL
 
 );
