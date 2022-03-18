@@ -1,3 +1,5 @@
+-- premier
+
 DROP TABLE Obs_Chouette; -- x1 dépendant / Chouette /
 DROP TABLE Chouette; -- indépendant
 
@@ -15,6 +17,7 @@ DROP TABLE QuiObserve; -- x2 dépendant / Observation, Observateur /
 DROP TABLE Observateur; -- indépendant
 DROP TABLE Observation; -- x1 dépendant / Lieu /
 DROP TABLE Lieu; -- indépendant
+-- dernier
 
 -- Creation de tables
 
@@ -22,7 +25,7 @@ CREATE TABLE Lieu (
 
     coord_Lambert_X NUMBER,
     coord_Lambert_Y NUMBER,
-    CONSTRAINT pk_Lieu PRIMARY KEY (coord_Lambert_X, coord_Lambert_Y)
+        CONSTRAINT pk_Lieu PRIMARY KEY (coord_Lambert_X, coord_Lambert_Y)
 
     -- attribut derivé /coord_GPS_X : double
     -- attribut derivé /coord_GPS_Y : double
@@ -63,6 +66,9 @@ CREATE TABLE QuiObserve (
 
 CREATE TABLE Obs_Batracien (
 
+    idObsBatracien NUMBER
+        CONSTRAINT pk_Obs_Batracien PRIMARY KEY
+        CONSTRAINT fk_Obs_Batracien_Observation REFERENCES Observation(idObs),
     espece VARCHAR(30)
         CONSTRAINT ck_Obs_Batracien_espece 
             CHECK espece IN ('calamite','pelodyte'),
@@ -123,6 +129,9 @@ CREATE TABLE ZoneHumide (
 
 CREATE TABLE Obs_Loutre (
 
+    idObsLoutre NUMBER
+        CONSTRAINT pk_Obs_Loutre PRIMARY KEY
+        CONSTRAINT fk_Obs_Loutre_Observation REFERENCES Observation(idObs),
     commune VARCHAR(50),
     lieuDit VARCHAR(50),
     indice VARCHAR(50)
@@ -133,6 +142,9 @@ CREATE TABLE Obs_Loutre (
 
 CREATE TABLE Obs_Hippocampe (
 
+    idObsHippocampe NUMBER
+        CONSTRAINT pk_Obs_Hippocampe PRIMARY KEY
+        CONSTRAINT fk_Obs_Hippocampe_Observation REFERENCES Observation(idObs),
     espece VARCHAR(50)
         CONSTRAINT ck_Obs_Hippocampe_espece 
             CHECK espece IN ('Syngnathus acus','Hippocampus guttulatus','Hippocampus hippocampus','Entelurus aequoreus'),
@@ -150,6 +162,9 @@ CREATE TABLE Obs_Hippocampe (
 
 CREATE TABLE  Obs_GCI (
 
+    idObsGCI NUMBER
+        CONSTRAINT pk_Obs_GCI PRIMARY KEY
+        CONSTRAINT fk_Obs_GCI_Observation REFERENCES Observation(idObs),
     nature VARCHAR(20)
         CONSTRAINT ck_Obs_CGI_nature 
             CHECK nature IN ({'œuf','poussin','nid');
@@ -166,8 +181,6 @@ CREATE TABLE Nid_CGI (
     idNid NUMBER
         CONSTRAINT pk_Nid_GCI PRIMARY KEY,
     nomPlage VARCHAR(50),
-    -- attribut dérivé /dateDecouverte : date
-    -- attribut dérivé /dateArretObservation : date
     raisonArretObservation VARCHAR(20)
         CONSTRAINT ck_Nid_GCI_raisonArretObservation 
             CHECK raisonArretObservation IN ('envol','inconnu','maree','piétinement','prédation'),
@@ -176,10 +189,16 @@ CREATE TABLE Nid_CGI (
     bagueMale VARCHAR(50),
     bagueFemelle VARCHAR(50)
 
+    -- attribut dérivé /dateDecouverte : date
+    -- attribut dérivé /dateArretObservation : date
+
 );
 
 CREATE TABLE Obs_Chouette (
 
+    idObsChouette NUMBER
+        CONSTRAINT pk_Obs_Chouette PRIMARY KEY
+        CONSTRAINT fk_Obs_Chouette_Observation REFERENCES Observation(idObs),
     protocole BOOLEAN,
     typeObs VARCHAR(50)
         CONSTRAINT ck_Obs_Chouette_typeObs 
