@@ -69,7 +69,7 @@ CREATE TABLE Obs_Batracien (
     idObsBatracien NUMBER
         CONSTRAINT pk_Obs_Batracien PRIMARY KEY
         CONSTRAINT fk_Obs_Batracien_Observation REFERENCES Observation(idObs),
-    espece VARCHAR(30)
+    espece VARCHAR(20)
         CONSTRAINT ck_Obs_Batracien_espece 
             CHECK espece IN ('calamite','pelodyte'),
     nombreAdultes NUMBER,
@@ -77,16 +77,16 @@ CREATE TABLE Obs_Batracien (
     nombrePonte NUMBER,
     nombreTetard NUMBER,
     temperature NUMBER,
-    meteo_ciel VARCHAR(20)
+    meteo_ciel VARCHAR(13)
         CONSTRAINT ck_Obs_Batracien_meteo_ciel 
             CHECK meteo_ciel IN ('dégagé','semi-dégagé','nuageux'),
-    meteo_temp VARCHAR(20),
+    meteo_temp VARCHAR(5),
         CONSTRAINT ck_Obs_Batracien_meteo_temp 
             CHECK meteo_temp IN ('froid','moyen','chaud'),
     meteo_vent VARCHAR(20)
         CONSTRAINT ck_Obs_Batracien_meteo_vent 
             CHECK meteo_vent IN ('non','léger','moyen','fort'),
-    meteo_pluie VARCHAR(20)
+    meteo_pluie VARCHAR(7)
         CONSTRAINT ck_Obs_Batracien_meteo_pluie 
             CHECK meteo_pluie IN ('non','léger','moyenne','forte'),
     uneVege_id NUMBER
@@ -115,10 +115,10 @@ CREATE TABLE ZoneHumide (
     zh_temporaire BOOLEAN,
     zh_profondeur NUMBER,
     zh_surface NUMBER,
-    zh_typeMare VARCHAR(20)
+    zh_typeMare VARCHAR(7)
         CONSTRAINT ck_ZoneHumide_zh_typeMare 
             CHECK zh_typeMare IN ('prairie','étang','marais','mare'),
-    zh_pente VARCHAR(20)
+    zh_pente VARCHAR(7)
         CONSTRAINT ck_ZoneHumide_zh_pente 
             CHECK zh_pente IN ('raide','abrupte','douce'),
     zh_ouverture VARCHAR(20)
@@ -134,7 +134,7 @@ CREATE TABLE Obs_Loutre (
         CONSTRAINT fk_Obs_Loutre_Observation REFERENCES Observation(idObs),
     commune VARCHAR(50),
     lieuDit VARCHAR(50),
-    indice VARCHAR(50)
+    indice VARCHAR(20)
         CONSTRAINT ck_Obs_Loutre_indice 
             CHECK indice IN ('positif','négatif','non prospection')
 
@@ -145,14 +145,14 @@ CREATE TABLE Obs_Hippocampe (
     idObsHippocampe NUMBER
         CONSTRAINT pk_Obs_Hippocampe PRIMARY KEY
         CONSTRAINT fk_Obs_Hippocampe_Observation REFERENCES Observation(idObs),
-    espece VARCHAR(50)
+    espece VARCHAR(30)
         CONSTRAINT ck_Obs_Hippocampe_espece 
             CHECK espece IN ('Syngnathus acus','Hippocampus guttulatus','Hippocampus hippocampus','Entelurus aequoreus'),
-    sexe VARCHAR(10)
+    sexe VARCHAR(7)
         CONSTRAINT ck_Obs_Hippocampe_sexe 
             CHECK sexe IN ('mâle','femelle','inconnu'),
     temperatureEau NUMBER,
-    typePeche VARCHAR(50) 
+    typePeche VARCHAR(20) 
         CONSTRAINT ck_Obs_Hippocampe_typePEche 
             CHECK typePeche IN ('casierCrevette','casierMorgates','petitFilet','verveuxAnguilles'),
     taille NUMBER,
@@ -165,9 +165,9 @@ CREATE TABLE  Obs_GCI (
     idObsGCI NUMBER
         CONSTRAINT pk_Obs_GCI PRIMARY KEY
         CONSTRAINT fk_Obs_GCI_Observation REFERENCES Observation(idObs),
-    nature VARCHAR(20)
+    nature VARCHAR(7)
         CONSTRAINT ck_Obs_CGI_nature 
-            CHECK nature IN ({'œuf','poussin','nid');
+            CHECK nature IN ('oeuf','poussin','nid');
     nombre NUMBER,
     presentsMaisNonObs BOOLEAN,
     unIdNid : int REF Nid_CGI(idNid) (NN)
@@ -181,7 +181,7 @@ CREATE TABLE Nid_CGI (
     idNid NUMBER
         CONSTRAINT pk_Nid_GCI PRIMARY KEY,
     nomPlage VARCHAR(50),
-    raisonArretObservation VARCHAR(20)
+    raisonArretObservation VARCHAR(12)
         CONSTRAINT ck_Nid_GCI_raisonArretObservation 
             CHECK raisonArretObservation IN ('envol','inconnu','maree','piétinement','prédation'),
     nbEnvol NUMBER,
@@ -200,7 +200,7 @@ CREATE TABLE Obs_Chouette (
         CONSTRAINT pk_Obs_Chouette PRIMARY KEY
         CONSTRAINT fk_Obs_Chouette_Observation REFERENCES Observation(idObs),
     protocole BOOLEAN,
-    typeObs VARCHAR(50)
+    typeObs VARCHAR(20)
         CONSTRAINT ck_Obs_Chouette_typeObs 
             CHECK typeObs IN ('Sonore','Visuel','Sonore et Visuel'),
     unNumIndividu NUMBER
@@ -213,10 +213,10 @@ CREATE TABLE Chouette (
 
     numIndividu NUMBER 
         CONSTRAINT pk_Chouette PRIMARY KEY,
-    espece VARCHAR(20)
+    espece VARCHAR(8)
         ck_Chouette_espece
             CHECK espece IN ('Effraie','Cheveche','Hulotte'),
-    sexe VARCHAR(20)
+    sexe VARCHAR(7)
         ck_Chouette_sexe 
             CHECK sexe IN ('mâle','femelle','inconnu')  
 
