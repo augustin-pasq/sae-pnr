@@ -1,3 +1,13 @@
+-- S2.01 - Groupe 1D1
+
+-- LE NY, Liam
+-- MALIVET, Ervan
+-- OZANNE, Colin
+-- PASQUIER, Augustin
+-- TABOR, Samuel
+
+-- Supression de tables
+
 DROP TABLE Obs_Chouette; -- x1 dépendant / Chouette /
 DROP TABLE Chouette; -- indépendant
 
@@ -8,14 +18,13 @@ DROP TABLE Obs_Hippocampe; -- indépendant
 DROP TABLE Obs_Loutre; -- indépendant
 
 DROP TABLE Obs_Batracien; -- x2 dépendant / Végétation, ZoneHumide /
-DROP TABLE Végétation; -- indépendant
+DROP TABLE Vegetation; -- indépendant
 DROP TABLE ZoneHumide; -- indépendant
 
 DROP TABLE QuiObserve; -- x2 dépendant / Observation, Observateur /
 DROP TABLE Observateur; -- indépendant
 DROP TABLE Observation; -- x1 dépendant / Lieu /
 DROP TABLE Lieu; -- indépendant
-
 
 -- Creation de tables
 
@@ -63,10 +72,10 @@ CREATE TABLE QuiObserve (
 
 );
 
-CREATE TABLE Végétation (
+CREATE TABLE Vegetation (
 
     vege_id NUMBER
-        CONSTRAINT pk_Végétation PRIMARY KEY,
+        CONSTRAINT pk_Vegetation PRIMARY KEY,
     vege_environ VARCHAR(50),
     vege_bordure VARCHAR(50),
     vege_ripisyles VARCHAR(50)
@@ -84,13 +93,13 @@ CREATE TABLE ZoneHumide (
     zh_surface NUMBER,
     zh_typeMare VARCHAR(10)
         CONSTRAINT ck_ZoneHumide_zh_typeMare
-            CHECK (zh_typeMare IN ('prairie','étang','marais','mare')),
+            CHECK (zh_typeMare IN ('prairie','etang','marais','mare')),
     zh_pente VARCHAR(10)
         CONSTRAINT ck_ZoneHumide_zh_pente 
             CHECK (zh_pente IN ('raide','abrupte','douce')),
     zh_ouverture VARCHAR(20)
         CONSTRAINT ck_ZoneHumide_zh_ouverture 
-            CHECK (zh_ouverture IN ('abritée','semi-abritée','ouverte'))
+            CHECK (zh_ouverture IN ('abritee','semi-abritee','ouverte'))
 
 );
 
@@ -109,18 +118,18 @@ CREATE TABLE Obs_Batracien (
     temperature NUMBER,
     meteo_ciel VARCHAR(15)
         CONSTRAINT ck_Obs_Batracien_meteo_ciel 
-            CHECK (meteo_ciel IN ('dégagé','semi-dégagé','nuageux')),
+            CHECK (meteo_ciel IN ('degage','semi-degage','nuageux')),
     meteo_temp VARCHAR(10),
         CONSTRAINT ck_Obs_Batracien_meteo_temp 
             CHECK (meteo_temp IN ('froid','moyen','chaud')),
     meteo_vent VARCHAR(20)
         CONSTRAINT ck_Obs_Batracien_meteo_vent 
-            CHECK (meteo_vent IN ('non','léger','moyen','fort')),
+            CHECK (meteo_vent IN ('non','leger','moyen','fort')),
     meteo_pluie VARCHAR(10)
         CONSTRAINT ck_Obs_Batracien_meteo_pluie 
-            CHECK (meteo_pluie IN ('non','léger','moyenne','forte')),
+            CHECK (meteo_pluie IN ('non','leger','moyenne','forte')),
     uneVege_id NUMBER
-        CONSTRAINT fk_Obs_Batracien_Végétation REFERENCES Végétation(vege_id)
+        CONSTRAINT fk_Obs_Batracien_Vegetation REFERENCES Vegetation(vege_id)
         CONSTRAINT nn_uneVege_id NOT NULL,
     uneZh_id NUMBER
         CONSTRAINT fk_Obs_Batracien_ZoneHumide REFERENCES ZoneHumide(zh_id)
@@ -137,7 +146,7 @@ CREATE TABLE Obs_Loutre (
     lieuDit VARCHAR(50),
     indice VARCHAR(20)
         CONSTRAINT ck_Obs_Loutre_indice 
-            CHECK (indice IN ('positif','négatif','non prospection'))
+            CHECK (indice IN ('positif','negatif','non prospection'))
 
 );
 
@@ -170,7 +179,7 @@ CREATE TABLE Nid_GCI (
     nomPlage VARCHAR(50),
     raisonArretObservation VARCHAR(15)
         CONSTRAINT ck_Nid_GCI_raisonArretObs 
-            CHECK (raisonArretObservation IN ('envol','inconnu','maree','piétinement','prédation')),
+            CHECK (raisonArretObservation IN ('envol','inconnu','maree','pietinement','predation')),
     nbEnvol NUMBER,
     protection NUMBER
         CONSTRAINT ck_Nid_GCI_protection
