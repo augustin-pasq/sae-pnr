@@ -40,6 +40,21 @@ def parseDBF(dbf):
         else:
             tmp['typeObs'] = 'NULL'
 
+        # Parsage des coordonnées
+        if 'l93_x' in dic:
+            tmp['coord_Lambert_X'] = dic['l93_x']
+        elif 'x' in dic:
+            tmp['coord_Lambert_X'] = dic['x']
+        else:
+            tmp['coord_Lambert_X'] = 'NULL'
+
+        if 'l93_y' in dic:
+            tmp['coord_Lambert_Y'] = dic['l93_y']
+        elif 'x' in dic:
+            tmp['coord_Lambert_Y'] = dic['y']
+        else:
+            tmp['coord_Lambert_Y'] = 'NULL'
+
         # Ajout des autres attributs nécessaires
         tmp['numIndividu'] = str(dic['num_indiv'])  # Forçage de string
 
@@ -49,24 +64,25 @@ def parseDBF(dbf):
     return info
 
 
-informations = []
-with Dbf.open('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf') as dbf:
-    print('Fields: ', end="")
-    print(*[field for field in dbf.fields], sep=", ")
-    print(f'Number of rows: {dbf.prolog.records_count}')
+def parse(files):
+    informations = []
 
-    informations.extend(parseDBF(dbf))
+    for file in files:
+        with Dbf.open(file) as dbf:
+            print('Fields: ', end="")
+            print(*[field for field in dbf.fields], sep=", ")
+            print(f'Number of rows: {dbf.prolog.records_count}')
 
-with Dbf.open('Suivi_chouettes/Chouettes_Point_Individus_2019.dbf') as dbf:
-    print('Fields: ', end="")
-    print(*[field for field in dbf.fields], sep=", ")
-    print(f'Number of rows: {dbf.prolog.records_count}')
+            informations.extend(parseDBF(dbf))
 
-    informations.extend(parseDBF(dbf))
+    print()
+    # Tri et suppression de doublons
+    informations = sorted([i for n, i in enumerate(informations) if i not in informations[n + 1:]],
+                          key=lambda x: x['numIndividu'])
+    if __name__ == '__main__':
+        for row in informations:
+            print('\n', row)
 
-print()
-# Tri et suppression de doublons
-informations = sorted([i for n, i in enumerate(informations) if i not in informations[n + 1:]],
-                      key=lambda x: x['numIndividu'])
-for row in informations:
-    print('\n', row)
+
+if __name__ == '__main__':
+    parse(('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf', 'Suivi_chouettes/Chouettes_Point_Individus_2019.dbf'))
