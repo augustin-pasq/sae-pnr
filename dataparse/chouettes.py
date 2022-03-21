@@ -83,6 +83,8 @@ def parse(files):
 
 
 if __name__ == '__main__':
+    # import chouettes
+    # chouettes.parse()
     d = parse(('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf', 'Suivi_chouettes/Chouettes_Point_Individus_2019.dbf'))
     for row in d:
         print('\n', row)
