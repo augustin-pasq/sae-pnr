@@ -1,6 +1,5 @@
 #! /bin/env python
 
-from decimal import Decimal
 from dbf_light import Dbf
 
 
@@ -21,7 +20,7 @@ def parseDBF(dbf):
         elif dic['especes'] == 'C':
             tmp['espece'] = 'Cheveche'
         else:
-            tmp['especes'] = ''
+            tmp['espece'] = 'NULL'
 
         # Passage sexe en str complète
         if dic['sexe'] == 1:
@@ -38,14 +37,17 @@ def parseDBF(dbf):
             tmp['typeObs'] = 'Sonore'
         elif dic['type_cont'] == 'VS':
             tmp['typeObs'] = 'Sonore et Visuel'
+        else:
+            tmp['typeObs'] = 'NULL'
 
         # Ajout des autres attributs nécessaires
-        tmp['numIndividu'] = str(dic['id_numero']) # Forçage de string
+        tmp['numIndividu'] = str(dic['num_indiv'])  # Forçage de string
 
         print(dic)
         info.append(tmp)
 
     return info
+
 
 informations = []
 with Dbf.open('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf') as dbf:
@@ -62,7 +64,9 @@ with Dbf.open('Suivi_chouettes/Chouettes_Point_Individus_2019.dbf') as dbf:
 
     informations.extend(parseDBF(dbf))
 
-
 print()
-for row in sorted(informations, key=lambda x: x['numIndividu']):
+# Tri et suppression de doublons
+informations = sorted([i for n, i in enumerate(informations) if i not in informations[n + 1:]],
+                      key=lambda x: x['numIndividu'])
+for row in informations:
     print('\n', row)
