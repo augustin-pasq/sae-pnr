@@ -4,13 +4,14 @@ from dbf_light import Dbf
 
 
 def parseDBF(dbf):
+    global i
     info = []
     for row in dbf:
         tmp = {}
         dic = row._asdict()
 
         # Passage de protocole en boolean
-        tmp['protocole'] = dic['protocole'] == 'O'
+        tmp['protocole'] = 1 if dic['protocole'] == 'O' else 0
 
         # Passage espèce en str complète
         if dic['especes'] == 'E':
@@ -58,16 +59,19 @@ def parseDBF(dbf):
         # Ajout des autres attributs nécessaires
         tmp['numIndividu'] = str(dic['num_indiv'])  # Forçage de string
         tmp['date'] = dic['periode']
+        tmp['idObs'] = i
 
         print(dic)
         info.append(tmp)
+        i += 1
 
     return info
 
 
 def parse(files):
     informations = []
-
+    global i
+    i = 0
     for file in files:
         with Dbf.open(file) as dbf:
             print('Fields: ', end="")
@@ -79,7 +83,7 @@ def parse(files):
     print()
     # Tri et suppression de doublons
     informations = sorted([i for n, i in enumerate(informations) if i not in informations[n + 1:]],
-                          key=lambda x: x['numIndividu'])
+                          key=lambda x: x['idObs'])
     return informations
 
 
