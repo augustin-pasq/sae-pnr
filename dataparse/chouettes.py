@@ -39,14 +39,14 @@ def parseDBF(dbf):
     return info
 
 informations = []
-with Dbf.open('../Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf') as dbf:
+with Dbf.open('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf') as dbf:
     print('Fields: ', end="")
     print(*[field for field in dbf.fields], sep=", ")
     print(f'Number of rows: {dbf.prolog.records_count}')
 
     informations.extend(parseDBF(dbf))
 
-with Dbf.open('../Suivi_chouettes/Chouettes_Point_Individus_2019.dbf') as dbf:
+with Dbf.open('Suivi_chouettes/Chouettes_Point_Individus_2019.dbf') as dbf:
     print('Fields: ', end="")
     print(*[field for field in dbf.fields], sep=", ")
     print(f'Number of rows: {dbf.prolog.records_count}')
