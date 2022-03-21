@@ -4,7 +4,7 @@ chouette = chouettes.parse(('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf', '
 f = open("insert.sql", "w")
 
 f.write("-- Insertions Chouette\n")
-for dic in chouette:
+for dic in chouette[0]:
 
     a = dic['numIndividu']
     b = dic['espece']
@@ -22,7 +22,7 @@ for dic in chouette:
     f.write(f"INSERT INTO Chouette VALUES({a},{b},{c});\n")
 
 f.write("\n-- Insertions Obs_Chouette\n")
-for dic in chouette:
+for dic in chouette[0]:
 
     a = dic['protocole']
     c = dic['typeObs']
