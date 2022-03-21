@@ -79,10 +79,10 @@ def parse(files):
     # Tri et suppression de doublons
     informations = sorted([i for n, i in enumerate(informations) if i not in informations[n + 1:]],
                           key=lambda x: x['numIndividu'])
-    if __name__ == '__main__':
-        for row in informations:
-            print('\n', row)
+    return informations
 
 
 if __name__ == '__main__':
-    parse(('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf', 'Suivi_chouettes/Chouettes_Point_Individus_2019.dbf'))
+    d = parse(('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf', 'Suivi_chouettes/Chouettes_Point_Individus_2019.dbf'))
+    for row in d:
+        print('\n', row)
