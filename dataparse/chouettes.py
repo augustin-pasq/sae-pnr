@@ -57,6 +57,7 @@ def parseDBF(dbf):
 
         # Ajout des autres attributs nécessaires
         tmp['numIndividu'] = str(dic['num_indiv'])  # Forçage de string
+        tmp['date'] = dic['periode']
 
         print(dic)
         info.append(tmp)
