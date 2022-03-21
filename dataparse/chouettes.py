@@ -1,5 +1,6 @@
 #! /bin/env python
 
+from decimal import Decimal
 from dbf_light import Dbf
 
 
@@ -14,11 +15,11 @@ def parseDBF(dbf):
 
         # Passage espèce en str complète
         if dic['especes'] == 'E':
-            tmp['especes'] = 'Effraie'
+            tmp['espece'] = 'Effraie'
         elif dic['especes'] == 'H':
-            tmp['especes'] = 'Hulotte'
+            tmp['espece'] = 'Hulotte'
         elif dic['especes'] == 'C':
-            tmp['especes'] = 'Cheveche'
+            tmp['espece'] = 'Cheveche'
         else:
             tmp['especes'] = ''
 
@@ -30,8 +31,16 @@ def parseDBF(dbf):
         else:
             tmp['sexe'] = 'inconnu'
 
+        # Passage de type_cont en str complète
+        if dic['type_cont'] == 'V':
+            tmp['typeObs'] = 'Visuel'
+        elif dic['type_cont'] == 'S':
+            tmp['typeObs'] = 'Sonore'
+        elif dic['type_cont'] == 'VS':
+            tmp['typeObs'] = 'Sonore et Visuel'
+
         # Ajout des autres attributs nécessaires
-        tmp['num_indiv'] = dic['num_indiv']
+        tmp['numIndividu'] = str(dic['id_numero']) # Forçage de string
 
         print(dic)
         info.append(tmp)
@@ -55,5 +64,5 @@ with Dbf.open('Suivi_chouettes/Chouettes_Point_Individus_2019.dbf') as dbf:
 
 
 print()
-for row in informations:
+for row in sorted(informations, key=lambda x: x['numIndividu']):
     print('\n', row)
