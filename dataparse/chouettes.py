@@ -4,11 +4,19 @@ from dbf_light import Dbf
 
 
 def parseDBF(dbf):
+    obs = []
     global i
     info = []
     for row in dbf:
         tmp = {}
         dic = row._asdict()
+
+        try:
+            tmpobs = {'prenom': dic['camp_2015'], 'nom': 'NULL', 'idObservateur': len(obs)}
+            obs += [tmpobs] if tmpobs["prenom"] not in [o['prenom'] for o in obs] and tmpobs["prenom"] != '' else []
+
+        except KeyError as e:
+            print(e)
 
         # Passage de protocole en boolean
         tmp['protocole'] = 1 if dic['protocole'] == 'O' else 0
@@ -65,7 +73,7 @@ def parseDBF(dbf):
         info.append(tmp)
         i += 1
 
-    return info
+    return info, obs
 
 
 def parse(files):
@@ -82,8 +90,8 @@ def parse(files):
 
     print()
     # Tri et suppression de doublons
-    informations = sorted([i for n, i in enumerate(informations) if i not in informations[n + 1:]],
-                          key=lambda x: x['idObs'])
+    informations[0] = sorted([i for n, i in enumerate(informations[0]) if i not in informations[0][n + 1:]],
+                             key=lambda x: x['idObs'])
     return informations
 
 
@@ -91,5 +99,7 @@ if __name__ == '__main__':
     # import chouettes
     # chouettes.parse()
     d = parse(('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf', 'Suivi_chouettes/Chouettes_Point_Individus_2019.dbf'))
-    for row in d:
+    for row in d[0]:
         print('\n', row)
+    print(*d[1], sep=", ")
+    print(d[1])
