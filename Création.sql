@@ -55,7 +55,7 @@ CREATE TABLE Observation (
 
 CREATE TABLE Observateur (
 
-    idObservateur NUMBER
+    idObservateur NUMBER GENERATED ALWAYS as IDENTITY(START with 0 INCREMENT by 1)
         CONSTRAINT pk_Observateur PRIMARY KEY,
     nom VARCHAR(50),
     prenom VARCHAR(50)
