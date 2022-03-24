@@ -99,7 +99,10 @@ if __name__ == '__main__':
     # import chouettes
     # chouettes.parse()
     d = parse(('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf', 'Suivi_chouettes/Chouettes_Point_Individus_2019.dbf'))
-    for row in d[0]:
-        print('\n', row)
+    print(d[0])
+    print(d[50])
+    print(d[60])
+    print(d[70])
+    print(d[70])
     print(*d[1], sep=", ")
     print(d[1])
