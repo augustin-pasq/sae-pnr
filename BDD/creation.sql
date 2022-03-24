@@ -55,7 +55,7 @@ CREATE TABLE Observation (
 
 CREATE TABLE Observateur (
 
-    idObservateur NUMBER GENERATED ALWAYS as IDENTITY(START with 0 INCREMENT by 1)
+    idObservateur NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1)
         CONSTRAINT pk_Observateur PRIMARY KEY,
     nom VARCHAR(50),
     prenom VARCHAR(50)
@@ -219,7 +219,7 @@ CREATE TABLE Chouette (
             CHECK (espece IN ('Effraie','Cheveche','Hulotte')),
     sexe VARCHAR(10)
         CONSTRAINT ck_Chouette_sexe 
-            CHECK (sexe IN ('mâle','femelle','inconnu'))
+            CHECK (sexe IN ('male','femelle','inconnu'))
 
 );
 
