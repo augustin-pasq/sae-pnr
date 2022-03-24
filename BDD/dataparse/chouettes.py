@@ -1,6 +1,7 @@
 #! /bin/env python
 
 from dbf_light import Dbf
+from collections import Counter
 
 
 def parseDBF(dbf):
@@ -68,7 +69,7 @@ def parseDBF(dbf):
         # Ajout des autres attributs nécessaires
         tmp['numIndividu'] = str(dic['num_indiv'])  # Forçage de string
         tmp['date'] = dic['periode']
-        tmp['idObs'] = i
+        # tmp['idObs'] = i
 
         info.append(tmp)
         i += 1
@@ -91,9 +92,19 @@ def parse(files):
             informations[0].extend(data[0])
             informations[1].extend(data[1])
 
+    nums = Counter(k['numIndividu'] for k in informations[0] if k.get('numIndividu'))
+    print(nums)
+
     # Tri et suppression de doublons
-    informations[0] = sorted([i for n, i in enumerate(informations[0]) if i not in informations[0][n + 1:]],
-                             key=lambda x: x['idObs'])
+    informations[0] = sorted([i for n, i in enumerate(informations[0]) if i not in informations[0][n + 1:] and nums[i['numIndividu']] <= 1],
+                             key=lambda x: x['numIndividu'])
+
+    nums = Counter(k['numIndividu'] for k in informations[0] if k.get('numIndividu'))
+    print(nums.most_common())
+
+    for i,d in enumerate(informations[0]):
+        d['idObs'] = i
+
     return informations
 
 
@@ -109,7 +120,8 @@ if __name__ == '__main__':
     print(d[0][20])
     print(d[0][30])
     print(d[0][50])
-    print(d[0][40])
+    print(d[0][312])
+    print(d[0][311])
     print()
     print("Observateurs")
     print(len(d[1]))
