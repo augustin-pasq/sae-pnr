@@ -67,7 +67,7 @@ def parseDBF(dbf):
             tmp['coord_Lambert_Y'] = 'NULL'
 
         # Ajout des autres attributs nécessaires
-        tmp['numIndividu'] = str(dic['num_indiv'])  # Forçage de string
+        tmp['numIndividu'] = str(dic['num_indiv']).replace("-", ".")  # Forçage de string
         tmp['date'] = dic['periode']
         # tmp['idObs'] = i
 
