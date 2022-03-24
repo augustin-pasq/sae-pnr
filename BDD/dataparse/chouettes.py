@@ -16,8 +16,7 @@ def parseDBF(dbf):
             obs += [tmpobs] if tmpobs["prenom"] not in [o['prenom'] for o in obs] and tmpobs["prenom"] != '' else []
 
         except KeyError as e:
-            print(e)
-
+            pass
         # Passage de protocole en boolean
         tmp['protocole'] = 1 if dic['protocole'] == 'O' else 0
 
@@ -69,7 +68,6 @@ def parseDBF(dbf):
         tmp['date'] = dic['periode']
         tmp['idObs'] = i
 
-        print(dic)
         info.append(tmp)
         i += 1
 
@@ -77,7 +75,7 @@ def parseDBF(dbf):
 
 
 def parse(files):
-    informations = []
+    informations = [[], []]
     global i
     i = 0
     for file in files:
@@ -86,7 +84,9 @@ def parse(files):
             print(*[field for field in dbf.fields], sep=", ")
             print(f'Number of rows: {dbf.prolog.records_count}')
 
-            informations.extend(parseDBF(dbf))
+            data = parseDBF(dbf)
+            informations[0].extend(data[0])
+            informations[1].extend(data[1])
 
     print()
     # Tri et suppression de doublons
@@ -99,10 +99,19 @@ if __name__ == '__main__':
     # import chouettes
     # chouettes.parse()
     d = parse(('Suivi_chouettes/Chouettes_Point_Ecoute_2019.dbf', 'Suivi_chouettes/Chouettes_Point_Individus_2019.dbf'))
-    print(d[0])
-    print(d[50])
-    print(d[60])
-    print(d[70])
-    print(d[70])
-    print(*d[1], sep=", ")
-    print(d[1])
+    print("len(d) =", len(d))
+    print("Data")
+    print(len(d[0]))
+    print(d[0][10])
+    print(d[0][20])
+    print(d[0][30])
+    print(d[0][50])
+    print(d[0][40])
+    print()
+    print("Observateurs")
+    print("len(d[1]) =", len(d[1]))
+    for l in d[1]:
+        print(l)
+    print("")
+    # print(len(d[2]))
+    # print(len(d[3]))
