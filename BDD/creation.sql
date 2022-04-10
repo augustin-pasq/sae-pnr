@@ -212,7 +212,7 @@ CREATE TABLE  Obs_GCI (
 
 CREATE TABLE Chouette (
 
-    numIndividu NUMBER 
+    numIndividu VARCHAR(20) 
         CONSTRAINT pk_Chouette PRIMARY KEY,
     espece VARCHAR(10)
         CONSTRAINT ck_Chouette_espece

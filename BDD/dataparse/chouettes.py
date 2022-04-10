@@ -51,7 +51,7 @@ def parseDBF(dbf):
         else:
             tmp['typeObs'] = 'NULL'
 
-        # Parsage des coordonnées
+        # Parsage des coordonnées ... "parsage ? COLIN que t'arrive t-il?"
         if 'l93_x' in dic:
             tmp['coord_Lambert_X'] = dic['l93_x']
         elif 'x' in dic:
