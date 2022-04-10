@@ -21,9 +21,13 @@ DROP TABLE Obs_Batracien; -- x2 dépendant / Végétation, ZoneHumide /
 DROP TABLE Vegetation; -- indépendant
 DROP TABLE ZoneHumide; -- indépendant
 
-DROP TABLE QuiObserve; -- x2 dépendant / Observation, Observateur /
+DROP TABLE QuiObserveBatracien; -- x2 dépendant
+DROP TABLE QuiObserveGCI; -- x2 dépendant / Observation
+DROP TABLE QuiObserveChouette; -- x2 dépendant / Observation
+DROP TABLE QuiObserveLoutre; -- x2 dépendant / Observation
+DROP TABLE QuiObserveHippocampe; -- x2 dépendant / Observation
+
 DROP TABLE Observateur; -- indépendant
-DROP TABLE Observation; -- x1 dépendant / Lieu /
 DROP TABLE Lieu; -- indépendant
 
 -- Creation de tables
@@ -39,36 +43,12 @@ CREATE TABLE Lieu (
 
 );
 
-CREATE TABLE Observation (
-
-    idObs NUMBER
-        CONSTRAINT pk_Observation PRIMARY KEY,
-    dateObs DATE,
-    heureOBS TIMESTAMP,
-    laCoord_Lambert_X NUMBER,
-    laCoord_Lambert_Y NUMBER,
-    CONSTRAINT fk_Observation_Lieu 
-        FOREIGN KEY (laCoord_Lambert_X, laCoord_Lambert_Y)
-            REFERENCES Lieu(coord_Lambert_X, coord_Lambert_Y)
-
-);
-
 CREATE TABLE Observateur (
 
     idObservateur NUMBER
         CONSTRAINT pk_Observateur PRIMARY KEY,
     nom VARCHAR(50),
     prenom VARCHAR(50)
-
-);
-
-CREATE TABLE QuiObserve (
-
-    unIdObs NUMBER
-        CONSTRAINT fk_QuiObserve_Observation REFERENCES Observation(idObs),
-    unIdObservateur NUMBER
-        CONSTRAINT fk_QuiObserve_Observateur REFERENCES Observateur(idObservateur),
-    CONSTRAINT pk_QuiObserve PRIMARY KEY (unIdObs, unIdObservateur)
 
 );
 
@@ -105,9 +85,15 @@ CREATE TABLE ZoneHumide (
 
 CREATE TABLE Obs_Batracien (
 
-    idObsBatracien NUMBER
-        CONSTRAINT pk_Obs_Batracien PRIMARY KEY
-        CONSTRAINT fk_Obs_Batracien_Observation REFERENCES Observation(idObs),
+    idObs NUMBER
+        CONSTRAINT pk_Observation PRIMARY KEY,
+    dateObs DATE,
+    heureOBS TIMESTAMP,
+    laCoord_Lambert_X NUMBER,
+    laCoord_Lambert_Y NUMBER,
+    CONSTRAINT fk_Observation_Lieu 
+        FOREIGN KEY (laCoord_Lambert_X, laCoord_Lambert_Y)
+            REFERENCES Lieu(coord_Lambert_X, coord_Lambert_Y)
     espece VARCHAR(20)
         CONSTRAINT ck_Obs_Batracien_espece 
             CHECK (espece IN ('calamite','pelodyte')),
@@ -137,11 +123,27 @@ CREATE TABLE Obs_Batracien (
 
 );
 
+CREATE TABLE QuiObserveBatracien (
+
+    unIdObs NUMBER
+        CONSTRAINT fk_QuiObserve_Observation REFERENCES Obs_Batracien(idObs),
+    unIdObservateur NUMBER
+        CONSTRAINT fk_QuiObserve_Observateur REFERENCES Observateur(idObservateur),
+    CONSTRAINT pk_QuiObserve PRIMARY KEY (unIdObs, unIdObservateur)
+
+);
+
 CREATE TABLE Obs_Loutre (
 
-    idObsLoutre NUMBER
-        CONSTRAINT pk_Obs_Loutre PRIMARY KEY
-        CONSTRAINT fk_Obs_Loutre_Observation REFERENCES Observation(idObs),
+    idObs NUMBER
+        CONSTRAINT pk_Observation PRIMARY KEY,
+    dateObs DATE,
+    heureOBS TIMESTAMP,
+    laCoord_Lambert_X NUMBER,
+    laCoord_Lambert_Y NUMBER,
+    CONSTRAINT fk_Observation_Lieu 
+        FOREIGN KEY (laCoord_Lambert_X, laCoord_Lambert_Y)
+            REFERENCES Lieu(coord_Lambert_X, coord_Lambert_Y)
     commune VARCHAR(50),
     lieuDit VARCHAR(50),
     indice VARCHAR(20)
@@ -150,11 +152,27 @@ CREATE TABLE Obs_Loutre (
 
 );
 
+CREATE TABLE QuiObserveLoutre (
+
+    unIdObs NUMBER
+        CONSTRAINT fk_QuiObserve_Observation REFERENCES Obs_Loutre(idObs),
+    unIdObservateur NUMBER
+        CONSTRAINT fk_QuiObserve_Observateur REFERENCES Observateur(idObservateur),
+    CONSTRAINT pk_QuiObserve PRIMARY KEY (unIdObs, unIdObservateur)
+
+);
+
 CREATE TABLE Obs_Hippocampe (
 
-    idObsHippocampe NUMBER
-        CONSTRAINT pk_Obs_Hippocampe PRIMARY KEY
-        CONSTRAINT fk_Obs_Hippocampe_Observation REFERENCES Observation(idObs),
+    idObs NUMBER
+        CONSTRAINT pk_Observation PRIMARY KEY,
+    dateObs DATE,
+    heureOBS TIMESTAMP,
+    laCoord_Lambert_X NUMBER,
+    laCoord_Lambert_Y NUMBER,
+    CONSTRAINT fk_Observation_Lieu 
+        FOREIGN KEY (laCoord_Lambert_X, laCoord_Lambert_Y)
+            REFERENCES Lieu(coord_Lambert_X, coord_Lambert_Y)
     espece VARCHAR(30)
         CONSTRAINT ck_Obs_Hippocampe_espece 
             CHECK (espece IN ('Syngnathus acus','Hippocampus guttulatus','Hippocampus hippocampus','Entelurus aequoreus')),
@@ -169,6 +187,16 @@ CREATE TABLE Obs_Hippocampe (
     gestant NUMBER
         CONSTRAINT ck_Obs_Hippocampe_gestant
             CHECK (gestant IN (0, 1))
+
+);
+
+CREATE TABLE QuiObserveHippocampe (
+
+    unIdObs NUMBER
+        CONSTRAINT fk_QuiObserve_Observation REFERENCES Obs_Hippocampe(idObs),
+    unIdObservateur NUMBER
+        CONSTRAINT fk_QuiObserve_Observateur REFERENCES Observateur(idObservateur),
+    CONSTRAINT pk_QuiObserve PRIMARY KEY (unIdObs, unIdObservateur)
 
 );
 
@@ -194,9 +222,15 @@ CREATE TABLE Nid_GCI (
 
 CREATE TABLE  Obs_GCI (
 
-    idObsGCI NUMBER
-        CONSTRAINT pk_Obs_GCI PRIMARY KEY
-        CONSTRAINT fk_Obs_GCI_Observation REFERENCES Observation(idObs),
+    idObs NUMBER
+        CONSTRAINT pk_Observation PRIMARY KEY,
+    dateObs DATE,
+    heureOBS TIMESTAMP,
+    laCoord_Lambert_X NUMBER,
+    laCoord_Lambert_Y NUMBER,
+    CONSTRAINT fk_Observation_Lieu 
+        FOREIGN KEY (laCoord_Lambert_X, laCoord_Lambert_Y)
+            REFERENCES Lieu(coord_Lambert_X, coord_Lambert_Y)
     nature VARCHAR(10)
         CONSTRAINT ck_Obs_GCI_nature 
             CHECK (nature IN ('oeuf','poussin','nid')),
@@ -207,6 +241,16 @@ CREATE TABLE  Obs_GCI (
     unIdNid NUMBER
         CONSTRAINT fk_Obs_GCI_unIdNid REFERENCES Nid_GCI(idNid)
         CONSTRAINT nn_Obs_GCI_unIdNod NOT NULL
+
+);
+
+CREATE TABLE QuiObserveGCI (
+
+    unIdObs NUMBER
+        CONSTRAINT fk_QuiObserve_Observation REFERENCES Obs_GCI(idObs),
+    unIdObservateur NUMBER
+        CONSTRAINT fk_QuiObserve_Observateur REFERENCES Observateur(idObservateur),
+    CONSTRAINT pk_QuiObserve PRIMARY KEY (unIdObs, unIdObservateur)
 
 );
 
@@ -225,9 +269,15 @@ CREATE TABLE Chouette (
 
 CREATE TABLE Obs_Chouette (
 
-    idObsChouette NUMBER
-        CONSTRAINT pk_Obs_Chouette PRIMARY KEY
-        CONSTRAINT fk_Obs_Chouette_Observation REFERENCES Observation(idObs),
+    idObs NUMBER
+        CONSTRAINT pk_Observation PRIMARY KEY,
+    dateObs DATE,
+    heureOBS TIMESTAMP,
+    laCoord_Lambert_X NUMBER,
+    laCoord_Lambert_Y NUMBER,
+    CONSTRAINT fk_Observation_Lieu 
+        FOREIGN KEY (laCoord_Lambert_X, laCoord_Lambert_Y)
+            REFERENCES Lieu(coord_Lambert_X, coord_Lambert_Y)
     protocole NUMBER
         CONSTRAINT ck_Obs_Chouette_protocole
             CHECK (protocole IN (0, 1)),
@@ -237,5 +287,15 @@ CREATE TABLE Obs_Chouette (
     unNumIndividu VARCHAR(20)
         CONSTRAINT fk_ObsChouette_unNumIndividu REFERENCES Chouette(numIndividu)
         CONSTRAINT nn_Obs_Chouette_unNumIndividu NOT NULL
+
+);
+
+CREATE TABLE QuiObserveChouette (
+
+    unIdObs NUMBER
+        CONSTRAINT fk_QuiObserve_Observation REFERENCES Obs_Chouette(idObs),
+    unIdObservateur NUMBER
+        CONSTRAINT fk_QuiObserve_Observateur REFERENCES Observateur(idObservateur),
+    CONSTRAINT pk_QuiObserve PRIMARY KEY (unIdObs, unIdObservateur)
 
 );
