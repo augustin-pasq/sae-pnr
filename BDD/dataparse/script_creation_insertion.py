@@ -4,7 +4,7 @@ chouette = chouettes.parse((r'C:\Users\emali\OneDrive\Documents\Work\Bac+1\S2\S2
 
 f = open("insertChouette.sql", "w")
 
-f.write("\n-- Insertions Lieu\n")
+f.write("-- Insertions Lieu\n")
 for i in range(len(chouette[0])):
     dic = chouette[0][i]
     d = dic['coord_Lambert_X']
@@ -20,7 +20,6 @@ for i in range(len(chouette[0])):
     dic = chouette[0][i]
     a = i+1
     b = "TO_DATE(\'01/01/" + str(dic['date']) +  "\', \'dd/mm/yyyy')" if dic['date'] != 0 else "NULL"
-    #b = "01/01/" + str(dic['date']) if dic['date'] != 0 else "NULL"
     c = 'NULL'
     d = dic['coord_Lambert_X']
     e = dic['coord_Lambert_Y']
