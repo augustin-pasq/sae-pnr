@@ -16,9 +16,13 @@ def parseDBF(dbf):
             dic['camp_2015'] = dic['camp_2015'].replace('щ', "é").replace("ч", "ç")
             tmpobs = {'prenom': dic['camp_2015'], 'nom': 'NULL', 'idObservateur': len(obs)}
             obs += [tmpobs] if tmpobs["prenom"] not in [o['prenom'] for o in obs] and tmpobs["prenom"] != '' else []
-            tmp['observateur'] = tmpobs['idObservateur']
         except KeyError as e:
             tmp['observateur'] = 'NULL'
+
+        id = 0
+        for o in obs:
+            if o["prenom"] == dic['camp_2015']:
+                id = o["idObservateur"]
 
         # Passage de protocole en boolean
         tmp['protocole'] = 1 if dic['protocole'] == 'O' else 0
