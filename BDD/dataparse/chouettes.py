@@ -17,12 +17,13 @@ def parseDBF(dbf):
             tmpobs = {'prenom': dic['camp_2015'], 'nom': 'NULL', 'idObservateur': len(obs)}
             obs += [tmpobs] if tmpobs["prenom"] not in [o['prenom'] for o in obs] and tmpobs["prenom"] != '' else []
         except KeyError as e:
-            tmp['observateur'] = 'NULL'
+            pass
 
-        id = 0
+        id = 'NULL'
         for o in obs:
             if o["prenom"] == dic['camp_2015']:
                 id = o["idObservateur"]
+        tmp['observateur'] = id
 
         # Passage de protocole en boolean
         tmp['protocole'] = 1 if dic['protocole'] == 'O' else 0
