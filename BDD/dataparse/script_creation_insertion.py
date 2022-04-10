@@ -16,6 +16,19 @@ for i in range(len(chouette[0])):
         e = 'NULL'
     f.write(f"INSERT INTO Lieu VALUES({d},{e});\n")
 
+f.write("-- Insertions Observateur\n")
+for dic in chouette[1]:
+    a = dic['idObservateur']
+    b = dic['nom']
+    c = dic['prenom']
+
+    if b != 'NULL':
+        b = "\'" + b + "\'"
+    if c != 'NULL':
+        c = "\'" + c + "\'"
+
+    f.write(f"INSERT INTO Observateur VALUES({a},{b},{c});\n")
+
 f.write("\n-- Insertions Chouette\n")
 for dic in chouette[0]:
     a = dic['numIndividu']
@@ -34,7 +47,7 @@ for i in range(len(chouette[0])):
     dic = chouette[0][i]
     a = i + 1
     e = "TO_DATE(\'01/01/" + str(dic['date']) + "\', \'dd/mm/yyyy')" if dic['date'] != 0 else "NULL"
-    f = 'NULL'
+    j = 'NULL'
     g = dic['coord_Lambert_X']
     h = dic['coord_Lambert_Y']
     b = dic['protocole']
@@ -51,13 +64,13 @@ for i in range(len(chouette[0])):
     if e == 0:
         e = 'NULL'
 
-    f.write(f"INSERT INTO Obs_Chouette VALUES({a},{e},{f},{g},{h},{b},{c},{d});\n")
+    f.write(f"INSERT INTO Obs_Chouette VALUES({a},{e},{j},{g},{h},{b},{c},{d});\n")
 
 
 f.write("\n-- Insertions QuiObserveChouette\n")
 for i in range(len(chouette[0])):
     dic = chouette[0][i]
-    a = dic['idObs']
+    a = i+1
     b = dic['observateur']
-    if a != 'NULL' and b != 'NULL':
+    if b != 'NULL':
         f.write(f"INSERT INTO QuiObserveChouette VALUES({a},{b});\n")
