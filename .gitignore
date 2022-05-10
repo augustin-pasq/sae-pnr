@@ -3,6 +3,9 @@
 .vscode
 Java/Java.iml
 
+# Compiled classes
+Java/class
+
 .~lock*
 
 # Python files
