@@ -1,3 +1,9 @@
+# IDE files
 .idea
+.vscode
+Java/Java.iml
+
 .~lock*
+
+# Python files
 dataparse/__pycache__
