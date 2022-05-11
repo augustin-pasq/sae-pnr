@@ -1,27 +1,42 @@
 package modele.donnee;
 
+/**
+ * Set of classes to be implemented on a species
+ */
 public interface lObs {
 
-	/**
-	 * 
-	 * @param obs
-	 */
-	void ajouterUneObs(T obs);
+    /**
+     * Add an observation to the list
+     *
+     * @param obs the observation to add
+     */
+    void ajouterUneObs(T obs);
 
-	/**
-	 * 
-	 * @param obs
-	 */
-	void ajouterPlsObs(ArrayList<T> obs);
+    /**
+     * Add several observations to the list
+     *
+     * @param obs the observations to add
+     */
+    void ajouterPlsObs(ArrayList<T> obs);
 
-	void videObs();
+    /**
+     * Remove all observations from the list
+     */
+    void videObs();
 
-	/**
-	 * 
-	 * @param idObs
-	 */
-	boolean retireObs(int idObs);
+    /**
+     * Remove an observation from the list
+     *
+     * @param idObs the id of the observation to remove
+     * @return true if the observation has been removed, false otherwise
+     */
+    boolean retireObs(int idObs);
 
-	int nbObs();
+    /**
+     * Get the number of observations
+     *
+     * @return the number of observations
+     */
+    int nbObs();
 
 }

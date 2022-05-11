@@ -1,18 +1,22 @@
 package modele.donnee;
 
+/**
+ * Class representing a place.
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class Lieu {
 
 	private double xCoord;
 	private double yCoord;
 
 	/**
-	 * 
-	 * @param x
-	 * @param y
+	 * Constructor for the class Lieu
+	 * @param x the x coordinate
+	 * @param y the y coordinate
 	 */
 	public Lieu(double x, double y) {
-		// TODO - implement Lieu.Lieu
-		throw new UnsupportedOperationException();
+		this.xCoord = x;
+		this.yCoord = y;
 	}
-
 }

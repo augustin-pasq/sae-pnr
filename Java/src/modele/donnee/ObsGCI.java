@@ -1,5 +1,9 @@
 package modele.donnee;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.util.ArrayList;
+
 public class ObsGCI extends Observation {
 
 	private ContenuNid natureObs;
@@ -17,7 +21,17 @@ public class ObsGCI extends Observation {
 	 */
 	public ObsGCI(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, ContenuNid nature, int leNombre) {
 		// TODO - implement ObsGCI.ObsGCI
-		throw new UnsupportedOperationException();
+		super(id, date, heure, lieu, observateurs);
+		this.natureObs = nature;
+		this.nombre = leNombre;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
+	public EspeceObservee especeObs() {
+		// TODO - implement Observation.especeObs
+		return null;
+	}
 }

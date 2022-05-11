@@ -1,5 +1,6 @@
 package modele.donnee;
 
+import java.sql.Time;
 import java.util.*;
 
 public abstract class Observation {
@@ -11,12 +12,12 @@ public abstract class Observation {
 	protected java.sql.Date heureObs;
 
 	/**
-	 * 
-	 * @param id
-	 * @param date
-	 * @param heure
-	 * @param lieu
-	 * @param observateurs
+	 * Constructor for the class Observation
+	 * @param id Observation's id
+	 * @param date Observation's date
+	 * @param heure Observation's time
+	 * @param lieu Observation's place
+	 * @param observateurs Observation's observers
 	 */
 	public Observation(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs) {
 		// TODO - implement Observation.Observation
@@ -24,17 +25,16 @@ public abstract class Observation {
 	}
 
 	/**
-	 * 
-	 * @param o
+	 * Add an observer to the observation
+	 * @param o Observateur to add
 	 */
 	public void ajouteObservateur(Observateur o) {
-		// TODO - implement Observation.ajouteObservateur
-		throw new UnsupportedOperationException();
+		this.lesObservateurs.add(o);
 	}
 
 	/**
-	 * 
-	 * @param idObservateur
+	 * Remove an observer from the observation
+	 * @param idObservateur Id of the observer to remove
 	 */
 	public void retireObservateur(int idObservateur) {
 		// TODO - implement Observation.retireObservateur
@@ -42,5 +42,4 @@ public abstract class Observation {
 	}
 
 	public abstract EspeceObservee especeObs();
-
 }
