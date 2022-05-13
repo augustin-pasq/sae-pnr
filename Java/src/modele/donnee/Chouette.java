@@ -22,23 +22,61 @@ public class Chouette implements lObs<ObsChouette> {
      * @param lEspece chouette species
      */
     public Chouette(String id, Sexe leSexe, EspeceChouette lEspece) {
-        // TODO - create constructor
+        this.setIdChouette(id);
+        this.setSexe(leSexe);
+        this.setEspece(lEspece);
+        this.lesObservations = new ArrayList<ObsChouette>();
+    }
+
+    public Sexe getSexe() {
+        return sexe;
+    }
+
+    public EspeceChouette getEspece() {
+        return espece;
+    }
+
+    public String getIdChouette() {
+        return idChouette;
+    }
+
+    public ArrayList<ObsChouette> getLesObservations() {
+        return lesObservations;
+    }
+
+    public void setSexe(Sexe sexe) throws NullPointerException {
+        if (sexe == null) throw new NullPointerException("Sexe can't be null");
+        else this.sexe = sexe;
+    }
+
+    public void setEspece(EspeceChouette espece) throws NullPointerException {
+        if (espece == null) throw new NullPointerException("Espece can't be null");
+        else this.espece = espece;
+    }
+
+    public void setIdChouette(String idChouette) throws NullPointerException {
+        if (idChouette == null) throw new NullPointerException("Id can't be null");
+        else this.idChouette = idChouette;
+    }
+
+    public void setLesObservations(ArrayList<ObsChouette> lesObservations) throws NullPointerException {
+        if (lesObservations == null) throw new NullPointerException("Observations can't be null");
+        else this.lesObservations = lesObservations;
     }
 
     /**
-     * @see modele.donnee.lObs#ajouterUneObs(T)
+     * @see modele.donnee.lObs#ajouterUneObs(ObsChouette)
      */
-    public void ajouterUneObs(T obs) {
-
+    public void ajouterUneObs(ObsChouette obs) {
+        this.lesObservations.add(obs);
     }
 
     /**
      * @see modele.donnee.lObs#ajouterPlsObs(ArrayList)
      */
-    public void ajouterPlsObs(ArrayList<T> obs) {
-        for (T o : obs) {
-            this.ajouterUneObs(o);
-        }
+    public void ajouterPlsObs(ArrayList<ObsChouette> obs) {
+        // obs.forEach(this::ajouterUneObs); pas borne-proof
+        this.lesObservations.addAll(obs);
     }
 
     /**
