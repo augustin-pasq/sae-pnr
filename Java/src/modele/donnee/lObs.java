@@ -1,9 +1,11 @@
 package modele.donnee;
 
+import java.util.ArrayList;
+
 /**
  * Set of classes to be implemented on a species
  */
-public interface lObs {
+public interface lObs<T> {
 
     /**
      * Add an observation to the list

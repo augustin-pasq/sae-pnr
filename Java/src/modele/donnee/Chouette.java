@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author Groupe PNR 1D1
  */
-public class Chouette implements modele.donnee.lObs {
+public class Chouette implements lObs<ObsChouette> {
 
     private Sexe sexe;
     private EspeceChouette espece;
