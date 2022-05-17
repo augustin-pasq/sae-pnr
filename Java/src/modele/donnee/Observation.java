@@ -98,8 +98,9 @@ public abstract class Observation {
      *
      * @param lieu Place of observation
      */
-    public void setLieu(Lieu lieu) {
-        this.lieuObs = lieu;
+    public void setLieu(Lieu lieu) throws IllegalArgumentException {
+        if (lieu == null) throw new IllegalArgumentException("Lieu is null");
+        else this.lieuObs = lieu;
     }
 
     /**
@@ -107,9 +108,12 @@ public abstract class Observation {
      *
      * @param observateurs List of observers
      */
-    public void setObservateurs(ArrayList<Observateur> observateurs) {
-        this.lesObservateurs = new ArrayList<Observateur>();
-        this.lesObservateurs.addAll(observateurs);
+    public void setObservateurs(ArrayList<Observateur> observateurs) throws IllegalArgumentException {
+        if (observateurs == null) throw new IllegalArgumentException("Observateurs is null");
+        else {
+            this.lesObservateurs = new ArrayList<Observateur>();
+            this.lesObservateurs.addAll(observateurs);
+        }
     }
 
     /**
@@ -117,8 +121,10 @@ public abstract class Observation {
      *
      * @param id Id of the observation
      */
-    public void setId(int id) {
-        this.idObs = id;
+    public void setId(int id) throws IllegalArgumentException {
+        if (id >= 0) throw new IllegalArgumentException("Id is negative");
+        else this.idObs = id;
+        ;
     }
 
     /**
@@ -126,8 +132,9 @@ public abstract class Observation {
      *
      * @param date Date of the observation
      */
-    public void setDate(Date date) {
-        this.dateObs = date;
+    public void setDate(Date date) throws IllegalArgumentException {
+        if (date == null) throw new IllegalArgumentException("Date is null");
+        else this.dateObs = date;
     }
 
     /**
@@ -135,8 +142,9 @@ public abstract class Observation {
      *
      * @param heure Time of the observation
      */
-    public void setHeure(Time heure) {
-        this.heureObs = heure;
+    public void setHeure(Time heure) throws IllegalArgumentException {
+        if (heure == null) throw new IllegalArgumentException("Heure is null");
+        else this.heureObs = heure;
     }
 
     /**
@@ -144,8 +152,9 @@ public abstract class Observation {
      *
      * @param o Observateur to add
      */
-    public void ajouteObservateur(Observateur o) {
-        this.lesObservateurs.add(o);
+    public void ajouteObservateur(Observateur o) throws IllegalArgumentException {
+        if (o == null) throw new IllegalArgumentException("Observateur is null");
+        else this.lesObservateurs.add(o);
     }
 
     /**
@@ -153,8 +162,10 @@ public abstract class Observation {
      *
      * @param idObservateur Id of the observer to remove
      */
-    public void retireObservateur(int idObservateur) {
-        this.lesObservateurs.remove(idObservateur);
+    public void retireObservateur(int idObservateur) throws IllegalArgumentException {
+        if (idObservateur < 0 || idObservateur >= this.lesObservateurs.size())
+            throw new IllegalArgumentException("Id is negative or too big");
+        else this.lesObservateurs.remove(idObservateur);
     }
 
     /**
