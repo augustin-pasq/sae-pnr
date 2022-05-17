@@ -43,9 +43,11 @@ public class ObsHippocampe extends Observation {
      * @param leTypePeche  the type of fishing
      * @param lEspece      the species of the seahorse
      * @param leSexe       the sex of the seahorse
+     * @exception IllegalArgumentException if the size is negative
      */
     public ObsHippocampe(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, double laTaille, Peche leTypePeche, EspeceHippocampe lEspece, Sexe leSexe) {
         super(id, date, heure, lieu, observateurs);
+        if (laTaille < 0) throw new IllegalArgumentException("Size is negative");
         this.setTaille(laTaille);
         this.setTypePeche(leTypePeche);
         this.setEspece(lEspece);

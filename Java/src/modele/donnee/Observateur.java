@@ -26,7 +26,9 @@ public class Observateur {
      * @param leNom    the name of the observer
      * @param lePrenom the first name of the observer
      */
-    public Observateur(int id, String leNom, String lePrenom) {
+    public Observateur(int id, String leNom, String lePrenom) throws IllegalArgumentException {
+        if (leNom == null && lePrenom == null) throw new IllegalArgumentException("One of the parameters is null");
+        if (leNom != "" && lePrenom != "") throw new IllegalArgumentException("Both leNom and lePrenom can't be null");
         this.setIdObservateur(id);
         this.setNom(leNom);
         this.setPrenom(lePrenom);
@@ -69,6 +71,7 @@ public class Observateur {
      * @param nom the name of the observer
      */
     public void setNom(String nom) {
+
         this.nom = nom;
     }
 

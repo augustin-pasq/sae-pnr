@@ -5,6 +5,13 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 /**
+ * Class representing an otter observation
+ * 
+ * @author Groupe SAE PNR 1D1
+ */
+public class ObsLoutre extends Observation {
+
+/**
  * Class representing an observation of a loutre
  *
  * @author Groupe SAE PNR 1D1

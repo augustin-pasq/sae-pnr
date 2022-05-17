@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 /**
  * Class representing batracien observation
+ * 
+ * @author Groupe SAE PNR 1D1
  */
 public class ObsBatracien extends Observation {
     /**
@@ -37,6 +39,7 @@ public class ObsBatracien extends Observation {
      * @param heure        the time of observation
      * @param lieu         the place of observation
      * @param observateurs the observers
+     * @exception IllegalArgumentException if the resObs parameter is null
      */
     public ObsBatracien(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, int[] resObs, EspeceBatracien lEspece) throws IllegalArgumentException {
         super(id, date, heure, lieu, observateurs);

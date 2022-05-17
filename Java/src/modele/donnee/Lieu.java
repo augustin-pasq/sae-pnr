@@ -1,13 +1,20 @@
 package modele.donnee;
 
 /**
- * Class representing a place.
+ * Class representing a place
  *
  * @author Groupe SAE PNR 1D1
  */
 public class Lieu {
 
+    /**
+     * The x lambert coordinate of the observation
+     */
     private double xCoord;
+
+    /**
+     * The y lambert coordinate of the observation
+     */
     private double yCoord;
 
     /**

@@ -25,8 +25,8 @@ public class ObsChouette extends Observation {
      */
     public ObsChouette(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, TypeObservation type) {
         super(id, date, heure, lieu, observateurs);
-
-        //throw new UnsupportedOperationException();
+        this.typeObs = type;
+        throw new UnsupportedOperationException();
     }
 
     /**

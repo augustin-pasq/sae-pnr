@@ -32,6 +32,7 @@ public class ObsGCI extends Observation {
      */
     public ObsGCI(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, ContenuNid nature, int leNombre) {
         super(id, date, heure, lieu, observateurs);
+        if (leNombre < 0) throw new IllegalArgumentException("Number is negative");
         this.setNatureObs(nature);
         this.setNombre(leNombre);
     }
@@ -82,7 +83,6 @@ public class ObsGCI extends Observation {
      * @return The observed species
      */
     public EspeceObservee especeObs() {
-        // TODO - implement Observation.especeObs
-        return null;
+        return EspeceObservee.GCI;
     }
 }
