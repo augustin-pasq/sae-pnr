@@ -25,8 +25,8 @@ public class ObsChouette extends Observation {
      */
     public ObsChouette(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, TypeObservation type) {
         super(id, date, heure, lieu, observateurs);
-        // TODO - implement ObsChouette.ObsChouette
-        throw new UnsupportedOperationException();
+
+        //throw new UnsupportedOperationException();
     }
 
     /**
