@@ -41,8 +41,11 @@ public abstract class Observation {
      * @param observateurs Observation's observers
      */
     public Observation(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs) {
-        // TODO - implement Observation.Observation
-        throw new UnsupportedOperationException();
+        this.setId(id);
+        this.setDate(date);
+        this.setHeure(heure);
+        this.setLieu(lieu);
+        this.setObservateurs(observateurs);
     }
 
     /**
@@ -151,8 +154,7 @@ public abstract class Observation {
      * @param idObservateur Id of the observer to remove
      */
     public void retireObservateur(int idObservateur) {
-        // TODO - implement Observation.retireObservateur
-        throw new UnsupportedOperationException();
+        this.lesObservateurs.remove(idObservateur);
     }
 
     /**

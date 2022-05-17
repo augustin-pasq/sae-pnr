@@ -143,7 +143,7 @@ public class ObsHippocampe extends Observation {
      * @param estGestant the new gestation status of the seahorse
      */
     public void setEstGestant(boolean estGestant) {
-        switch (this.sexe) {
+        switch (this.getSexe()) {
             case FEMELLE -> {
                 if (estGestant) throw new IllegalArgumentException("A female cannot be gestating");
                 else this.estGestant = false;
