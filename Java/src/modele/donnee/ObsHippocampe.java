@@ -146,12 +146,12 @@ public class ObsHippocampe extends Observation {
      */
     public void setEstGestant(boolean estGestant) {
         switch (this.getSexe()) {
-            case FEMELLE -> {
+            case FEMELLE : {
                 if (estGestant) throw new IllegalArgumentException("A female cannot be gestating");
                 else this.estGestant = false;
             }
-            case MALE -> this.estGestant = estGestant;
-            case INCONNU -> {
+            case MALE : this.estGestant = estGestant;
+            case INCONNU : {
                 if (estGestant) {
                     this.setSexe(Sexe.MALE);
                 }

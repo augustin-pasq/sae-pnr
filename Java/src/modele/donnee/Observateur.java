@@ -28,7 +28,7 @@ public class Observateur {
      */
     public Observateur(int id, String leNom, String lePrenom) throws IllegalArgumentException {
         if (leNom == null && lePrenom == null) throw new IllegalArgumentException("One of the parameters is null");
-        if (leNom != "" && lePrenom != "") throw new IllegalArgumentException("Both leNom and lePrenom can't be null");
+        if (leNom == "" && lePrenom == "") throw new IllegalArgumentException("Both leNom and lePrenom can't be null");
         this.setIdObservateur(id);
         this.setNom(leNom);
         this.setPrenom(lePrenom);
