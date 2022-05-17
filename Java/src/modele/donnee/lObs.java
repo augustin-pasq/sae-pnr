@@ -3,7 +3,7 @@ package modele.donnee;
 import java.util.ArrayList;
 
 /**
- * Set of classes to be implemented on a species
+ * Set of classes to be implemented on an observation
  */
 public interface lObs<T> {
 
