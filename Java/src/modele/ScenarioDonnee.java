@@ -6,12 +6,15 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import javax.xml.validation.Validator;
+
 
 public class ScenarioDonnee {
     public static void main(String[] args) {
         p("## Scenario de données");
         ArrayList<Observateur> listeObs = testObservateur();
         testChouette(listeObs);
+        testObsChouette(listeObs);
         testObsHippocampe(listeObs);
         testObsLoutre(listeObs);
         testGCI(listeObs);
@@ -60,10 +63,11 @@ public class ScenarioDonnee {
 
     public static void testChouette(ArrayList<Observateur> listeObs) {
 
-        // Test de la classe Chouette
-
         Chouette chouette = new Chouette("1", Sexe.MALE, EspeceChouette.HULOTTE);
+
+        p("Changement de l'id de la chouette par 2");
         chouette.setIdChouette("2");
+        p("Id : " + chouette.getIdChouette());
         try {
             chouette.setIdChouette(null);
         } catch (NullPointerException e) {
@@ -75,29 +79,35 @@ public class ScenarioDonnee {
             p("lesObservations null : " + e.getMessage());
         }
 
+        p("Changement du sexe de la chouette en femelle");
         chouette.setSexe(Sexe.FEMELLE);
+        p("Sexe : " + chouette.getSexe());
         Sexe nonDefini = null;
         try {
             chouette.setSexe(nonDefini);
         } catch (NullPointerException e) {
             p("sexe null : " + e.getMessage());
         }
+
+        p("Changement de l'espece de la chouette en hulotte");
+        chouette.setEspece(EspeceChouette.HULOTTE);
+        p("Espece : " + chouette.getEspece());
         EspeceChouette aucuneEspece = null;
         try {
             chouette.setEspece(aucuneEspece);
         } catch (NullPointerException e) {
             p("Espece null : " + e.getMessage());
         }
+
+
         Date dixSeptMai = new Date(0);
         Time now = new Time(50000);
         Time minuit = new Time(0);
-        Lieu vannes = new Lieu(47.6586772, -2.7599079);
-        Lieu arradon = new Lieu(47.62798, -2.8229152);
+        Lieu vannes = new Lieu(268045.333, 6744460.457);
+        Lieu arradon = new Lieu(263077.46, 6741405.844);
 
-        p("Changement du sexe de la chouette en femelle");
-        p("Sexe : " + chouette.getSexe());
-        p("Espece : " + chouette.getEspece());
-        p("Id : " + chouette.getIdChouette());
+    
+
         ObsChouette obsChouette = new ObsChouette(1, dixSeptMai, now, vannes, listeObs, TypeObservation.SONORE);
         ObsChouette obsChouette2 = new ObsChouette(2, dixSeptMai, now, vannes, listeObs, TypeObservation.VISUELLE);
         ObsChouette obsChouette3 = new ObsChouette(3, dixSeptMai, now, arradon, listeObs, TypeObservation.SONORE);
@@ -149,13 +159,27 @@ public class ScenarioDonnee {
         }
 
 
-        Lieu lieu = new Lieu(5, 5);
-        NidGCI nd = new NidGCI(109, "Bellevue");
-
-
         p("");
         p(obsChouette.toString());
         p("");
+    }
+    public static void testObsChouette(ArrayList<Observateur> listeObs) {
+        Date dixHuitMai = new Date(0);
+        Time now = new Time(50000);
+        Time minuit = new Time(0);
+        Lieu vannes = new Lieu(268045.333, 6744460.457);
+        Lieu arradon = new Lieu(263077.46, 6741405.844);
+
+        ObsChouette obsChouette = new ObsChouette(1, dixHuitMai, now, vannes, listeObs, TypeObservation.SONORE);
+
+        p("Changement du type d'observation en VISUELLE");
+        obsChouette.setTypeObs(TypeObservation.VISUELLE);
+        p("Type d'observation : " + obsChouette.getTypeObs());
+
+
+        p("Espece de la chouette : " + obsChouette.especeObs());
+
+
     }
 
     public static void testObsHippocampe(ArrayList<Observateur> listeObs) {
@@ -163,8 +187,8 @@ public class ScenarioDonnee {
         Date dixHuitMai = new Date(0);
         Time now = new Time(50000);
         Time minuit = new Time(0);
-        Lieu vannes = new Lieu(47.6586772, -2.7599079);
-        Lieu arradon = new Lieu(47.62798, -2.8229152);
+        Lieu vannes = new Lieu(268045.333, 6744460.457);
+        Lieu arradon = new Lieu(263077.46, 6741405.844);
 
         ObsHippocampe hippocampe1 = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, 9.5, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
 
@@ -245,8 +269,8 @@ public class ScenarioDonnee {
         Date dixHuitMai = new Date(464314741);
         Time now = new Time(50000);
         Time minuit = new Time(0);
-        Lieu vannes = new Lieu(47.6586772, -2.7599079);
-        Lieu arradon = new Lieu(47.62798, -2.8229152);
+        Lieu vannes = new Lieu(268045.333, 6744460.457);
+        Lieu arradon = new Lieu(263077.46, 6741405.844);
 
         ObsLoutre loutre1 = new ObsLoutre(1, dixHuitMai, now, arradon, listeObs, IndiceLoutre.POSITIF);
 
@@ -258,6 +282,8 @@ public class ScenarioDonnee {
     }
 
     public static void testGCI(ArrayList<Observateur> listeObs) {
+        Lieu vannes = new Lieu(268045.333, 6744460.457);
+        Lieu arradon = new Lieu(263077.46, 6741405.844);
 
         // Initialisation
 
@@ -267,7 +293,6 @@ public class ScenarioDonnee {
 
         Date date1 = new Date(0);
         Time heure1 = new Time(36000000);
-        Lieu lieu1 = new Lieu(16, 6);
 
         ArrayList<Observateur> observateurs1 = new ArrayList<Observateur>();
         observateurs1.add(listeObs.get(0));
@@ -276,7 +301,7 @@ public class ScenarioDonnee {
         ContenuNid nature1 = ContenuNid.OEUF;
         int leNombre1 = 1;
 
-        ObsGCI obs1 = new ObsGCI(1, date1, heure1, lieu1, observateurs1, nature1, leNombre1);
+        ObsGCI obs1 = new ObsGCI(1, date1, heure1, vannes, observateurs1, nature1, leNombre1);
 
         //
         // 2
@@ -284,7 +309,6 @@ public class ScenarioDonnee {
 
         // Date date1 = new Date();
         Time heure2 = new Time(72000000);
-        Lieu lieu2 = new Lieu(20, 10);
 
         ArrayList<Observateur> observateurs2 = new ArrayList<Observateur>();
         observateurs2.add(listeObs.get(0));
@@ -293,7 +317,7 @@ public class ScenarioDonnee {
         ContenuNid nature2 = ContenuNid.POUSSIN;
         int leNombre2 = 2;
 
-        ObsGCI obs2 = new ObsGCI(2, date1, heure2, lieu2, observateurs2, nature2, leNombre2);
+        ObsGCI obs2 = new ObsGCI(2, date1, heure2, vannes, observateurs2, nature2, leNombre2);
 
         //
         // 3
@@ -301,7 +325,7 @@ public class ScenarioDonnee {
 
         // Date date1 = new Date();
         // Time heure1 = new Time(36000000);
-        Lieu lieu3 = new Lieu(65, 99);
+
 
         ArrayList<Observateur> observateurs3 = new ArrayList<Observateur>();
         observateurs3.add(listeObs.get(4));
@@ -309,7 +333,7 @@ public class ScenarioDonnee {
         // ContenuNid nature1 = ContenuNid.OEUF;
         // int leNombre1 = 1;
 
-        ObsGCI obs3_1 = new ObsGCI(3, date1, heure1, lieu3, observateurs3, nature1, leNombre1);
+        ObsGCI obs3_1 = new ObsGCI(3, date1, heure1, arradon, observateurs3, nature1, leNombre1);
 
         //
         // 4
@@ -325,7 +349,7 @@ public class ScenarioDonnee {
         // ContenuNid nature1 = ContenuNid.OEUF;
         // int leNombre1 = 1;
 
-        ObsGCI obs3_2 = new ObsGCI(4, date1, heure3, lieu3, observateurs3, nature1, leNombre1);
+        ObsGCI obs3_2 = new ObsGCI(4, date1, heure3, arradon, observateurs3, nature1, leNombre1);
 
         // NidGCI
         NidGCI nid1 = new NidGCI(1, "Plage1");
@@ -363,14 +387,35 @@ public class ScenarioDonnee {
 
 
     public static void testLieu() {
-        Lieu vannes = new Lieu(47.6586772, -2.7599079);
+        Lieu vannes = new Lieu(268045.333, 6744460.457);
 
-        p("Modificiation de coordX par 23.5");
-        vannes.setXCoord(23.5);
-        p("Modificiation de coordX par 6543210");
-        vannes.setYCoord(6543210);
+        p("Modificiation de coordX par 300000");
+        vannes.setXCoord(300000);
+        p("Modificiation de coordX par 7000000");
+        vannes.setYCoord(7000000);
         p("Coord x : " + vannes.getXCoord());
         p("Coord y : " + vannes.getYCoord());
+
+        
+        try {
+            Lieu impossible = new Lieu(-5, 12);
+        } catch (IllegalArgumentException e) {
+            p("Coordonnée Lambert x négatif et coordonnée y < 6000000 : " + e.getMessage());
+        }
+
+        try {
+            vannes.setXCoord(-2);
+        } catch (IllegalArgumentException e) {
+            p("Coordonnée Lambert x négatif : " + e.getMessage());
+        }
+
+
+        try {
+            vannes.setYCoord(300);
+        } catch (IllegalArgumentException e) {
+            p("Coordonnée Lambert y < 6000000 : " + e.getMessage());
+        }
+
     }
 
     private static void p(String str) {

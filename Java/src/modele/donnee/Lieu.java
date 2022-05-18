@@ -24,8 +24,10 @@ public class Lieu {
      * @param y the y coordinate
      */
     public Lieu(double x, double y) throws IllegalArgumentException {
-        this.xCoord = x;
-        this.yCoord = y;
+        if (x < 0 || x > 1300000) throw new IllegalArgumentException("Coordinate is out of range");
+        else this.xCoord = x;
+        if (y < 6000000 || y > 7200000) throw new IllegalArgumentException("Coordinate is out of range");
+        else this.yCoord = y;
     }
 
     /**
@@ -63,6 +65,6 @@ public class Lieu {
      */
     public void setYCoord(double y) throws IllegalArgumentException {
         if (y < 6000000 || y > 7200000) throw new IllegalArgumentException("Coordinate is out of range");
-        this.yCoord = y;
+        else this.yCoord = y;
     }
 }
