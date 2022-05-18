@@ -16,6 +16,7 @@ public class ScenarioDonnee {
         testChouette(listeObs);
         testObsHippocampe(listeObs);
         testObsLoutre(listeObs);
+        testGCI(listeObs);
         testLieu();
 
 
@@ -260,6 +261,110 @@ public class ScenarioDonnee {
         System.out.println("Indice : " + loutre1.getIndice());
 
         System.out.println("Espece : " + loutre1.especeObs());
+    }
+
+    public static void testGCI(ArrayList<Observateur> listeObs){
+
+        // Initialisation
+
+        //
+        // 1
+        //
+
+        Date date1 = new Date(Date.getC);
+        Time heure1 = new Time(36000000);
+        Lieu lieu1 = new Lieu(16, 6);
+
+        ArrayList<Observateur> observateurs1 = new ArrayList<Observateur>();
+        observateurs1.add(listeObs.get(0));
+        observateurs1.add(listeObs.get(2));
+
+        ContenuNid nature1 = ContenuNid.OEUF;
+        int leNombre1 = 1;
+
+        ObsGCI obs1 = new ObsGCI(1, date1, heure1, lieu1, observateurs1, nature1, leNombre1);
+
+        //
+        // 2
+        //
+
+        // Date date1 = new Date();
+        Time heure2 = new Time(72000000);
+        Lieu lieu2 = new Lieu(20, 10);
+
+        ArrayList<Observateur> observateurs2 = new ArrayList<Observateur>();
+        observateurs2.add(listeObs.get(0));
+        observateurs2.add(listeObs.get(1));
+
+        ContenuNid nature2 = ContenuNid.POUSSIN;
+        int leNombre2 = 2;
+        
+        ObsGCI obs2 = new ObsGCI(2, date1, heure2, lieu2, observateurs2, nature2, leNombre2);
+
+        //
+        // 3
+        //
+
+        // Date date1 = new Date();
+        // Time heure1 = new Time(36000000);
+        Lieu lieu3 = new Lieu(65, 99);
+
+        ArrayList<Observateur> observateurs3 = new ArrayList<Observateur>();
+        observateurs3.add(listeObs.get(4));
+
+        // ContenuNid nature1 = ContenuNid.OEUF;
+        // int leNombre1 = 1;
+
+        ObsGCI obs3_1 = new ObsGCI(3, date1, heure1, lieu3, observateurs3, nature1, leNombre1);
+
+        //
+        // 4
+        //
+
+        // Date date1 = new Date();
+        Time heure3 = new Time(80000000);
+        // Lieu lieu3 = new Lieu(65, 99);
+
+        // ArrayList<Observateur> observateurs3 = new ArrayList<Observateur>();
+        // observateurs3.add(listeObs.get(4));
+
+        // ContenuNid nature1 = ContenuNid.OEUF;
+        // int leNombre1 = 1;
+
+        ObsGCI obs3_2 = new ObsGCI(4, date1, heure3, lieu3, observateurs3, nature1, leNombre1);
+        
+        // NidGCI
+        NidGCI nid1 = new NidGCI(1, 2, "Plage1");
+        NidGCI nid2 = new NidGCI(2, 4, "Plage2");
+        NidGCI nid3 = new NidGCI(3, 3, "Plage3");
+
+        nid1.ajouterUneObs(obs1);
+        nid2.ajouterUneObs(obs2);
+
+        ArrayList<ObsGCI> lesObs = new ArrayList<ObsGCI>();
+        lesObs.add(obs3_1);
+        lesObs.add(obs3_2);
+
+        nid3.ajouterPlsObs(lesObs);
+        
+        //nbObs
+        System.out.println("nbObs nid1 : " + nid1.nbObs());
+        System.out.println("nbObs nid2 : " + nid2.nbObs());
+        System.out.println("nbObs nid3 : " + nid3.nbObs());
+        System.out.println("\nexpected :\n");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("2");
+        System.out.prinln("\n");
+
+        //videObs,retureObs
+        nid1.videObs();
+        nid3.retireObs(3);
+        System.out.println("nbObs nid1 : " + nid1.nbObs());
+        System.out.println("nbObs nid3 : " + nid1.nbObs());   
+        System.out.println("\nexpected :\n");
+        System.out.println("0");
+        System.out.println("1");
     }
 
 
