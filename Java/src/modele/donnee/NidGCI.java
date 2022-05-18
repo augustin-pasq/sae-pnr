@@ -6,7 +6,7 @@ import java.sql.Date;
 /**
  * Class to represent a GCI nest
  */
-public class NidGCI implements lObs<ObsGCI> {
+public class NidGCI implements IObs<ObsGCI> {
     
     /**
      * The list of observations of this GCI nest

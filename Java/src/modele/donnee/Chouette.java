@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author Groupe PNR 1D1
  */
-public class Chouette implements lObs<ObsChouette> {
+public class Chouette implements IObs<ObsChouette> {
     /**
      * Sex of the owl
      */
