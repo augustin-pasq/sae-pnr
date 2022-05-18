@@ -52,7 +52,8 @@ public class Lieu {
      * @param x the x coordinate
      */
     public void setXCoord(double x) {
-        this.xCoord = x;
+        if (x < 0 || x > 1300000) throw new IndexOutOfBoundsException("Coordinate is out of range");
+        else this.xCoord = x;
     }
 
     /**
@@ -61,6 +62,7 @@ public class Lieu {
      * @param y the y coordinate
      */
     public void setYCoord(double y) {
+        if (y < 6000000 || y > 7200000) throw new IndexOutOfBoundsException("Coordinate is out of range");
         this.yCoord = y;
     }
 }
