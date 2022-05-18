@@ -67,4 +67,12 @@ public class Lieu {
         if (y < 6000000 || y > 7200000) throw new IllegalArgumentException("Coordinate is out of range");
         else this.yCoord = y;
     }
+
+    /**
+     * Format the coordinates in a string
+     * @return the coordinates as a string
+     */
+    public String toString() {
+        return "Lieu{" + this.getXCoord() + ", " + this.getYCoord() + "}";
+    }
 }
