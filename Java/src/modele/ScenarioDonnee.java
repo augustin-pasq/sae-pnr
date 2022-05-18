@@ -33,7 +33,7 @@ public class ScenarioDonnee {
         Observateur obs5 = new Observateur(5, "Tabor", "Samuel");
         try {
             Observateur obsNull = new Observateur(5, null, null);
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             System.out.println("Observateur null : " + e.getMessage());
         }
         try {
@@ -69,12 +69,12 @@ public class ScenarioDonnee {
         chouette.setIdChouette("2");
         try {
             chouette.setIdChouette(null);
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             System.out.println("Id null : " + e.getMessage());
         }
         try {
             chouette.setLesObservations(null);
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             System.out.println("lesObservations null : " + e.getMessage());
         }
 
@@ -82,13 +82,13 @@ public class ScenarioDonnee {
         Sexe nonDefini = null;
         try {
             chouette.setSexe(nonDefini);
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             System.out.println("sexe null : " + e.getMessage());
         }
         EspeceChouette aucuneEspece = null;
         try {
             chouette.setEspece(aucuneEspece);
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             System.out.println("Espece null : " + e.getMessage());
         }
         Date dixSeptMai = new Date(0);
@@ -242,7 +242,7 @@ public class ScenarioDonnee {
 
     public static void testObsLoutre(ArrayList<Observateur> listeObs) {
 
-        Date dixHuitMai = new Date(0);
+        Date dixHuitMai = new Date(464314741);
         Time now = new Time(50000);
         Time minuit = new Time(0);
         Lieu vannes = new Lieu(47.6586772, -2.7599079);
@@ -368,7 +368,7 @@ public class ScenarioDonnee {
         System.out.println("Modificiation de coordX par 23.5");
         vannes.setXCoord(23.5);
         System.out.println("Modificiation de coordX par -45.3");
-        vannes.setYCoord(-45.3);
+        vannes.setYCoord(6543210);
         System.out.println("Coord x : " + vannes.getXCoord());
         System.out.println("Coord y : " + vannes.getYCoord());
     }
