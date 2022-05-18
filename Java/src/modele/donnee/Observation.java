@@ -124,7 +124,6 @@ public abstract class Observation {
     public void setId(int id) throws IllegalArgumentException {
         if (id >= 0) throw new IllegalArgumentException("Id is negative");
         else this.idObs = id;
-        ;
     }
 
     /**
