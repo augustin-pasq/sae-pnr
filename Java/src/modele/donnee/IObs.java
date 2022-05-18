@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Set of classes to be implemented on an observation
  */
-public interface lObs<T> {
+public interface IObs<T> {
 
     /**
      * Add an observation to the list
