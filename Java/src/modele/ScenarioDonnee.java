@@ -367,7 +367,7 @@ public class ScenarioDonnee {
 
         System.out.println("Modificiation de coordX par 23.5");
         vannes.setXCoord(23.5);
-        System.out.println("Modificiation de coordX par -45.3");
+        System.out.println("Modificiation de coordX par 6543210");
         vannes.setYCoord(6543210);
         System.out.println("Coord x : " + vannes.getXCoord());
         System.out.println("Coord y : " + vannes.getYCoord());
