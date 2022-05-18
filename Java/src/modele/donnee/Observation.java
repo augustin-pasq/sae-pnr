@@ -183,10 +183,11 @@ public abstract class Observation {
         StringBuilder s = new StringBuilder();
         Class<?> c = this.getClass();
 
+        // Start with the class name and open bracket
         s.append(c.getSimpleName())
                 .append("{");
 
-        //iterate through all object attributes
+        // Dynamically get the fields of the class
         for (Field f : c.getDeclaredFields()) {
             try {
                 s.append(f.getName())
@@ -194,6 +195,7 @@ public abstract class Observation {
             } catch (IllegalArgumentException ignored) {}
         }
 
+        // Dynamically get the fields of the super-class
         for (Field f: this.getClass().getSuperclass().getDeclaredFields()) {
             try {
                 s.append(f.getName())
@@ -203,6 +205,7 @@ public abstract class Observation {
             } catch (IllegalArgumentException | IllegalAccessException ignored) {}
         }
 
+        // Remove the last ", " before returning
         return s.substring(0, s.length()-2) + "}";
     }
 }
