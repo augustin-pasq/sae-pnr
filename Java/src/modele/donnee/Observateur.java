@@ -1,5 +1,7 @@
 package modele.donnee;
 
+import java.util.Objects;
+
 /**
  * Class to represent an observer
  *
@@ -27,8 +29,8 @@ public class Observateur {
      * @param lePrenom the first name of the observer
      */
     public Observateur(int id, String leNom, String lePrenom) throws IllegalArgumentException {
-        if (leNom == null && lePrenom == null) throw new IllegalArgumentException("One of the parameters is null");
-        if (leNom == "" && lePrenom == "") throw new IllegalArgumentException("Both leNom and lePrenom can't be null");
+        if (leNom == null || lePrenom == null) throw new IllegalArgumentException("One of the parameters is null");
+        if (leNom.equals("") && lePrenom.equals("")) throw new IllegalArgumentException("Both leNom and lePrenom can't be empty");
         this.setIdObservateur(id);
         this.setNom(leNom);
         this.setPrenom(lePrenom);
