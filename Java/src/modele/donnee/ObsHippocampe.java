@@ -47,7 +47,6 @@ public class ObsHippocampe extends Observation {
      */
     public ObsHippocampe(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, double laTaille, Peche leTypePeche, EspeceHippocampe lEspece, Sexe leSexe) {
         super(id, date, heure, lieu, observateurs);
-        if (laTaille < 0) throw new IllegalArgumentException("Size is negative");
         this.setTaille(laTaille);
         this.setTypePeche(leTypePeche);
         this.setEspece(lEspece);

@@ -28,9 +28,9 @@ public class Chouette implements IObs<ObsChouette> {
     /**
      * Constructor for the class Chouette
      *
-     * @param id      chouette identifier
-     * @param leSexe  chouette sex
-     * @param lEspece chouette species
+     * @param id      owl identifier
+     * @param leSexe  owl sex
+     * @param lEspece owl species
      */
     public Chouette(String id, Sexe leSexe, EspeceChouette lEspece) {
         this.setIdChouette(id);
@@ -126,7 +126,8 @@ public class Chouette implements IObs<ObsChouette> {
      * @see modele.donnee.lObs#ajouterUneObs(ObsChouette)
      */
     public void ajouterUneObs(ObsChouette obs) {
-        this.lesObservations.add(obs);
+        if (obs == null) throw new NullPointerException("Observation can't be null");
+        else this.lesObservations.add(obs);
     }
 
     /**
@@ -136,8 +137,8 @@ public class Chouette implements IObs<ObsChouette> {
      * @see modele.donnee.lObs#ajouterPlsObs(ArrayList)
      */
     public void ajouterPlsObs(ArrayList<ObsChouette> obs) {
-        // obs.forEach(this::ajouterUneObs); pas borne-proof
-        this.lesObservations.addAll(obs);
+        if (obs == null || obs.size() == 0) throw new NullPointerException("List of observations can't be null or empty");
+        else this.lesObservations.addAll(obs);
     }
 
     /**
@@ -156,13 +157,12 @@ public class Chouette implements IObs<ObsChouette> {
      * @see modele.donnee.lObs#retireObs(int)
      */
     public boolean retireObs(int idObs) {
-        boolean ret = true;
-        if (idObs < 0 || idObs >= this.nbObs()) {
-            return false;
-        } else {
+        try {
             this.lesObservations.remove(idObs);
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
         }
-        return ret;
     }
 
     /**
