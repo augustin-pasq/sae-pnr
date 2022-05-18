@@ -7,16 +7,17 @@
 
 ## Build instructions
 
-There is a script to easily build and run the application:
+There is a script to easily build the application:
 
 ```bash
+# Build and run the application
 ./maker run
-```
 
-There is also an option to only build the application:
-
-```bash
+# Only build the application
 ./maker build
+
+# Generate the documentation
+./maker doc
 ```
 
 **For Windows users**, simply replace the `./maker` with `.\maker.exe` with the same commands.
