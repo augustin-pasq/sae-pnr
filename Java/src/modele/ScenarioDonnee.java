@@ -12,8 +12,15 @@ import java.util.Arrays;
 public class ScenarioDonnee {
     public static void main(String[] args) {
         System.out.println("## Scenario de données");
+        ArrayList<Observateur> listeObs = testObservateur();
+        testChouette(listeObs);
 
-        // Creation des objets
+
+    }
+
+    public static ArrayList<Observateur> testObservateur() {       
+        
+         // Creation des objets
         ArrayList<Observateur> listeObs = new ArrayList<Observateur>();
         Observateur obs1 = new Observateur(1, "Le Ny", "Liam");
         Observateur obs2 = new Observateur(2, "Pasquier", "Augustin");
@@ -36,16 +43,35 @@ public class ScenarioDonnee {
         listeObs.add(obs4);
         listeObs.add(obs5);
 
+        return listeObs;
+    }
+
+
+    public static void testChouette(ArrayList<Observateur> listeObs) {
+
         
         // Test de la classe Chouette
 
         Chouette chouette = new Chouette("1", Sexe.MALE, EspeceChouette.HULOTTE);
         chouette.setIdChouette("2");
-        chouette.setIdChouette(null);
-        chouette.setLesObservations(null);
+        try {
+            chouette.setIdChouette(null);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Id null : " + e.getMessage());
+        }
+        try {
+            chouette.setLesObservations(null);
+        } catch (IllegalArgumentException e) {
+            System.out.println("lesObservations null : " + e.getMessage());
+        }
+        
         chouette.setSexe(Sexe.FEMELLE);
         Sexe nonDefini = null;
-        chouette.setSexe(nonDefini);
+        try {
+            chouette.setSexe(nonDefini);
+        } catch (IllegalArgumentException e) {
+            System.out.println("sexe null : " + e.getMessage());
+        }
         EspeceChouette aucuneEspece = null;
         chouette.setEspece(aucuneEspece);
         Date today = new Date(17 / 05 / 2022);
