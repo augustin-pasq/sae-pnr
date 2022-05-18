@@ -19,6 +19,7 @@ public class ScenarioDonnee {
         testObsLoutre(listeObs);
         testGCI(listeObs);
         testLieu();
+        testObsBatracien(listeObs);
     }
 
     public static ArrayList<Observateur> testObservateur() {
