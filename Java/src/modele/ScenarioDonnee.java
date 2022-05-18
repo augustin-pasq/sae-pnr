@@ -14,14 +14,22 @@ public class ScenarioDonnee {
         System.out.println("## Scenario de données");
 
         // Creation des objets
-        ArrayList<Observateur> listeObs = new ArrayList<Observateur>(); 
+        ArrayList<Observateur> listeObs = new ArrayList<Observateur>();
         Observateur obs1 = new Observateur(1, "Le Ny", "Liam");
         Observateur obs2 = new Observateur(2, "Pasquier", "Augustin");
         Observateur obs3 = new Observateur(3, "Malivet", "Ervan");
         Observateur obs4 = new Observateur(4, "Ozanne", "Colin");
         Observateur obs5 = new Observateur(5, "Tabor", "Samuel");
-        Observateur obsNull = new Observateur(5, null, null);
-        Observateur obsVide = new Observateur(5, "", "");
+        try {
+            Observateur obsNull = new Observateur(5, null, null);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Observateur null : " + e.getMessage());
+        }
+        try {
+            Observateur obsVide = new Observateur(5, "", "");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Observateur vide : " + e.getMessage());
+        }
         listeObs.add(obs1);
         listeObs.add(obs2);
         listeObs.add(obs3);
@@ -40,9 +48,7 @@ public class ScenarioDonnee {
         chouette.setSexe(nonDefini);
         EspeceChouette aucuneEspece = null;
         chouette.setEspece(aucuneEspece);
-
-
-        Date today = new Date(17/05/2022);
+        Date today = new Date(17 / 05 / 2022);
         Time now = new Time(50000);
         Time minuit = new Time(0);
         Lieu vannes = new Lieu(47.6586772, -2.7599079);
@@ -65,7 +71,7 @@ public class ScenarioDonnee {
 
         System.out.println("Affichage des observations de la chouette : ");
         // TODO
-        // Arrays.toString(listeObsChouette) ??
+        System.out.println(chouette.getLesObservations());
         // Afficher listeObsChouette 
 
         ObsChouette obsChouette4 = new ObsChouette(4, today, now, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
@@ -109,7 +115,6 @@ public class ScenarioDonnee {
 
         Lieu lieu = new Lieu(5, 5);
         NidGCI nd = new NidGCI(109, "Bellevue");
-
 
 
     }
