@@ -173,4 +173,8 @@ public class Chouette implements IObs<ObsChouette> {
     public int nbObs() {
         return this.lesObservations.size();
     }
+
+    public String toString() {
+        return "Chouette " + this.getIdChouette() + " : " + this.getEspece() + " " + this.getSexe() + " " + this.getLesObservations();
+    }
 }
