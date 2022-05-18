@@ -425,9 +425,9 @@ public class ScenarioDonnee {
      */
     public static void testObsBatracien(ArrayList<Observateur> listeObs) {
         int id = 1;
-        Date date = new Date(2000/10/10);
-        Time heure = new Time(0);
-        Lieu lieu = new Lieu(5, 5);
+        Date date = new Date(0);
+        Time heure = new Time(80000000);
+        Lieu lieu = new Lieu(268045.333, 6744460.457);
         int[] resObs = {1, 3, 2, 5};
         EspeceBatracien lEspece = EspeceBatracien.CALAMITE;
         ObsBatracien obsBatracien = new ObsBatracien(id, date, heure, lieu, listeObs, resObs, lEspece);
