@@ -82,4 +82,8 @@ public class Observateur {
         if (prenom == null) throw new NullPointerException("Prenom can't be null");
         else this.prenom = prenom;
     }
+
+    public String toString() {
+        return "Observateur{" + idObservateur + ", " + nom + ", " + prenom + '}';
+    }
 }

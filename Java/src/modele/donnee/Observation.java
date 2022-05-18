@@ -1,5 +1,6 @@
 package modele.donnee;
 
+import java.lang.reflect.Field;
 import java.sql.Time;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -173,4 +174,35 @@ public abstract class Observation {
      * @return observed species
      */
     public abstract EspeceObservee especeObs();
+
+    /**
+     * Generic toString method
+     * @return String representation of the observation
+     */
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        Class<?> c = this.getClass();
+
+        s.append(c.getSimpleName())
+                .append("{");
+
+        //iterate through all object attributes
+        for (Field f : c.getDeclaredFields()) {
+            try {
+                s.append(f.getName())
+                        .append(", ");
+            } catch (IllegalArgumentException ignored) {}
+        }
+
+        for (Field f: this.getClass().getSuperclass().getDeclaredFields()) {
+            try {
+                s.append(f.getName())
+                        .append(": ")
+                        .append(f.get(this))
+                        .append(", ");
+            } catch (IllegalArgumentException | IllegalAccessException ignored) {}
+        }
+
+        return s.substring(0, s.length()-2) + "}";
+    }
 }
