@@ -35,7 +35,7 @@ public class NidGCI implements lObs<ObsGCI> {
         this.setIdNid(id);
         this.setNomPlage(plage);
         this.setNbEnvol(0);
-        this.lesObservations = new ArrayList<ObsGCI>();
+        this.setLesObservations(new ArrayList<ObsGCI>());
     }
 
     /**
@@ -102,6 +102,12 @@ public class NidGCI implements lObs<ObsGCI> {
         if (nom == null || nom.isEmpty()) throw new NullPointerException("Nom can't be null or empty");
         else this.nomPlage = nom;
     }
+
+    private void setLesObservations(ArrayList<ObsGCI> lesObs) {
+        if (lesObs == null || lesObs.size() == 0) throw new NullPointerException("Observations can't be null or empty");
+        else this.lesObservations = lesObs;
+    }
+
 
     /**
      * Get the first observation date for this GCI nest
