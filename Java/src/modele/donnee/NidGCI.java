@@ -89,7 +89,8 @@ public class NidGCI implements lObs<ObsGCI> {
      * @param nb the new number of nest flies
      */
     public void setNbEnvol(int nb) {
-        this.nbEnvol = nb;
+        if (nb < 0) throw new IllegalArgumentException("ID can't be negative");
+        else this.nbEnvol = nb;
     }
 
     /**
@@ -98,7 +99,8 @@ public class NidGCI implements lObs<ObsGCI> {
      * @param nom the new name of the beach
      */
     public void setNomPlage(String nom) {
-        this.nomPlage = nom;
+        if (nom == null || nom.isEmpty()) throw new NullPointerException("Nom can't be null or empty");
+        else this.nomPlage = nom;
     }
 
     /**
@@ -125,7 +127,8 @@ public class NidGCI implements lObs<ObsGCI> {
      * @param obs the observer to add
      */
     public void ajouterUneObs(ObsGCI obs) {
-        this.lesObservations.add(obs);
+        if (obs == null) throw new NullPointerException("Observation can't be null");
+        else this.lesObservations.add(obs);
     }
 
     /**
@@ -134,7 +137,8 @@ public class NidGCI implements lObs<ObsGCI> {
      * @param obs the observers to add
      */
     public void ajouterPlsObs(ArrayList<ObsGCI> obs) {
-        this.lesObservations.addAll(obs);
+        if (obs == null) throw new NullPointerException("Observations can't be null");
+        else this.lesObservations.addAll(obs);
     }
 
     /**

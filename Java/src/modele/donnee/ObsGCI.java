@@ -32,7 +32,6 @@ public class ObsGCI extends Observation {
      */
     public ObsGCI(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, ContenuNid nature, int leNombre) {
         super(id, date, heure, lieu, observateurs);
-        if (leNombre < 0) throw new IllegalArgumentException("Number is negative");
         this.setNatureObs(nature);
         this.setNombre(leNombre);
     }

@@ -42,6 +42,7 @@ public class ObsLoutre extends Observation {
      * @param indice the indice of the observation
      */
     public void setIndice(IndiceLoutre indice) {
+        if (indice == null) throw new NullPointerException("Indice cannot be null");
         this.indice = indice;
     }
 

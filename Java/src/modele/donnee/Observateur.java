@@ -1,7 +1,5 @@
 package modele.donnee;
 
-import java.util.Objects;
-
 /**
  * Class to represent an observer
  *
@@ -28,9 +26,7 @@ public class Observateur {
      * @param leNom    the name of the observer
      * @param lePrenom the first name of the observer
      */
-    public Observateur(int id, String leNom, String lePrenom) throws IllegalArgumentException {
-        if (leNom == null || lePrenom == null) throw new IllegalArgumentException("One of the parameters is null");
-        if (leNom.equals("") && lePrenom.equals("")) throw new IllegalArgumentException("Both leNom and lePrenom can't be empty");
+    public Observateur(int id, String leNom, String lePrenom) {
         this.setIdObservateur(id);
         this.setNom(leNom);
         this.setPrenom(lePrenom);
@@ -65,7 +61,8 @@ public class Observateur {
      * @param idObservateur the id of the observer
      */
     public void setIdObservateur(int idObservateur) {
-        this.idObservateur = idObservateur;
+        if (idObservateur < 0) throw new IllegalArgumentException("Id can't be negative");
+        else this.idObservateur = idObservateur;
     }
 
     /**
@@ -73,8 +70,8 @@ public class Observateur {
      * @param nom the name of the observer
      */
     public void setNom(String nom) {
-
-        this.nom = nom;
+        if (nom == null) throw new NullPointerException("Nom can't be null");
+        else this.nom = nom;
     }
 
     /**
@@ -82,6 +79,7 @@ public class Observateur {
      * @param prenom the first name of the observer
      */
     public void setPrenom(String prenom) {
-        this.prenom = prenom;
+        if (prenom == null) throw new NullPointerException("Prénom can't be null");
+        else this.prenom = prenom;
     }
 }
