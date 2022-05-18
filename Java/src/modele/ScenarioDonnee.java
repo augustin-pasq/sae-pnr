@@ -5,8 +5,6 @@ import modele.donnee.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 
 
 public class ScenarioDonnee {
@@ -22,10 +20,10 @@ public class ScenarioDonnee {
 
     }
 
-    public static ArrayList<Observateur> testObservateur() {  
+    public static ArrayList<Observateur> testObservateur() {
         System.out.println("Test de la classe Chouette");
-        
-         // Creation des objets
+
+        // Creation des objets
         ArrayList<Observateur> listeObs = new ArrayList<Observateur>();
         Observateur obs0 = new Observateur(0, "Doe", "John");
         Observateur obs1 = new Observateur(1, "Le Ny", "Liam");
@@ -58,14 +56,13 @@ public class ScenarioDonnee {
         System.out.println("Prenom : " + obs0.getPrenom());
 
 
-
         return listeObs;
     }
 
 
     public static void testChouette(ArrayList<Observateur> listeObs) {
 
-        
+
         // Test de la classe Chouette
 
         Chouette chouette = new Chouette("1", Sexe.MALE, EspeceChouette.HULOTTE);
@@ -80,7 +77,7 @@ public class ScenarioDonnee {
         } catch (IllegalArgumentException e) {
             System.out.println("lesObservations null : " + e.getMessage());
         }
-        
+
         chouette.setSexe(Sexe.FEMELLE);
         Sexe nonDefini = null;
         try {
@@ -94,7 +91,7 @@ public class ScenarioDonnee {
         } catch (IllegalArgumentException e) {
             System.out.println("Espece null : " + e.getMessage());
         }
-        Date dixSeptMai = new Date(17 / 05 / 2022);
+        Date dixSeptMai = new Date(0);
         Time now = new Time(50000);
         Time minuit = new Time(0);
         Lieu vannes = new Lieu(47.6586772, -2.7599079);
@@ -137,14 +134,14 @@ public class ScenarioDonnee {
 
         System.out.println("L'observation numero 2 est retirée");
         chouette.retireObs(2);
-        
+
         System.out.println("Il y a au total " + chouette.nbObs() + " observations pour cet chouette");
         if (chouette.nbObs() == 5) {
             System.out.println("OK");
         } else {
             System.out.println("ERREUR");
         }
-        
+
         System.out.println("Toutes les observations ont été retirées");
         chouette.videObs();
         System.out.println("Il y a au total " + chouette.nbObs() + " observations pour cet chouette");
@@ -155,8 +152,6 @@ public class ScenarioDonnee {
         }
 
 
-
-
         Lieu lieu = new Lieu(5, 5);
         NidGCI nd = new NidGCI(109, "Bellevue");
 
@@ -165,16 +160,16 @@ public class ScenarioDonnee {
 
     public static void testObsHippocampe(ArrayList<Observateur> listeObs) {
 
-        Date dixHuitMai = new Date(18 / 05 / 2022);
+        Date dixHuitMai = new Date(0);
         Time now = new Time(50000);
         Time minuit = new Time(0);
         Lieu vannes = new Lieu(47.6586772, -2.7599079);
         Lieu arradon = new Lieu(47.62798, -2.8229152);
 
-        ObsHippocampe hippocampe1 = new ObsHippocampe(01, dixHuitMai, now, vannes, listeObs, 9.5, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
+        ObsHippocampe hippocampe1 = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, 9.5, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
 
         try {
-            ObsHippocampe hippocampeTailleNegatif = new ObsHippocampe(01, dixHuitMai, now, vannes, listeObs, -1, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
+            ObsHippocampe hippocampeTailleNegatif = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, -1, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
         } catch (IllegalArgumentException e) {
             System.out.println("Taille négative : " + e.getMessage());
         }
@@ -195,7 +190,6 @@ public class ScenarioDonnee {
 
         System.out.println("Modificiation de l'espece par HIPPOCAMPUS_HIPPOCAMPUS");
         hippocampe1.setEspece(EspeceHippocampe.HIPPOCAMPUS_HIPPOCAMPUS);
-
 
 
         try {
@@ -248,7 +242,7 @@ public class ScenarioDonnee {
 
     public static void testObsLoutre(ArrayList<Observateur> listeObs) {
 
-        Date dixHuitMai = new Date(18 / 05 / 2022);
+        Date dixHuitMai = new Date(0);
         Time now = new Time(50000);
         Time minuit = new Time(0);
         Lieu vannes = new Lieu(47.6586772, -2.7599079);
@@ -263,7 +257,7 @@ public class ScenarioDonnee {
         System.out.println("Espece : " + loutre1.especeObs());
     }
 
-    public static void testGCI(ArrayList<Observateur> listeObs){
+    public static void testGCI(ArrayList<Observateur> listeObs) {
 
         // Initialisation
 
@@ -271,7 +265,7 @@ public class ScenarioDonnee {
         // 1
         //
 
-        Date date1 = new Date(Date.getC);
+        Date date1 = new Date(0);
         Time heure1 = new Time(36000000);
         Lieu lieu1 = new Lieu(16, 6);
 
@@ -298,7 +292,7 @@ public class ScenarioDonnee {
 
         ContenuNid nature2 = ContenuNid.POUSSIN;
         int leNombre2 = 2;
-        
+
         ObsGCI obs2 = new ObsGCI(2, date1, heure2, lieu2, observateurs2, nature2, leNombre2);
 
         //
@@ -332,11 +326,11 @@ public class ScenarioDonnee {
         // int leNombre1 = 1;
 
         ObsGCI obs3_2 = new ObsGCI(4, date1, heure3, lieu3, observateurs3, nature1, leNombre1);
-        
+
         // NidGCI
-        NidGCI nid1 = new NidGCI(1, 2, "Plage1");
-        NidGCI nid2 = new NidGCI(2, 4, "Plage2");
-        NidGCI nid3 = new NidGCI(3, 3, "Plage3");
+        NidGCI nid1 = new NidGCI(1, "Plage1");
+        NidGCI nid2 = new NidGCI(2, "Plage2");
+        NidGCI nid3 = new NidGCI(3, "Plage3");
 
         nid1.ajouterUneObs(obs1);
         nid2.ajouterUneObs(obs2);
@@ -346,7 +340,7 @@ public class ScenarioDonnee {
         lesObs.add(obs3_2);
 
         nid3.ajouterPlsObs(lesObs);
-        
+
         //nbObs
         System.out.println("nbObs nid1 : " + nid1.nbObs());
         System.out.println("nbObs nid2 : " + nid2.nbObs());
@@ -355,20 +349,20 @@ public class ScenarioDonnee {
         System.out.println("1");
         System.out.println("1");
         System.out.println("2");
-        System.out.prinln("\n");
+        System.out.println("\n");
 
         //videObs,retureObs
         nid1.videObs();
         nid3.retireObs(3);
         System.out.println("nbObs nid1 : " + nid1.nbObs());
-        System.out.println("nbObs nid3 : " + nid1.nbObs());   
+        System.out.println("nbObs nid3 : " + nid1.nbObs());
         System.out.println("\nexpected :\n");
         System.out.println("0");
         System.out.println("1");
     }
 
 
-    public static void testLieu () {
+    public static void testLieu() {
         Lieu vannes = new Lieu(47.6586772, -2.7599079);
 
         System.out.println("Modificiation de coordX par 23.5");
