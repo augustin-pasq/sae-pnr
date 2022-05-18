@@ -417,7 +417,81 @@ public class ScenarioDonnee {
         }
 
     }
+    
+    /**
+     *  Test method for the obsBatracien class
+     * @param listeObs  a list of observers of type Observateur
+     */
+    public static void testObsBatracien(ArrayList<Observateur> listeObs) {
+        int id = 1;
+        Date date = new Date(2000/10/10);
+        Time heure = new Time(0);
+        Lieu lieu = new Lieu(5, 5);
+        int[] resObs = {1, 3, 2, 5};
+        EspeceBatracien lEspece = EspeceBatracien.CALAMITE;
+        ObsBatracien obsBatracien = new ObsBatracien(id, date, heure, lieu, listeObs, resObs, lEspece);
 
+
+        //Tests sur l'attribut nombreAdultes:
+        try {
+            p("\nModificiation du nombre de batracien adulte par un nombre négatif: ");
+            obsBatracien.setNombreAdultes(-1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Amount of adult batrachian < 0: " + e.getMessage());
+        }
+        p("Modificiation du nombre de batracien adulte par un nombre positif: ");
+        obsBatracien.setNombreAdultes(10);
+        p("Nombre d'adultes apres modification: " + obsBatracien.getNombreAdultes());
+
+
+        //Tests sur l'attribut nombreAmplexus
+        try {
+            p("\nModificiation du nombre d'amplexus par un nombre négatif: ");
+            obsBatracien.setNombreAmplexus(-1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Amount of amplexus < 0 : " + e.getMessage());
+        }
+        p("Modificiation du nombre d'amplexus par un nombre positif: ");
+        obsBatracien.setNombreAmplexus(5);
+        p("Nombre d'amplexus apres modification: " + obsBatracien.getNombreAmplexus());
+
+
+        //Tests sur l'attribut nombreTetard
+        try {
+            p("\nModificiation du nombre de tetards par un nombre négatif: ");
+            obsBatracien.setNombreTetard(-1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Amount of tadpoles < 0 : " + e.getMessage());
+        }
+        p("Modificiation du nombre de tetards par un nombre positif: ");
+        obsBatracien.setNombreTetard(5);
+        p("Nombre de tetards apres modification: " + obsBatracien.getNombreTetard());
+
+
+        //Tests sur l'attribut nombrePonte
+        try {
+            p("\nModificiation du nombre de pontes par un nombre négatif: ");
+            obsBatracien.setNombrePonte(-1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Amount of clutches < 0 : " + e.getMessage());
+        }
+        p("Modificiation du nombre de pontes par un nombre positif: ");
+        obsBatracien.setNombrePonte(5);
+        p("Nombre de pontes apres modification: " + obsBatracien.getNombrePonte());
+
+
+        //Tests sur l'attribut
+        try {
+            p("\nModificiation de l'espece par une valeur nulle: ");
+            obsBatracien.setEspece(null);
+        } catch (NullPointerException e) {
+            System.out.println("Espece is null : " + e.getMessage());
+        }
+        p("Modificiation de l'espece: ");
+        obsBatracien.setEspece(EspeceBatracien.PELODYTE);
+        p("Espece apres modification: " + obsBatracien.getEspece());
+    }
+    
     private static void p(String str) {
         System.out.println(str);
     }
