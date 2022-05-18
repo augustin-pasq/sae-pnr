@@ -26,7 +26,7 @@ public class Observateur {
      * @param leNom    the name of the observer
      * @param lePrenom the first name of the observer
      */
-    public Observateur(int id, String leNom, String lePrenom) {
+    public Observateur(int id, String leNom, String lePrenom) throws IllegalArgumentException,NullPointerException {
         this.setIdObservateur(id);
         this.setNom(leNom);
         this.setPrenom(lePrenom);
@@ -60,7 +60,7 @@ public class Observateur {
      * Setter of the id of the observer
      * @param idObservateur the id of the observer
      */
-    public void setIdObservateur(int idObservateur) {
+    public void setIdObservateur(int idObservateur) throws IllegalArgumentException {
         if (idObservateur < 0) throw new IllegalArgumentException("Id can't be negative");
         else this.idObservateur = idObservateur;
     }
@@ -69,7 +69,7 @@ public class Observateur {
      * Setter of the name of the observer
      * @param nom the name of the observer
      */
-    public void setNom(String nom) {
+    public void setNom(String nom) throws NullPointerException {
         if (nom == null) throw new NullPointerException("Nom can't be null");
         else this.nom = nom;
     }
@@ -78,8 +78,8 @@ public class Observateur {
      * Setter of the first name of the observer
      * @param prenom the first name of the observer
      */
-    public void setPrenom(String prenom) {
-        if (prenom == null) throw new NullPointerException("Prénom can't be null");
+    public void setPrenom(String prenom) throws NullPointerException {
+        if (prenom == null) throw new NullPointerException("Prenom can't be null");
         else this.prenom = prenom;
     }
 }

@@ -31,7 +31,7 @@ public class NidGCI implements IObs<ObsGCI> {
      * @param id    the id of the nest
      * @param plage the name of the beach
      */
-    public NidGCI(int id, String plage) {
+    public NidGCI(int id, String plage) throws NullPointerException {
         this.setIdNid(id);
         this.setNomPlage(plage);
         this.setNbEnvol(0);
@@ -79,8 +79,9 @@ public class NidGCI implements IObs<ObsGCI> {
      *
      * @param id the new id of the GCI nest
      */
-    public void setIdNid(int id) {
-        this.idNid = id;
+    public void setIdNid(int id) throws IllegalArgumentException {
+        if (id < 0) throw new IllegalArgumentException("ID can't be negative");
+        else this.idNid = id;
     }
 
     /**
@@ -88,7 +89,7 @@ public class NidGCI implements IObs<ObsGCI> {
      *
      * @param nb the new number of nest flies
      */
-    public void setNbEnvol(int nb) {
+    public void setNbEnvol(int nb) throws IllegalArgumentException {
         if (nb < 0) throw new IllegalArgumentException("ID can't be negative");
         else this.nbEnvol = nb;
     }
@@ -98,13 +99,13 @@ public class NidGCI implements IObs<ObsGCI> {
      *
      * @param nom the new name of the beach
      */
-    public void setNomPlage(String nom) {
+    public void setNomPlage(String nom) throws NullPointerException {
         if (nom == null || nom.isEmpty()) throw new NullPointerException("Nom can't be null or empty");
         else this.nomPlage = nom;
     }
 
-    private void setLesObservations(ArrayList<ObsGCI> lesObs) {
-        if (lesObs == null || lesObs.size() == 0) throw new NullPointerException("Observations can't be null or empty");
+    private void setLesObservations(ArrayList<ObsGCI> lesObs) throws NullPointerException {
+        if (lesObs == null) throw new NullPointerException("Observations can't be null or empty");
         else this.lesObservations = lesObs;
     }
 
