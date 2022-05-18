@@ -14,14 +14,19 @@ public class ScenarioDonnee {
         System.out.println("## Scenario de données");
         ArrayList<Observateur> listeObs = testObservateur();
         testChouette(listeObs);
+        testObsHippocampe(listeObs);
+        testObsLoutre(listeObs);
+        testLieu();
 
 
     }
 
-    public static ArrayList<Observateur> testObservateur() {       
+    public static ArrayList<Observateur> testObservateur() {  
+        System.out.println("Test de la classe Chouette");
         
          // Creation des objets
         ArrayList<Observateur> listeObs = new ArrayList<Observateur>();
+        Observateur obs0 = new Observateur(0, "Doe", "John");
         Observateur obs1 = new Observateur(1, "Le Ny", "Liam");
         Observateur obs2 = new Observateur(2, "Pasquier", "Augustin");
         Observateur obs3 = new Observateur(3, "Malivet", "Ervan");
@@ -42,6 +47,16 @@ public class ScenarioDonnee {
         listeObs.add(obs3);
         listeObs.add(obs4);
         listeObs.add(obs5);
+
+        obs0.setIdObservateur(10);
+        obs0.setNom("Nom");
+        obs0.setPrenom("Prenom");
+
+        System.out.println("ID : " + obs0.getIdObservateur());
+        System.out.println("Nom : " + obs0.getNom());
+        System.out.println("Prenom : " + obs0.getPrenom());
+
+
 
         return listeObs;
     }
@@ -73,8 +88,12 @@ public class ScenarioDonnee {
             System.out.println("sexe null : " + e.getMessage());
         }
         EspeceChouette aucuneEspece = null;
-        chouette.setEspece(aucuneEspece);
-        Date today = new Date(17 / 05 / 2022);
+        try {
+            chouette.setEspece(aucuneEspece);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Espece null : " + e.getMessage());
+        }
+        Date dixSeptMai = new Date(17 / 05 / 2022);
         Time now = new Time(50000);
         Time minuit = new Time(0);
         Lieu vannes = new Lieu(47.6586772, -2.7599079);
@@ -84,9 +103,9 @@ public class ScenarioDonnee {
         System.out.println("Sexe : " + chouette.getSexe());
         System.out.println("Espece : " + chouette.getEspece());
         System.out.println("Id : " + chouette.getIdChouette());
-        ObsChouette obsChouette = new ObsChouette(1, today, now, vannes, listeObs, TypeObservation.SONORE);
-        ObsChouette obsChouette2 = new ObsChouette(2, today, now, vannes, listeObs, TypeObservation.VISUELLE);
-        ObsChouette obsChouette3 = new ObsChouette(3, today, now, arradon, listeObs, TypeObservation.SONORE);
+        ObsChouette obsChouette = new ObsChouette(1, dixSeptMai, now, vannes, listeObs, TypeObservation.SONORE);
+        ObsChouette obsChouette2 = new ObsChouette(2, dixSeptMai, now, vannes, listeObs, TypeObservation.VISUELLE);
+        ObsChouette obsChouette3 = new ObsChouette(3, dixSeptMai, now, arradon, listeObs, TypeObservation.SONORE);
 
         // Ajouter des observations
         ArrayList<ObsChouette> listeObsChouette = new ArrayList<ObsChouette>();
@@ -96,16 +115,14 @@ public class ScenarioDonnee {
         chouette.setLesObservations(listeObsChouette);
 
         System.out.println("Affichage des observations de la chouette : ");
-        // TODO
         System.out.println(chouette.getLesObservations());
-        // Afficher listeObsChouette 
 
-        ObsChouette obsChouette4 = new ObsChouette(4, today, now, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
+        ObsChouette obsChouette4 = new ObsChouette(4, dixSeptMai, now, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
         chouette.ajouterUneObs(obsChouette4);
 
 
-        ObsChouette obsChouette5 = new ObsChouette(5, today, minuit, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
-        ObsChouette obsChouette6 = new ObsChouette(6, today, minuit, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
+        ObsChouette obsChouette5 = new ObsChouette(5, dixSeptMai, minuit, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
+        ObsChouette obsChouette6 = new ObsChouette(6, dixSeptMai, minuit, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
         ArrayList<ObsChouette> listeObsChouetteNuit = new ArrayList<ObsChouette>();
         listeObsChouetteNuit.add(obsChouette5);
         listeObsChouetteNuit.add(obsChouette6);
@@ -144,4 +161,118 @@ public class ScenarioDonnee {
 
 
     }
+
+    public static void testObsHippocampe(ArrayList<Observateur> listeObs) {
+
+        Date dixHuitMai = new Date(18 / 05 / 2022);
+        Time now = new Time(50000);
+        Time minuit = new Time(0);
+        Lieu vannes = new Lieu(47.6586772, -2.7599079);
+        Lieu arradon = new Lieu(47.62798, -2.8229152);
+
+        ObsHippocampe hippocampe1 = new ObsHippocampe(01, dixHuitMai, now, vannes, listeObs, 9.5, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
+
+        try {
+            ObsHippocampe hippocampeTailleNegatif = new ObsHippocampe(01, dixHuitMai, now, vannes, listeObs, -1, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Taille négative : " + e.getMessage());
+        }
+
+
+        System.out.println("Modificiation du type de peche par PETIT_FILET");
+        hippocampe1.setTypePeche(Peche.PETIT_FILET);
+
+
+        try {
+            hippocampe1.setTypePeche(null);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Type peche null : " + e.getMessage());
+        }
+
+        System.out.println("TypePeche : " + hippocampe1.getTypePeche());
+
+
+        System.out.println("Modificiation de l'espece par HIPPOCAMPUS_HIPPOCAMPUS");
+        hippocampe1.setEspece(EspeceHippocampe.HIPPOCAMPUS_HIPPOCAMPUS);
+
+
+
+        try {
+            hippocampe1.setEspece(null);
+        } catch (IllegalArgumentException e) {
+            System.out.println("EspeceHippocampe null : " + e.getMessage());
+        }
+
+        System.out.println("TypeEspece: " + hippocampe1.getEspece());
+
+        System.out.println("Modificiation du sexe par FEMELLE");
+        hippocampe1.setSexe(Sexe.FEMELLE);
+
+        try {
+            hippocampe1.setSexe(null);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Sexe null : " + e.getMessage());
+        }
+
+        System.out.println("Sexe : " + hippocampe1.getSexe());
+
+        System.out.println("Modificiation de la taille par 10.3");
+        hippocampe1.setTaille(10.3);
+
+        try {
+            hippocampe1.setTaille(-2.3);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Taille négative : " + e.getMessage());
+        }
+
+        System.out.println("Taille : " + hippocampe1.getTaille());
+
+        try {
+            hippocampe1.setEstGestant(true);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Femelle ne peut pas être gestante : " + e.getMessage());
+        }
+
+        System.out.println("Modificiation du sexe par FEMELLE");
+        hippocampe1.setSexe(Sexe.MALE);
+        System.out.println("Animal gestant");
+        hippocampe1.setEstGestant(true);
+
+        System.out.println("Gestant ? " + hippocampe1.getEstGestant());
+
+
+        System.out.println("Espece : " + hippocampe1.especeObs());
+
+    }
+
+    public static void testObsLoutre(ArrayList<Observateur> listeObs) {
+
+        Date dixHuitMai = new Date(18 / 05 / 2022);
+        Time now = new Time(50000);
+        Time minuit = new Time(0);
+        Lieu vannes = new Lieu(47.6586772, -2.7599079);
+        Lieu arradon = new Lieu(47.62798, -2.8229152);
+
+        ObsLoutre loutre1 = new ObsLoutre(1, dixHuitMai, now, arradon, listeObs, IndiceLoutre.POSITIF);
+
+        System.out.println("Modificiation de l'indice par NEGATIF");
+        loutre1.setIndice(IndiceLoutre.NEGATIF);
+        System.out.println("Indice : " + loutre1.getIndice());
+
+        System.out.println("Espece : " + loutre1.especeObs());
+    }
+
+
+    public static void testLieu () {
+        Lieu vannes = new Lieu(47.6586772, -2.7599079);
+
+        System.out.println("Modificiation de coordX par 23.5");
+        vannes.setXCoord(23.5);
+        System.out.println("Modificiation de coordX par -45.3");
+        vannes.setYCoord(-45.3);
+        System.out.println("Coord x : " + vannes.getXCoord());
+        System.out.println("Coord y : " + vannes.getYCoord());
+    }
+
+
 }
