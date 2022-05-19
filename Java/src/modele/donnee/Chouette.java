@@ -137,7 +137,8 @@ public class Chouette implements IObs<ObsChouette> {
      * @see modele.donnee.lObs#ajouterPlsObs(ArrayList)
      */
     public void ajouterPlsObs(ArrayList<ObsChouette> obs) {
-        if (obs == null || obs.size() == 0) throw new NullPointerException("List of observations can't be null or empty");
+        if (obs == null || obs.size() == 0)
+            throw new NullPointerException("List of observations can't be null or empty");
         else this.lesObservations.addAll(obs);
     }
 
@@ -174,6 +175,11 @@ public class Chouette implements IObs<ObsChouette> {
         return this.lesObservations.size();
     }
 
+    /**
+     * Format the object to a string
+     *
+     * @return the object as a string
+     */
     public String toString() {
         return "Chouette " + this.getIdChouette() + " : " + this.getEspece() + " " + this.getSexe() + " " + this.getLesObservations();
     }
