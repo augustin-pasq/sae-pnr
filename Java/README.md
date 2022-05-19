@@ -11,10 +11,10 @@ There is a script to easily build the application:
 
 ```bash
 # Build and run the application
-./maker run
+./maker run [--verbose, --file <file>]
 
 # Only build the application
-./maker build
+./maker build [--verbose]
 
 # Generate the documentation
 ./maker doc
