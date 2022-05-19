@@ -119,9 +119,13 @@ public class ScenarioDonnee {
         listeObsChouette.add(obsChouette2);
         listeObsChouette.add(obsChouette3);
         chouette.setLesObservations(listeObsChouette);
+        ArraysList<ObsChouette> retourObservartions = chouette.getLesObservations();
 
         p("Affichage des observations de la chouette : ");
         p(chouette.getLesObservations().toString());
+
+        System.out.println("Affichage des observations de la chouette : ");
+
 
         ObsChouette obsChouette4 = new ObsChouette(4, dixSeptMai, now, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
         chouette.ajouterUneObs(obsChouette4);
@@ -159,6 +163,8 @@ public class ScenarioDonnee {
             p("ERREUR");
         }
 
+        Lieu lieu = new Lieu(5, 5);
+        NidGCI nd = new NidGCI(109, "Bellevue");
 
         p("");
         p(obsChouette.toString());
@@ -177,9 +183,7 @@ public class ScenarioDonnee {
         obsChouette.setTypeObs(TypeObservation.VISUELLE);
         p("Type d'observation : " + obsChouette.getTypeObs());
 
-
-        p("Espece de la chouette : " + obsChouette.especeObs());
-
+        testGCI();
 
     }
 
@@ -326,7 +330,6 @@ public class ScenarioDonnee {
 
         // Date date1 = new Date();
         // Time heure1 = new Time(36000000);
-
 
         ArrayList<Observateur> observateurs3 = new ArrayList<Observateur>();
         observateurs3.add(listeObs.get(4));
