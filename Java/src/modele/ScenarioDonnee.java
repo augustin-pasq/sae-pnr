@@ -119,7 +119,7 @@ public class ScenarioDonnee {
         listeObsChouette.add(obsChouette2);
         listeObsChouette.add(obsChouette3);
         chouette.setLesObservations(listeObsChouette);
-        ArraysList<ObsChouette> retourObservartions = chouette.getLesObservations();
+        ArrayList<ObsChouette> retourObservartions = chouette.getLesObservations();
 
         p("Affichage des observations de la chouette : ");
         p(chouette.getLesObservations().toString());
@@ -182,9 +182,6 @@ public class ScenarioDonnee {
         p("Changement du type d'observation en VISUELLE");
         obsChouette.setTypeObs(TypeObservation.VISUELLE);
         p("Type d'observation : " + obsChouette.getTypeObs());
-
-        testGCI();
-
     }
 
     public static void testObsHippocampe(ArrayList<Observateur> listeObs) {
