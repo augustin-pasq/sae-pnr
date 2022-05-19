@@ -162,9 +162,9 @@ public abstract class Observation {
      *
      * @param idObservateur Id of the observer to remove
      */
-    public void retireObservateur(int idObservateur) throws IllegalArgumentException {
+    public void retireObservateur(int idObservateur) throws IndexOutOfBoundsException {
         if (idObservateur < 0 || idObservateur >= this.lesObservateurs.size())
-            throw new IllegalArgumentException("Id is negative or too big");
+            throw new IndexOutOfBoundsException("Id out of bounds");
         else this.lesObservateurs.remove(idObservateur);
     }
 
