@@ -163,7 +163,6 @@ public class ScenarioDonnee {
             p("ERREUR");
         }
 
-        Lieu lieu = new Lieu(5, 5);
         NidGCI nd = new NidGCI(109, "Bellevue");
 
         p("");
