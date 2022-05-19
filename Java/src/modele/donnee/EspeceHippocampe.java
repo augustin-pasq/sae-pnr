@@ -2,6 +2,8 @@ package modele.donnee;
 
 /**
  * The possible species of the hippocampe.
+ *
+ * @author Groupe PNR 1D1
  */
 public enum EspeceHippocampe {
     /**

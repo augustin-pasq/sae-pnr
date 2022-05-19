@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * Set of classes to be implemented on an observation
+ *
+ * @author Groupe PNR 1D1
  */
 public interface IObs<T> {
 
