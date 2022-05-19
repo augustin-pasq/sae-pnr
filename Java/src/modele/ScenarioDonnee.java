@@ -52,7 +52,7 @@ public class ScenarioDonnee {
         p("Changement de l'id de l'observateur par 10");
         obs0.setIdObservateur(10);
         p("ID : " + obs0.getIdObservateur());
-        
+
         p("\nChangement du nom de l'observateur par Nom");
         obs0.setNom("Nom");
         p("Nom : " + obs0.getNom());
@@ -118,7 +118,6 @@ public class ScenarioDonnee {
         Lieu vannes = new Lieu(268045.333, 6744460.457);
         Lieu arradon = new Lieu(263077.46, 6741405.844);
 
-    
 
         ObsChouette obsChouette = new ObsChouette(1, dixSeptMai, now, vannes, listeObs, TypeObservation.SONORE);
         ObsChouette obsChouette2 = new ObsChouette(2, dixSeptMai, now, vannes, listeObs, TypeObservation.VISUELLE);
@@ -178,6 +177,7 @@ public class ScenarioDonnee {
         p(obsChouette.toString());
         p("");
     }
+
     public static void testObsChouette(ArrayList<Observateur> listeObs) {
         p("\n--- Test de la classe ObsChouette ---\n");
         Date dixHuitMai = new Date(0);
@@ -223,8 +223,6 @@ public class ScenarioDonnee {
             p("Type peche null : " + e.getMessage());
         }
 
-        
-
 
         p("\nModificiation de l'espece par HIPPOCAMPUS_HIPPOCAMPUS");
         hippocampe1.setEspece(EspeceHippocampe.HIPPOCAMPUS_HIPPOCAMPUS);
@@ -237,7 +235,6 @@ public class ScenarioDonnee {
             p("EspeceHippocampe null : " + e.getMessage());
         }
 
-        
 
         p("\nModificiation du sexe par FEMELLE");
         hippocampe1.setSexe(Sexe.FEMELLE);
@@ -250,7 +247,6 @@ public class ScenarioDonnee {
             p("Sexe null : " + e.getMessage());
         }
 
-        
 
         p("\nModificiation de la taille par 10.3");
         hippocampe1.setTaille(10.3);
@@ -263,7 +259,6 @@ public class ScenarioDonnee {
             p("Taille négative : " + e.getMessage());
         }
 
-        
 
         try {
             p("\nMettre à vrai le boolean gestant");
@@ -417,7 +412,7 @@ public class ScenarioDonnee {
         p("Coord x : " + vannes.getXCoord());
         p("Coord y : " + vannes.getYCoord());
 
-        
+
         try {
             Lieu impossible = new Lieu(-5, 12);
         } catch (IllegalArgumentException e) {
@@ -438,10 +433,11 @@ public class ScenarioDonnee {
         }
 
     }
-    
+
     /**
-     *  Test method for the obsBatracien class
-     * @param listeObs  a list of observers of type Observateur
+     * Test method for the obsBatracien class
+     *
+     * @param listeObs a list of observers of type Observateur
      */
     public static void testObsBatracien(ArrayList<Observateur> listeObs) {
         p("\n--- Test de la classe ObsBatracien ---\n");
@@ -513,7 +509,11 @@ public class ScenarioDonnee {
         obsBatracien.setEspece(EspeceBatracien.PELODYTE);
         p("Espece apres modification: " + obsBatracien.getEspece());
     }
-    
+
+    /**
+     * Shorthand for System.out.println
+     * @param str String to print
+     */
     private static void p(String str) {
         System.out.println(str);
     }
