@@ -23,7 +23,7 @@ public class ScenarioDonnee {
     }
 
     public static ArrayList<Observateur> testObservateur() {
-        p("Test de la classe Chouette");
+        p("\n--- Test de la classe Observateur ---\n");
 
         // Creation des objets
         ArrayList<Observateur> listeObs = new ArrayList<Observateur>();
@@ -49,12 +49,17 @@ public class ScenarioDonnee {
         listeObs.add(obs4);
         listeObs.add(obs5);
 
+        p("Changement de l'id de l'observateur par 10");
         obs0.setIdObservateur(10);
-        obs0.setNom("Nom");
-        obs0.setPrenom("Prenom");
-
         p("ID : " + obs0.getIdObservateur());
+        
+        p("\nChangement du nom de l'observateur par Nom");
+        obs0.setNom("Nom");
         p("Nom : " + obs0.getNom());
+
+
+        p("\nChangement du prénom de l'observateur par Prénom");
+        obs0.setPrenom("Prenom");
         p("Prenom : " + obs0.getPrenom());
 
 
@@ -63,6 +68,7 @@ public class ScenarioDonnee {
 
 
     public static void testChouette(ArrayList<Observateur> listeObs) {
+        p("\n--- Test la classe Chouette ---\n");
 
         Chouette chouette = new Chouette("1", Sexe.MALE, EspeceChouette.HULOTTE);
 
@@ -70,31 +76,36 @@ public class ScenarioDonnee {
         chouette.setIdChouette("2");
         p("Id : " + chouette.getIdChouette());
         try {
+            p("Changement de l'id de la chouette par null");
             chouette.setIdChouette(null);
         } catch (NullPointerException e) {
             p("Id null : " + e.getMessage());
         }
+
         try {
+            p("\nRajouter une liste d'observations null");
             chouette.setLesObservations(null);
         } catch (NullPointerException e) {
             p("lesObservations null : " + e.getMessage());
         }
 
-        p("Changement du sexe de la chouette en femelle");
+        p("\nChangement du sexe de la chouette en femelle");
         chouette.setSexe(Sexe.FEMELLE);
         p("Sexe : " + chouette.getSexe());
         Sexe nonDefini = null;
         try {
+            p("Changement du sexe de la chouette par null");
             chouette.setSexe(nonDefini);
         } catch (NullPointerException e) {
             p("sexe null : " + e.getMessage());
         }
 
-        p("Changement de l'espece de la chouette en hulotte");
+        p("\nChangement de l'espece de la chouette en hulotte");
         chouette.setEspece(EspeceChouette.HULOTTE);
         p("Espece : " + chouette.getEspece());
         EspeceChouette aucuneEspece = null;
         try {
+            p("Changement de l'espece de la chouette par null");
             chouette.setEspece(aucuneEspece);
         } catch (NullPointerException e) {
             p("Espece null : " + e.getMessage());
@@ -121,11 +132,8 @@ public class ScenarioDonnee {
         chouette.setLesObservations(listeObsChouette);
         ArrayList<ObsChouette> retourObservartions = chouette.getLesObservations();
 
-        p("Affichage des observations de la chouette : ");
+        p("\nAffichage des observations de la chouette : ");
         p(chouette.getLesObservations().toString());
-
-        System.out.println("Affichage des observations de la chouette : ");
-
 
         ObsChouette obsChouette4 = new ObsChouette(4, dixSeptMai, now, arradon, listeObs, TypeObservation.SONORE_VISUELLE);
         chouette.ajouterUneObs(obsChouette4);
@@ -136,15 +144,16 @@ public class ScenarioDonnee {
         ArrayList<ObsChouette> listeObsChouetteNuit = new ArrayList<ObsChouette>();
         listeObsChouetteNuit.add(obsChouette5);
         listeObsChouetteNuit.add(obsChouette6);
+        chouette.ajouterPlsObs(listeObsChouetteNuit);
 
-        p("Il y a au total " + chouette.nbObs() + " observations pour cet chouette");
+        p("\nIl y a au total " + chouette.nbObs() + " observations pour cet chouette");
         if (chouette.nbObs() == 6) {
             p("OK");
         } else {
             p("ERREUR");
         }
 
-        p("L'observation numero 2 est retirée");
+        p("\nL'observation numero 2 est retirée");
         chouette.retireObs(2);
 
         p("Il y a au total " + chouette.nbObs() + " observations pour cet chouette");
@@ -154,7 +163,7 @@ public class ScenarioDonnee {
             p("ERREUR");
         }
 
-        p("Toutes les observations ont été retirées");
+        p("\nToutes les observations ont été retirées");
         chouette.videObs();
         p("Il y a au total " + chouette.nbObs() + " observations pour cet chouette");
         if (chouette.nbObs() == 0) {
@@ -170,6 +179,7 @@ public class ScenarioDonnee {
         p("");
     }
     public static void testObsChouette(ArrayList<Observateur> listeObs) {
+        p("\n--- Test de la classe ObsChouette ---\n");
         Date dixHuitMai = new Date(0);
         Time now = new Time(50000);
         Time minuit = new Time(0);
@@ -184,6 +194,7 @@ public class ScenarioDonnee {
     }
 
     public static void testObsHippocampe(ArrayList<Observateur> listeObs) {
+        p("\n--- Test de la classe ObsHippocampe ---\n");
 
         Date dixHuitMai = new Date(0);
         Time now = new Time(50000);
@@ -194,68 +205,76 @@ public class ScenarioDonnee {
         ObsHippocampe hippocampe1 = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, 9.5, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
 
         try {
+            p("Création d'un hippocampe avec un taille = -1");
             ObsHippocampe hippocampeTailleNegatif = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, -1, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
         } catch (IllegalArgumentException e) {
             p("Taille négative : " + e.getMessage());
         }
 
 
-        p("Modificiation du type de peche par PETIT_FILET");
+        p("\nModificiation du type de peche par PETIT_FILET");
         hippocampe1.setTypePeche(Peche.PETIT_FILET);
-
+        p("TypePeche : " + hippocampe1.getTypePeche());
 
         try {
+            p("Modificiation du type de peche par null");
             hippocampe1.setTypePeche(null);
         } catch (IllegalArgumentException e) {
             p("Type peche null : " + e.getMessage());
         }
 
-        p("TypePeche : " + hippocampe1.getTypePeche());
+        
 
 
-        p("Modificiation de l'espece par HIPPOCAMPUS_HIPPOCAMPUS");
+        p("\nModificiation de l'espece par HIPPOCAMPUS_HIPPOCAMPUS");
         hippocampe1.setEspece(EspeceHippocampe.HIPPOCAMPUS_HIPPOCAMPUS);
-
+        p("TypeEspece: " + hippocampe1.getEspece());
 
         try {
+            p("Modificiation de l'espece par null");
             hippocampe1.setEspece(null);
         } catch (IllegalArgumentException e) {
             p("EspeceHippocampe null : " + e.getMessage());
         }
 
-        p("TypeEspece: " + hippocampe1.getEspece());
+        
 
-        p("Modificiation du sexe par FEMELLE");
+        p("\nModificiation du sexe par FEMELLE");
         hippocampe1.setSexe(Sexe.FEMELLE);
+        p("Sexe : " + hippocampe1.getSexe());
 
         try {
+            p("Modificiation du sexe par null");
             hippocampe1.setSexe(null);
         } catch (IllegalArgumentException e) {
             p("Sexe null : " + e.getMessage());
         }
 
-        p("Sexe : " + hippocampe1.getSexe());
+        
 
-        p("Modificiation de la taille par 10.3");
+        p("\nModificiation de la taille par 10.3");
         hippocampe1.setTaille(10.3);
+        p("Taille : " + hippocampe1.getTaille());
 
         try {
+            p("Modificiation de la taille par -2.3");
             hippocampe1.setTaille(-2.3);
         } catch (IllegalArgumentException e) {
             p("Taille négative : " + e.getMessage());
         }
 
-        p("Taille : " + hippocampe1.getTaille());
+        
 
         try {
+            p("\nMettre à vrai le boolean gestant");
             hippocampe1.setEstGestant(true);
         } catch (IllegalArgumentException e) {
             p("Femelle ne peut pas être gestante : " + e.getMessage());
         }
 
-        p("Modificiation du sexe par FEMELLE");
+        p("\nModificiation du sexe par FEMELLE");
         hippocampe1.setSexe(Sexe.MALE);
-        p("Animal gestant");
+        p("\nMettre à vrai le boolean gestant");
         hippocampe1.setEstGestant(true);
 
         p("Gestant ? " + hippocampe1.getEstGestant());
@@ -266,6 +285,7 @@ public class ScenarioDonnee {
     }
 
     public static void testObsLoutre(ArrayList<Observateur> listeObs) {
+        p("\n--- Test de la classe ObsLoutre ---\n");
 
         Date dixHuitMai = new Date(464314741);
         Time now = new Time(50000);
@@ -387,6 +407,7 @@ public class ScenarioDonnee {
 
 
     public static void testLieu() {
+        p("\n--- Test de la classe Lieu ---\n");
         Lieu vannes = new Lieu(268045.333, 6744460.457);
 
         p("Modificiation de coordX par 300000");
@@ -423,6 +444,7 @@ public class ScenarioDonnee {
      * @param listeObs  a list of observers of type Observateur
      */
     public static void testObsBatracien(ArrayList<Observateur> listeObs) {
+        p("\n--- Test de la classe ObsBatracien ---\n");
         int id = 1;
         Date date = new Date(0);
         Time heure = new Time(80000000);
