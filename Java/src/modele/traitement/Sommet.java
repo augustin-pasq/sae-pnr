@@ -3,6 +3,7 @@ package modele.traitement;
 import modele.donnee.EspeceObservee;
 import modele.donnee.Lieu;
 import modele.donnee.Observation;
+
 import java.sql.Date;
 
 public class Sommet {
@@ -64,9 +65,19 @@ public class Sommet {
         else this.date = date;
     }
 
+    public double claculeDist(Sommet som) {
+        double ret = 0;
+        if (som == null) throw new IllegalArgumentException("som ne doit pas être null");
+        else {
+            double dX = Math.pow(this.getCoordLieu().getXCoord() - som.getCoordLieu().getXCoord(), 2);
+            double dY = Math.pow(this.getCoordLieu().getYCoord() - som.getCoordLieu().getYCoord(), 2);
+            ret = Math.sqrt(dX + dY);
+        }
+        return ret;
+    }
 
     public String toString() {
-        return "Sommet{" + "espece=" + espece + ", id=" + id + ", coordLieu=" + coordLieu + ", date=" + date + '}';
+        return "Sommet{" + this.getId() + ", " + this.getDate() + ", " + this.getCoordLieu() + ", " + this.getEspece() + '}';
     }
 
 }
