@@ -15,7 +15,7 @@ public class Graphe {
             ArrayList<Sommet> sommetsVoisins = new ArrayList<Sommet>();
 
             for (Sommet s2 : sommets) {
-                if (s1.claculeDist(s2) > dist) {
+                if (s1.calculeDist(s2) > dist) {
                     sommetsVoisins.add(s2);
                 } else {
                     sommetsVoisins = null;
@@ -50,13 +50,16 @@ public class Graphe {
         return (int) Math.ceil(sum/2);
     }
 
+    
     public int [][] matriceAdjacence(){
 
-        int nbSommets;
+        // déclaration
         int [][] adj;
 
         nbSommets = this.nbSommets();
         adj = new int [nbSommets][nbSommets+1];
+        listeSommets = this.sommetsVoisins.keySet();
+        idSommets = new int [nbSommets];
 
         for (Sommet s : this.sommetsVoisins.){
 
@@ -75,6 +78,12 @@ public class Graphe {
 
     public ArrayList<Sommet> voisins (int idSom) {
         
+
+        for (Sommet s : listeSommets){
+
+            int id = s.getId();
+
+        }
     }
 
     public int rayon () {
