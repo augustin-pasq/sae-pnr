@@ -47,46 +47,50 @@ public class Graphe {
         for (ArrayList<Sommet> s : this.sommetsVoisins.values()) {
             sum = sum + s.size();
         }
-        return (int) Math.ceil(sum/2);
+        return (int) Math.ceil(sum / 2);
     }
 
-    
-    public int [][] matriceAdjacence(){
+
+    public int[][] matriceAdjacence() {
 
         // déclaration
-        int [][] adj;
+        int[][] adj;
 
         nbSommets = this.nbSommets();
-        adj = new int [nbSommets][nbSommets+1];
+        adj = new int[nbSommets][nbSommets + 1];
         listeSommets = this.sommetsVoisins.keySet();
-        idSommets = new int [nbSommets];
+        idSommets = new int[nbSommets];
 
-        for (Sommet s : this.sommetsVoisins.){
+        for (Sommet s : this.sommetsVoisins.) {
 
             adj[0][i] = this.sommetsVoisins.getKey(i);
         }
 
         // identifiant des sommets
-        for (i = 0 ; i < nbSommets ; i++) adj[i][0] = idSommets[i];
+        for (i = 0; i < nbSommets; i++) adj[i][0] = idSommets[i];
     }
 
 
-    public boolean existeChemin (int idSom1; int idSom2) {
+    public boolean existeChemin(int idSom1;
+
+    int idSom2)
+
+    {
         ArrayList<Sommet> voisinSom1;
 
     }
 
-    public ArrayList<Sommet> voisins (int idSom) {
-        
+    public ArrayList<Sommet> voisins(int idSom) {
 
-        for (Sommet s : listeSommets){
+
+        for (Sommet s : listeSommets) {
 
             int id = s.getId();
 
         }
     }
 
-    public int rayon () {
+    public int rayon() {
         int s1;
         int s2;
         if (this.estConnexe()) {
@@ -97,12 +101,12 @@ public class Graphe {
 
     }
 
-    
-    public int diametre () {
+
+    public int diametre() {
         if (this.estConnexe()) {
-            return - 1;
+            return -1;
         } else {
-            
+
         }
 
     }
