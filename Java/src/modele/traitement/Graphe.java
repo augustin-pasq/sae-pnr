@@ -1,9 +1,7 @@
 package modele.traitement;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  * Graphe
@@ -54,33 +52,49 @@ public class Graphe {
 
     public int [][] matriceAdjacence(){
 
-        // déclaration
-        HashMap <Integer, ArrayList<Sommet>> sommets; 
+        int nbSommets;
         int [][] adj;
-        Set<Sommet> listeSommets;
-        int [] idSommets;
 
-        // initialisation
-        int nbSommets = this.nbSommets();
-
+        nbSommets = this.nbSommets();
         adj = new int [nbSommets][nbSommets+1];
-        listeSommets = this.sommetsVoisins.keySet();
-        idSommets = new int [nbSommets];
-       
-        for (Sommet s : listeSommets){
-            sommets.put(s.getId(), this.sommetsVoisins.get(s));
-        }
 
-        // tri des idSommets pour l'affichage
-        int i = 0;
-        for (Sommet s : listeSommets){
-            idSommets[i] = s.getId();
-            i++;
+        for (Sommet s : this.sommetsVoisins.){
+
+            adj[0][i] = this.sommetsVoisins.getKey(i);
         }
-        Arrays.sort(idSommets);
 
         // identifiant des sommets
         for (i = 0 ; i < nbSommets ; i++) adj[i][0] = idSommets[i];
+    }
+
+
+    public boolean existeChemin (int idSom1; int idSom2) {
+        ArrayList<Sommet> voisinSom1;
+
+    }
+
+    public ArrayList<Sommet> voisins (int idSom) {
         
+    }
+
+    public int rayon () {
+        int s1;
+        int s2;
+        if (this.estConnexe()) {
+            return -1;
+        } else {
+
+        }
+
+    }
+
+    
+    public int diametre () {
+        if (this.estConnexe()) {
+            return - 1;
+        } else {
+            
+        }
+
     }
 }
