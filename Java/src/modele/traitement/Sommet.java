@@ -1,5 +1,14 @@
 package modele.traitement;
 
+<<<<<<< HEAD
+/**
+ * Sommet
+ */
+public class Sommet {
+
+    
+}
+=======
 import modele.donnee.EspeceObservee;
 import modele.donnee.Lieu;
 import modele.donnee.Observation;
@@ -81,3 +90,4 @@ public class Sommet {
     }
 
 }
+>>>>>>> bd67d75ab9cf808d5ce118daad23337083d4f2d0
