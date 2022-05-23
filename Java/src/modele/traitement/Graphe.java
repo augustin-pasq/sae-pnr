@@ -13,7 +13,6 @@ public class Graphe {
     public int [][] matriceAdjacence(){
 
         // déclaration
-        HashMap <Integer, ArrayList<Sommet>> sommets; 
         int [][] adj;
         Set<Sommet> listeSommets;
         int [] idSommets;
@@ -24,10 +23,6 @@ public class Graphe {
         adj = new int [nbSommets][nbSommets+1];
         listeSommets = this.sommetsVoisins.keySet();
         idSommets = new int [nbSommets];
-       
-        for (Sommet s : listeSommets){
-            sommets.put(s.getId(), this.sommetsVoisins.get(s));
-        }
 
         // tri des idSommets pour l'affichage
         int i = 0;
@@ -39,6 +34,11 @@ public class Graphe {
 
         // identifiant des sommets
         for (i = 0 ; i < nbSommets ; i++) adj[i][0] = idSommets[i];
-        
+
+        for (Sommet s : listeSommets){
+
+            int id = s.getId();
+
+        }
     }
 }
