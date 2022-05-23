@@ -37,7 +37,8 @@ public class Graphe {
         }
         Arrays.sort(idSommets);
 
-        for (i = 0 ; i < nbSommets ; i++) adj[0][i] = idSommets[i];
-
+        // identifiant des sommets
+        for (i = 0 ; i < nbSommets ; i++) adj[i][0] = idSommets[i];
+        
     }
 }
