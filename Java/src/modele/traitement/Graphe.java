@@ -42,12 +42,25 @@ public class Graphe {
      * @throws IllegalArgumentException If the Hashmap is null or if it contains null keys or null values
      */
     public Graphe(HashMap<Sommet, ArrayList<Sommet>> somVoisins) throws IllegalArgumentException {
-        if (somVoisins == null) throw new IllegalArgumentException("somVoisins cannot be null");
+        if (somVoisins == null)
+            throw new IllegalArgumentException("somVoisins cannot be null");
         Set<Sommet> listeSommets = somVoisins.keySet();
         for (Sommet s : listeSommets) {
-            if (s == null) throw new IllegalArgumentException("Hashmap key sommet cannot be null");
-            if (somVoisins.get(s) == null) throw new IllegalArgumentException("Hashmap value ArrayList cannot be null");
+            if (s == null) 
+                throw new IllegalArgumentException("Hashmap key sommet cannot be null");
+            if (somVoisins.get(s) == null){
+                throw new IllegalArgumentException("Hashmap ArrayList cannot be null");
+            }
         }
+
+        for (Sommet s : listeSommets)
+            for (Sommet som : somVoisins.get(s)) {
+                if (som == null)
+                    throw new IllegalArgumentException("Hashmap ArrayList values cannot be null"); 
+                if (!somVoisins.get(som).contains(s))
+                    throw new IllegalArgumentException("Hashmap ArrayList has to be symmetrical"); // undirected graph
+            }
+            
         this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>(somVoisins);
     }
 

@@ -161,6 +161,17 @@ public class ScenarioTraitement {
         p("g1.estDansGraphe(6) = false >>> " + g1.estDansGraphe(6));
         p("g1.estDansGraphe(9) = false >>> " + g1.estDansGraphe(9));
 
+        p("");
+
+        p("--- calculeDegre()");
+        p("g1.calculeDegre(0) = 2  >>> " + g1.calculeDegre(0));
+        p("g1.calculeDegre(1) = 2 >>> " + g1.calculeDegre(1));
+        p("g2.calculeDegre(2) = 2 >>> " + g2.calculeDegre(2));
+        p("g2.calculeDegre(3) = 2 >>> " + g2.calculeDegre(3));
+
+        p("");  
+
+        p(g1);
     }
 
     private static void p(Object o) {
