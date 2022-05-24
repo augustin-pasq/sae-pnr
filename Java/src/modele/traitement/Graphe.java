@@ -240,6 +240,69 @@ public class Graphe {
         return listeVoisins;
     }
 
+    public boolean ajouteArete(int idSom1, int idSom2){
+        boolean arete = false;
+        boolean voisin = false;
+        Sommet s1 = null;
+        Sommet s2 = null;
+        ArrayList<Sommet> voisinS1 = null;
+        ArrayList<Sommet> voisinS2 = null;
+
+        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
+            for (Sommet s : this.sommetsVoisins.keySet())
+                if (s.getId() == idSom1)
+                    s1 = s;
+                else if (s.getId() == idSom2)
+                    s2 = s;
+
+            for (Sommet s : this.sommetsVoisins.get(s1))
+                if (s.equals(s2))
+                    voisin = true;
+
+            if (!voisin){
+                arete = true;
+                voisinS1 = this.sommetsVoisins.get(s1);
+                voisinS1.add(s2);
+                voisinS2 = this.sommetsVoisins.get(s2);
+                voisinS2.add(s1);
+                this.sommetsVoisins.put(s1, voisinS1);
+                this.sommetsVoisins.put(s2, voisinS2);
+            }
+        }
+
+        return arete;
+    }
+
+    public boolean retireArete(int idSom1, int idSom2){
+        boolean arete = false;
+        boolean voisin = false;
+        Sommet s1 = null;
+        Sommet s2 = null;
+
+        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
+            for (Sommet s : this.sommetsVoisins.keySet())
+                if (s.getId() == idSom1)
+                    s1 = s;
+                else if (s.getId() == idSom2)
+                    s2 = s;
+
+            for (Sommet s : this.sommetsVoisins.get(s1))
+                if (s.equals(s2))
+                    voisin = true;
+
+            if (!voisin){
+                arete = true;
+                this.sommetsVoisins.get(s1).add(s2);
+                this.sommetsVoisins.get(s2).add(s1);
+            }
+        }
+
+        return arete;
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * Calculate the smallest eccentricity of the graph
      * @return Radius of the graph
