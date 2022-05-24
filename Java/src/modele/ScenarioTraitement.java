@@ -144,18 +144,22 @@ public class ScenarioTraitement {
         p("");
 
         p("--- nbSommets()");
-        p("g1.nbSommets() >>> " + g1.nbSommets());
-        p("g2.nbSommets() >>> " + g2.nbSommets());
+        p("g1.nbSommets() = 4 >>> " + g1.nbSommets());
+        p("g2.nbSommets() = 4 >>> " + g2.nbSommets());
 
         p("");
 
         p("--- nbAretes()");
-        p("g1.nbAretes() >>> " + g1.nbAretes());
-        p("g2.nbAretes() >>> " + g2.nbAretes());
+        p("g1.nbAretes() = 5 >>> " + g1.nbAretes());
+        p("g2.nbAretes() = 5 >>> " + g2.nbAretes());
 
         p("");
 
-        
+        p("--- estDansGraphe()");
+        p("g1.estDansGraphe(2) = true >>> " + g1.estDansGraphe(2));
+        p("g2.estDansGraphe(2) = true >>> " + g2.estDansGraphe(2));
+        p("g1.estDansGraphe(6) = false >>> " + g1.estDansGraphe(6));
+        p("g1.estDansGraphe(9) = false >>> " + g1.estDansGraphe(9));
 
     }
 
