@@ -72,7 +72,7 @@ public class Sommet {
      * @throws IllegalArgumentException if the identifier is negative
      */
     public void setId(int id) throws IllegalArgumentException {
-        if (this.id < 0) throw new IllegalArgumentException("id doit être positif");
+        if (id < 0) throw new IllegalArgumentException("id cannot be negative");
         else this.id = id;
     }
 
@@ -90,7 +90,7 @@ public class Sommet {
      * @throws IllegalArgumentException if the species is null
      */
     public void setEspece(EspeceObservee espece) throws IllegalArgumentException {
-        if (espece == null) throw new IllegalArgumentException("espece ne peut être null");
+        if (espece == null) throw new IllegalArgumentException("espece cannot be null");
         else this.espece = espece;
     }
 
@@ -108,7 +108,7 @@ public class Sommet {
      * @throws IllegalArgumentException if the coordinates are null
      */
     public void setCoordLieu(Lieu coordLieu) throws IllegalArgumentException {
-        if (coordLieu == null) throw new IllegalArgumentException("coordLieu ne peut être null");
+        if (coordLieu == null) throw new IllegalArgumentException("coordLieu cannot be null");
         else this.coordLieu = coordLieu;
     }
 
@@ -126,7 +126,7 @@ public class Sommet {
      * @throws IllegalArgumentException if the date is null
      */
     public void setDate(Date date) throws IllegalArgumentException {
-        if (date == null) throw new IllegalArgumentException("date ne peut être null");
+        if (date == null) throw new IllegalArgumentException("date cannot be null");
         else this.date = date;
     }
 
@@ -135,9 +135,9 @@ public class Sommet {
      * @param som the vertex to calculate the distance to
      * @return the distance between the two vertices
      */
-    public double calculeDist(Sommet som) {
-        double ret = 0;
-        if (som == null) throw new IllegalArgumentException("som ne doit pas être null");
+    public double calculeDist(Sommet som) throws IllegalArgumentException {
+        double ret;
+        if (som == null) throw new IllegalArgumentException("som cannot be null");
         else {
             double dX = Math.pow(this.getCoordLieu().getXCoord() - som.getCoordLieu().getXCoord(), 2);
             double dY = Math.pow(this.getCoordLieu().getYCoord() - som.getCoordLieu().getYCoord(), 2);
