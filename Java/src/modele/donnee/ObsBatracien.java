@@ -43,8 +43,9 @@ public class ObsBatracien extends Observation {
      * @param lEspece      the species of the egg-lay
      * @exception IllegalArgumentException if the resObs parameter is null
      */
-    public ObsBatracien(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, int[] resObs, EspeceBatracien lEspece) throws IllegalArgumentException {
+    public ObsBatracien(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, int[] resObs, EspeceBatracien lEspece) throws IllegalArgumentException, NullPointerException {
         super(id, date, heure, lieu, observateurs);
+        if (resObs == null) throw new NullPointerException("resObs is null");
         if (resObs.length != 4) throw new IllegalArgumentException("Expected 4 results, got " + resObs.length);
         this.setEspece(lEspece);
         this.setNombreAdultes(resObs[0]);
