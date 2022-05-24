@@ -347,12 +347,26 @@ public class Graphe {
     }
 
     public String toString(){
-        String printFormat = "";
+        String printFormat = "Graphe :\n";
+        ArrayList<Sommet> debug;
+        Integer [] idSommets;
+        Sommet som;
 
         for (Sommet s : this.sommetsVoisins.keySet()){
-            Object[] debug = this.sommetsVoisins.get(s).toArray();
+            debug = this.sommetsVoisins.get(s);
+            if (debug == null) idSommets = new Integer [0];
+            else {
+                idSommets = new Integer [debug.size()];
+                for (int i = 0 ; i < idSommets.length ; i++){
+                    som = debug.get(i);
+                    if (som != null)
+                        idSommets[i] = som.getId();
+                    else
+                        idSommets[i] = null;
+                }
+            }
             printFormat = printFormat + "Id : " + s.getId() + "\n";
-            printFormat = printFormat + "\tNeighbors : " + Arrays.toString(debug) + "\n";
+            printFormat = printFormat + "\tNeighbors : " + Arrays.toString(idSommets) + "\n";
         }
         return printFormat;
     }

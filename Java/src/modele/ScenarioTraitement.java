@@ -135,28 +135,31 @@ public class ScenarioTraitement {
         Graphe g1 = new Graphe(hashMap);
         Graphe g2 = new Graphe(g1);
 
-        p("g1.getSommetsVoisins() = " + g1.getSommetsVoisins());
-        p("g2.getSommetsVoisins() = " + g2.getSommetsVoisins());
+        p("");
+
+        p("--- getSommetsVoisins");
+        p("g1.getSommetsVoisins() >>> " + g1.getSommetsVoisins() + "\n");
+        p("g2.getSommetsVoisins() >>> " + g2.getSommetsVoisins());
 
         p("");
 
-        p("g1.nbSommets() = " + g1.nbSommets());
-        p("g2.nbSommets() = " + g2.nbSommets());
+        p("--- nbSommets()");
+        p("g1.nbSommets() >>> " + g1.nbSommets());
+        p("g2.nbSommets() >>> " + g2.nbSommets());
 
         p("");
 
-        p("g1.nbArretes() = " + g1.nbAretes());
-        p("g2.nbArretes() = " + g2.nbAretes());
+        p("--- nbAretes()");
+        p("g1.nbAretes() >>> " + g1.nbAretes());
+        p("g2.nbAretes() >>> " + g2.nbAretes());
 
         p("");
 
-        p("--- Methodes Graphe ---");
-       
-        System.out.println(g2);
+        
 
     }
 
-    private static void p(String str) {
-        System.out.println(str);
+    private static void p(Object o) {
+        System.out.println(o);
     }
 }
