@@ -350,9 +350,9 @@ public class Graphe {
         String printFormat = "";
 
         for (Sommet s : this.sommetsVoisins.keySet()){
-            Sommet[] debug = (Sommet []) this.sommetsVoisins.get(s).toArray();
+            Object[] debug = this.sommetsVoisins.get(s).toArray();
             printFormat = printFormat + "Id : " + s.getId() + "\n";
-            printFormat = printFormat + "\tNeighbors : " + debug + "\n";
+            printFormat = printFormat + "\tNeighbors : " + Arrays.toString(debug) + "\n";
         }
         return printFormat;
     }

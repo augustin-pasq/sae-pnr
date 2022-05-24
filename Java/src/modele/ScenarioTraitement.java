@@ -148,7 +148,12 @@ public class ScenarioTraitement {
         p("g1.nbArretes() = " + g1.nbAretes());
         p("g2.nbArretes() = " + g2.nbAretes());
 
-        //TODO : tester Graphe
+        p("");
+
+        p("--- Methodes Graphe ---");
+       
+        System.out.println(g2);
+
     }
 
     private static void p(String str) {
