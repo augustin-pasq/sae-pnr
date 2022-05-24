@@ -10,19 +10,23 @@ public class Graphe {
 
     private HashMap<Sommet, ArrayList<Sommet>> sommetsVoisins;
 
-    public Graphe(ArrayList<Sommet> sommets, double dist) {
-        for (Sommet s1 : sommets) {
-            ArrayList<Sommet> sommetsVoisins = new ArrayList<Sommet>();
+    public Graphe(ArrayList<Sommet> sommets, double dist) throws IllegalArgumentException {
+        if (sommets == null) throw new IllegalArgumentException("sommets cannot be null");
+        else {
+            this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
+            for (Sommet s1 : sommets) {
+                ArrayList<Sommet> sv = new ArrayList<Sommet>();
 
-            for (Sommet s2 : sommets) {
-                if (s1.calculeDist(s2) > dist) {
-                    sommetsVoisins.add(s2);
-                } else {
-                    sommetsVoisins = null;
+                for (Sommet s2 : sommets) {
+                    if (s1.calculeDist(s2) > dist) {
+                        sv.add(s2);
+                    } else {
+                        sv = null;
+                    }
                 }
-            }
 
-            this.sommetsVoisins.put(s1, sommetsVoisins);
+                this.sommetsVoisins.put(s1, sv);
+            }
         }
     }
 
