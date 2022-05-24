@@ -345,4 +345,15 @@ public class Graphe {
 
         return connexe;
     }
+
+    public String toString(){
+        String printFormat = "";
+
+        for (Sommet s : this.sommetsVoisins.keySet()){
+            Sommet[] debug = (Sommet []) this.sommetsVoisins.get(s).toArray();
+            printFormat = printFormat + "Id : " + s.getId() + "\n";
+            printFormat = printFormat + "\tNeighbors : " + debug + "\n";
+
+        return printFormat;
+    }
 }
