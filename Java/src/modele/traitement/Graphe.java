@@ -353,7 +353,7 @@ public class Graphe {
             Sommet[] debug = (Sommet []) this.sommetsVoisins.get(s).toArray();
             printFormat = printFormat + "Id : " + s.getId() + "\n";
             printFormat = printFormat + "\tNeighbors : " + debug + "\n";
-
+        }
         return printFormat;
     }
 }
