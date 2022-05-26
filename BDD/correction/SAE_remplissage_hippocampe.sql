@@ -2,7 +2,7 @@
 -- Basé sur le travail du groupe 2C2, modifs de LNAERT
 -- Rajouter le lien entre observateur et observation
 
-DELETE FROM obs_hippocampe;
+DELETE FROM Obs_Hippocampe;
 
 
 INSERT INTO Lieu VALUES(266355.27, 6732979.36);

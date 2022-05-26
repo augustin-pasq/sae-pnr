@@ -2,7 +2,7 @@
 -- Basé sur le travail du groupe 1C2, modifs de LNAERT
 
 
-DELETE FROM obs_chouette;
+DELETE FROM Obs_Chouette;
 DELETE FROM Chouette;
 
 

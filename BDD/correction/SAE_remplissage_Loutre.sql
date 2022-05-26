@@ -1,7 +1,7 @@
 -- Basé sur le travail du groupe 3C2, modifs de LNAERT
 
 
-DELETE FROM obs_loutre;
+DELETE FROM Obs_Loutre;
 
 
 INSERT INTO Observateur (idObservateur,nom,prenom) VALUES (1+42,null,'Thomas');

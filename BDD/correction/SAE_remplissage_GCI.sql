@@ -1,8 +1,8 @@
 
 -- Basé sur le travail du groupe 3C1, modifs de LNAERT
 
-DELETE FROM obs_gci;
-DELETE FROM nid_gci;
+DELETE FROM Obs_GCI;
+DELETE FROM Nid_GCI;
 
 
 -- GCI SuiviNiD 2020 + GCI SuiviNid 2013-2020 (juste la partie 2020)

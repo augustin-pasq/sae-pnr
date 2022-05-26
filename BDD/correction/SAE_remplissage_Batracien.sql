@@ -1,6 +1,6 @@
 -- Basé sur le travail du groupe 1C1, modifs de LNAERT
 
-DELETE FROM obs_batracien;
+DELETE FROM Obs_Batracien;
 
 
 INSERT INTO Observateur (idObservateur, nom, prenom) VALUES(1,'ARAUJO','Marie');
@@ -213,8 +213,8 @@ INSERT INTO Observation (idObs, dateObs, heureObs, lieu_Lambert_X, lieu_Lambert_
 INSERT INTO Observation (idObs, dateObs, heureObs, lieu_Lambert_X, lieu_Lambert_Y) VALUES(82, null, null, 272230.778704775, 6730076.7790603);
 
 -- Basé sur le travail du groupe 2C1 + 3D2, modifs de LNAERT
-DELETE FROM vegetation;
-DELETE FROM zonehumide;
+DELETE FROM Vegetation;
+DELETE FROM ZoneHumide;
 DELETE FROM Lieu_Vegetation;
 
 INSERT INTO Lieu_Vegetation(idVegeLieu) VALUES(1);
