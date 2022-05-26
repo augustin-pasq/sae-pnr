@@ -112,21 +112,21 @@ public class ScenarioTraitement {
 
         HashMap<Sommet, ArrayList<Sommet>> hashMap = new HashMap<>();
 
-        ArrayList<Sommet> sommet0 = new ArrayList<>();
+        ArrayList<Sommet> sommet0 = new ArrayList<>(); // Id : 0
         sommet0.add(sommets.get(0));
         sommet0.add(sommets.get(1));
         sommet0.add(sommets.get(2));
         sommet0.add(sommets.get(3));
-
-        ArrayList<Sommet> sommet1 = new ArrayList<>();
+        
+        ArrayList<Sommet> sommet1 = new ArrayList<>(); // Id : 1
         sommet1.add(sommets.get(0));
 
-        ArrayList<Sommet> sommet2 = new ArrayList<>();
+        ArrayList<Sommet> sommet2 = new ArrayList<>(); // Id : 2
         sommet2.add(sommets.get(0));
         sommet2.add(sommets.get(3));
         // sommets3.add(sommets.get(4));
 
-        ArrayList<Sommet> sommet3 = new ArrayList<>();
+        ArrayList<Sommet> sommet3 = new ArrayList<>(); // Id : 3
         sommet3.add(sommets.get(0));
         sommet3.add(sommets.get(2));
         // sommets4.add(sommets.get(4));

@@ -74,7 +74,9 @@ public class Graphe {
 
                 // Symétrie respectée : v voisin de s => s voisin de v
                 if (!somVoisins.get(v).contains(s))
-                    throw new IllegalArgumentException("HashMap values have to be symmetrical");
+                    throw new IllegalArgumentException("HashMap values have to be symmetrical, " + s.getId() + " not neighbor of " + v.getId());
+                else
+                    System.out.println("Le sommet " + v.getId() + " a " + s.getId() + " comme voisin.");
             }
         }
 
@@ -447,8 +449,7 @@ public class Graphe {
                         idSommets[i] = null;
                 }
             }
-            printFormat = printFormat + "Id : " + s.getId() + "\n";
-            printFormat = printFormat + "\tNeighbors : " + Arrays.toString(idSommets) + "\n";
+            printFormat = printFormat + "Id : " + s.getId() + " " + Arrays.toString(idSommets) + "\n";
         }
         return printFormat;
     }
