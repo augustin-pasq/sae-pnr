@@ -15,8 +15,9 @@ public class Graphe {
 
     /**
      * Construct a graph from a list of vertices and a minimal distance
+     *
      * @param sommets List of vertices
-     * @param dist Minimal distance between two vertices to be neighbours
+     * @param dist    Minimal distance between two vertices to be neighbours
      * @throws IllegalArgumentException If the list of vertices is null or if the minimal distance is negative
      */
     public Graphe(ArrayList<Sommet> sommets, double dist) throws IllegalArgumentException {
@@ -38,6 +39,7 @@ public class Graphe {
 
     /**
      * Construct a graph from a Hashmap containing the nodes of the graph as keys and their neighbours as values
+     *
      * @param somVoisins Hashmap containing the nodes of the graph as keys and their neighbours as values
      * @throws IllegalArgumentException If the Hashmap is null or if it contains null keys or null values
      */
@@ -51,7 +53,7 @@ public class Graphe {
 
         for (Sommet s : listeSommets) {
             // Clés non nulles
-            if (s == null) 
+            if (s == null)
                 throw new IllegalArgumentException("Hashmap key cannot be null");
 
             ArrayList<Sommet> voisins = somVoisins.get(s); // Voisins de s
@@ -60,8 +62,8 @@ public class Graphe {
             if (voisins == null)
                 throw new IllegalArgumentException("Hashmap value cannot be null");
 
-            
-            for (Sommet v : voisins){
+
+            for (Sommet v : voisins) {
                 // Sommets adjacents non nuls
                 if (v == null)
                     throw new IllegalArgumentException("ArrayList value (from HashMap values) cannot be null");
@@ -81,6 +83,7 @@ public class Graphe {
 
     /**
      * Copy-constructor for a graph
+     *
      * @param g Graph to be copied
      * @throws IllegalArgumentException If the graph is null
      */
@@ -90,6 +93,7 @@ public class Graphe {
 
     /**
      * Get the Hashmap containing the nodes and their neighbours
+     *
      * @return Hashmap containing the nodes of the graph as keys and their neighbours as values
      */
     public HashMap<Sommet, ArrayList<Sommet>> getSommetsVoisins() {
@@ -98,6 +102,7 @@ public class Graphe {
 
     /**
      * Setter for the Hashmap containing the vertices and their neighbours
+     *
      * @param somVoisins Hashmap containing the nodes of the graph as keys and their neighbours as values
      */
     private void setSommetsVoisins(HashMap<Sommet, ArrayList<Sommet>> somVoisins) {
@@ -114,6 +119,7 @@ public class Graphe {
 
     /**
      * Get the number of vertices in the graph
+     *
      * @return Number of vertices in the graph
      */
     public int nbSommets() {
@@ -122,6 +128,7 @@ public class Graphe {
 
     /**
      * Get the number of edges in the graph
+     *
      * @return Number of edges in the graph
      */
     public int nbAretes() {
@@ -134,6 +141,7 @@ public class Graphe {
 
     /**
      * Check if a vertex is in the graph
+     *
      * @param idSom ID of the vertex to be checked
      * @return True if the vertex is in the graph, false otherwise
      */
@@ -153,6 +161,7 @@ public class Graphe {
 
     /**
      * Calculate the number of neighbours of a vertex
+     *
      * @param idSom ID of the vertex
      * @return Number of neighbours
      */
@@ -171,6 +180,7 @@ public class Graphe {
 
     /**
      * Calculate the number of neighbours of all vertices in the graph
+     *
      * @return Hashmap containing the ID of the vertex as key and the number of neighbours as value
      */
     public HashMap<Sommet, Integer> calculeDegres() {
@@ -184,6 +194,7 @@ public class Graphe {
 
     /**
      * Calculate the vertex with the most neighbours
+     *
      * @return vertex with the most neighbours
      */
     public Sommet somMaxDegree() {
@@ -194,16 +205,17 @@ public class Graphe {
         Sommet sommet = null;
 
         for (Sommet s : listeSommets)
-            if (degres.get(s) > maxDeg){
+            if (degres.get(s) > maxDeg) {
                 maxDeg = degres.get(s);
                 sommet = s;
             }
-        
+
         return sommet;
     }
 
     /**
      * Check if a vertex is a neighbour of another
+     *
      * @param idSom1 ID of the first vertex
      * @param idSom2 ID of the second vertex
      * @return True if the second vertex is a neighbour of the first, false otherwise
@@ -222,6 +234,7 @@ public class Graphe {
 
     /**
      * Generate the adjacency matrix of the graph
+     *
      * @return Adjacency matrix of the graph
      */
     public int[][] matriceAdjacence() {
@@ -231,6 +244,7 @@ public class Graphe {
 
     /**
      * Check if a path exists between two vertices
+     *
      * @param idSom1 ID of the first vertex
      * @param idSom2 ID of the second vertex
      * @return True if a path exists, false otherwise
@@ -249,6 +263,7 @@ public class Graphe {
             if (s1.getId() == idSom1) {
                 s = s1;
             }
+
         sommetsTraites.add(s);
         file.addAll(this.sommetsVoisins.get(s));
 
@@ -259,6 +274,7 @@ public class Graphe {
                 chemin = true;
             else
                 sommetsTraites.add(s);
+
             for (Sommet s1 : this.sommetsVoisins.get(s))
                 if (!file.contains(s1) && !sommetsTraites.contains(s1))
                     file.add(s1);
@@ -269,6 +285,7 @@ public class Graphe {
 
     /**
      * Get the neighbours of a vertex
+     *
      * @param idSom ID of the vertex
      * @return ArrayList containing the neighbours of the vertex
      */
@@ -286,11 +303,12 @@ public class Graphe {
 
     /**
      * Add an edge to the graph
+     *
      * @param idSom1 ID of the first vertex
      * @param idSom2 ID of the second vertex
      * @return True if the edge has been added, false otherwise
      */
-    public boolean ajouteArete(int idSom1, int idSom2){
+    public boolean ajouteArete(int idSom1, int idSom2) {
         boolean arete = false;
         boolean voisin = false;
         Sommet s1 = null;
@@ -298,7 +316,7 @@ public class Graphe {
         ArrayList<Sommet> voisinS1 = null;
         ArrayList<Sommet> voisinS2 = null;
 
-        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
+        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)) {
             for (Sommet s : this.sommetsVoisins.keySet())
                 if (s.getId() == idSom1)
                     s1 = s;
@@ -309,7 +327,7 @@ public class Graphe {
                 if (s.equals(s2))
                     voisin = true;
 
-            if (!voisin){
+            if (!voisin) {
                 arete = true;
                 voisinS1 = this.sommetsVoisins.get(s1);
                 voisinS1.add(s2);
@@ -325,17 +343,18 @@ public class Graphe {
 
     /**
      * Remove an edge from the graph
+     *
      * @param idSom1 ID of the first vertex
      * @param idSom2 ID of the second vertex
      * @return True if the edge has been removed, false otherwise
      */
-    public boolean retireArete(int idSom1, int idSom2){
+    public boolean retireArete(int idSom1, int idSom2) {
         boolean arete = false;
         boolean voisin = false;
         Sommet s1 = null;
         Sommet s2 = null;
 
-        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
+        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)) {
             for (Sommet s : this.sommetsVoisins.keySet())
                 if (s.getId() == idSom1)
                     s1 = s;
@@ -346,7 +365,7 @@ public class Graphe {
                 if (s.equals(s2))
                     voisin = true;
 
-            if (!voisin){
+            if (!voisin) {
                 arete = true;
                 this.sommetsVoisins.get(s1).add(s2);
                 this.sommetsVoisins.get(s2).add(s1);
@@ -358,6 +377,7 @@ public class Graphe {
 
     /**
      * Calculate the smallest eccentricity of the graph
+     *
      * @return Radius of the graph
      */
     public int rayon() {
@@ -367,6 +387,7 @@ public class Graphe {
 
     /**
      * Calculate the largest eccentricity of the graph
+     *
      * @return Diameter of the graph
      */
     public int diametre() {
@@ -376,6 +397,7 @@ public class Graphe {
 
     /**
      * Check if the graph is connected
+     *
      * @return True if the graph is connected, false otherwise
      */
     public boolean estConnexe() {
@@ -401,20 +423,21 @@ public class Graphe {
 
     /**
      * Format the graph to a string
+     *
      * @return String representation of the graph
      */
-    public String toString(){
+    public String toString() {
         String printFormat = "Graphe :\n";
         ArrayList<Sommet> debug;
-        Integer [] idSommets;
+        Integer[] idSommets;
         Sommet som;
 
-        for (Sommet s : this.sommetsVoisins.keySet()){
+        for (Sommet s : this.sommetsVoisins.keySet()) {
             debug = this.sommetsVoisins.get(s);
-            if (debug == null) idSommets = new Integer [0];
+            if (debug == null) idSommets = new Integer[0];
             else {
-                idSommets = new Integer [debug.size()];
-                for (int i = 0 ; i < idSommets.length ; i++){
+                idSommets = new Integer[debug.size()];
+                for (int i = 0; i < idSommets.length; i++) {
                     som = debug.get(i);
                     if (som != null)
                         idSommets[i] = som.getId();
