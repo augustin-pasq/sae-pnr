@@ -54,21 +54,21 @@ public class Graphe {
             if (s == null) 
                 throw new IllegalArgumentException("Hashmap key cannot be null");
 
-            ArrayList<Sommet> voisins1 = somVoisins.get(s); // Voisins de s
+            ArrayList<Sommet> voisins = somVoisins.get(s); // Voisins de s
 
             // Liste des voisins non nulle
-            if (voisins1 == null)
+            if (voisins == null)
                 throw new IllegalArgumentException("Hashmap value cannot be null");
 
             
-            for (Sommet v : voisins1){
+            for (Sommet v : voisins){
                 // Sommets adjacents non nuls
                 if (v == null)
                     throw new IllegalArgumentException("ArrayList value (from HashMap values) cannot be null");
 
                 // Symétrie respectée : v voisin de s => v a des voisins
                 if (somVoisins.get(v) == null)
-                    throw new IllegalArgumentException("HashMap values have to be symmetrical, no neighbors here");
+                    throw new IllegalArgumentException("HashMap values have to be symmetrical, no neighbors for vertex " + v.getId());
 
                 // Symétrie respectée : v voisin de s => s voisin de v
                 if (!somVoisins.get(v).contains(s))
