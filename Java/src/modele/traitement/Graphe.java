@@ -267,6 +267,12 @@ public class Graphe {
         return listeVoisins;
     }
 
+    /**
+     * Add an edge to the graph
+     * @param idSom1 ID of the first vertex
+     * @param idSom2 ID of the second vertex
+     * @return True if the edge has been added, false otherwise
+     */
     public boolean ajouteArete(int idSom1, int idSom2){
         boolean arete = false;
         boolean voisin = false;
@@ -300,6 +306,12 @@ public class Graphe {
         return arete;
     }
 
+    /**
+     * Remove an edge from the graph
+     * @param idSom1 ID of the first vertex
+     * @param idSom2 ID of the second vertex
+     * @return True if the edge has been removed, false otherwise
+     */
     public boolean retireArete(int idSom1, int idSom2){
         boolean arete = false;
         boolean voisin = false;
@@ -326,9 +338,6 @@ public class Graphe {
 
         return arete;
     }
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * Calculate the smallest eccentricity of the graph
@@ -373,6 +382,10 @@ public class Graphe {
         return connexe;
     }
 
+    /**
+     * Format the graph to a string
+     * @return String representation of the graph
+     */
     public String toString(){
         String printFormat = "Graphe :\n";
         ArrayList<Sommet> debug;
