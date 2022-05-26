@@ -78,7 +78,8 @@ public class Graphe {
             }
         }
 
-        this.setSommetsVoisins(somVoisins);
+        this.sommetsVoisins = somVoisins;
+        //this.setSommetsVoisins(somVoisins);
     }
 
     /**
@@ -106,6 +107,7 @@ public class Graphe {
      * @param somVoisins Hashmap containing the nodes of the graph as keys and their neighbours as values
      */
     private void setSommetsVoisins(HashMap<Sommet, ArrayList<Sommet>> somVoisins) {
+        // TODO : fix setter (doesn't work)
         this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
         for (Sommet s : somVoisins.keySet()) {
             ArrayList<Sommet> voisins = somVoisins.get(s);
