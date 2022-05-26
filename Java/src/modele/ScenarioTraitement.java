@@ -27,6 +27,7 @@ public class ScenarioTraitement {
         Sommet s3 = new Sommet(98, lieu, date, EspeceObservee.BATRACIEN);
         Sommet s4 = new Sommet(35, lieu, date, EspeceObservee.BATRACIEN);
         Sommet s5 = null;
+
         try {
             s5 = new Sommet(-5, lieu, date, EspeceObservee.BATRACIEN);
         } catch (Exception e) {
@@ -95,10 +96,10 @@ public class ScenarioTraitement {
         p("\n");
 
         ArrayList<Sommet> ret = new ArrayList<Sommet>();
-        ret.add(s1);
-        ret.add(s2);
-        ret.add(s3);
-        ret.add(s4);
+        ret.add(s1); // id & index 0
+        ret.add(s2); // id & index 1
+        ret.add(s3); // id & index 2
+        ret.add(s4); // id & index 3
         // ret.add(s5); Sommet nul
         return ret;
     }
@@ -108,14 +109,20 @@ public class ScenarioTraitement {
 
         HashMap<Sommet, ArrayList<Sommet>> hashMap = new HashMap<>();
 
-        ArrayList<Sommet> sommets1 = new ArrayList<>();
+        // sommets : [0, 1, 2, 3]
+
+        // voisins de 0
+        ArrayList<Sommet> sommets1 = new ArrayList<>(); 
         sommets1.add(sommets.get(0));
         sommets1.add(sommets.get(1));
+        sommets1.add(sommets.get(2));
 
+        // voisins de 1
         ArrayList<Sommet> sommets2 = new ArrayList<>();
         sommets2.add(sommets.get(0));
         sommets2.add(sommets.get(2));
 
+        // voisins de 2
         ArrayList<Sommet> sommets3 = new ArrayList<>();
         sommets3.add(sommets.get(0));
         sommets3.add(sommets.get(1));
@@ -123,14 +130,15 @@ public class ScenarioTraitement {
         sommets3.add(sommets.get(3));
         // sommets3.add(sommets.get(4));
 
+        // voisins de 3
         ArrayList<Sommet> sommets4 = new ArrayList<>();
-        sommets4.add(sommets.get(0));
+        sommets4.add(sommets.get(2));
         // sommets4.add(sommets.get(4));
 
-        hashMap.put(new Sommet(0, new Lieu(0, 6000001), new Date(0), EspeceObservee.BATRACIEN), sommets1);
-        hashMap.put(new Sommet(1, new Lieu(1, 6000002), new Date(1), EspeceObservee.BATRACIEN), sommets2);
-        hashMap.put(new Sommet(2, new Lieu(2, 6000003), new Date(2), EspeceObservee.BATRACIEN), sommets3);
-        hashMap.put(new Sommet(3, new Lieu(3, 6000004), new Date(3), EspeceObservee.BATRACIEN), sommets4);
+        hashMap.put(new Sommet(0, new Lieu(0, 6000001), new Date(0), EspeceObservee.BATRACIEN), sommets1); // {0 : 0, 1, 2}
+        hashMap.put(new Sommet(1, new Lieu(1, 6000002), new Date(1), EspeceObservee.BATRACIEN), sommets2); // {1 : 0, 2}
+        hashMap.put(new Sommet(2, new Lieu(2, 6000003), new Date(2), EspeceObservee.BATRACIEN), sommets3); // {2 : 0, 1, 2, 3}
+        hashMap.put(new Sommet(3, new Lieu(3, 6000004), new Date(3), EspeceObservee.BATRACIEN), sommets4); // {3 : 2}
 
         Graphe g1 = new Graphe(hashMap);
         Graphe g2 = new Graphe(g1);
