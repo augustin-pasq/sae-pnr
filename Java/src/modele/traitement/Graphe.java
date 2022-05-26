@@ -42,25 +42,39 @@ public class Graphe {
      * @throws IllegalArgumentException If the Hashmap is null or if it contains null keys or null values
      */
     public Graphe(HashMap<Sommet, ArrayList<Sommet>> somVoisins) throws IllegalArgumentException {
+
+        // HashMap non nuls
         if (somVoisins == null)
-            throw new IllegalArgumentException("somVoisins cannot be null");
+            throw new IllegalArgumentException("HashMap cannot be null");
+
         Set<Sommet> listeSommets = somVoisins.keySet();
+
         for (Sommet s : listeSommets) {
+            // Clés non nulles
             if (s == null) 
-                throw new IllegalArgumentException("Hashmap key sommet cannot be null");
-            if (somVoisins.get(s) == null){
-                throw new IllegalArgumentException("Hashmap ArrayList cannot be null");
+                throw new IllegalArgumentException("Hashmap key cannot be null");
+
+            ArrayList<Sommet> voisins1 = somVoisins.get(s); // Voisins de s
+
+            // Liste des voisins non nulle
+            if (voisins1 == null)
+                throw new IllegalArgumentException("Hashmap value cannot be null");
+
+            
+            for (Sommet v : voisins1){
+                // Sommets adjacents non nuls
+                if (v == null)
+                    throw new IllegalArgumentException("ArrayList value (from HashMap values) cannot be null");
+
+                // Symétrie respectée : v voisin de s => v a des voisins
+                if (somVoisins.get(v) == null)
+                    throw new IllegalArgumentException("HashMap values have to be symmetrical, no neighbors here");
+
+                // Symétrie respectée : v voisin de s => s voisin de v
+                if (!somVoisins.get(v).contains(s))
+                    throw new IllegalArgumentException("HashMap values have to be symmetrical");
             }
         }
-
-        for (Sommet s : listeSommets)
-            for (Sommet som : somVoisins.get(s)) {
-                if (som == null)
-                    throw new IllegalArgumentException("Hashmap ArrayList values cannot be null"); 
-                if (!somVoisins.get(som).contains(s))
-                    throw new IllegalArgumentException("Hashmap ArrayList has to be symmetrical"); // undirected graph
-            }
-            
         this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>(somVoisins);
     }
 

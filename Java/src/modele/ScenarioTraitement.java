@@ -99,7 +99,7 @@ public class ScenarioTraitement {
         ret.add(s2);
         ret.add(s3);
         ret.add(s4);
-        ret.add(s5);
+        // ret.add(s5); Sommet nul
         return ret;
     }
 
@@ -121,11 +121,11 @@ public class ScenarioTraitement {
         sommets3.add(sommets.get(1));
         sommets3.add(sommets.get(2));
         sommets3.add(sommets.get(3));
-        sommets3.add(sommets.get(4));
+        // sommets3.add(sommets.get(4));
 
         ArrayList<Sommet> sommets4 = new ArrayList<>();
         sommets4.add(sommets.get(0));
-        sommets4.add(sommets.get(4));
+        // sommets4.add(sommets.get(4));
 
         hashMap.put(new Sommet(0, new Lieu(0, 6000001), new Date(0), EspeceObservee.BATRACIEN), sommets1);
         hashMap.put(new Sommet(1, new Lieu(1, 6000002), new Date(1), EspeceObservee.BATRACIEN), sommets2);
