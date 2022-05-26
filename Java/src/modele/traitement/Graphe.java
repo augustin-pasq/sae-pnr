@@ -75,7 +75,17 @@ public class Graphe {
                     throw new IllegalArgumentException("HashMap values have to be symmetrical");
             }
         }
-        this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>(somVoisins);
+
+        // Copie de tous les sommets dans un nouveau hashmap
+        this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
+        for (Sommet s : somVoisins.keySet()) {
+            ArrayList<Sommet> voisins = somVoisins.get(s);
+            ArrayList<Sommet> voisinsCopie = new ArrayList<Sommet>();
+            for (Sommet v : voisins)
+                voisinsCopie.add(new Sommet(v));
+
+            this.sommetsVoisins.put(new Sommet(s), voisinsCopie);
+        }
     }
 
     /**
