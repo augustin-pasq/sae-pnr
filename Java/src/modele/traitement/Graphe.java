@@ -76,16 +76,7 @@ public class Graphe {
             }
         }
 
-        // Copie de tous les sommets dans un nouveau hashmap
-        this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
-        for (Sommet s : somVoisins.keySet()) {
-            ArrayList<Sommet> voisins = somVoisins.get(s);
-            ArrayList<Sommet> voisinsCopie = new ArrayList<Sommet>();
-            for (Sommet v : voisins)
-                voisinsCopie.add(new Sommet(v));
-
-            this.sommetsVoisins.put(new Sommet(s), voisinsCopie);
-        }
+        this.setSommetsVoisins(somVoisins);
     }
 
     /**
@@ -103,6 +94,22 @@ public class Graphe {
      */
     public HashMap<Sommet, ArrayList<Sommet>> getSommetsVoisins() {
         return new HashMap<>(this.sommetsVoisins);
+    }
+
+    /**
+     * Setter for the Hashmap containing the vertices and their neighbours
+     * @param somVoisins Hashmap containing the nodes of the graph as keys and their neighbours as values
+     */
+    private void setSommetsVoisins(HashMap<Sommet, ArrayList<Sommet>> somVoisins) {
+        this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
+        for (Sommet s : somVoisins.keySet()) {
+            ArrayList<Sommet> voisins = somVoisins.get(s);
+            ArrayList<Sommet> voisinsCopie = new ArrayList<Sommet>();
+            for (Sommet v : voisins)
+                voisinsCopie.add(new Sommet(v));
+
+            this.sommetsVoisins.put(new Sommet(s), voisinsCopie);
+        }
     }
 
     /**
