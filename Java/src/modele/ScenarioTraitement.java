@@ -168,14 +168,22 @@ public class ScenarioTraitement {
         p("");
 
         p("--- calculeDegre()");
-        p("g1.calculeDegre(0) = 2  >>> " + g1.calculeDegre(0));
-        p("g1.calculeDegre(1) = 2 >>> " + g1.calculeDegre(1));
+        p("g1.calculeDegre(0) = 4  >>> " + g1.calculeDegre(0));
+        p("g1.calculeDegre(1) = 1 >>> " + g1.calculeDegre(1));
         p("g2.calculeDegre(2) = 2 >>> " + g2.calculeDegre(2));
         p("g2.calculeDegre(3) = 2 >>> " + g2.calculeDegre(3));
 
-        p("");  
+        p("");
 
-        p(g1);
+        p("--- calculeDegres()");
+        HashMap<Sommet, Integer> degres = g1.calculeDegres();
+        for (Sommet s : degres.keySet())
+            p("id : " + s.getId() + " >>> " + degres.get(s));
+
+        p("");
+
+        p("--- somMaxDegree()");
+        p("g1.somMaxDegre() = 0  >>> " + g1.somMaxDegree().getId());
     }
 
     private static void p(Object o) {
