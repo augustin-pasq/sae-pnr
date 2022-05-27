@@ -50,6 +50,7 @@ public class Graphe {
             throw new IllegalArgumentException("HashMap cannot be null");
 
         Set<Sommet> listeSommets = somVoisins.keySet();
+        ArrayList<Integer> listeId = new ArrayList<Integer>(); 
 
         for (Sommet s : listeSommets) {
             // Clés non nulles
@@ -57,6 +58,12 @@ public class Graphe {
                 throw new IllegalArgumentException("Hashmap key cannot be null");
 
             ArrayList<Sommet> voisins = somVoisins.get(s); // Voisins de s
+
+            // Id différents
+            if (listeId.contains(s.getId()))
+                throw new IllegalArgumentException("Hashmap keys id cannot be repeated");
+
+            listeId.add(s.getId());
 
             // Liste des voisins non nulle
             if (voisins == null)
@@ -75,8 +82,6 @@ public class Graphe {
                 // Symétrie respectée : v voisin de s => s voisin de v
                 if (!somVoisins.get(v).contains(s))
                     throw new IllegalArgumentException("HashMap values have to be symmetrical, " + s.getId() + " not neighbor of " + v.getId());
-                else
-                    System.out.println("Le sommet " + v.getId() + " a " + s.getId() + " comme voisin.");
             }
         }
 
@@ -230,7 +235,7 @@ public class Graphe {
         for (Sommet s1 : this.sommetsVoisins.keySet())
             if (s1.getId() == idSom1)
                 for (Sommet s2 : this.sommetsVoisins.get(s1))
-                    if (s2.getId() == s1.getId())
+                    if (s2.getId() == idSom2)
                         voisin = true;
 
         return voisin;
@@ -320,28 +325,28 @@ public class Graphe {
         ArrayList<Sommet> voisinS1 = null;
         ArrayList<Sommet> voisinS2 = null;
 
-        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)) {
-            for (Sommet s : this.sommetsVoisins.keySet())
-                if (s.getId() == idSom1)
-                    s1 = s;
-                else if (s.getId() == idSom2)
-                    s2 = s;
+        if (!estDansGraphe(idSom1) || !estDansGraphe(idSom2))
+            throw new IllegalArgumentException("Ids need to come from vertices from the graph");
+                
+        for (Sommet s : this.sommetsVoisins.keySet())
+            if (s.getId() == idSom1)
+                s1 = s;
+            else if (s.getId() == idSom2)
+                s2 = s;
 
-            for (Sommet s : this.sommetsVoisins.get(s1))
-                if (s.equals(s2))
-                    voisin = true;
+        for (Sommet s : this.sommetsVoisins.get(s1))
+            if (s.equals(s2))
+                voisin = true;
 
-            if (!voisin) {
-                arete = true;
-                voisinS1 = this.sommetsVoisins.get(s1);
-                voisinS1.add(s2);
-                voisinS2 = this.sommetsVoisins.get(s2);
-                voisinS2.add(s1);
-                this.sommetsVoisins.put(s1, voisinS1);
-                this.sommetsVoisins.put(s2, voisinS2);
-            }
+        if (!voisin) {
+            arete = true;
+            voisinS1 = this.sommetsVoisins.get(s1);
+            voisinS1.add(s2);
+            voisinS2 = this.sommetsVoisins.get(s2);
+            voisinS2.add(s1);
+            this.sommetsVoisins.put(s1, voisinS1);
+            this.sommetsVoisins.put(s2, voisinS2);
         }
-
         return arete;
     }
 

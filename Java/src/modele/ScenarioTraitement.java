@@ -136,8 +136,23 @@ public class ScenarioTraitement {
         hashMap.put(sommets.get(2), sommet2);
         hashMap.put(sommets.get(3), sommet3);
 
+        /* Graph representation   
+         
+        0 -- 1
+        | \
+        |  \
+        |   \
+        3 -- 2
+        
+        */
+
         Graphe g1 = new Graphe(hashMap);
         Graphe g2 = new Graphe(g1);
+
+        p("");
+
+        p("--- toString()");
+        p(g1);
 
         p("");
 
@@ -184,6 +199,66 @@ public class ScenarioTraitement {
 
         p("--- somMaxDegree()");
         p("g1.somMaxDegre() = 0  >>> " + g1.somMaxDegree().getId());
+
+        p("");
+
+        p("--- sontVoisins()");
+        p("g1.sontVoisins(0,0) = true >>> " + g1.sontVoisins(0, 0));
+        p("g1.sontVoisins(0,2) = true >>> " + g1.sontVoisins(0, 2));
+        p("g1.sontVoisins(2,0) = true >>> " + g1.sontVoisins(2, 0));
+        p("g1.sontVoisins(2,3) = true >>> " + g1.sontVoisins(2, 3));
+        p("g1.sontVoisins(3,1) = false >>> " + g1.sontVoisins(3, 1));
+        p("g1.sontVoisins(1,3) = false >>> " + g1.sontVoisins(1, 3));
+
+        p("");
+
+        // Adding an isolated vertex
+        HashMap<Sommet, ArrayList<Sommet>> hashMap2 = new HashMap<>(hashMap);
+        hashMap2.put(new Sommet(4, new Lieu(5500, 6000000), new Date(0), EspeceObservee.BATRACIEN), new ArrayList<Sommet>());
+        Graphe g3 = new Graphe(hashMap2);
+
+        p("--- existeChemin()");
+        p("g3.existeChemin(0,1) = true >>> " + g3.existeChemin(0, 1));
+        p("g3.existeChemin(1,0) = true >>> " + g3.existeChemin(1, 0));
+        p("g3.existeChemin(0,2) = true >>> " + g3.existeChemin(0, 2));
+        p("g3.existeChemin(2,0) = true >>> " + g3.existeChemin(2, 0));
+        p("g3.existeChemin(0,4) = false >>> " + g3.existeChemin(0, 4));
+        p("g3.existeChemin(4,0) = false >>> " + g3.existeChemin(4, 0));
+        p("g3.existeChemin(2,4) = false >>> " + g3.existeChemin(2, 4));
+        p("g3.existeChemin(4,2) = false >>> " + g3.existeChemin(4, 2));
+
+        p("");
+        
+        p("--- voisins()");
+        p("g1.voisins(0) >>> (id) [0, 1, 2, 3] \n" + g1.voisins(0) + "\n");
+        p("g1.voisins(1) >>> (id) [0] \n" + g1.voisins(1) + "\n");
+        p("g1.voisins(2) >>> (id) [0, 3] \n" + g1.voisins(2) + "\n");
+        p("g1.voisins(3) >>> (id) [0, 2] \n" + g1.voisins(3) + "\n");
+
+        p("");
+
+        p("--- ajouteArete()");
+        p("g3.ajouteArete(0, 4) \n>>>");
+        p("Original " +  g3);
+        g3.ajouteArete(0, 4);
+        p("New " + g3);
+
+        p("g3.ajouteArete(1, 4) \n>>>");
+        p("Original " +  g3);
+        g3.ajouteArete(1, 4);
+        p("New " + g3);
+
+        p("g3.ajouteArete(2, 2) \n>>>");
+        p("Original " +  g3);
+        g3.ajouteArete(2, 2);
+        p("New " + g3);
+
+        p("g3.ajouteArete(1, 4) \n>>>");
+        p("Original " +  g3);
+        g3.ajouteArete(2, 2);
+        p("New " + g3);
+        
+        p("");
     }
 
     private static void p(Object o) {
