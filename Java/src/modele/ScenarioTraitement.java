@@ -6,6 +6,7 @@ import modele.traitement.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class ScenarioTraitement {
@@ -136,7 +137,7 @@ public class ScenarioTraitement {
         hashMap.put(sommets.get(2), sommet2);
         hashMap.put(sommets.get(3), sommet3);
 
-        /* Graph representation   
+        /* Graph looks like   
          
         0 -- 1
         | \
@@ -252,6 +253,12 @@ public class ScenarioTraitement {
         p("New " +  g3);
         
         p("");
+
+        for (int i = 0 ; i < 4 ; i++){
+            for (int j = 0 ; j < 4 ; j++)
+                p(g1.matriceAdjacence()[i][j]);
+            p("\n");
+        }
     }
 
     private static void p(Object o) {

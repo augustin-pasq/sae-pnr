@@ -246,9 +246,54 @@ public class Graphe {
      *
      * @return Adjacency matrix of the graph
      */
-    public int[][] matriceAdjacence() {
-        // TODO : get the adjacency matrix
-        return new int[][]{new int[]{0}};
+    public int[][] matriceAdjacence(){
+        int nbSommets = this.nbSommets();
+        int [][] adj = new int [nbSommets][nbSommets+1];
+        Sommet [] sommets = this.sortedById();
+
+        for (int i = 0 ; i < nbSommets ; i++)
+            adj[i][0] = sommets[i].getId();
+            
+        /*
+        for (Sommet s : sommets)
+            ArrayList<Sommet> voisins = this.sommetsVoisins.get(s);
+        */
+
+        return adj;
+    }
+
+    private Sommet [] sortedById(){
+
+        Sommet [] sommets = new Sommet [this.nbSommets()];
+        int nbSommets = this.nbSommets();
+
+        int i = 0;
+        for (Sommet s : this.sommetsVoisins.keySet()){
+            sommets[i] = s;
+            i++;
+        }
+
+        // Tri par id
+        int id, mini, tmp;
+        Sommet refTmp;
+        
+        for (i = 0 ; i < nbSommets ; i++){
+            mini = sommets[i].getId();
+            tmp = i;
+            for (int j = i+1 ; j < nbSommets ; j++){
+                
+                id = sommets[j].getId();
+                if (id < mini){
+                    mini = id;
+                    tmp = j;
+                }
+            }
+            refTmp = sommets[i];
+            sommets[i] = sommets[tmp];
+            sommets[tmp] = refTmp;
+        }
+
+        return sommets;
     }
 
     /**
@@ -332,6 +377,7 @@ public class Graphe {
                     s2 = s;
             }
 
+            // Si graphe sans arrête multiple
             for (Sommet s : this.sommetsVoisins.get(s1))
                 if (s.equals(s2))
                     voisin = true;
