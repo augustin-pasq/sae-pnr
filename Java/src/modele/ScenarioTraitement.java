@@ -238,25 +238,18 @@ public class ScenarioTraitement {
         p("");
 
         p("--- ajouteArete()");
-        p("g3.ajouteArete(0, 4) \n>>>");
-        p("Original " +  g3);
-        g3.ajouteArete(0, 4);
+        p(g3);
+        p("g3.ajouteArete(0, 4) = true >>> " + g3.ajouteArete(0, 4));
         p("New " + g3);
 
-        p("g3.ajouteArete(1, 4) \n>>>");
-        p("Original " +  g3);
-        g3.ajouteArete(1, 4);
+        p("g3.ajouteArete(1, 4) = true >>> " + g3.ajouteArete(1, 4));
         p("New " + g3);
 
-        p("g3.ajouteArete(2, 2) \n>>>");
-        p("Original " +  g3);
-        g3.ajouteArete(2, 2);
-        p("New " + g3);
+        p("g3.ajouteArete(2, 2) = true >>> " +  g3.ajouteArete(2, 2));
+        p("New " +  g3);
 
-        p("g3.ajouteArete(1, 4) \n>>>");
-        p("Original " +  g3);
-        g3.ajouteArete(2, 2);
-        p("New " + g3);
+        p("g3.ajouteArete(1, 5) = false >>> " + g3.ajouteArete(2, 2));
+        p("New " +  g3);
         
         p("");
     }

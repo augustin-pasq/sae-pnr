@@ -322,30 +322,26 @@ public class Graphe {
         boolean voisin = false;
         Sommet s1 = null;
         Sommet s2 = null;
-        ArrayList<Sommet> voisinS1 = null;
-        ArrayList<Sommet> voisinS2 = null;
 
-        if (!estDansGraphe(idSom1) || !estDansGraphe(idSom2))
-            throw new IllegalArgumentException("Ids need to come from vertices from the graph");
-                
-        for (Sommet s : this.sommetsVoisins.keySet())
-            if (s.getId() == idSom1)
-                s1 = s;
-            else if (s.getId() == idSom2)
-                s2 = s;
+        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
 
-        for (Sommet s : this.sommetsVoisins.get(s1))
-            if (s.equals(s2))
-                voisin = true;
+            for (Sommet s : this.sommetsVoisins.keySet()){
+                if (s.getId() == idSom1)
+                    s1 = s;
+                if (s.getId() == idSom2)
+                    s2 = s;
+            }
 
-        if (!voisin) {
-            arete = true;
-            voisinS1 = this.sommetsVoisins.get(s1);
-            voisinS1.add(s2);
-            voisinS2 = this.sommetsVoisins.get(s2);
-            voisinS2.add(s1);
-            this.sommetsVoisins.put(s1, voisinS1);
-            this.sommetsVoisins.put(s2, voisinS2);
+            for (Sommet s : this.sommetsVoisins.get(s1))
+                if (s.equals(s2))
+                    voisin = true;
+
+            if (!voisin) {
+                arete = true;
+                this.sommetsVoisins.get(s1).add(s2);
+                if (s1 != s2)
+                    this.sommetsVoisins.get(s2).add(s1);
+            }
         }
         return arete;
     }
@@ -358,30 +354,9 @@ public class Graphe {
      * @return True if the edge has been removed, false otherwise
      */
     public boolean retireArete(int idSom1, int idSom2) {
-        boolean arete = false;
-        boolean voisin = false;
-        Sommet s1 = null;
-        Sommet s2 = null;
+        
 
-        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)) {
-            for (Sommet s : this.sommetsVoisins.keySet())
-                if (s.getId() == idSom1)
-                    s1 = s;
-                else if (s.getId() == idSom2)
-                    s2 = s;
-
-            for (Sommet s : this.sommetsVoisins.get(s1))
-                if (s.equals(s2))
-                    voisin = true;
-
-            if (!voisin) {
-                arete = true;
-                this.sommetsVoisins.get(s1).add(s2);
-                this.sommetsVoisins.get(s2).add(s1);
-            }
-        }
-
-        return arete;
+        return true;
     }
 
     /**
