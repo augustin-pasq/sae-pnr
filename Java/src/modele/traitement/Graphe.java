@@ -374,6 +374,7 @@ public class Graphe {
 
         if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
 
+            // récupération des id.
             for (Sommet s : this.sommetsVoisins.keySet()){
                 if (s.getId() == idSom1)
                     s1 = s;
@@ -381,11 +382,11 @@ public class Graphe {
                     s2 = s;
             }
 
-            // Si graphe sans arrête multiple
-            for (Sommet s : this.sommetsVoisins.get(s1))
-                if (s.equals(s2))
-                    voisin = true;
+            // empêche les arcs multiples.
+            if (this.sommetsVoisins.get(s1).contains(s2))
+                voisin = true;
 
+            // ajoute une arete.
             if (!voisin) {
                 arete = true;
                 this.sommetsVoisins.get(s1).add(s2);
@@ -404,9 +405,29 @@ public class Graphe {
      * @return True if the edge has been removed, false otherwise
      */
     public boolean retireArete(int idSom1, int idSom2) {
-        
+        boolean arete = false;
+        Sommet s1 = null;
+        Sommet s2 = null;
 
-        return true;
+        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
+
+            // récupération des id.
+            for (Sommet s : this.sommetsVoisins.keySet()){
+                if (s.getId() == idSom1)
+                    s1 = s;
+                if (s.getId() == idSom2)
+                    s2 = s;
+            }
+
+            // retire une arete.
+            if (this.sommetsVoisins.get(s1).contains(s2)){
+                arete = true;
+                this.sommetsVoisins.get(s1).remove(s2);
+                if (s1 != s2)
+                    this.sommetsVoisins.get(s2).remove(s1);
+            }
+        }
+        return arete;
     }
 
     /**
@@ -451,7 +472,6 @@ public class Graphe {
                     connexe = false;
             }
         }
-
         return connexe;
     }
 

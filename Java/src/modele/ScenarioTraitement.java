@@ -231,6 +231,7 @@ public class ScenarioTraitement {
         p("");
 
         p("--- matriceAdjacence()");
+        p(g3);
         p("g3.matriceAdjacence() >>>");
 
         int [][] adj = g3.matriceAdjacence();
@@ -253,21 +254,22 @@ public class ScenarioTraitement {
         p("--- ajouteArete()");
         p(g3);
         p("g3.ajouteArete(0, 4) = true >>> " + g3.ajouteArete(0, 4));
-        p("New " + g3);
-
         p("g3.ajouteArete(1, 4) = true >>> " + g3.ajouteArete(1, 4));
-        p("New " + g3);
-
         p("g3.ajouteArete(2, 2) = true >>> " +  g3.ajouteArete(2, 2));
+        p("g3.ajouteArete(1, 5) = false >>> " + g3.ajouteArete(1, 5));
+        p("");
         p("New " +  g3);
 
-        p("g3.ajouteArete(1, 5) = false >>> " + g3.ajouteArete(2, 2));
-        p("New " +  g3);
-        
-        p("");
+        //p("");
 
         p("--- retireArete()");
-
+        p(g3);
+        p("g3.retireArete(0, 4) = true >>> " + g3.retireArete(0, 4));
+        p("g3.retireArete(1, 4) = true >>> " + g3.retireArete(1, 4));
+        p("g3.retireArete(2, 2) = true >>> " +  g3.retireArete(2, 2));
+        p("g3.retireArete(1, 5) = false >>> " + g3.retireArete(1, 5));
+        p("");
+        p("New " +  g3);
 
     }
 
