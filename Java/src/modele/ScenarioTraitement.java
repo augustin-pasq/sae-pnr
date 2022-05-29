@@ -254,10 +254,11 @@ public class ScenarioTraitement {
         
         p("");
 
-        for (int i = 0 ; i < 4 ; i++){
-            for (int j = 0 ; j < 4 ; j++)
-                p(g1.matriceAdjacence()[i][j]);
-            p("\n");
+        int [][] adj = g3.matriceAdjacence();
+        for (int i = 0 ; i < adj.length ; i++){
+            for (int j = 0 ; j < adj[i].length ; j++)
+                System.out.print(adj[i][j] + " ");
+            p("");
         }
     }
 

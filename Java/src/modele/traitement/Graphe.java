@@ -250,23 +250,27 @@ public class Graphe {
         int nbSommets = this.nbSommets();
         int [][] adj = new int [nbSommets][nbSommets+1];
         Sommet [] sommets = this.sortedById();
+        Sommet s;
+        ArrayList <Sommet> v;
 
-        for (int i = 0 ; i < nbSommets ; i++)
+        for (int i = 0 ; i < nbSommets ; i++){
             adj[i][0] = sommets[i].getId();
-            
-        /*
-        for (Sommet s : sommets)
-            ArrayList<Sommet> voisins = this.sommetsVoisins.get(s);
-        */
-
+            s = sommets[i];
+            v = this.sommetsVoisins.get(s);
+            for (int j = 1 ; j < nbSommets+1 ; j++){
+                if (v.contains(sommets[j-1])){
+                    adj[i][j] = 1;
+                }
+            }
+        }
         return adj;
     }
 
     private Sommet [] sortedById(){
 
-        Sommet [] sommets = new Sommet [this.nbSommets()];
         int nbSommets = this.nbSommets();
-
+        Sommet [] sommets = new Sommet [nbSommets];
+        
         int i = 0;
         for (Sommet s : this.sommetsVoisins.keySet()){
             sommets[i] = s;
