@@ -229,19 +229,6 @@ public class ScenarioTraitement {
         p("g3.existeChemin(4,2) = false >>> " + g3.existeChemin(4, 2));
 
         p("");
-
-        p("--- matriceAdjacence()");
-        p(g3);
-        p("g3.matriceAdjacence() >>>");
-
-        int [][] adj = g3.matriceAdjacence();
-        for (int i = 0 ; i < adj.length ; i++){
-            for (int j = 0 ; j < adj[i].length ; j++)
-                System.out.print(adj[i][j] + " ");
-            p("");
-        }
-
-        p("");
         
         p("--- voisins()");
         p("g1.voisins(0) >>> (id) [0, 1, 2, 3] \n" + g1.voisins(0) + "\n");
@@ -270,6 +257,21 @@ public class ScenarioTraitement {
         p("g3.retireArete(1, 5) = false >>> " + g3.retireArete(1, 5));
         p("");
         p("New " +  g3);
+
+        //p("");
+
+        p("--- matriceAdjacence()");
+        p(g3);
+        p("g3.matriceAdjacence() >>>");
+
+        int [][] adj = g3.matriceAdjacence();
+        for (int i = 0 ; i < adj.length ; i++){
+            for (int j = 0 ; j < adj[i].length ; j++)
+                System.out.print(adj[i][j] + " ");
+            p("");
+        }
+
+        p("");
 
     }
 

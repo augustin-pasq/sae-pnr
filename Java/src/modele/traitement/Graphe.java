@@ -242,65 +242,6 @@ public class Graphe {
     }
 
     /**
-     * Generate the adjacency matrix of the graph
-     *
-     * @return Adjacency matrix of the graph
-     */
-    public int[][] matriceAdjacence(){
-        int nbSommets = this.nbSommets();
-        int [][] adj = new int [nbSommets][nbSommets+1];
-        Sommet [] sommets = this.sortedById();
-        Sommet s;
-        ArrayList <Sommet> v;
-
-        for (int i = 0 ; i < nbSommets ; i++){
-            adj[i][0] = sommets[i].getId();
-            s = sommets[i];
-            v = this.sommetsVoisins.get(s);
-            for (int j = 1 ; j < nbSommets+1 ; j++){
-                if (v.contains(sommets[j-1])){
-                    adj[i][j] = 1;
-                }
-            }
-        }
-        return adj;
-    }
-
-    private Sommet [] sortedById(){
-
-        int nbSommets = this.nbSommets();
-        Sommet [] sommets = new Sommet [nbSommets];
-        
-        int i = 0;
-        for (Sommet s : this.sommetsVoisins.keySet()){
-            sommets[i] = s;
-            i++;
-        }
-
-        // Tri par id
-        int id, mini, tmp;
-        Sommet refTmp;
-        
-        for (i = 0 ; i < nbSommets ; i++){
-            mini = sommets[i].getId();
-            tmp = i;
-            for (int j = i+1 ; j < nbSommets ; j++){
-                
-                id = sommets[j].getId();
-                if (id < mini){
-                    mini = id;
-                    tmp = j;
-                }
-            }
-            refTmp = sommets[i];
-            sommets[i] = sommets[tmp];
-            sommets[tmp] = refTmp;
-        }
-
-        return sommets;
-    }
-
-    /**
      * Check if a path exists between two vertices
      *
      * @param idSom1 ID of the first vertex
@@ -429,6 +370,71 @@ public class Graphe {
         }
         return arete;
     }
+
+    /**
+     * Generate the adjacency matrix of the graph
+     *
+     * @return Adjacency matrix of the graph
+     */
+    public int[][] matriceAdjacence(){
+        int nbSommets = this.nbSommets();
+        int [][] adj = new int [nbSommets][nbSommets+1];
+        Sommet [] sommets = this.sortedById();
+        Sommet s;
+        ArrayList <Sommet> v;
+
+        for (int i = 0 ; i < nbSommets ; i++){
+            adj[i][0] = sommets[i].getId();
+            s = sommets[i];
+            v = this.sommetsVoisins.get(s);
+            for (int j = 1 ; j < nbSommets+1 ; j++){
+                if (v.contains(sommets[j-1])){
+                    adj[i][j] = 1;
+                }
+            }
+        }
+        return adj;
+    }
+
+    /**
+     * Generate an array which contains the vertices sorted by their id
+     * 
+     * @return an id-sorted array of vertices
+     */
+    private Sommet [] sortedById(){
+
+        int nbSommets = this.nbSommets();
+        Sommet [] sommets = new Sommet [nbSommets];
+        
+        int i = 0;
+        for (Sommet s : this.sommetsVoisins.keySet()){
+            sommets[i] = s;
+            i++;
+        }
+
+        // Tri par id
+        int id, mini, tmp;
+        Sommet refTmp;
+        
+        for (i = 0 ; i < nbSommets ; i++){
+            mini = sommets[i].getId();
+            tmp = i;
+            for (int j = i+1 ; j < nbSommets ; j++){
+                
+                id = sommets[j].getId();
+                if (id < mini){
+                    mini = id;
+                    tmp = j;
+                }
+            }
+            refTmp = sommets[i];
+            sommets[i] = sommets[tmp];
+            sommets[tmp] = refTmp;
+        }
+
+        return sommets;
+    }
+
 
     /**
      * Calculate the smallest eccentricity of the graph
