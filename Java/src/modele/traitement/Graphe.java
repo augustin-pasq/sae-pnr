@@ -397,6 +397,52 @@ public class Graphe {
     }
 
     /**
+     * Check if the graph is connected
+     *
+     * @return True if the graph is connected, false otherwise
+     */
+    public boolean estConnexe_nonfonctionnel() {
+        boolean connexe = true;
+        Set<Sommet> sommets = this.sommetsVoisins.keySet();
+        Iterator<Sommet> it = sommets.iterator();
+        Sommet s1;
+        Sommet s2;
+
+        while (it.hasNext() && connexe) {
+            s1 = it.next();
+
+            Iterator<Sommet> it2 = sommets.iterator();
+            while (it2.hasNext() && connexe) {
+                s2 = it2.next();
+                if (!this.existeChemin(s1.getId(), s2.getId()))
+                    connexe = false;
+            }
+        }
+        return connexe;
+    }
+
+    /**
+     * Check if the graph is connected
+     *
+     * @return True if the graph is connected, false otherwise
+     */
+    public boolean estConnexe() {
+        boolean connexe = true;
+        ArrayList<Sommet> sommets = new ArrayList<>();
+        ArrayList<Sommet> dejaVu = new ArrayList<>();
+        ArrayList<Sommet> file = new ArrayList<>();
+
+        // sommets dans un ArrayList
+        for (Sommet s : this.sommetsVoisins.keySet())        
+            sommets.add(s);
+        
+        dejaVu.add(sommets.remove(0));
+        
+
+        return connexe;
+    }
+
+    /**
      * Generate an array which contains the vertices sorted by their id
      * 
      * @return an id-sorted array of vertices
@@ -435,7 +481,6 @@ public class Graphe {
         return sommets;
     }
 
-
     /**
      * Calculate the smallest eccentricity of the graph
      *
@@ -454,31 +499,6 @@ public class Graphe {
     public int diametre() {
         // TODO : determine the diameter of the graph
         return 0;
-    }
-
-    /**
-     * Check if the graph is connected
-     *
-     * @return True if the graph is connected, false otherwise
-     */
-    public boolean estConnexe() {
-        boolean connexe = true;
-        Set<Sommet> sommets = this.sommetsVoisins.keySet();
-        Iterator<Sommet> it = sommets.iterator();
-        Sommet s1;
-        Sommet s2;
-
-        while (it.hasNext() && connexe) {
-            s1 = it.next();
-
-            Iterator<Sommet> it2 = sommets.iterator();
-            while (it2.hasNext() && connexe) {
-                s2 = it2.next();
-                if (!this.existeChemin(s1.getId(), s2.getId()))
-                    connexe = false;
-            }
-        }
-        return connexe;
     }
 
     /**

@@ -273,6 +273,13 @@ public class ScenarioTraitement {
 
         p("");
 
+        p("--- estConnexe()");
+        p("g1.estConnexe() = true >>> " + g1.estConnexe());
+        p("g3.estConnexe() = false >>> " + g3.estConnexe());
+
+        p("");
+
+
     }
 
     private static void p(Object o) {
