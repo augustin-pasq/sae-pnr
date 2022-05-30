@@ -9,13 +9,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Scenario class for the traitement package
+ */
 public class ScenarioTraitement {
+    /**
+     * Entry point of the program
+     * @param args arguments of the program
+     */
     public static void main(String[] args) {
         p("## Scenario de traitement");
         ArrayList<Sommet> sommets = testSommet();
         testGraphe(sommets);
     }
 
+    /**
+     * Test the Sommet class
+     * @return ArrayList of Sommet
+     */
     private static ArrayList<Sommet> testSommet() {
         p("--- Test de la classe Sommet ---");
 
@@ -108,6 +119,10 @@ public class ScenarioTraitement {
         return ret;
     }
 
+    /**
+     * Test de la classe Graphe
+     * @param sommets Liste de sommets
+     */
     private static void testGraphe(ArrayList<Sommet> sommets) {
         p("--- Test de la classe Graphe ---");
 
@@ -265,9 +280,9 @@ public class ScenarioTraitement {
         p("g3.matriceAdjacence() >>>");
 
         int [][] adj = g3.matriceAdjacence();
-        for (int i = 0 ; i < adj.length ; i++){
-            for (int j = 0 ; j < adj[i].length ; j++)
-                System.out.print(adj[i][j] + " ");
+        for (int[] y : adj) {
+            for (int x : y)
+                System.out.print(x + " ");
             p("");
         }
 
@@ -282,6 +297,10 @@ public class ScenarioTraitement {
 
     }
 
+    /**
+     * Shorthand for System.out.println()
+     * @param o the object to print
+     */
     private static void p(Object o) {
         System.out.println(o);
     }

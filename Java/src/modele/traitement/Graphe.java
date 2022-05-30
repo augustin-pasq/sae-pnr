@@ -50,7 +50,7 @@ public class Graphe {
             throw new IllegalArgumentException("HashMap cannot be null");
 
         Set<Sommet> listeSommets = somVoisins.keySet();
-        ArrayList<Integer> listeId = new ArrayList<Integer>(); 
+        ArrayList<Integer> listeId = new ArrayList<Integer>();
 
         for (Sommet s : listeSommets) {
             // Clés non nulles
@@ -86,7 +86,6 @@ public class Graphe {
         }
 
         this.sommetsVoisins = somVoisins;
-        //this.setSommetsVoisins(somVoisins);
     }
 
     /**
@@ -106,24 +105,6 @@ public class Graphe {
      */
     public HashMap<Sommet, ArrayList<Sommet>> getSommetsVoisins() {
         return new HashMap<>(this.sommetsVoisins);
-    }
-
-    /**
-     * Setter for the Hashmap containing the vertices and their neighbours
-     *
-     * @param somVoisins Hashmap containing the nodes of the graph as keys and their neighbours as values
-     */
-    private void setSommetsVoisins(HashMap<Sommet, ArrayList<Sommet>> somVoisins) {
-        // TODO : fix setter (doesn't work)
-        this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
-        for (Sommet s : somVoisins.keySet()) {
-            ArrayList<Sommet> voisins = somVoisins.get(s);
-            ArrayList<Sommet> voisinsCopie = new ArrayList<Sommet>();
-            for (Sommet v : voisins)
-                voisinsCopie.add(new Sommet(v));
-
-            this.sommetsVoisins.put(new Sommet(s), voisinsCopie);
-        }
     }
 
     /**
@@ -313,10 +294,10 @@ public class Graphe {
         Sommet s1 = null;
         Sommet s2 = null;
 
-        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
+        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)) {
 
             // récupération des id.
-            for (Sommet s : this.sommetsVoisins.keySet()){
+            for (Sommet s : this.sommetsVoisins.keySet()) {
                 if (s.getId() == idSom1)
                     s1 = s;
                 if (s.getId() == idSom2)
@@ -350,10 +331,10 @@ public class Graphe {
         Sommet s1 = null;
         Sommet s2 = null;
 
-        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)){
+        if (estDansGraphe(idSom1) && estDansGraphe(idSom2)) {
 
             // récupération des id.
-            for (Sommet s : this.sommetsVoisins.keySet()){
+            for (Sommet s : this.sommetsVoisins.keySet()) {
                 if (s.getId() == idSom1)
                     s1 = s;
                 if (s.getId() == idSom2)
@@ -361,7 +342,7 @@ public class Graphe {
             }
 
             // retire une arete.
-            if (this.sommetsVoisins.get(s1).contains(s2)){
+            if (this.sommetsVoisins.get(s1).contains(s2)) {
                 arete = true;
                 this.sommetsVoisins.get(s1).remove(s2);
                 if (s1 != s2)
@@ -376,19 +357,19 @@ public class Graphe {
      *
      * @return Adjacency matrix of the graph
      */
-    public int[][] matriceAdjacence(){
+    public int[][] matriceAdjacence() {
         int nbSommets = this.nbSommets();
-        int [][] adj = new int [nbSommets][nbSommets+1];
-        Sommet [] sommets = this.sortedById();
+        int[][] adj = new int[nbSommets][nbSommets + 1];
+        Sommet[] sommets = this.sortedById();
         Sommet s;
-        ArrayList <Sommet> v;
+        ArrayList<Sommet> v;
 
-        for (int i = 0 ; i < nbSommets ; i++){
+        for (int i = 0; i < nbSommets; i++) {
             adj[i][0] = sommets[i].getId();
             s = sommets[i];
             v = this.sommetsVoisins.get(s);
-            for (int j = 1 ; j < nbSommets+1 ; j++){
-                if (v.contains(sommets[j-1])){
+            for (int j = 1; j < nbSommets + 1; j++) {
+                if (v.contains(sommets[j - 1])) {
                     adj[i][j] = 1;
                 }
             }
@@ -444,16 +425,16 @@ public class Graphe {
 
     /**
      * Generate an array which contains the vertices sorted by their id
-     * 
+     *
      * @return an id-sorted array of vertices
      */
-    private Sommet [] sortedById(){
+    private Sommet[] sortedById() {
 
         int nbSommets = this.nbSommets();
-        Sommet [] sommets = new Sommet [nbSommets];
-        
+        Sommet[] sommets = new Sommet[nbSommets];
+
         int i = 0;
-        for (Sommet s : this.sommetsVoisins.keySet()){
+        for (Sommet s : this.sommetsVoisins.keySet()) {
             sommets[i] = s;
             i++;
         }
@@ -461,14 +442,14 @@ public class Graphe {
         // Tri par id
         int id, mini, tmp;
         Sommet refTmp;
-        
-        for (i = 0 ; i < nbSommets ; i++){
+
+        for (i = 0; i < nbSommets; i++) {
             mini = sommets[i].getId();
             tmp = i;
-            for (int j = i+1 ; j < nbSommets ; j++){
-                
+            for (int j = i + 1; j < nbSommets; j++) {
+
                 id = sommets[j].getId();
-                if (id < mini){
+                if (id < mini) {
                     mini = id;
                     tmp = j;
                 }
