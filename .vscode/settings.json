@@ -8,6 +8,7 @@
         "Java/lib/javafx-sdk-18.0.1/lib/javafx.media.jar",
         "Java/lib/javafx-sdk-18.0.1/lib/javafx.swing.jar",
         "Java/lib/javafx-sdk-18.0.1/lib/javafx.web.jar",
-        "Java/lib/javafx-sdk-18.0.1/lib/javafx-swt.jar"
+        "Java/lib/javafx-sdk-18.0.1/lib/javafx-swt.jar",
+        "Java/lib/mysql-connector-java-8.0.29.jar"
     ]
 }
