@@ -16,8 +16,8 @@ public class TestDB {
             String conString = "jdbc:mysql://" + ip + ":" + port + "/" + nomBase;
 
             // Identifiants de connexion et mot de passe
-            String nomConnexion = "root";
-            String motDePasse = "mysql29";
+            String nomConnexion = "naert";
+            String motDePasse = "mdp_naert";
 
             // Connexion
             Connection con = DriverManager.getConnection(conString, nomConnexion, motDePasse);
