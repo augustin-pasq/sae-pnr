@@ -442,9 +442,8 @@ public class Graphe {
         
         Sommet som = sommets.get(0);
         dejaVu.add(som);
-        for (Sommet s : this.sommetsVoisins.get(som)){
+        for (Sommet s : this.sommetsVoisins.get(som))
             file.add(s);
-        }
         
         while (file.size() > 0){
             som = file.remove(0);
