@@ -429,12 +429,31 @@ public class Graphe {
         // sommets dans un ArrayList
         for (Sommet s : this.sommetsVoisins.keySet())
             sommets.add(s);
+        
+        Sommet som = sommets.get(0);
+        dejaVu.add(som);
+        for (Sommet s : this.sommetsVoisins.get(som))
+            file.add(s);
+        
+        while (file.size() > 0){
+            som = file.remove(0);
+            dejaVu.add(som);
+            for (Sommet s : this.sommetsVoisins.get(som)){
+                if (!file.contains(s) && !dejaVu.contains(s))
+                    file.add(s);
+            }
+            System.out.println(dejaVu.size());
+        }
 
-        dejaVu.add(sommets.remove(0));
+        if (dejaVu.size() == sommets.size())
+            connexe = true;
+        else
+            connexe = false;
 
         return connexe;
     }
 
+    /**
     public boolean estConnexePasOpti() {
         boolean connexe = true;
 
@@ -448,6 +467,7 @@ public class Graphe {
 
         return connexe;
     }
+    */
 
     /**
      * Generate an array which contains the vertices sorted by their id
