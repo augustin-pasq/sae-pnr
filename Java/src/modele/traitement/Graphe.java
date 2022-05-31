@@ -373,7 +373,7 @@ public class Graphe {
     public int[][] matriceAdjacence() {
         int nbSommets = this.nbSommets();
         int[][] adj = new int[nbSommets][nbSommets + 1];
-        Sommet[] sommets = this.sortedById();
+        Sommet[] sommets = this.triParId();
         Sommet s;
         ArrayList<Sommet> v;
 
@@ -391,76 +391,11 @@ public class Graphe {
     }
 
     /**
-     * Check if the graph is connected
-     *
-     * @return True if the graph is connected, false otherwise
-     */
-    public boolean estConnexe_nonfonctionnel() {
-        boolean connexe = true;
-        Set<Sommet> sommets = this.sommetsVoisins.keySet();
-        Iterator<Sommet> it = sommets.iterator();
-        Sommet s1;
-        Sommet s2;
-
-        while (it.hasNext() && connexe) {
-            s1 = it.next();
-
-            Iterator<Sommet> it2 = sommets.iterator();
-            while (it2.hasNext() && connexe) {
-                s2 = it2.next();
-                if (!this.existeChemin(s1.getId(), s2.getId()))
-                    connexe = false;
-            }
-        }
-        return connexe;
-    }
-
-    /**
-     * Check if the graph is connected
-     *
-     * @return True if the graph is connected, false otherwise
-     */
-    public boolean estConnexe() {
-        boolean connexe = true;
-        ArrayList<Sommet> sommets = new ArrayList<>();
-        ArrayList<Sommet> dejaVu = new ArrayList<>();
-        ArrayList<Sommet> file = new ArrayList<>();
-
-        // sommets dans un ArrayList
-        for (Sommet s : this.sommetsVoisins.keySet())
-            sommets.add(s);
-        
-        Sommet som = sommets.get(0);
-        dejaVu.add(som);
-        for (Sommet s : this.sommetsVoisins.get(som)){
-            file.add(s);
-        }
-        
-        while (file.size() > 0){
-            som = file.remove(0);
-            if (!dejaVu.contains(som))
-                dejaVu.add(som);
-            for (Sommet s : this.sommetsVoisins.get(som)){
-                if (!file.contains(s) && !dejaVu.contains(s))
-                    file.add(s);
-            }
-            System.out.println(dejaVu.size());
-        }
-
-        if (dejaVu.size() == sommets.size())
-            connexe = true;
-        else
-            connexe = false;
-
-        return connexe;
-    }
-
-    /**
      * Generate an array which contains the vertices sorted by their id
      *
      * @return an id-sorted array of vertices
      */
-    private Sommet[] sortedById() {
+    private Sommet[] triParId() {
 
         int nbSommets = this.nbSommets();
         Sommet[] sommets = new Sommet[nbSommets];
@@ -492,6 +427,42 @@ public class Graphe {
         }
 
         return sommets;
+    }
+
+    /**
+     * Check if the graph is connected
+     *
+     * @return True if the graph is connected, false otherwise
+     */
+    public boolean estConnexe() {
+        boolean connexe = true;
+        ArrayList<Sommet> sommets = new ArrayList<>(this.sommetsVoisins.keySet());
+        ArrayList<Sommet> dejaVu = new ArrayList<>();
+        ArrayList<Sommet> file = new ArrayList<>();
+        
+        Sommet som = sommets.get(0);
+        dejaVu.add(som);
+        for (Sommet s : this.sommetsVoisins.get(som)){
+            file.add(s);
+        }
+        
+        while (file.size() > 0){
+            som = file.remove(0);
+            if (!dejaVu.contains(som))
+                dejaVu.add(som);
+            for (Sommet s : this.sommetsVoisins.get(som)){
+                if (!file.contains(s) && !dejaVu.contains(s))
+                    file.add(s);
+            }
+            System.out.println(dejaVu.size());
+        }
+
+        if (dejaVu.size() == sommets.size())
+            connexe = true;
+        else
+            connexe = false;
+
+        return connexe;
     }
 
     // Cette méthode pourra être remplacée en utilisant distArrête()
