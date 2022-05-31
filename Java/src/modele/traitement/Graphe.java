@@ -423,6 +423,20 @@ public class Graphe {
         return connexe;
     }
 
+    public boolean estConnexePasOpti() {
+        boolean connexe = true;
+
+        for (int s1 = 0 ; s1 < this.sommetsVoisins.size() ; s1++) {
+            for (int s2 = 0 ; s1 < this.sommetsVoisins.size() ; s1++) {
+                if (!existeChemin(s1, s2)) {
+                    connexe = false;
+                }
+            }
+        }
+
+        return connexe;
+    }
+
     /**
      * Generate an array which contains the vertices sorted by their id
      *
