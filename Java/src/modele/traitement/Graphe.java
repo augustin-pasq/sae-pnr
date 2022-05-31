@@ -456,9 +456,7 @@ public class Graphe {
             System.out.println(dejaVu.size());
         }
 
-        if (dejaVu.size() == sommets.size())
-            connexe = true;
-        else
+        if (dejaVu.size() != sommets.size())
             connexe = false;
 
         return connexe;
