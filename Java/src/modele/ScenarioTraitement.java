@@ -291,6 +291,7 @@ public class ScenarioTraitement {
         p("g1.estConnexe() = true >>> " + g1.estConnexe());
         p("g3.estConnexe() = false >>> " + g3.estConnexe());
 
+        /**
         p("");
 
         p("--- excentricite()");
@@ -306,7 +307,7 @@ public class ScenarioTraitement {
 
         p("--- diametre()");
         p("Le diametre de g3 vaut " + g3.diametre());
-
+        */
     }
 
     

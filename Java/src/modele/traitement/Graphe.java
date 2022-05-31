@@ -432,12 +432,14 @@ public class Graphe {
         
         Sommet som = sommets.get(0);
         dejaVu.add(som);
-        for (Sommet s : this.sommetsVoisins.get(som))
+        for (Sommet s : this.sommetsVoisins.get(som)){
             file.add(s);
+        }
         
         while (file.size() > 0){
             som = file.remove(0);
-            dejaVu.add(som);
+            if (!dejaVu.contains(som))
+                dejaVu.add(som);
             for (Sommet s : this.sommetsVoisins.get(som)){
                 if (!file.contains(s) && !dejaVu.contains(s))
                     file.add(s);
@@ -492,7 +494,7 @@ public class Graphe {
         return sommets;
     }
 
-    // Cette méthode pourra être remplacer en utilisant distArrête()
+    // Cette méthode pourra être remplacée en utilisant distArrête()
     private int minDistance(int path_array[], Boolean sptSet[]) {
         // Initialize min value
         int min = Integer.MAX_VALUE;
