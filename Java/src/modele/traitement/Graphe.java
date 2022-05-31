@@ -9,7 +9,8 @@ import java.util.*;
  */
 public class Graphe {
     /**
-     * HashMap containing the nodes of the graph as keys and their neighbours as values
+     * HashMap containing the nodes of the graph as keys and their neighbours as
+     * values
      */
     private HashMap<Sommet, ArrayList<Sommet>> sommetsVoisins;
 
@@ -18,11 +19,14 @@ public class Graphe {
      *
      * @param sommets List of vertices
      * @param dist    Minimal distance between two vertices to be neighbours
-     * @throws IllegalArgumentException If the list of vertices is null or if the minimal distance is negative
+     * @throws IllegalArgumentException If the list of vertices is null or if the
+     *                                  minimal distance is negative
      */
     public Graphe(ArrayList<Sommet> sommets, double dist) throws IllegalArgumentException {
-        if (sommets == null) throw new IllegalArgumentException("sommets cannot be null");
-        else if (dist < 0) throw new IllegalArgumentException("dist cannot be negative");
+        if (sommets == null)
+            throw new IllegalArgumentException("sommets cannot be null");
+        else if (dist < 0)
+            throw new IllegalArgumentException("dist cannot be negative");
         else {
             this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
             for (Sommet s1 : sommets) {
@@ -38,10 +42,13 @@ public class Graphe {
     }
 
     /**
-     * Construct a graph from a Hashmap containing the nodes of the graph as keys and their neighbours as values
+     * Construct a graph from a Hashmap containing the nodes of the graph as keys
+     * and their neighbours as values
      *
-     * @param somVoisins Hashmap containing the nodes of the graph as keys and their neighbours as values
-     * @throws IllegalArgumentException If the Hashmap is null or if it contains null keys or null values
+     * @param somVoisins Hashmap containing the nodes of the graph as keys and their
+     *                   neighbours as values
+     * @throws IllegalArgumentException If the Hashmap is null or if it contains
+     *                                  null keys or null values
      */
     public Graphe(HashMap<Sommet, ArrayList<Sommet>> somVoisins) throws IllegalArgumentException {
 
@@ -69,7 +76,6 @@ public class Graphe {
             if (voisins == null)
                 throw new IllegalArgumentException("Hashmap value cannot be null");
 
-
             for (Sommet v : voisins) {
                 // Sommets adjacents non nuls
                 if (v == null)
@@ -77,11 +83,13 @@ public class Graphe {
 
                 // Symétrie respectée : v voisin de s => v a des voisins
                 if (somVoisins.get(v) == null)
-                    throw new IllegalArgumentException("HashMap values have to be symmetrical, no neighbors for vertex " + v.getId());
+                    throw new IllegalArgumentException(
+                            "HashMap values have to be symmetrical, no neighbors for vertex " + v.getId());
 
                 // Symétrie respectée : v voisin de s => s voisin de v
                 if (!somVoisins.get(v).contains(s))
-                    throw new IllegalArgumentException("HashMap values have to be symmetrical, " + s.getId() + " not neighbor of " + v.getId());
+                    throw new IllegalArgumentException(
+                            "HashMap values have to be symmetrical, " + s.getId() + " not neighbor of " + v.getId());
             }
         }
 
@@ -101,7 +109,8 @@ public class Graphe {
     /**
      * Get the Hashmap containing the nodes and their neighbours
      *
-     * @return Hashmap containing the nodes of the graph as keys and their neighbours as values
+     * @return Hashmap containing the nodes of the graph as keys and their
+     *         neighbours as values
      */
     public HashMap<Sommet, ArrayList<Sommet>> getSommetsVoisins() {
         return new HashMap<>(this.sommetsVoisins);
@@ -171,7 +180,8 @@ public class Graphe {
     /**
      * Calculate the number of neighbours of all vertices in the graph
      *
-     * @return Hashmap containing the ID of the vertex as key and the number of neighbours as value
+     * @return Hashmap containing the ID of the vertex as key and the number of
+     *         neighbours as value
      */
     public HashMap<Sommet, Integer> calculeDegres() {
         HashMap<Sommet, Integer> degres = new HashMap<Sommet, Integer>();
@@ -188,7 +198,8 @@ public class Graphe {
      * @return vertex with the most neighbours
      */
     public Sommet somMaxDegree() {
-        if (this.sommetsVoisins.isEmpty()) throw new IllegalArgumentException("Graph is empty");
+        if (this.sommetsVoisins.isEmpty())
+            throw new IllegalArgumentException("Graph is empty");
         HashMap<Sommet, Integer> degres = this.calculeDegres();
         Set<Sommet> listeSommets = degres.keySet();
         int maxDeg = -1;
@@ -208,7 +219,8 @@ public class Graphe {
      *
      * @param idSom1 ID of the first vertex
      * @param idSom2 ID of the second vertex
-     * @return True if the second vertex is a neighbour of the first, false otherwise
+     * @return True if the second vertex is a neighbour of the first, false
+     *         otherwise
      */
     public boolean sontVoisins(int idSom1, int idSom2) {
         boolean voisin = false;
@@ -276,7 +288,8 @@ public class Graphe {
             if (s1.getId() == idSom)
                 listeVoisins = this.sommetsVoisins.get(s1);
 
-        if (listeVoisins == null) throw new IllegalArgumentException("vertex is not in the graph");
+        if (listeVoisins == null)
+            throw new IllegalArgumentException("vertex is not in the graph");
 
         return listeVoisins;
     }
@@ -414,11 +427,10 @@ public class Graphe {
         ArrayList<Sommet> file = new ArrayList<>();
 
         // sommets dans un ArrayList
-        for (Sommet s : this.sommetsVoisins.keySet())        
+        for (Sommet s : this.sommetsVoisins.keySet())
             sommets.add(s);
-        
+
         dejaVu.add(sommets.remove(0));
-        
 
         return connexe;
     }
@@ -476,14 +488,102 @@ public class Graphe {
         return sommets;
     }
 
+    // Cette méthode pourra être remplacer en utilisant distArrête()
+    private int minDistance(int path_array[], Boolean sptSet[]) {
+        // Initialize min value
+        int min = Integer.MAX_VALUE;
+        int min_index = -1;
+        for (int v = 0; v < this.nbSommets(); v++)
+            if (sptSet[v] == false && path_array[v] <= min) {
+                min = path_array[v];
+                min_index = v;
+            }
+        return min_index;
+    }
+
+    // print the array of distances (path_array)
+    private void printMinpath(int path_array[]) {
+        System.out.println("Vertex# \t Minimum Distance from Source");
+        for (int i = 0; i < this.nbSommets(); i++)
+            System.out.println(i + " \t\t\t " + path_array[i]);
+    }
+
+    // Implementation of Dijkstra's algorithm for graph (adjacency matrix)
+    private int[] algo_dijkstra(int idSom) {
+        int graph[][] = this.matriceAdjacence();
+        int path_array[] = new int[this.nbSommets()]; // The output array. dist[i] will hold
+        // the shortest distance from src to i
+
+        // spt (shortest path set) contains vertices that have shortest path
+        Boolean sptSet[] = new Boolean[this.nbSommets()];
+
+        // Initially all the distances are INFINITE and stpSet[] is set to false
+        for (int i = 0; i < this.nbSommets(); i++) {
+            path_array[i] = Integer.MAX_VALUE;
+            sptSet[i] = false;
+        }
+
+        // Path between vertex and itself is always 0
+        path_array[idSom] = 0;
+        // now find shortest path for all vertices
+        for (int count = 0; count < this.nbSommets() - 1; count++) {
+            // call minDistance method to find the vertex with min distance
+            int u = minDistance(path_array, sptSet);
+            // the current vertex u is processed
+            sptSet[u] = true;
+            // process adjacent nodes of the current vertex
+            for (int v = 0; v < this.nbSommets(); v++)
+
+                // if vertex v not in sptset then update it
+                if (!sptSet[v] && graph[u][v] != 0 && path_array[u] != Integer.MAX_VALUE && path_array[u]
+                        + graph[u][v] < path_array[v])
+                    path_array[v] = path_array[u] + graph[u][v];
+        }
+
+        // print the path array
+        // printMinpath(path_array);
+        return path_array;
+    }
+
+    /**
+     * Calculates the maximum number of edges of the path between the parameter
+     * vertex and the other vertices of the graph. Works only with related graphs,
+     * otherwise returns -1.
+     * 
+     * @param idSom Vertex identifier
+     * @return The eccentricity of the vertex or -1 if the function is used in an
+     *         unconnected graph.
+     */
+    public int excentricite(int idSom) {
+        int path_array[] = this.algo_dijkstra(idSom);
+        int nbMax = -1;
+        if (this.estConnexe()) {
+            for (int i = 0; i < path_array.length; i++) {
+                int distActuel = path_array[i];
+                if (distActuel > nbMax) {
+                    nbMax = distActuel;
+                }
+            }
+        }
+        return nbMax;
+    }
+
     /**
      * Calculate the smallest eccentricity of the graph
      *
      * @return Radius of the graph
      */
     public int rayon() {
-        // TODO : determine the radius of the graph
-        return 0;
+        int rayon = Integer.MAX_VALUE;
+        for (Sommet s : this.sommetsVoisins.keySet()) {
+            int idSom = s.getId();
+            int excentriciteActuel = excentricite(idSom);
+            if (excentriciteActuel < rayon) {
+                rayon = excentriciteActuel;
+            }
+
+        }
+        return rayon;
     }
 
     /**
@@ -492,8 +592,16 @@ public class Graphe {
      * @return Diameter of the graph
      */
     public int diametre() {
-        // TODO : determine the diameter of the graph
-        return 0;
+        int diametre = Integer.MIN_VALUE;
+        for (Sommet s : this.sommetsVoisins.keySet()) {
+            int idSom = s.getId();
+            int excentriciteActuel = excentricite(idSom);
+            if (excentriciteActuel > diametre) {
+                diametre = excentriciteActuel;
+            }
+
+        }
+        return diametre;
     }
 
     /**
@@ -509,7 +617,8 @@ public class Graphe {
 
         for (Sommet s : this.sommetsVoisins.keySet()) {
             debug = this.sommetsVoisins.get(s);
-            if (debug == null) idSommets = new Integer[0];
+            if (debug == null)
+                idSommets = new Integer[0];
             else {
                 idSommets = new Integer[debug.size()];
                 for (int i = 0; i < idSommets.length; i++) {
