@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch TestDB",
+            "request": "launch",
+            "mainClass": "controleur.TestDB",
+            "projectName": "SAE-PNR_39b3f9d8"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
