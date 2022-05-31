@@ -445,7 +445,7 @@ public class Graphe {
         for (Sommet s : this.sommetsVoisins.get(som))
             file.add(s);
         
-        while (file.size() > 0){
+        while (!file.isEmpty()){
             som = file.remove(0);
             if (!dejaVu.contains(som))
                 dejaVu.add(som);
@@ -453,13 +453,52 @@ public class Graphe {
                 if (!file.contains(s) && !dejaVu.contains(s))
                     file.add(s);
             }
-            System.out.println(dejaVu.size());
         }
 
         if (dejaVu.size() != sommets.size())
             connexe = false;
 
         return connexe;
+    }
+
+    public ArrayList<Graphe> composanteConnexe(){
+        ArrayList<Graphe> composantes = new ArrayList<>();
+        HashMap <Sommet, ArrayList<Sommet>> hashmap = new HashMap<>();
+
+        ArrayList<Sommet> sommets = new ArrayList<>(this.sommetsVoisins.keySet());
+        ArrayList<Sommet> dejaVu = new ArrayList<>();
+        ArrayList<Sommet> file = new ArrayList<>();
+        Sommet som;
+        
+        while (!sommets.isEmpty()){
+            som = sommets.remove(0);
+            if (!dejaVu.contains(som))
+                dejaVu.add(som);
+
+            for (Sommet s : this.sommetsVoisins.get(som)){
+                if (!file.contains(s) && !dejaVu.contains(s))
+                    file.add(s);
+            }
+            
+            while (!file.isEmpty()){
+                som = file.remove(0);
+                sommets.remove(som);
+                if (!dejaVu.contains(som))
+                    dejaVu.add(som);
+                for (Sommet s : this.sommetsVoisins.get(som)){
+                    if (!file.contains(s) && !dejaVu.contains(s))
+                        file.add(s);
+                }
+            }
+
+            while (!dejaVu.isEmpty()){
+                som = dejaVu.remove(0);
+                hashmap.put(som, this.sommetsVoisins.get(som));
+            }
+            composantes.add(new Graphe(hashmap));
+            hashmap = new HashMap<>();
+        }
+        return composantes;
     }
 
     // Cette méthode pourra être remplacée en utilisant distArrête()

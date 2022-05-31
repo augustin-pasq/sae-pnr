@@ -291,6 +291,12 @@ public class ScenarioTraitement {
         p("g1.estConnexe() = true >>> " + g1.estConnexe());
         p("g3.estConnexe() = false >>> " + g3.estConnexe());
 
+        p("");
+
+        p("--- composanteConnexe()");
+        p("g1.composanteConnexe() = >>> " + g1.composanteConnexe());
+        p("g3.composanteConnexe() = >>>\n" + g3.composanteConnexe());
+
         /**
         p("");
 
