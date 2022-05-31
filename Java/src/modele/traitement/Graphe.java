@@ -452,7 +452,7 @@ public class Graphe {
 
         return connexe;
     }
-    
+
     /**
      * Generate an array which contains the vertices sorted by their id
      *
