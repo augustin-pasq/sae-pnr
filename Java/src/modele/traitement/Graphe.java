@@ -461,6 +461,11 @@ public class Graphe {
         return connexe;
     }
 
+    /**
+     * Generate an ArrayList of Graph containing all the sub-graphs of the graph
+     * 
+     * @return
+     */
     public ArrayList<Graphe> composanteConnexe(){
         ArrayList<Graphe> composantes = new ArrayList<>();
         HashMap <Sommet, ArrayList<Sommet>> hashmap = new HashMap<>();

@@ -297,7 +297,7 @@ public class ScenarioTraitement {
         p("g1.composanteConnexe() = >>> " + g1.composanteConnexe());
         p("g3.composanteConnexe() = >>>\n" + g3.composanteConnexe());
 
-        p("")
+        p("");
 
         /**
         p("");
