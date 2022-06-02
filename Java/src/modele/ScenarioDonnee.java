@@ -6,8 +6,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
-import javax.xml.validation.Validator;
-
 /**
  * Scenario for the data
  *
@@ -516,6 +514,7 @@ public class ScenarioDonnee {
 
     /**
      * Shorthand for System.out.println
+     *
      * @param str String to print
      */
     private static void p(String str) {
