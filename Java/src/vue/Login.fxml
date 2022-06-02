@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="vue.Login"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane style="-fx-background-image: url(&quot;/data/fondLogin.png&quot;);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox spacing="8" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+        <Label text="Nom d'utilisateur" />
+        <TextField id="username" />
+        <Label text="Mot de passe" />
+        <PasswordField id="password" />
+        <Button alignment="CENTER" contentDisplay="CENTER" style="-fx-background-color: #00936E;" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+          <cursor>
+              <Cursor fx:constant="DEFAULT" />
+          </cursor>
+      </Button>
+    </VBox>
+</Pane>
