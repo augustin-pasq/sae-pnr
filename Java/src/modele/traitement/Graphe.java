@@ -31,6 +31,7 @@ public class Graphe {
             this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
             for (Sommet s1 : sommets) {
                 ArrayList<Sommet> voisins = new ArrayList<Sommet>();
+
                 for (Sommet s2 : sommets)
                     if (s1.calculeDist(s2) > dist)
                         voisins.add(s2);
@@ -505,17 +506,57 @@ public class Graphe {
         return composantes;
     }
 
-    // Cette méthode pourra être remplacée en utilisant distArrête()
-    private int minDistance(int path_array[], Boolean sptSet[]) {
-        // Initialize min value
-        int min = Integer.MAX_VALUE;
-        int min_index = -1;
-        for (int v = 0; v < this.nbSommets(); v++)
-            if (sptSet[v] == false && path_array[v] <= min) {
-                min = path_array[v];
-                min_index = v;
+    /**
+     * Generate an HashMap containing the vertices associated with their distance from the given vertex
+     *  
+     * @param id the id of the vertex we calculate the distances
+     * 
+     * @return an ArrayList containing the distancesA2QZ3+
+     */
+    public HashMap<Sommet, Integer> minDistance(int id){
+        Sommet som = null;
+        HashMap<Sommet, Integer> hashmap = new HashMap<>();
+        HashMap<Sommet, Integer> dejaVu = new HashMap<>();
+        ArrayList<HashMap<Sommet, Integer>> file = new ArrayList<>();
+        int dist = 0;
+
+        for (Sommet s : this.sommetsVoisins.keySet()){
+            if (s.getId() == id)
+                som = s;
+        }
+
+        if (som == null)
+            throw new IllegalArgumentException("id cannot be found");
+
+        dejaVu.put(som, dist);
+        dist++;
+        for (Sommet s : this.sommetsVoisins.get(som)){
+            hashmap.put(s, dist);
+            file.add(hashmap);
+            hashmap = new HashMap<>();
+        }
+        
+        while (!file.isEmpty()){
+            hashmap = file.remove(0);
+            for (Sommet s : hashmap.keySet())
+                som = s;
+            dist = hashmap.get(som);
+            if (!dejaVu.keySet().contains(som))
+                dejaVu.put(som, dist);
+
+            else if (dejaVu.get(som) > dist)
+                dejaVu.put(som, dist);
+
+            for (Sommet s : this.sommetsVoisins.get(som)){
+                if (!dejaVu.keySet().contains(s)){
+                    hashmap = new HashMap<>();
+                    hashmap.put(s, dist + 1);
+                    file.add(hashmap);
+                }
             }
-        return min_index;
+        }
+
+        return dejaVu;
     }
 
     // print the array of distances (path_array)
@@ -558,7 +599,7 @@ public class Graphe {
         }
 
         // print the path array
-        // printMinpath(path_array);
+        printMinpath(path_array);
         return path_array;
     }
 
@@ -587,7 +628,7 @@ public class Graphe {
 
     public int excentriciteV2(int idSom) {
         int [][] FloydWarshall = this.FloydWarshall(this.matriceAdjacence());
-        
+
     }
 
     /**
@@ -649,9 +690,7 @@ public class Graphe {
         }
 
     }
-
-
-
+    
     /**
      * Format the graph to a string
      *
@@ -680,12 +719,5 @@ public class Graphe {
             printFormat = printFormat + "Id : " + s.getId() + " " + Arrays.toString(idSommets) + "\n";
         }
         return printFormat;
-        int nbSommets;
-        int [][] adj;
-
-        nbSommets = this.nbSommets();
-        adj = new int [nbSommets][nbSommets+1];
-
-    
     }
 }
