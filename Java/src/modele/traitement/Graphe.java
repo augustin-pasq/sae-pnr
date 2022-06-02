@@ -31,7 +31,6 @@ public class Graphe {
             this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
             for (Sommet s1 : sommets) {
                 ArrayList<Sommet> voisins = new ArrayList<Sommet>();
-
                 for (Sommet s2 : sommets)
                     if (s1.calculeDist(s2) > dist)
                         voisins.add(s2);
@@ -706,6 +705,11 @@ public class Graphe {
         return nbMax;
     }
 
+    public int excentriciteV2(int idSom) {
+        int [][] FloydWarshall = this.FloydWarshall(this.matriceAdjacence());
+        
+    }
+
     /**
      * Calculate the smallest eccentricity of the graph
      *
@@ -742,6 +746,32 @@ public class Graphe {
         return diametre;
     }
 
+    public int[][] FloydWarshall(int[][] adjacence) {
+        int ordre = this.nbSommets();
+        int[][] res = adjacence;
+
+        for (int i=1; i < ordre; i++) {
+            res[i][i] = 0;
+        }
+
+        for (int k=1; k < ordre; k++) {
+            for (int i=0; i < ordre; i++) {
+                for (int j=1; j < ordre; j++) {
+                    int val1 = res[i][k] + res[k][j];
+                    int val2 = res[i][j];
+                    if (val1 < val2) {
+                        res[i][j] = val1;
+                    } else {
+                        res[i][j] = val2;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
     /**
      * Format the graph to a string
      *
@@ -770,5 +800,12 @@ public class Graphe {
             printFormat = printFormat + "Id : " + s.getId() + " " + Arrays.toString(idSommets) + "\n";
         }
         return printFormat;
+        int nbSommets;
+        int [][] adj;
+
+        nbSommets = this.nbSommets();
+        adj = new int [nbSommets][nbSommets+1];
+
+    
     }
 }
