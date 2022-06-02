@@ -3,7 +3,7 @@ package vue;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -17,9 +17,9 @@ public class Login extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL url = getClass().getResource("Login.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        VBox root = fxmlLoader.load();
+        URL pathFXML = getClass().getResource("Login.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
 
         Scene scene = new Scene(root, 300, 250);
         scene.getStylesheets().addAll(this.getClass().getResource("StyleLogin.css").toExternalForm());

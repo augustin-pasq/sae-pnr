@@ -1,4 +1,4 @@
-#pane{
+#AnchorPane{
     -fx-background-image: url("..\..\data\fondLogin.png");
     -fx-background-repeat: stretch;   
     -fx-background-size: 900 506;

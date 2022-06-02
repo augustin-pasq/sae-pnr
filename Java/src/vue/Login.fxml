@@ -3,47 +3,55 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<FlowPane prefHeight="405.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" stylesheets="StyleLogin.css">
+<AnchorPane id="AnchorPane" prefHeight="405.0" prefWidth="571.0" stylesheets="StyleLogin.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <VBox prefHeight="242.0" prefWidth="328.0" spacing="8">
-           <padding>
-               <Insets bottom="10" left="10" right="10" top="10" />
-           </padding>
-           <Label />
-         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../data/logoPNR.png" />
-            </image>
-            <effect>
-               <Blend />
-            </effect>
-         </ImageView>
-           <TextField id="username" promptText="Nom d'utlisateur" />
-           <PasswordField id="password" promptText="Mot de passe" />
-           <Button alignment="CENTER" contentDisplay="CENTER" style="-fx-background-color: #00936E;" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
-             <cursor>
-                <Cursor fx:constant="DEFAULT" />
-             </cursor>
-            <effect>
-               <Blend />
-            </effect>
-            <opaqueInsets>
-               <Insets />
-            </opaqueInsets>
-         </Button>
-       </VBox>
+      <VBox layoutX="153.0" prefHeight="405.0" prefWidth="266.0" spacing="10.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../../data/logoPNR.png" />
+                     </image>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ImageView>
+               </center>
+            </BorderPane>
+              <TextField id="username" promptText="Nom d'utlisateur" style="-fx-border-color:#00936E" />
+              <PasswordField id="password" promptText="Mot de passe" style="-fx-border-color:#00936E" />
+            <BorderPane prefHeight="57.0" prefWidth="65.0">
+               <bottom>
+                    <Button alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="88.0" style="-fx-background-color: #00936E; -fx-background-radius: 15px" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" BorderPane.alignment="CENTER">
+                      <cursor>
+                         <Cursor fx:constant="DEFAULT" />
+                      </cursor>
+                     <effect>
+                        <Blend />
+                     </effect>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+               </bottom>
+            </BorderPane>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </VBox>
    </children>
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
-</FlowPane>
+</AnchorPane>
