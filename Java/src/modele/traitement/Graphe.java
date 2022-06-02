@@ -31,6 +31,7 @@ public class Graphe {
             this.sommetsVoisins = new HashMap<Sommet, ArrayList<Sommet>>();
             for (Sommet s1 : sommets) {
                 ArrayList<Sommet> voisins = new ArrayList<Sommet>();
+
                 for (Sommet s2 : sommets)
                     if (s1.calculeDist(s2) > dist)
                         voisins.add(s2);
@@ -505,92 +506,12 @@ public class Graphe {
         return composantes;
     }
 
-    // Cette méthode pourra être remplacée en utilisant distArrête()
-    private int minDistance(int path_array[], Boolean sptSet[]) {
-        // Initialize min value
-        int min = Integer.MAX_VALUE;
-        int min_index = -1;
-        for (int v = 0; v < this.nbSommets(); v++)
-            if (sptSet[v] == false && path_array[v] <= min) {
-                min = path_array[v];
-                min_index = v;
-            }
-        return min_index;
-    }
-
     /**
      * Generate an HashMap containing the vertices associated with their distance from the given vertex
      *  
      * @param id the id of the vertex we calculate the distances
      * 
      * @return an ArrayList containing the distancesA2QZ3+
-     * 3
-     * 
-     * 
-     * 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     3
-
-     3
-
-
-
-
-
-
-
-
-     
      */
     public HashMap<Sommet, Integer> minDistance(int id){
         Sommet som = null;
@@ -707,7 +628,7 @@ public class Graphe {
 
     public int excentriciteV2(int idSom) {
         int [][] FloydWarshall = this.FloydWarshall(this.matriceAdjacence());
-        
+
     }
 
     /**
@@ -769,9 +690,7 @@ public class Graphe {
         }
 
     }
-
-
-
+    
     /**
      * Format the graph to a string
      *
@@ -800,12 +719,5 @@ public class Graphe {
             printFormat = printFormat + "Id : " + s.getId() + " " + Arrays.toString(idSommets) + "\n";
         }
         return printFormat;
-        int nbSommets;
-        int [][] adj;
-
-        nbSommets = this.nbSommets();
-        adj = new int [nbSommets][nbSommets+1];
-
-    
     }
 }
