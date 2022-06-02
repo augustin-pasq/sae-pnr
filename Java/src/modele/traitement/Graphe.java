@@ -519,6 +519,126 @@ public class Graphe {
         return min_index;
     }
 
+    /**
+     * Generate an HashMap containing the vertices associated with their distance from the given vertex
+     *  
+     * @param id the id of the vertex we calculate the distances
+     * 
+     * @return an ArrayList containing the distancesA2QZ3+
+     * 3
+     * 
+     * 
+     * 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     3
+
+     3
+
+
+
+
+
+
+
+
+     
+     */
+    public HashMap<Sommet, Integer> minDistance(int id){
+        Sommet som = null;
+        HashMap<Sommet, Integer> hashmap = new HashMap<>();
+        HashMap<Sommet, Integer> dejaVu = new HashMap<>();
+        ArrayList<HashMap<Sommet, Integer>> file = new ArrayList<>();
+        int dist = 0;
+
+        for (Sommet s : this.sommetsVoisins.keySet()){
+            if (s.getId() == id)
+                som = s;
+        }
+
+        if (som == null)
+            throw new IllegalArgumentException("id cannot be found");
+
+        dejaVu.put(som, dist);
+        dist++;
+        for (Sommet s : this.sommetsVoisins.get(som)){
+            hashmap.put(s, dist);
+            file.add(hashmap);
+            hashmap = new HashMap<>();
+        }
+        
+        while (!file.isEmpty()){
+            hashmap = file.remove(0);
+            for (Sommet s : hashmap.keySet())
+                som = s;
+            dist = hashmap.get(som);
+            if (!dejaVu.keySet().contains(som))
+                dejaVu.put(som, dist);
+
+            else if (dejaVu.get(som) > dist)
+                dejaVu.put(som, dist);
+
+            for (Sommet s : this.sommetsVoisins.get(som)){
+                if (!dejaVu.keySet().contains(s)){
+                    hashmap = new HashMap<>();
+                    hashmap.put(s, dist + 1);
+                    file.add(hashmap);
+                }
+            }
+        }
+
+        return dejaVu;
+    }
+
     // print the array of distances (path_array)
     private void printMinpath(int path_array[]) {
         System.out.println("Vertex# \t Minimum Distance from Source");
@@ -559,7 +679,7 @@ public class Graphe {
         }
 
         // print the path array
-        // printMinpath(path_array);
+        printMinpath(path_array);
         return path_array;
     }
 
