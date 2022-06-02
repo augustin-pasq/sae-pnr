@@ -391,6 +391,32 @@ public class Graphe {
     }
 
     /**
+     * Generate the adjacency matrix of the graph without the id on the first column
+     *
+     * @return Adjacency matrix of the graph without the id on the first column
+     */
+    private int[][] matriceAdjacenceWithoutID() {
+        int nbSommets = this.nbSommets();
+        int[][] matriceAdjacenceWithoutID = new int[nbSommets][nbSommets];
+        Sommet[] sommets = this.triParId();
+        Sommet s;
+        ArrayList<Sommet> v;
+
+        for (int i = 0; i < nbSommets; i++) {
+            s = sommets[i];
+            v = this.sommetsVoisins.get(s);
+            for (int j = 0; j < nbSommets; j++) {
+                if (v.contains(sommets[j])) {
+                    matriceAdjacenceWithoutID[i][j] = 1;
+                }
+            }
+        }
+        return matriceAdjacenceWithoutID;
+    }
+
+
+
+    /**
      * Generate an array which contains the vertices sorted by their id
      *
      * @return an id-sorted array of vertices
@@ -612,17 +638,20 @@ public class Graphe {
      * @return The eccentricity of the vertex or -1 if the function is used in an
      *         unconnected graph.
      */
+    
     public int excentricite(int idSom) {
-        int path_array[] = this.algo_dijkstra(idSom);
+        // TODO
+        
+        int[][] plusCourtChemin = new int[1][1];
         int nbMax = -1;
         if (this.estConnexe()) {
-            for (int i = 0; i < path_array.length; i++) {
-                int distActuel = path_array[i];
-                if (distActuel > nbMax) {
-                    nbMax = distActuel;
+            for (int i = 0; i < plusCourtChemin.length; i++) {
+                    if (plusCourtChemin[i][idSom] > nbMax) {
+                        nbMax = plusCourtChemin[i][idSom];
+                    }
                 }
-            }
         }
+               
         return nbMax;
     }
 
@@ -630,6 +659,7 @@ public class Graphe {
         int [][] FloydWarshall = this.FloydWarshall(this.matriceAdjacence());
 
     }
+    
 
     /**
      * Calculate the smallest eccentricity of the graph
@@ -667,29 +697,6 @@ public class Graphe {
         return diametre;
     }
 
-    public int[][] FloydWarshall(int[][] adjacence) {
-        int ordre = this.nbSommets();
-        int[][] res = adjacence;
-
-        for (int i=1; i < ordre; i++) {
-            res[i][i] = 0;
-        }
-
-        for (int k=1; k < ordre; k++) {
-            for (int i=0; i < ordre; i++) {
-                for (int j=1; j < ordre; j++) {
-                    int val1 = res[i][k] + res[k][j];
-                    int val2 = res[i][j];
-                    if (val1 < val2) {
-                        res[i][j] = val1;
-                    } else {
-                        res[i][j] = val2;
-                    }
-                }
-            }
-        }
-
-    }
     
     /**
      * Format the graph to a string
