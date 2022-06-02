@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane style="-fx-background-image: url(&quot;/data/fondLogin.png&quot;);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <VBox spacing="8" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
         <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
@@ -16,7 +16,8 @@
         <PasswordField id="password" />
         <Button alignment="CENTER" contentDisplay="CENTER" style="-fx-background-color: #00936E;" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
           <cursor>
-             <Cursor fx:constant="DEFAULT" />
-          </cursor></Button>
+              <Cursor fx:constant="DEFAULT" />
+          </cursor>
+      </Button>
     </VBox>
-</ScrollPane>
+</Pane>

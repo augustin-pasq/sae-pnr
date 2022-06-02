@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class ScenarioTraitement {
     /**
      * Entry point of the program
+     *
      * @param args arguments of the program
      */
     public static void main(String[] args) {
@@ -24,6 +25,7 @@ public class ScenarioTraitement {
 
     /**
      * Test the Sommet class
+     *
      * @return ArrayList of Sommet
      */
     private static ArrayList<Sommet> testSommet() {
@@ -120,6 +122,7 @@ public class ScenarioTraitement {
 
     /**
      * Test de la classe Graphe
+     *
      * @param sommets Liste de sommets
      */
     private static void testGraphe(ArrayList<Sommet> sommets) {
@@ -132,7 +135,7 @@ public class ScenarioTraitement {
         sommet0.add(sommets.get(1));
         sommet0.add(sommets.get(2));
         sommet0.add(sommets.get(3));
-        
+
         ArrayList<Sommet> sommet1 = new ArrayList<>(); // Id : 1
         sommet1.add(sommets.get(0));
 
@@ -243,7 +246,7 @@ public class ScenarioTraitement {
         p("g3.existeChemin(4,2) = false >>> " + g3.existeChemin(4, 2));
 
         p("");
-        
+
         p("--- voisins()");
         p("g1.voisins(0) >>> (id) [0, 1, 2, 3] \n" + g1.voisins(0) + "\n");
         p("g1.voisins(1) >>> (id) [0] \n" + g1.voisins(1) + "\n");
@@ -256,10 +259,10 @@ public class ScenarioTraitement {
         p(g3);
         p("g3.ajouteArete(0, 4) = true >>> " + g3.ajouteArete(0, 4));
         p("g3.ajouteArete(1, 4) = true >>> " + g3.ajouteArete(1, 4));
-        p("g3.ajouteArete(2, 2) = true >>> " +  g3.ajouteArete(2, 2));
+        p("g3.ajouteArete(2, 2) = true >>> " + g3.ajouteArete(2, 2));
         p("g3.ajouteArete(1, 5) = false >>> " + g3.ajouteArete(1, 5));
         p("");
-        p("New " +  g3);
+        p("New " + g3);
 
         //p("");
 
@@ -267,10 +270,10 @@ public class ScenarioTraitement {
         p(g3);
         p("g3.retireArete(0, 4) = true >>> " + g3.retireArete(0, 4));
         p("g3.retireArete(1, 4) = true >>> " + g3.retireArete(1, 4));
-        p("g3.retireArete(2, 2) = true >>> " +  g3.retireArete(2, 2));
+        p("g3.retireArete(2, 2) = true >>> " + g3.retireArete(2, 2));
         p("g3.retireArete(1, 5) = false >>> " + g3.retireArete(1, 5));
         p("");
-        p("New " +  g3);
+        p("New " + g3);
 
         //p("");
 
@@ -278,7 +281,7 @@ public class ScenarioTraitement {
         p(g3);
         p("g3.matriceAdjacence() >>>");
 
-        int [][] adj = g1.matriceAdjacence();
+        int[][] adj = g1.matriceAdjacence();
         for (int[] y : adj) {
             for (int x : y)
                 System.out.print(x + " ");
@@ -298,40 +301,38 @@ public class ScenarioTraitement {
         p("g1.composanteConnexe() = >>> " + g1.composanteConnexe());
         p("g3.composanteConnexe() = >>>\n" + g3.composanteConnexe());
 
-        
-
-    
 
         /**
-        p("--- excentricite()");
-        p("L'exentricite du sommet 0 de g1 vaut " + g1.excentricite(0));
-        p("L'exentricite du sommet 2 de g1 vaut " + g1.excentricite(2));
-        p("L'exentricite du sommet 0 de g3 vaut " + g3.excentricite(0));
-        p("L'exentricite du sommet 2 de g3 vaut " + g3.excentricite(2));
-        p("L'exentricite du sommet 1 de g1 vaut " + g1.excentricite(2));
+         p("--- excentricite()");
+         p("L'exentricite du sommet 0 de g1 vaut " + g1.excentricite(0));
+         p("L'exentricite du sommet 2 de g1 vaut " + g1.excentricite(2));
+         p("L'exentricite du sommet 0 de g3 vaut " + g3.excentricite(0));
+         p("L'exentricite du sommet 2 de g3 vaut " + g3.excentricite(2));
+         p("L'exentricite du sommet 1 de g1 vaut " + g1.excentricite(2));
 
-        p("");
+         p("");
 
-        p("--- rayon()");
-        p("Le rayon de g1 vaut " + g1.rayon());
-        p("Le rayon de g3 vaut " + g3.rayon());
-        p("Le rayon de g1 vaut " + g1.rayon());
+         p("--- rayon()");
+         p("Le rayon de g1 vaut " + g1.rayon());
+         p("Le rayon de g3 vaut " + g3.rayon());
+         p("Le rayon de g1 vaut " + g1.rayon());
 
-        p("");
+         p("");
 
-        p(g1);
+         p(g1);
 
-        p("--- diametre()");
-        p("Le diametre de g1 vaut " + g1.diametre());
-        p("Le diametre de g3 vaut " + g3.diametre());
-        p("Le diametre de g1 vaut " + g1.diametre());
-        
+         p("--- diametre()");
+         p("Le diametre de g1 vaut " + g1.diametre());
+         p("Le diametre de g3 vaut " + g3.diametre());
+         p("Le diametre de g1 vaut " + g1.diametre());
+         */
+
     }
 
-    
 
     /**
      * Shorthand for System.out.println()
+     *
      * @param o the object to print
      */
     private static void p(Object o) {
