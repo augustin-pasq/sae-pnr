@@ -507,101 +507,92 @@ public class Graphe {
     }
 
     /**
+     * Gets the minimum distance between two vertices
+     * 
+     * @param idSom1 the id of the first vertex
+     * @param idSom2 the id of the second vertex
+     * 
+     * @return the distance separating the vertices
+     */
+    public int distArete (int idSom1, int idSom2){
+        Sommet s1 = null;
+        Sommet s2 = null;
+        int dist;
+
+        for (Sommet s : this.sommetsVoisins.keySet()) {
+            if (s.getId() == idSom1)
+                s1 = s;
+            if (s.getId() == idSom2)
+                s2 = s;
+        }
+
+        if (s1 == null || s2 == null)
+            throw new IllegalArgumentException("id cannot be found");
+
+        dist = this.minDistance(idSom1).get(s2);
+        return dist;
+    }
+
+    /**
      * Generate an HashMap containing the vertices associated with their distance from the given vertex
      *  
      * @param id the id of the vertex we calculate the distances
      * 
      * @return an ArrayList containing the distancesA2QZ3+
      */
-    public HashMap<Sommet, Integer> minDistance(int id){
+    private HashMap<Sommet, Integer> minDistance(int id){
+
         Sommet som = null;
         HashMap<Sommet, Integer> hashmap = new HashMap<>();
         HashMap<Sommet, Integer> dejaVu = new HashMap<>();
         ArrayList<HashMap<Sommet, Integer>> file = new ArrayList<>();
         int dist = 0;
 
-        for (Sommet s : this.sommetsVoisins.keySet()){
-            if (s.getId() == id)
-                som = s;
+        if (!this.estConnexe()){
+            for (Sommet s : this.sommetsVoisins.keySet())
+                dejaVu.put(s, -1);
         }
+        else {
 
-        if (som == null)
-            throw new IllegalArgumentException("id cannot be found");
+            for (Sommet s : this.sommetsVoisins.keySet()){
+                if (s.getId() == id)
+                    som = s;
+            }
 
-        dejaVu.put(som, dist);
-        dist++;
-        for (Sommet s : this.sommetsVoisins.get(som)){
-            hashmap.put(s, dist);
-            file.add(hashmap);
-            hashmap = new HashMap<>();
-        }
-        
-        while (!file.isEmpty()){
-            hashmap = file.remove(0);
-            for (Sommet s : hashmap.keySet())
-                som = s;
-            dist = hashmap.get(som);
-            if (!dejaVu.keySet().contains(som))
-                dejaVu.put(som, dist);
+            if (som == null)
+                throw new IllegalArgumentException("id cannot be found");
 
-            else if (dejaVu.get(som) > dist)
-                dejaVu.put(som, dist);
-
+            dejaVu.put(som, dist);
+            dist++;
             for (Sommet s : this.sommetsVoisins.get(som)){
-                if (!dejaVu.keySet().contains(s)){
-                    hashmap = new HashMap<>();
-                    hashmap.put(s, dist + 1);
-                    file.add(hashmap);
+                hashmap.put(s, dist);
+                file.add(hashmap);
+                hashmap = new HashMap<>();
+            }
+            
+            while (!file.isEmpty()){
+                hashmap = file.remove(0);
+                for (Sommet s : hashmap.keySet())
+                    som = s;
+                dist = hashmap.get(som);
+                if (!dejaVu.keySet().contains(som))
+                    dejaVu.put(som, dist);
+
+                else if (dejaVu.get(som) > dist)
+                    dejaVu.put(som, dist);
+
+                for (Sommet s : this.sommetsVoisins.get(som)){
+                    if (!dejaVu.keySet().contains(s)){
+                        hashmap = new HashMap<>();
+                        hashmap.put(s, dist + 1);
+                        file.add(hashmap);
+                    }
                 }
             }
         }
-
         return dejaVu;
     }
 
-    // print the array of distances (path_array)
-    private void printMinpath(int path_array[]) {
-        System.out.println("Vertex# \t Minimum Distance from Source");
-        for (int i = 0; i < this.nbSommets(); i++)
-            System.out.println(i + " \t\t\t " + path_array[i]);
-    }
-
-    // Implementation of Dijkstra's algorithm for graph (adjacency matrix)
-    private int[] algo_dijkstra(int idSom) {
-        int graph[][] = this.matriceAdjacence();
-        int path_array[] = new int[this.nbSommets()]; // The output array. dist[i] will hold
-        // the shortest distance from src to i
-
-        // spt (shortest path set) contains vertices that have shortest path
-        Boolean sptSet[] = new Boolean[this.nbSommets()];
-
-        // Initially all the distances are INFINITE and stpSet[] is set to false
-        for (int i = 0; i < this.nbSommets(); i++) {
-            path_array[i] = Integer.MAX_VALUE;
-            sptSet[i] = false;
-        }
-
-        // Path between vertex and itself is always 0
-        path_array[idSom] = 0;
-        // now find shortest path for all vertices
-        for (int count = 0; count < this.nbSommets() - 1; count++) {
-            // call minDistance method to find the vertex with min distance
-            int u = minDistance(path_array, sptSet);
-            // the current vertex u is processed
-            sptSet[u] = true;
-            // process adjacent nodes of the current vertex
-            for (int v = 0; v < this.nbSommets(); v++)
-
-                // if vertex v not in sptset then update it
-                if (!sptSet[v] && graph[u][v] != 0 && path_array[u] != Integer.MAX_VALUE && path_array[u]
-                        + graph[u][v] < path_array[v])
-                    path_array[v] = path_array[u] + graph[u][v];
-        }
-
-        // print the path array
-        printMinpath(path_array);
-        return path_array;
-    }
 
     /**
      * Calculates the maximum number of edges of the path between the parameter
@@ -613,26 +604,16 @@ public class Graphe {
      *         unconnected graph.
      */
     public int excentricite(int idSom) {
-        int path_array[] = this.algo_dijkstra(idSom);
-        int nbMax = -1;
-        if (this.estConnexe()) {
-            for (int i = 0; i < path_array.length; i++) {
-                int distActuel = path_array[i];
-                if (distActuel > nbMax) {
-                    nbMax = distActuel;
-                }
-            }
-        }
-        return nbMax;
-    }
-
-    public int excentriciteV2(int idSom) {
-        int [][] FloydWarshall = this.FloydWarshall(this.matriceAdjacence());
-
+        int mini = -1;
+        HashMap<Sommet, Integer> distances = minDistance(idSom);
+        for (Sommet s : distances.keySet())
+            if (mini < distances.get(s))
+                mini = distances.get(s);
+        return mini;
     }
 
     /**
-     * Calculate the smallest eccentricity of the graph
+     * Calculate the smallest exentricity of the graph
      *
      * @return Radius of the graph
      */
@@ -650,45 +631,20 @@ public class Graphe {
     }
 
     /**
-     * Calculate the largest eccentricity of the graph
+     * Calculate the largest exentricity of the graph
      *
      * @return Diameter of the graph
      */
     public int diametre() {
-        int diametre = Integer.MIN_VALUE;
+        int diametre = -1;
         for (Sommet s : this.sommetsVoisins.keySet()) {
             int idSom = s.getId();
             int excentriciteActuel = excentricite(idSom);
             if (excentriciteActuel > diametre) {
                 diametre = excentriciteActuel;
             }
-
         }
         return diametre;
-    }
-
-    public int[][] FloydWarshall(int[][] adjacence) {
-        int ordre = this.nbSommets();
-        int[][] res = adjacence;
-
-        for (int i=1; i < ordre; i++) {
-            res[i][i] = 0;
-        }
-
-        for (int k=1; k < ordre; k++) {
-            for (int i=0; i < ordre; i++) {
-                for (int j=1; j < ordre; j++) {
-                    int val1 = res[i][k] + res[k][j];
-                    int val2 = res[i][j];
-                    if (val1 < val2) {
-                        res[i][j] = val1;
-                    } else {
-                        res[i][j] = val2;
-                    }
-                }
-            }
-        }
-
     }
     
     /**
