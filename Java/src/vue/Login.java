@@ -22,7 +22,7 @@ public class Login extends Application {
         VBox root = fxmlLoader.load();
 
         Scene scene = new Scene(root, 300, 250);
-        scene.getStylesheets().addAll(this.getClass().getResource("styleLogin.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("StyleLogin.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

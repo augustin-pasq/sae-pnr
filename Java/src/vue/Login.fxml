@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<FlowPane prefHeight="405.0" prefWidth="571.0" style="-fx-background-image: url('..\..\data\fondLogin.png');;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane prefHeight="405.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="188.0" fitWidth="362.0" pickOnBounds="true" preserveRatio="true">
          <image>
