@@ -278,12 +278,13 @@ public class ScenarioTraitement {
         p(g3);
         p("g3.matriceAdjacence() >>>");
 
-        int [][] adj = g3.matriceAdjacence();
+        int [][] adj = g1.matriceAdjacence();
         for (int[] y : adj) {
             for (int x : y)
                 System.out.print(x + " ");
             p("");
         }
+
 
         p("");
 
@@ -297,23 +298,34 @@ public class ScenarioTraitement {
         p("g1.composanteConnexe() = >>> " + g1.composanteConnexe());
         p("g3.composanteConnexe() = >>>\n" + g3.composanteConnexe());
 
-        /**
-        p("");
+        
 
+    
+
+        /**
         p("--- excentricite()");
+        p("L'exentricite du sommet 0 de g1 vaut " + g1.excentricite(0));
+        p("L'exentricite du sommet 2 de g1 vaut " + g1.excentricite(2));
         p("L'exentricite du sommet 0 de g3 vaut " + g3.excentricite(0));
         p("L'exentricite du sommet 2 de g3 vaut " + g3.excentricite(2));
+        p("L'exentricite du sommet 1 de g1 vaut " + g1.excentricite(2));
 
         p("");
 
         p("--- rayon()");
+        p("Le rayon de g1 vaut " + g1.rayon());
         p("Le rayon de g3 vaut " + g3.rayon());
+        p("Le rayon de g1 vaut " + g1.rayon());
 
         p("");
 
+        p(g1);
+
         p("--- diametre()");
+        p("Le diametre de g1 vaut " + g1.diametre());
         p("Le diametre de g3 vaut " + g3.diametre());
-        */
+        p("Le diametre de g1 vaut " + g1.diametre());
+        
     }
 
     

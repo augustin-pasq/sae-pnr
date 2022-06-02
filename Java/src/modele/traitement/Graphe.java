@@ -110,7 +110,7 @@ public class Graphe {
      * Get the Hashmap containing the nodes and their neighbours
      *
      * @return Hashmap containing the nodes of the graph as keys and their
-     *         neighbours as values
+     * neighbours as values
      */
     public HashMap<Sommet, ArrayList<Sommet>> getSommetsVoisins() {
         return new HashMap<>(this.sommetsVoisins);
@@ -181,7 +181,7 @@ public class Graphe {
      * Calculate the number of neighbours of all vertices in the graph
      *
      * @return Hashmap containing the ID of the vertex as key and the number of
-     *         neighbours as value
+     * neighbours as value
      */
     public HashMap<Sommet, Integer> calculeDegres() {
         HashMap<Sommet, Integer> degres = new HashMap<Sommet, Integer>();
@@ -220,7 +220,7 @@ public class Graphe {
      * @param idSom1 ID of the first vertex
      * @param idSom2 ID of the second vertex
      * @return True if the second vertex is a neighbour of the first, false
-     *         otherwise
+     * otherwise
      */
     public boolean sontVoisins(int idSom1, int idSom2) {
         boolean voisin = false;
@@ -439,17 +439,17 @@ public class Graphe {
         ArrayList<Sommet> sommets = new ArrayList<>(this.sommetsVoisins.keySet());
         ArrayList<Sommet> dejaVu = new ArrayList<>();
         ArrayList<Sommet> file = new ArrayList<>();
-        
+
         Sommet som = sommets.get(0);
         dejaVu.add(som);
         for (Sommet s : this.sommetsVoisins.get(som))
             file.add(s);
-        
-        while (!file.isEmpty()){
+
+        while (!file.isEmpty()) {
             som = file.remove(0);
             if (!dejaVu.contains(som))
                 dejaVu.add(som);
-            for (Sommet s : this.sommetsVoisins.get(som)){
+            for (Sommet s : this.sommetsVoisins.get(som)) {
                 if (!file.contains(s) && !dejaVu.contains(s))
                     file.add(s);
             }
@@ -461,37 +461,42 @@ public class Graphe {
         return connexe;
     }
 
-    public ArrayList<Graphe> composanteConnexe(){
+    /**
+     * Generate an ArrayList of Graph containing all the sub-graphs of the graph
+     *
+     * @return
+     */
+    public ArrayList<Graphe> composanteConnexe() {
         ArrayList<Graphe> composantes = new ArrayList<>();
-        HashMap <Sommet, ArrayList<Sommet>> hashmap = new HashMap<>();
+        HashMap<Sommet, ArrayList<Sommet>> hashmap = new HashMap<>();
 
         ArrayList<Sommet> sommets = new ArrayList<>(this.sommetsVoisins.keySet());
         ArrayList<Sommet> dejaVu = new ArrayList<>();
         ArrayList<Sommet> file = new ArrayList<>();
         Sommet som;
-        
-        while (!sommets.isEmpty()){
+
+        while (!sommets.isEmpty()) {
             som = sommets.remove(0);
             if (!dejaVu.contains(som))
                 dejaVu.add(som);
 
-            for (Sommet s : this.sommetsVoisins.get(som)){
+            for (Sommet s : this.sommetsVoisins.get(som)) {
                 if (!file.contains(s) && !dejaVu.contains(s))
                     file.add(s);
             }
-            
-            while (!file.isEmpty()){
+
+            while (!file.isEmpty()) {
                 som = file.remove(0);
                 sommets.remove(som);
                 if (!dejaVu.contains(som))
                     dejaVu.add(som);
-                for (Sommet s : this.sommetsVoisins.get(som)){
+                for (Sommet s : this.sommetsVoisins.get(som)) {
                     if (!file.contains(s) && !dejaVu.contains(s))
                         file.add(s);
                 }
             }
 
-            while (!dejaVu.isEmpty()){
+            while (!dejaVu.isEmpty()) {
                 som = dejaVu.remove(0);
                 hashmap.put(som, this.sommetsVoisins.get(som));
             }
@@ -501,85 +506,85 @@ public class Graphe {
         return composantes;
     }
 
-    // Cette méthode pourra être remplacée en utilisant distArrête()
-    private int minDistance(int path_array[], Boolean sptSet[]) {
-        // Initialize min value
-        int min = Integer.MAX_VALUE;
-        int min_index = -1;
-        for (int v = 0; v < this.nbSommets(); v++)
-            if (sptSet[v] == false && path_array[v] <= min) {
-                min = path_array[v];
-                min_index = v;
+    /**
+     * Generate an HashMap containing the vertices associated with their distance from the given vertex
+     *
+     * @param id the id of the vertex we calculate the distances
+     * @return an ArrayList containing the distancesA2QZ3+
+     */
+    public HashMap<Sommet, Integer> minDistance(int id) {
+        Sommet som = null;
+        HashMap<Sommet, Integer> hashmap = new HashMap<>();
+        HashMap<Sommet, Integer> dejaVu = new HashMap<>();
+        ArrayList<HashMap<Sommet, Integer>> file = new ArrayList<>();
+        int dist = 0;
+
+        for (Sommet s : this.sommetsVoisins.keySet()) {
+            if (s.getId() == id)
+                som = s;
+        }
+
+        if (som == null)
+            throw new IllegalArgumentException("id cannot be found");
+
+        dejaVu.put(som, dist);
+        dist++;
+        for (Sommet s : this.sommetsVoisins.get(som)) {
+            hashmap.put(s, dist);
+            file.add(hashmap);
+            hashmap = new HashMap<>();
+        }
+
+        while (!file.isEmpty()) {
+            hashmap = file.remove(0);
+            for (Sommet s : hashmap.keySet())
+                som = s;
+            dist = hashmap.get(som);
+            if (!dejaVu.keySet().contains(som))
+                dejaVu.put(som, dist);
+
+            else if (dejaVu.get(som) > dist)
+                dejaVu.put(som, dist);
+
+            for (Sommet s : this.sommetsVoisins.get(som)) {
+                if (!dejaVu.keySet().contains(s)) {
+                    hashmap = new HashMap<>();
+                    hashmap.put(s, dist + 1);
+                    file.add(hashmap);
+                }
             }
-        return min_index;
-    }
-
-    // print the array of distances (path_array)
-    private void printMinpath(int path_array[]) {
-        System.out.println("Vertex# \t Minimum Distance from Source");
-        for (int i = 0; i < this.nbSommets(); i++)
-            System.out.println(i + " \t\t\t " + path_array[i]);
-    }
-
-    // Implementation of Dijkstra's algorithm for graph (adjacency matrix)
-    private int[] algo_dijkstra(int idSom) {
-        int graph[][] = this.matriceAdjacence();
-        int path_array[] = new int[this.nbSommets()]; // The output array. dist[i] will hold
-        // the shortest distance from src to i
-
-        // spt (shortest path set) contains vertices that have shortest path
-        Boolean sptSet[] = new Boolean[this.nbSommets()];
-
-        // Initially all the distances are INFINITE and stpSet[] is set to false
-        for (int i = 0; i < this.nbSommets(); i++) {
-            path_array[i] = Integer.MAX_VALUE;
-            sptSet[i] = false;
         }
 
-        // Path between vertex and itself is always 0
-        path_array[idSom] = 0;
-        // now find shortest path for all vertices
-        for (int count = 0; count < this.nbSommets() - 1; count++) {
-            // call minDistance method to find the vertex with min distance
-            int u = minDistance(path_array, sptSet);
-            // the current vertex u is processed
-            sptSet[u] = true;
-            // process adjacent nodes of the current vertex
-            for (int v = 0; v < this.nbSommets(); v++)
-
-                // if vertex v not in sptset then update it
-                if (!sptSet[v] && graph[u][v] != 0 && path_array[u] != Integer.MAX_VALUE && path_array[u]
-                        + graph[u][v] < path_array[v])
-                    path_array[v] = path_array[u] + graph[u][v];
-        }
-
-        // print the path array
-        // printMinpath(path_array);
-        return path_array;
+        return dejaVu;
     }
+
 
     /**
      * Calculates the maximum number of edges of the path between the parameter
      * vertex and the other vertices of the graph. Works only with related graphs,
      * otherwise returns -1.
-     * 
+     *
      * @param idSom Vertex identifier
      * @return The eccentricity of the vertex or -1 if the function is used in an
-     *         unconnected graph.
+     * unconnected graph.
      */
+
     public int excentricite(int idSom) {
-        int path_array[] = this.algo_dijkstra(idSom);
+        // TODO
+
+        int[][] plusCourtChemin = new int[1][1];
         int nbMax = -1;
         if (this.estConnexe()) {
-            for (int i = 0; i < path_array.length; i++) {
-                int distActuel = path_array[i];
-                if (distActuel > nbMax) {
-                    nbMax = distActuel;
+            for (int i = 0; i < plusCourtChemin.length; i++) {
+                if (plusCourtChemin[i][idSom] > nbMax) {
+                    nbMax = plusCourtChemin[i][idSom];
                 }
             }
         }
+
         return nbMax;
     }
+
 
     /**
      * Calculate the smallest eccentricity of the graph
@@ -615,6 +620,30 @@ public class Graphe {
 
         }
         return diametre;
+    }
+
+    public int[][] FloydWarshall(int[][] adjacence) {
+        int ordre = this.nbSommets();
+        int[][] res = adjacence;
+
+        for (int i = 1; i < ordre; i++) {
+            res[i][i] = 0;
+        }
+
+        for (int k = 1; k < ordre; k++) {
+            for (int i = 0; i < ordre; i++) {
+                for (int j = 1; j < ordre; j++) {
+                    int val1 = res[i][k] + res[k][j];
+                    int val2 = res[i][j];
+                    if (val1 < val2) {
+                        res[i][j] = val1;
+                    } else {
+                        res[i][j] = val2;
+                    }
+                }
+            }
+        }
+        return res;
     }
 
     /**
