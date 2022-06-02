@@ -6,7 +6,6 @@ import modele.traitement.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -294,6 +293,15 @@ public class ScenarioTraitement {
 
         p("");
 
+        p("--- composanteConnexe()");
+        p("g1.composanteConnexe() = >>> " + g1.composanteConnexe());
+        p("g3.composanteConnexe() = >>>\n" + g3.composanteConnexe());
+
+        p("");
+
+        /**
+        p("");
+
         p("--- excentricite()");
         p("L'exentricite du sommet 0 de g3 vaut " + g3.excentricite(0));
         p("L'exentricite du sommet 2 de g3 vaut " + g3.excentricite(2));
@@ -307,7 +315,7 @@ public class ScenarioTraitement {
 
         p("--- diametre()");
         p("Le diametre de g3 vaut " + g3.diametre());
-
+        */
     }
 
     
