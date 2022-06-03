@@ -32,7 +32,7 @@
               <PasswordField id="password" promptText="Mot de passe" style="-fx-border-color:#00936E; -fx-background-radius: 15px; -fx-border-radius: 15px" />
             <BorderPane prefHeight="57.0" prefWidth="65.0">
                <bottom>
-                    <Button alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="88.0" style="-fx-background-color: #00936E; -fx-background-radius: 15px" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" BorderPane.alignment="CENTER">
+                    <Button alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="105.0" style="-fx-background-color: #00936E; -fx-background-radius: 15px" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" BorderPane.alignment="CENTER">
                       <cursor>
                          <Cursor fx:constant="DEFAULT" />
                       </cursor>
