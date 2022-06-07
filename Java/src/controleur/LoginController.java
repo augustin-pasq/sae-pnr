@@ -4,9 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
+import modele.donnee.UseDatabase;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -14,13 +17,19 @@ public class LoginController implements Initializable {
     private Button loginButton;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 
     @FXML
     private void login(final ActionEvent event) {
-        Color c = Color.color(1, 1, 1);
-        System.out.println(c);
-        loginButton.setStyle(
-                "-fx-background-color: #" + c.toString().substring(2));
+        System.out.println("Login");
+        UseDatabase.selectQuery("SELECT lObservateur, COUNT(lObservation) nbObs FROM AObserve GROUP BY lObservateur HAVING nbObs > (SELECT AVG(nbObs) moy FROM (SELECT lObservateur, COUNT(lObservation) nbObs FROM AObserve GROUP BY lObservateur) B);");
+        this.loginButton.setText("Logged in");
+    }
+
+    private String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder();
+        return argon2PasswordEncoder.encode(password);
     }
 }
