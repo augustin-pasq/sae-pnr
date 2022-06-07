@@ -3,6 +3,7 @@ package vue;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -17,13 +18,18 @@ public class Login extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource(getClass().getSimpleName() + ".fxml");
+        URL pathFXML = getClass().getResource("Login.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
-        Scene scene = new Scene(root, 600, 550);
-        scene.getStylesheets().addAll(this.getClass().getResource("StyleLogin.css").toExternalForm());
+        // Add the stylesheet of the page
+        Scene scene = new Scene(root);
+        URL pathCSS = getClass().getResource("StyleLogin.css");
+        scene.getStylesheets().addAll(pathCSS.toExternalForm());
+        // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo 
         primaryStage.setScene(scene);
+        //primaryStage.setFullScreen(true); 
+        primaryStage.setTitle("PNR");
         primaryStage.show();
     }
 }
