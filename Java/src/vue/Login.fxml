@@ -12,46 +12,53 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="405.0" prefWidth="571.0" style="-fx-background-image: url('.\data\fondLogin.png');" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.LoginController">
-   <children>
-      <VBox layoutX="153.0" prefHeight="405.0" prefWidth="266.0" spacing="10.0">
-         <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                     <image>
-                        <Image url="@../../data/Logo_PNR.png" />
-                     </image>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </ImageView>
-               </center>
-            </BorderPane>
-              <TextField id="username" promptText="Nom d'utlisateur" style="-fx-border-color:#00936E" />
-              <PasswordField id="password" promptText="Mot de passe" style="-fx-border-color:#00936E" />
-            <BorderPane prefHeight="57.0" prefWidth="65.0">
-               <bottom>
-                    <Button fx:id="loginButton" onAction="#login" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="88.0" style="-fx-background-color: #00936E; -fx-background-radius: 15px" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" BorderPane.alignment="CENTER">
-                      <cursor>
-                         <Cursor fx:constant="HAND" />
-                      </cursor>
-                     <effect>
-                        <Blend />
-                     </effect>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-               </bottom>
-            </BorderPane>
-         </children>
-         <padding>
-            <Insets left="20.0" right="20.0" />
-         </padding>
-      </VBox>
-   </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
+<AnchorPane id="AnchorPane" prefHeight="405.0" prefWidth="571.0"
+            style="-fx-background-image: url('.\data\fondLogin.png');" xmlns="http://javafx.com/javafx/18"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.LoginController">
+    <children>
+        <VBox layoutX="153.0" prefHeight="405.0" prefWidth="266.0" spacing="10.0">
+            <children>
+                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                    <center>
+                        <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true"
+                                   BorderPane.alignment="CENTER">
+                            <image>
+                                <Image url="@../../data/Logo_PNR.png"/>
+                            </image>
+                            <effect>
+                                <Blend/>
+                            </effect>
+                        </ImageView>
+                    </center>
+                </BorderPane>
+                <TextField id="username" promptText="Nom d'utlisateur" style="-fx-border-color:#00936E"/>
+                <PasswordField id="password" promptText="Mot de passe" style="-fx-border-color:#00936E"/>
+                <BorderPane prefHeight="57.0" prefWidth="65.0">
+                    <bottom>
+                        <Button fx:id="loginButton" onAction="#login" alignment="CENTER" contentDisplay="CENTER"
+                                prefHeight="27.0" prefWidth="88.0"
+                                style="-fx-background-color: #00936E; -fx-background-radius: 15px" text="CONNEXION"
+                                textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS"
+                                BorderPane.alignment="CENTER">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                            <effect>
+                                <Blend/>
+                            </effect>
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                        </Button>
+                    </bottom>
+                </BorderPane>
+            </children>
+            <padding>
+                <Insets left="20.0" right="20.0"/>
+            </padding>
+        </VBox>
+    </children>
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
 </AnchorPane>
