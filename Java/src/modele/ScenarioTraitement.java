@@ -288,7 +288,6 @@ public class ScenarioTraitement {
             p("");
         }
 
-
         p("");
 
         p("--- estConnexe()");
@@ -321,7 +320,6 @@ public class ScenarioTraitement {
         p("g1.diametre() = 2 >>> " + g1.diametre());
         p("g3.diametre() = -1 >>> " + g3.diametre());
     }
-
 
     /**
      * Shorthand for System.out.println()
