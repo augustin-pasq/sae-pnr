@@ -110,7 +110,7 @@ public class Graphe {
      * Get the Hashmap containing the nodes and their neighbours
      *
      * @return Hashmap containing the nodes of the graph as keys and their
-     *         neighbours as values
+     * neighbours as values
      */
     public HashMap<Sommet, ArrayList<Sommet>> getSommetsVoisins() {
         return new HashMap<>(this.sommetsVoisins);
@@ -181,7 +181,7 @@ public class Graphe {
      * Calculate the number of neighbours of all vertices in the graph
      *
      * @return Hashmap containing the ID of the vertex as key and the number of
-     *         neighbours as value
+     * neighbours as value
      */
     public HashMap<Sommet, Integer> calculeDegres() {
         HashMap<Sommet, Integer> degres = new HashMap<Sommet, Integer>();
@@ -220,7 +220,7 @@ public class Graphe {
      * @param idSom1 ID of the first vertex
      * @param idSom2 ID of the second vertex
      * @return True if the second vertex is a neighbour of the first, false
-     *         otherwise
+     * otherwise
      */
     public boolean sontVoisins(int idSom1, int idSom2) {
         boolean voisin = false;
@@ -439,17 +439,17 @@ public class Graphe {
         ArrayList<Sommet> sommets = new ArrayList<>(this.sommetsVoisins.keySet());
         ArrayList<Sommet> dejaVu = new ArrayList<>();
         ArrayList<Sommet> file = new ArrayList<>();
-        
+
         Sommet som = sommets.get(0);
         dejaVu.add(som);
         for (Sommet s : this.sommetsVoisins.get(som))
             file.add(s);
-        
-        while (!file.isEmpty()){
+
+        while (!file.isEmpty()) {
             som = file.remove(0);
             if (!dejaVu.contains(som))
                 dejaVu.add(som);
-            for (Sommet s : this.sommetsVoisins.get(som)){
+            for (Sommet s : this.sommetsVoisins.get(som)) {
                 if (!file.contains(s) && !dejaVu.contains(s))
                     file.add(s);
             }
@@ -463,40 +463,40 @@ public class Graphe {
 
     /**
      * Generate an ArrayList of Graph containing all the sub-graphs of the graph
-     * 
+     *
      * @return
      */
-    public ArrayList<Graphe> composanteConnexe(){
+    public ArrayList<Graphe> composanteConnexe() {
         ArrayList<Graphe> composantes = new ArrayList<>();
-        HashMap <Sommet, ArrayList<Sommet>> hashmap = new HashMap<>();
+        HashMap<Sommet, ArrayList<Sommet>> hashmap = new HashMap<>();
 
         ArrayList<Sommet> sommets = new ArrayList<>(this.sommetsVoisins.keySet());
         ArrayList<Sommet> dejaVu = new ArrayList<>();
         ArrayList<Sommet> file = new ArrayList<>();
         Sommet som;
-        
-        while (!sommets.isEmpty()){
+
+        while (!sommets.isEmpty()) {
             som = sommets.remove(0);
             if (!dejaVu.contains(som))
                 dejaVu.add(som);
 
-            for (Sommet s : this.sommetsVoisins.get(som)){
+            for (Sommet s : this.sommetsVoisins.get(som)) {
                 if (!file.contains(s) && !dejaVu.contains(s))
                     file.add(s);
             }
-            
-            while (!file.isEmpty()){
+
+            while (!file.isEmpty()) {
                 som = file.remove(0);
                 sommets.remove(som);
                 if (!dejaVu.contains(som))
                     dejaVu.add(som);
-                for (Sommet s : this.sommetsVoisins.get(som)){
+                for (Sommet s : this.sommetsVoisins.get(som)) {
                     if (!file.contains(s) && !dejaVu.contains(s))
                         file.add(s);
                 }
             }
 
-            while (!dejaVu.isEmpty()){
+            while (!dejaVu.isEmpty()) {
                 som = dejaVu.remove(0);
                 hashmap.put(som, this.sommetsVoisins.get(som));
             }
@@ -508,13 +508,12 @@ public class Graphe {
 
     /**
      * Gets the minimum distance between two vertices
-     * 
+     *
      * @param idSom1 the id of the first vertex
      * @param idSom2 the id of the second vertex
-     * 
      * @return the distance separating the vertices
      */
-    public int distArete (int idSom1, int idSom2){
+    public int distArete(int idSom1, int idSom2) {
         Sommet s1 = null;
         Sommet s2 = null;
         int dist;
@@ -535,12 +534,11 @@ public class Graphe {
 
     /**
      * Generate an HashMap containing the vertices associated with their distance from the given vertex
-     *  
+     *
      * @param id the id of the vertex we calculate the distances
-     * 
      * @return an ArrayList containing the distancesA2QZ3+
      */
-    private HashMap<Sommet, Integer> minDistance(int id){
+    private HashMap<Sommet, Integer> minDistance(int id) {
 
         Sommet som = null;
         HashMap<Sommet, Integer> hashmap = new HashMap<>();
@@ -548,13 +546,12 @@ public class Graphe {
         ArrayList<HashMap<Sommet, Integer>> file = new ArrayList<>();
         int dist = 0;
 
-        if (!this.estConnexe()){
+        if (!this.estConnexe()) {
             for (Sommet s : this.sommetsVoisins.keySet())
                 dejaVu.put(s, -1);
-        }
-        else {
+        } else {
 
-            for (Sommet s : this.sommetsVoisins.keySet()){
+            for (Sommet s : this.sommetsVoisins.keySet()) {
                 if (s.getId() == id)
                     som = s;
             }
@@ -564,13 +561,13 @@ public class Graphe {
 
             dejaVu.put(som, dist);
             dist++;
-            for (Sommet s : this.sommetsVoisins.get(som)){
+            for (Sommet s : this.sommetsVoisins.get(som)) {
                 hashmap.put(s, dist);
                 file.add(hashmap);
                 hashmap = new HashMap<>();
             }
-            
-            while (!file.isEmpty()){
+
+            while (!file.isEmpty()) {
                 hashmap = file.remove(0);
                 for (Sommet s : hashmap.keySet())
                     som = s;
@@ -581,8 +578,8 @@ public class Graphe {
                 else if (dejaVu.get(som) > dist)
                     dejaVu.put(som, dist);
 
-                for (Sommet s : this.sommetsVoisins.get(som)){
-                    if (!dejaVu.keySet().contains(s)){
+                for (Sommet s : this.sommetsVoisins.get(som)) {
+                    if (!dejaVu.keySet().contains(s)) {
                         hashmap = new HashMap<>();
                         hashmap.put(s, dist + 1);
                         file.add(hashmap);
@@ -598,10 +595,10 @@ public class Graphe {
      * Calculates the maximum number of edges of the path between the parameter
      * vertex and the other vertices of the graph. Works only with related graphs,
      * otherwise returns -1.
-     * 
+     *
      * @param idSom Vertex identifier
      * @return The eccentricity of the vertex or -1 if the function is used in an
-     *         unconnected graph.
+     * unconnected graph.
      */
     public int excentricite(int idSom) {
         int mini = -1;
@@ -646,7 +643,7 @@ public class Graphe {
         }
         return diametre;
     }
-    
+
     /**
      * Format the graph to a string
      *
