@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="405.0" prefWidth="571.0" stylesheets="StyleLogin.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="405.0" prefWidth="573.0" stylesheets="@../../src/vue/StyleLogin.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="153.0" prefHeight="405.0" prefWidth="266.0" spacing="10.0">
+      <VBox id="fondGris" layoutX="153.0" prefHeight="405.0" prefWidth="266.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="0.0">
          <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
                <center>
                   <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                      <image>
@@ -28,11 +28,11 @@
                   </ImageView>
                </center>
             </BorderPane>
-              <TextField id="username" promptText="Nom d'utlisateur" style="-fx-border-color:#00936E" />
-              <PasswordField id="password" promptText="Mot de passe" style="-fx-border-color:#00936E" />
+              <TextField id="username" promptText="Nom d'utlisateur" />
+              <PasswordField id="password" promptText="Mot de passe" />
             <BorderPane prefHeight="57.0" prefWidth="65.0">
                <bottom>
-                    <Button alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="88.0" style="-fx-background-color: #00936E; -fx-background-radius: 15px" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" BorderPane.alignment="CENTER">
+                    <Button id="connexion" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="88.0" text="CONNEXION" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" BorderPane.alignment="CENTER">
                       <cursor>
                          <Cursor fx:constant="DEFAULT" />
                       </cursor>
