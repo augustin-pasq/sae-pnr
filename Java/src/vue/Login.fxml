@@ -31,8 +31,8 @@
                         </ImageView>
                     </center>
                 </BorderPane>
-                <TextField id="username" promptText="Nom d'utlisateur" style="-fx-border-color:#00936E"/>
-                <PasswordField id="password" promptText="Mot de passe" style="-fx-border-color:#00936E"/>
+                <TextField id="username" fx:id="usernameField" promptText="Nom d'utlisateur" style="-fx-border-color:#00936E"/>
+                <PasswordField id="password" fx:id="passField" promptText="Mot de passe" style="-fx-border-color:#00936E"/>
                 <BorderPane prefHeight="57.0" prefWidth="65.0">
                     <bottom>
                         <Button fx:id="loginButton" onAction="#login" alignment="CENTER" contentDisplay="CENTER"
