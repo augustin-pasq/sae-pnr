@@ -301,20 +301,20 @@ public class ScenarioTraitement {
         p("g3.composanteConnexe() = >>>\n" + g3.composanteConnexe());
 
         p("");
-        
+
         p("--- excentricite()");
         p("g1.excentricite() = 1 >>> " + g1.excentricite(0));
         p("g1.excentricite() = 2 >>> " + g1.excentricite(2));
         p("g3.excentricite() = -1 >>> " + g3.excentricite(0));
         p("g3.excentricite() = -1 >>> " + g3.excentricite(2));
 
-         p("");
+        p("");
 
         p("--- rayon()");
         p("g1.rayon() = 1 >>> " + g1.rayon());
         p("g3.rayon() = -1 >>> " + g3.rayon());
 
-         p("");
+        p("");
 
         p("--- diametre()");
         p("g1.diametre() = 2 >>> " + g1.diametre());

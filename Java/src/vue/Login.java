@@ -17,11 +17,11 @@ public class Login extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource("Login.fxml");
+        URL pathFXML = getClass().getResource(getClass().getSimpleName() + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 600, 550);
         scene.getStylesheets().addAll(this.getClass().getResource("StyleLogin.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
