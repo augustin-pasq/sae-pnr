@@ -6,7 +6,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -96,25 +95,17 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <BorderPane prefHeight="41.0" prefWidth="622.0">
-               <right>
-                  <Button id="logout" mnemonicParsing="false" BorderPane.alignment="CENTER" />
-                      <graphic>
-                <ImageView fitHeight="${controller.buttonWidth}">
-            <Image url="@../../data/Logo_PNR.png"/>
-              </ImageView>
-                   </graphic>
-               </right>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets top="50.0" />
-               </padding>
-            </BorderPane>
+            <AnchorPane prefHeight="86.0" prefWidth="550.0">
+               <children>
+                  <Button id="logout" layoutX="578.0" layoutY="76.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0">
+                   <graphic>
+                     <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../data/exit.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               </children>
+            </AnchorPane>
          </children>
       </VBox>
    </children>
