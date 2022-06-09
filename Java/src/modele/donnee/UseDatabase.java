@@ -55,7 +55,7 @@ public class UseDatabase {
 
     /**
      * Allows to make an update query (INSERT, UPDATE, DELETE) in the database
-     * 
+     *
      * @param query the query to make
      * @return a boolean indicating whether the update is successful
      */
@@ -76,7 +76,7 @@ public class UseDatabase {
 
     /**
      * Allows to make a SELECT query in the database
-     * 
+     *
      * @param query the query to make
      * @return an ArrayList of the results of the query
      */
@@ -109,5 +109,24 @@ public class UseDatabase {
         }
 
         return output;
+    }
+
+    /**
+     * Authenticate a user
+     *
+     * @param username the username of the user
+     * @param password the password of the user
+     * @return a boolean indicating whether the user is authenticated
+     */
+    public static boolean authenticateUser(String username, String password) {
+        boolean success = false;
+
+        String query = "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'";
+        ArrayList<ArrayList<String>> results = selectQuery(query);
+        if (results.size() > 1) {
+            success = true;
+        }
+
+        return success;
     }
 }
