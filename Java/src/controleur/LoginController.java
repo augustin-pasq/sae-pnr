@@ -38,8 +38,9 @@ public class LoginController implements Initializable {
 
     }
 
-    private String hashPassword(String password) {
-        Argon2PasswordEncoder a2 = new Argon2PasswordEncoder();
-        return a2.encode(password);
+    private String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder();
+        return argon2PasswordEncoder.encode(password);
     }
 }

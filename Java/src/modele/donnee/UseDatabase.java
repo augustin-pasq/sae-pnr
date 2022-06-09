@@ -30,10 +30,6 @@ public class UseDatabase {
      */
     public static String databaseName = "PNR";
 
-    public static void main(String[] args) {
-        selectQuery("SELECT lObservateur, COUNT(lObservation) nbObs FROM AObserve GROUP BY lObservateur HAVING nbObs > (SELECT AVG(nbObs) moy FROM (SELECT lObservateur, COUNT(lObservation) nbObs FROM AObserve GROUP BY lObservateur) B);");
-    }
-
     /**
      * Makes the connection to the database
      *
@@ -43,15 +39,12 @@ public class UseDatabase {
 
         Connection connection = null;
 
-        // The URL of the database is generated with the text typed in the fields "address" and "port"
+        // The URL of the database is generated with the text typed in the fields
+        // "address" and "port"
         String jdbcURL = "jdbc:mysql://" + address + ":" + port + "/" + databaseName;
 
         try {
             connection = DriverManager.getConnection(jdbcURL, username, password);
-
-            // This display a message if the connection is successfully established
-            System.out.println("Connection established.");
-
         } catch (SQLException se) {
             // This display a message if the connection failed + the reason of the error
             System.out.println("Connection failed: " + se.getMessage());
@@ -60,6 +53,33 @@ public class UseDatabase {
         return connection;
     }
 
+    /**
+     * Allows to make an update query (INSERT, UPDATE, DELETE) in the database
+     * 
+     * @param query the query to make
+     * @return a boolean indicating whether the update is successful
+     */
+    public static boolean updateQuery(String query) {
+        boolean success = false;
+
+        try {
+            Statement stmt = MySQLConnection().createStatement();
+            stmt.executeUpdate(query);
+            success = true;
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error executing query:" + e.getMessage());
+        }
+
+        return success;
+    }
+
+    /**
+     * Allows to make a SELECT query in the database
+     * 
+     * @param query the query to make
+     * @return an ArrayList of the results of the query
+     */
     public static ArrayList<ArrayList<String>> selectQuery(String query) {
         ArrayList<ArrayList<String>> output = null;
 
@@ -75,7 +95,6 @@ public class UseDatabase {
             output = new ArrayList<ArrayList<String>>();
             output.add(columnsNames);
 
-
             while (rs.next()) {
                 ArrayList<String> line = new ArrayList<String>();
                 for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
@@ -84,8 +103,6 @@ public class UseDatabase {
                 output.add(line);
             }
 
-            System.out.println(output.toString());
-
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Error executing query:" + e.getMessage());
@@ -93,5 +110,4 @@ public class UseDatabase {
 
         return output;
     }
-
 }
