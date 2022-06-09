@@ -6,9 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -38,9 +39,12 @@ public class LoginController implements Initializable {
 
     }
 
-    private String hashPassword(String password) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder();
-        return argon2PasswordEncoder.encode(password);
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
