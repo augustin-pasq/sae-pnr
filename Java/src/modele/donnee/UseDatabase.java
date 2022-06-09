@@ -30,10 +30,6 @@ public class UseDatabase {
      */
     public static String databaseName = "PNR";
 
-    public static void main(String[] args) {
-        updateQuery("INSERT INTO Lieu_Vegetation(idVegeLieu) VALUES(83);");
-    }
-
     /**
      * Makes the connection to the database
      *
@@ -49,10 +45,6 @@ public class UseDatabase {
 
         try {
             connection = DriverManager.getConnection(jdbcURL, username, password);
-
-            // This display a message if the connection is successfully established
-            System.out.println("Connection established.");
-
         } catch (SQLException se) {
             // This display a message if the connection failed + the reason of the error
             System.out.println("Connection failed: " + se.getMessage());
@@ -65,15 +57,21 @@ public class UseDatabase {
      * Allows to make an update query (INSERT, UPDATE, DELETE) in the database
      * 
      * @param query the query to make
+     * @return a boolean indicating whether the update is successful
      */
-    public static void updateQuery(String query) {
+    public static boolean updateQuery(String query) {
+        boolean success = false;
+
         try {
             Statement stmt = MySQLConnection().createStatement();
             stmt.executeUpdate(query);
+            success = true;
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Error executing query:" + e.getMessage());
         }
+
+        return success;
     }
 
     /**
@@ -104,8 +102,6 @@ public class UseDatabase {
                 }
                 output.add(line);
             }
-
-            System.out.println(output.toString());
 
             stmt.close();
         } catch (SQLException e) {
