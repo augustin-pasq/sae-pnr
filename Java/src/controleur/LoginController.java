@@ -52,14 +52,13 @@ public class LoginController implements Initializable {
         String password = hashPassword(passField.getText());
 
         if (username.equals("") || password.equals("")) {
-            this.errorLabel.setText("Please fill in all the fields");
+            this.errorLabel.setText("Merci de remplir tous les champs");
         } else {
             if (authenticateUser(username, password)) {
-                System.out.println("Login successful");
-                this.errorLabel.setText("");
+                this.errorLabel.setText("Connecté avec succès");
+                //MainControler.switchScene("Main", event);
             } else {
-                System.out.println("Login failed");
-                this.errorLabel.setText("Wrong username or password");
+                this.errorLabel.setText("Identifiant ou mot de passe incorrect");
             }
         }
     }
