@@ -31,7 +31,7 @@ public class UseDatabase {
     public static String databaseName = "PNR";
 
     public static void main(String[] args) {
-        selectQuery("SELECT lObservateur, COUNT(lObservation) nbObs FROM AObserve GROUP BY lObservateur HAVING nbObs > (SELECT AVG(nbObs) moy FROM (SELECT lObservateur, COUNT(lObservation) nbObs FROM AObserve GROUP BY lObservateur) B);");
+        updateQuery("INSERT INTO Lieu_Vegetation(idVegeLieu) VALUES(83);");
     }
 
     /**
@@ -43,7 +43,8 @@ public class UseDatabase {
 
         Connection connection = null;
 
-        // The URL of the database is generated with the text typed in the fields "address" and "port"
+        // The URL of the database is generated with the text typed in the fields
+        // "address" and "port"
         String jdbcURL = "jdbc:mysql://" + address + ":" + port + "/" + databaseName;
 
         try {
@@ -60,6 +61,27 @@ public class UseDatabase {
         return connection;
     }
 
+    /**
+     * Allows to make an update query (INSERT, UPDATE, DELETE) in the database
+     * 
+     * @param query the query to make
+     */
+    public static void updateQuery(String query) {
+        try {
+            Statement stmt = MySQLConnection().createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error executing query:" + e.getMessage());
+        }
+    }
+
+    /**
+     * Allows to make a SELECT query in the database
+     * 
+     * @param query the query to make
+     * @return an ArrayList of the results of the query
+     */
     public static ArrayList<ArrayList<String>> selectQuery(String query) {
         ArrayList<ArrayList<String>> output = null;
 
@@ -74,7 +96,6 @@ public class UseDatabase {
 
             output = new ArrayList<ArrayList<String>>();
             output.add(columnsNames);
-
 
             while (rs.next()) {
                 ArrayList<String> line = new ArrayList<String>();
@@ -93,5 +114,4 @@ public class UseDatabase {
 
         return output;
     }
-
 }

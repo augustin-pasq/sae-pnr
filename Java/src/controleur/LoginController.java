@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import modele.donnee.UseDatabase;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
 import java.net.URL;
 import java.security.MessageDigest;
@@ -29,7 +28,6 @@ public class LoginController implements Initializable {
 
     private String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-512");
-        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder();
-        return argon2PasswordEncoder.encode(password);
+        return "";
     }
 }
