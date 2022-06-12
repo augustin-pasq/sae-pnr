@@ -104,9 +104,14 @@ public class NidGCI implements IObs<ObsGCI> {
         else this.nomPlage = nom;
     }
 
+    /**
+     * Setter for the list of observations of this GCI nest
+     * @param lesObs the new list of observations
+     * @throws NullPointerException if the list of observations is null
+     */
     private void setLesObservations(ArrayList<ObsGCI> lesObs) throws NullPointerException {
-        if (lesObs == null) throw new NullPointerException("Observations can't be null or empty");
-        else this.lesObservations = lesObs;
+        if (lesObs == null) throw new NullPointerException("Observations is null");
+        else this.lesObservations = new ArrayList<ObsGCI>(lesObs);
     }
 
 

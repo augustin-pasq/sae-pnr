@@ -1,7 +1,11 @@
 package modele;
 
-import modele.donnee.*;
-import modele.traitement.*;
+import modele.donnee.EspeceBatracien;
+import modele.donnee.EspeceObservee;
+import modele.donnee.Lieu;
+import modele.donnee.ObsBatracien;
+import modele.traitement.Graphe;
+import modele.traitement.Sommet;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -34,7 +38,7 @@ public class ScenarioTraitement {
         Date date = new Date(162523025);
         Time heure = new Time(80000000);
         Lieu lieu = new Lieu(268045.333, 6744460.457);
-        ObsBatracien obs = new ObsBatracien(12, date, heure, lieu, new ArrayList<>(), new int[] { 1, 3, 2, 5 },
+        ObsBatracien obs = new ObsBatracien(12, date, heure, lieu, new ArrayList<>(), new int[]{1, 3, 2, 5},
                 EspeceBatracien.CALAMITE);
         Sommet s1 = new Sommet(obs);
         Sommet s2 = new Sommet(78, lieu, date, EspeceObservee.BATRACIEN);
@@ -156,13 +160,13 @@ public class ScenarioTraitement {
 
         /*
          * Graph looks like
-         * 
-         * 0 -- 1
+         *
+         * 0 - 1
+         * |\
          * | \
-         * | \
-         * | \
-         * 3 -- 2
-         * 
+         * |  \
+         * 3 - 2
+         *
          */
 
         Graphe g1 = new Graphe(hashMap);
