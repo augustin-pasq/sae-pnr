@@ -36,7 +36,8 @@ public class Sommet {
      * @param coordLieu the coordinates of the vertex
      * @param date      the date of the vertex creation
      * @param espece    the species observed at the vertex
-     * @throws IllegalArgumentException if the identifier is negative or if the coordinates, the date or species are null
+     * @throws IllegalArgumentException if the identifier is negative or if the
+     *                                  coordinates, the date or species are null
      */
     public Sommet(int id, Lieu coordLieu, Date date, EspeceObservee espece) throws IllegalArgumentException {
         this.setId(id);
@@ -52,7 +53,8 @@ public class Sommet {
      * @throws IllegalArgumentException if the observation is null
      */
     public Sommet(Observation obs) throws IllegalArgumentException {
-        if (obs == null) throw new IllegalArgumentException("obs ne peut être null");
+        if (obs == null)
+            throw new IllegalArgumentException("obs ne peut être null");
         else {
             this.setId(obs.getId());
             this.setCoordLieu(obs.getLieu());
@@ -89,8 +91,10 @@ public class Sommet {
      * @throws IllegalArgumentException if the identifier is negative
      */
     public void setId(int id) throws IllegalArgumentException {
-        if (id < 0) throw new IllegalArgumentException("id cannot be negative");
-        else this.id = id;
+        if (id < 0)
+            throw new IllegalArgumentException("id cannot be negative");
+        else
+            this.id = id;
     }
 
     /**
@@ -109,8 +113,10 @@ public class Sommet {
      * @throws IllegalArgumentException if the species is null
      */
     public void setEspece(EspeceObservee espece) throws IllegalArgumentException {
-        if (espece == null) throw new IllegalArgumentException("espece cannot be null");
-        else this.espece = espece;
+        if (espece == null)
+            throw new IllegalArgumentException("espece cannot be null");
+        else
+            this.espece = espece;
     }
 
     /**
@@ -129,8 +135,10 @@ public class Sommet {
      * @throws IllegalArgumentException if the coordinates are null
      */
     public void setCoordLieu(Lieu coordLieu) throws IllegalArgumentException {
-        if (coordLieu == null) throw new IllegalArgumentException("coordLieu cannot be null");
-        else this.coordLieu = coordLieu;
+        if (coordLieu == null)
+            throw new IllegalArgumentException("coordLieu cannot be null");
+        else
+            this.coordLieu = coordLieu;
     }
 
     /**
@@ -149,8 +157,10 @@ public class Sommet {
      * @throws IllegalArgumentException if the date is null
      */
     public void setDate(Date date) throws IllegalArgumentException {
-        if (date == null) throw new IllegalArgumentException("date cannot be null");
-        else this.date = date;
+        if (date == null)
+            throw new IllegalArgumentException("date cannot be null");
+        else
+            this.date = date;
     }
 
     /**
@@ -161,7 +171,8 @@ public class Sommet {
      */
     public double calculeDist(Sommet som) throws IllegalArgumentException {
         double ret;
-        if (som == null) throw new IllegalArgumentException("som cannot be null");
+        if (som == null)
+            throw new IllegalArgumentException("som cannot be null");
         else {
             double dX = Math.pow(this.getCoordLieu().getXCoord() - som.getCoordLieu().getXCoord(), 2);
             double dY = Math.pow(this.getCoordLieu().getYCoord() - som.getCoordLieu().getYCoord(), 2);
@@ -176,7 +187,8 @@ public class Sommet {
      * @return the vertex formatted as a string
      */
     public String toString() {
-        return "Sommet{" + this.getId() + ", " + this.getDate() + ", " + this.getCoordLieu() + ", " + this.getEspece() + '}';
+        return "Sommet{" + this.getId() + ", " + this.getDate() + ", " + this.getCoordLieu() + ", " + this.getEspece()
+                + '}';
     }
 
 }

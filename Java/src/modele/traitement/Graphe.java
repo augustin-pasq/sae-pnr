@@ -110,7 +110,7 @@ public class Graphe {
      * Get the Hashmap containing the nodes and their neighbours
      *
      * @return Hashmap containing the nodes of the graph as keys and their
-     * neighbours as values
+     *         neighbours as values
      */
     public HashMap<Sommet, ArrayList<Sommet>> getSommetsVoisins() {
         return new HashMap<>(this.sommetsVoisins);
@@ -181,7 +181,7 @@ public class Graphe {
      * Calculate the number of neighbours of all vertices in the graph
      *
      * @return Hashmap containing the ID of the vertex as key and the number of
-     * neighbours as value
+     *         neighbours as value
      */
     public HashMap<Sommet, Integer> calculeDegres() {
         HashMap<Sommet, Integer> degres = new HashMap<Sommet, Integer>();
@@ -220,7 +220,7 @@ public class Graphe {
      * @param idSom1 ID of the first vertex
      * @param idSom2 ID of the second vertex
      * @return True if the second vertex is a neighbour of the first, false
-     * otherwise
+     *         otherwise
      */
     public boolean sontVoisins(int idSom1, int idSom2) {
         boolean voisin = false;
@@ -464,7 +464,7 @@ public class Graphe {
     /**
      * Generate an ArrayList of Graph containing all the sub-graphs of the graph
      *
-     * @return
+     * @return an ArrayList of Graph containing all the sub-graphs of the graph
      */
     public ArrayList<Graphe> composanteConnexe() {
         ArrayList<Graphe> composantes = new ArrayList<>();
@@ -533,7 +533,8 @@ public class Graphe {
     }
 
     /**
-     * Generate an HashMap containing the vertices associated with their distance from the given vertex
+     * Generate an HashMap containing the vertices associated with their distance
+     * from the given vertex
      *
      * @param id the id of the vertex we calculate the distances
      * @return an ArrayList containing the distancesA2QZ3+
@@ -590,7 +591,6 @@ public class Graphe {
         return dejaVu;
     }
 
-
     /**
      * Calculates the maximum number of edges of the path between the parameter
      * vertex and the other vertices of the graph. Works only with related graphs,
@@ -598,7 +598,7 @@ public class Graphe {
      *
      * @param idSom Vertex identifier
      * @return The eccentricity of the vertex or -1 if the function is used in an
-     * unconnected graph.
+     *         unconnected graph.
      */
     public int excentricite(int idSom) {
         int mini = -1;
