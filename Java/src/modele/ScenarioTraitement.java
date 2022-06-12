@@ -34,7 +34,8 @@ public class ScenarioTraitement {
         Date date = new Date(162523025);
         Time heure = new Time(80000000);
         Lieu lieu = new Lieu(268045.333, 6744460.457);
-        ObsBatracien obs = new ObsBatracien(12, date, heure, lieu, new ArrayList<>(), new int[]{1, 3, 2, 5}, EspeceBatracien.CALAMITE);
+        ObsBatracien obs = new ObsBatracien(12, date, heure, lieu, new ArrayList<>(), new int[] { 1, 3, 2, 5 },
+                EspeceBatracien.CALAMITE);
         Sommet s1 = new Sommet(obs);
         Sommet s2 = new Sommet(78, lieu, date, EspeceObservee.BATRACIEN);
         Sommet s3 = new Sommet(98, lieu, date, EspeceObservee.BATRACIEN);
@@ -105,7 +106,6 @@ public class ScenarioTraitement {
         p("s1.calculeDist(s4) = " + s1.calculeDist(s4));
         p("s4.calculeDist(s1) = " + s4.calculeDist(s1));
 
-
         ArrayList<Sommet> ret = new ArrayList<Sommet>();
         ret.add(s1);
         ret.add(s2);
@@ -154,15 +154,16 @@ public class ScenarioTraitement {
         hashMap.put(sommets.get(2), sommet2);
         hashMap.put(sommets.get(3), sommet3);
 
-        /* Graph looks like   
-         
-        0 -- 1
-        | \
-        |  \
-        |   \
-        3 -- 2
-        
-        */
+        /*
+         * Graph looks like
+         * 
+         * 0 -- 1
+         * | \
+         * | \
+         * | \
+         * 3 -- 2
+         * 
+         */
 
         Graphe g1 = new Graphe(hashMap);
         Graphe g2 = new Graphe(g1);
@@ -232,7 +233,8 @@ public class ScenarioTraitement {
 
         // Adding an isolated vertex
         HashMap<Sommet, ArrayList<Sommet>> hashMap2 = new HashMap<>(hashMap);
-        hashMap2.put(new Sommet(4, new Lieu(5500, 6000000), new Date(0), EspeceObservee.BATRACIEN), new ArrayList<Sommet>());
+        hashMap2.put(new Sommet(4, new Lieu(5500, 6000000), new Date(0), EspeceObservee.BATRACIEN),
+                new ArrayList<Sommet>());
         Graphe g3 = new Graphe(hashMap2);
 
         p("--- existeChemin()");
@@ -264,7 +266,7 @@ public class ScenarioTraitement {
         p("");
         p("New " + g3);
 
-        //p("");
+        // p("");
 
         p("--- retireArete()");
         p(g3);
@@ -275,7 +277,7 @@ public class ScenarioTraitement {
         p("");
         p("New " + g3);
 
-        //p("");
+        // p("");
 
         p("--- matriceAdjacence()");
         p(g3);
