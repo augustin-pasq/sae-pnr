@@ -1,0 +1,32 @@
+#AnchorPane, #Back, #HomePage {
+    -fx-background-color: rgba(255, 255, 255, 0);
+}
+
+
+#Nom, #Prenom, #Heure, #CoordX, #CoordY, #Espece, #Sexe, #Temperature, #TypePeche, #Taille, #Gestant {
+    -fx-border-color: #00936E; 
+    -fx-border-width: 4px;
+    -fx-background-radius: 15px; 
+    -fx-border-radius: 15px; 
+    -fx-background-color: #ffffff;
+   
+}
+
+#Date {
+    -fx-border-color: #00936E; 
+    -fx-border-width: 4px;
+    -fx-background-color: #ffffff;
+}
+
+#cm {
+    -fx-border-color: rgba(255, 255, 255, 1) rgba(255, 255, 255, 1) rgba(255, 255, 255, 1) #4849434b; 
+    -fx-border-width: 4 4 4 2;
+    -fx-background-color: #ffffff;
+}
+#valider{
+    -fx-background-color: #00936E;
+    -fx-background-radius: 30px;
+}
+
+
+
