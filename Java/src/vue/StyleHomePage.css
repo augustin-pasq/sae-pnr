@@ -3,7 +3,11 @@
 }
 
 
-#Menu, #principal {
+#Saisir, #Modifier, #Consulter {
+    -fx-border-color: #00936E; 
+    -fx-background-radius: 15px; 
+    -fx-border-radius: 15px; 
+    -fx-background-color: #ffffff;
    
 }
 
