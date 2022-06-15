@@ -3,6 +3,11 @@ package modele.donnee;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Class to interact with the database
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class UseDatabase {
 
     /**
