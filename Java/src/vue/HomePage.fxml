@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="405.0" prefWidth="486.0" stylesheets="@../../src/vue/StyleHomePage.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" prefHeight="405.0" prefWidth="662.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="405.0" prefWidth="662.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
             <Insets left="20.0" right="20.0" />
          </padding>
@@ -26,7 +26,7 @@
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Label text="principal">
+                  <Label id="principal" text="principal">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -67,9 +67,9 @@
                               <Insets top="10.0" />
                            </padding>
                            <graphic>
-                              <ImageView fitHeight="76.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="76.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../data/Modify_Data.png" />
+                                    <Image url="@../../data/Add_Data.png" />
                                  </image>
                               </ImageView>
                            </graphic>
