@@ -1,0 +1,17 @@
+#AnchorPane, #Back, #HomePage{
+    -fx-background-color: rgba(255, 255, 255, 0);
+}
+
+
+#Batraciens, #Chouettes, #GCI, #Hippocampes, #Loutres {
+    -fx-border-color: #00936E; 
+    -fx-border-width: 4px;
+    -fx-background-radius: 15px; 
+    -fx-border-radius: 15px; 
+    -fx-background-color: #ffffff;
+   
+}
+
+
+
+
