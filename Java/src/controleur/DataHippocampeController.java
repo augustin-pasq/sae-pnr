@@ -29,7 +29,7 @@ public class DataHippocampeController implements Initializable {
     @FXML
     private ComboBox<String> gestantComboBox;
 
-    ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.CASIER_CREVETTES, Peche.CASIER_MORGATES, Peche.NON_RENSEIGNE, Peche.PETIT_FILET, Peche.PETIT_FILET, Peche.VERVEUX_ANGUILLES);
+    ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.CASIER_CREVETTES, Peche.CASIER_MORGATES, Peche.NON_RENSEIGNE, Peche.PETIT_FILET, Peche.VERVEUX_ANGUILLES);
     @FXML
     private ComboBox<Peche> typePecheComboBox;
 
