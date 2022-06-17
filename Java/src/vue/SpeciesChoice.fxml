@@ -90,7 +90,7 @@
                         <Font name="DejaVu Sans Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="GCI" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="GRAVELEAU A COLLIER INTERROMPU" textAlignment="CENTER">
+                  <Button id="GCI" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="GRAVELOT A COLLIER INTERROMPU" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
