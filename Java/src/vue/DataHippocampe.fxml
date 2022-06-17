@@ -80,19 +80,23 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="413.0" spacing="40.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <TextField id="Nom" prefHeight="40.0" prefWidth="413.0" promptText="Nom de l'observateur">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </TextField>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField id="Nom" layoutY="-4.0" prefHeight="64.0" prefWidth="265.0" promptText="Nom de l'observateur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </AnchorPane>
                         <AnchorPane prefHeight="0.0" prefWidth="1000.0">
                            <children>
-                              <TextField id="Heure" prefHeight="0.0" prefWidth="393.0" promptText="Heure" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <TextField id="Heure" layoutY="-14.0" prefHeight="48.0" prefWidth="295.0" promptText="Heure" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </TextField>
-                              <Label id="heure" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="207.0" layoutY="4.0" prefHeight="40.0" prefWidth="100.0" text=" HH:MM" textAlignment="CENTER" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="4.0">
+                              <Label id="heure" alignment="CENTER" contentDisplay="BOTTOM" layoutX="181.0" layoutY="-4.0" prefHeight="40.0" prefWidth="100.0" text=" HH:MM" textAlignment="CENTER" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="-4.0">
                                  <font>
                                     <Font size="23.0" />
                                  </font>
@@ -102,31 +106,50 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <ComboBox id="Espece" fx:id="especeComboBox" prefHeight="200.0" prefWidth="1000.0" promptText="Espèce" />
-                        <ComboBox id="TypePeche" fx:id="typePecheComboBox" prefHeight="49.0" prefWidth="1000.0" promptText="Type de pêche" />
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="500.0" spacing="40.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <TextField id="Prenom" prefHeight="40.0" prefWidth="1000.0" promptText="Prénom de l'observateur">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </TextField>
-                        <TextField id="CoordX" prefHeight="40.0" prefWidth="1000.0" promptText="Coordonnées Lambert X">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </TextField>
-                        <ComboBox id="Sexe" fx:id="sexeComboBox" prefHeight="108.0" prefWidth="1000.0" promptText="Sexe" />
-                        <AnchorPane prefHeight="200.0" prefWidth="1000.0">
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TextField id="Taille" prefHeight="48.0" prefWidth="393.0" promptText="Taille" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <ComboBox id="Espece" fx:id="especeComboBox" layoutY="-8.0" prefHeight="48.0" prefWidth="295.0" promptText="Espèce" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ComboBox id="TypePeche" fx:id="typePecheComboBox" layoutY="-8.0" prefHeight="48.0" prefWidth="295.0" promptText="Type de pêche" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="500.0" spacing="40.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField id="Prenom" layoutY="-4.0" prefHeight="40.0" prefWidth="1000.0" promptText="Prénom de l'observateur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </TextField>
-                              <Label id="cm" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="277.0" layoutY="4.0" prefHeight="40.0" prefWidth="111.0" text=" cm" textAlignment="CENTER" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="4.0">
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField id="CoordX" layoutY="-14.0" prefHeight="48.0" prefWidth="382.0" promptText="Coordonnées Lambert X" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </TextField>
+                           </children></AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <ComboBox id="Sexe" fx:id="sexeComboBox" layoutY="-8.0" prefHeight="48.0" prefWidth="382.0" promptText="Sexe" AnchorPane.bottomAnchor="-40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="96.0" prefWidth="382.0">
+                           <children>
+                              <TextField id="Taille" layoutY="29.0" prefHeight="48.0" prefWidth="382.0" promptText="Taille" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </TextField>
+                              <Label id="cm" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="257.0" layoutY="33.0" prefHeight="40.0" prefWidth="111.0" text=" cm" textAlignment="CENTER" AnchorPane.rightAnchor="14.0">
                                  <font>
                                     <Font size="23.0" />
                                  </font>
@@ -140,13 +163,25 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="500.0" spacing="40.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <DatePicker id="Date" prefHeight="115.0" prefWidth="1000.0" promptText="Date de l'observation" VBox.vgrow="ALWAYS" />
-                        <TextField id="CoordY" prefHeight="40.0" prefWidth="1000.0" promptText="Coordonnées Lambert Y">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </TextField>
-                        <ComboBox id="Gestant" fx:id="gestantComboBox" prefHeight="46.0" prefWidth="1000.0" promptText="Gestant" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <DatePicker id="Date" prefHeight="48.0" prefWidth="383.0" promptText="Date de l'observation" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField id="CoordY" prefHeight="40.0" prefWidth="1000.0" promptText="Coordonnées Lambert Y" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ComboBox id="Gestant" fx:id="gestantComboBox" layoutY="-6.0" prefHeight="48.0" prefWidth="383.0" promptText="Gestant" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0" />
+                           </children>
+                        </AnchorPane>
                         <AnchorPane prefHeight="40.0" prefWidth="393.0">
                            <children>
                               <TextField id="Temperature" prefHeight="33.0" prefWidth="393.0" promptText="Température de l'eau" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
