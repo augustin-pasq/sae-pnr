@@ -37,7 +37,7 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="275.0" prefWidth="682.0" spacing="30.0">
                <children>
-                    <TextField id="username" fx:id="usernameField" prefHeight="48.0" prefWidth="602.0" promptText="Nom d'utilisateur">
+                  <TextField id="username" fx:id="usernameField" prefHeight="48.0" prefWidth="602.0" promptText="Nom d'utilisateur">
                      <VBox.margin>
                         <Insets left="100.0" right="100.0" />
                      </VBox.margin>
@@ -45,7 +45,7 @@
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                    <PasswordField id="password" fx:id="passField" maxWidth="1.7976931348623157E308" prefHeight="48.0" prefWidth="602.0" promptText="Mot de passe">
+                  <PasswordField id="password" fx:id="passField" maxWidth="1.7976931348623157E308" prefHeight="48.0" prefWidth="602.0" promptText="Mot de passe">
                      <VBox.margin>
                         <Insets left="100.0" right="100.0" />
                      </VBox.margin>
