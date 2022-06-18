@@ -1,12 +1,11 @@
 package controleur;
 
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.security.MessageDigest;
@@ -51,7 +50,7 @@ public class LoginController implements Initializable {
      * @param event the event that triggered the method
      */
     @FXML
-    private void login(final ActionEvent event) {
+    private void login(final Event event) {
         String username = usernameField.getText();
         String password = hashPassword(passField.getText());
 
@@ -71,15 +70,27 @@ public class LoginController implements Initializable {
     }
 
     /**
+     * React to a key press. Login if key is Enter
+     * @param event the event that triggered the method
+     */
+    @FXML
+    private void keypress(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            login(event);
+        }
+    }
+
+    /**
      * Change to the appropriate scene
      * @param username the username of the user
      * @param event the event that triggered the method
      */
-    private void changeScene(final String username, final ActionEvent event) {
+    private void changeScene(final String username, final Event event) {
+        Control target = (Control) event.getSource();
         if (username.equals("admin")) {
-            Main.switchScene("AdminPanel", event);
+            Main.switchScene("AdminPanel", target);
         } else {
-            Main.switchScene("HomePage", event);
+            Main.switchScene("HomePage", target);
         }
     }
 
