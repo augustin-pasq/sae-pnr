@@ -113,12 +113,12 @@
                         <Font name="DejaVu Sans Bold" size="20.0" />
                      </font>
                   </Button>
-                  <TextField id="Ajouter" fx:id="usernameField" prefHeight="76.0" prefWidth="565.0" promptText="SAISIR UNE ESPECE">
+                  <TextField id="Ajouter" prefHeight="76.0" prefWidth="565.0" promptText="SAISIR UNE ESPECE">
                      <VBox.margin>
                         <Insets left="100.0" right="100.0" />
                      </VBox.margin>
                      <font>
-                        <Font size="20.0" />
+                        <Font name="DejaVu Sans Bold" size="20.0" />
                      </font>
                   </TextField>
                </children>
