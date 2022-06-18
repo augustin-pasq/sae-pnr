@@ -38,6 +38,10 @@ public class LoginController implements Initializable {
     @FXML
     private Label errorLabel;
 
+    /**
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
@@ -53,21 +57,38 @@ public class LoginController implements Initializable {
 
         if (username.equals("") || password.equals("")) {
             this.errorLabel.setText("Merci de remplir tous les champs");
-            Main.switchScene("HomaPage", event);
         } else {
             try {
                 if (authenticateUser(username, password)) {
-                    this.errorLabel.setText("Connecté avec succès");
+                    changeScene(username, event);
                 } else {
                     this.errorLabel.setText("Identifiant ou mot de passe incorrect");
                 }
             } catch (NoInternetException e) {
-                this.errorLabel.setText("Vous devez être connecté à internet pour vous connecter");
+                this.errorLabel.setText("Vous devez être connecté à internet pour utiliser l'application");
             }
         }
     }
 
-    private String hashPassword(String password) {
+    /**
+     * Change to the appropriate scene
+     * @param username the username of the user
+     * @param event the event that triggered the method
+     */
+    private void changeScene(final String username, final ActionEvent event) {
+        if (username.equals("admin")) {
+            Main.switchScene("AdminPanel", event);
+        } else {
+            Main.switchScene("HomePage", event);
+        }
+    }
+
+    /**
+     * Create an SHA-256 hash of a password
+     * @param password the password to hash
+     * @return the hash of the password
+     */
+    public String hashPassword(String password) {
         String hash = "";
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -82,11 +103,5 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
         return hash;
-    }
-
-    public static void main(String[] args) {
-        LoginController loginController = new LoginController();
-        String p = "password";
-        System.out.format("SHA-512(%s) = %s", p, loginController.hashPassword(p));
     }
 }
