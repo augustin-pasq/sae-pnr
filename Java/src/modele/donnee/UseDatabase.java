@@ -1,5 +1,7 @@
 package modele.donnee;
 
+import controleur.NoInternetException;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -123,13 +125,17 @@ public class UseDatabase {
      * @param password the password of the user
      * @return a boolean indicating whether the user is authenticated
      */
-    public static boolean authenticateUser(String username, String password) {
+    public static boolean authenticateUser(String username, String password) throws NoInternetException {
         boolean success = false;
 
-        String query = "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'";
-        ArrayList<ArrayList<String>> results = selectQuery(query);
-        if (results.size() > 1) {
-            success = true;
+        try {
+            String query = "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'";
+            ArrayList<ArrayList<String>> results = selectQuery(query);
+            if (results.size() > 1) {
+                success = true;
+            }
+        } catch (NullPointerException e) {
+            throw new NoInternetException("Not connected to internet");
         }
 
         return success;
