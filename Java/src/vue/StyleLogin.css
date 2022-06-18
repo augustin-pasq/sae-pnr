@@ -18,7 +18,7 @@
 }
 
 #fondGris {
-    -fx-background-color: rgba(255, 255, 255, 0.85);
+    -fx-background-color: rgba(255, 255, 255, 0.70);
     -fx-background-radius: 15px; 
     /*-fx-box-shadow : 0px 10px 100px 2px rgba(0,0,0,0.33);*/
 }
