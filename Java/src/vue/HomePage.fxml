@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../src/vue/StyleHomePage.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../src/vue/StyleHomePage.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.HomePageController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="405.0" prefWidth="662.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
@@ -40,7 +40,7 @@
                <children>
                   <AnchorPane prefHeight="263.0" prefWidth="413.0">
                      <children>
-                        <Button id="Saisir" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Saisir des données" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="77.0">
+                        <Button id="Saisir" fx:id="saisir" onAction="#move" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Saisir des données" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="77.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -62,7 +62,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="129.0" prefWidth="413.0">
                      <children>
-                        <Button id="Modifier" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Modifier des données">
+                        <Button id="Modifier" fx:id="modifier" onAction="#move" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Modifier des données">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -84,7 +84,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="310.0" prefWidth="413.0">
                      <children>
-                        <Button id="Consulter" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0"  text="Consulter des données">
+                        <Button id="Consulter" fx:id="consulter" onAction="#move" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0"  text="Consulter des données">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -113,10 +113,10 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button id="logout" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="-18.0">
+                        <Button id="logout" fx:id="logout" onAction="#logout" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="-18.0">
                            <graphic>
                            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                              <Image url="@../../data/exit.png" />
+                              <Image url="@../../data/Exit.png" />
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
