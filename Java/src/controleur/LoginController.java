@@ -53,11 +53,11 @@ public class LoginController implements Initializable {
 
         if (username.equals("") || password.equals("")) {
             this.errorLabel.setText("Merci de remplir tous les champs");
+            Main.switchScene("HomaPage", event);
         } else {
             try {
                 if (authenticateUser(username, password)) {
                     this.errorLabel.setText("Connecté avec succès");
-                    //MainControler.switchScene("Main", event);
                 } else {
                     this.errorLabel.setText("Identifiant ou mot de passe incorrect");
                 }
