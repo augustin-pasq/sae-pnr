@@ -54,11 +54,15 @@ public class LoginController implements Initializable {
         if (username.equals("") || password.equals("")) {
             this.errorLabel.setText("Merci de remplir tous les champs");
         } else {
-            if (authenticateUser(username, password)) {
-                this.errorLabel.setText("Connecté avec succès");
-                //MainControler.switchScene("Main", event);
-            } else {
-                this.errorLabel.setText("Identifiant ou mot de passe incorrect");
+            try {
+                if (authenticateUser(username, password)) {
+                    this.errorLabel.setText("Connecté avec succès");
+                    //MainControler.switchScene("Main", event);
+                } else {
+                    this.errorLabel.setText("Identifiant ou mot de passe incorrect");
+                }
+            } catch (NoInternetException e) {
+                this.errorLabel.setText("Vous devez être connecté à internet pour vous connecter");
             }
         }
     }
