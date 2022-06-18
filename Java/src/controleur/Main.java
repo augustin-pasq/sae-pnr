@@ -1,7 +1,7 @@
 package controleur;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -56,6 +56,7 @@ public class Main extends Application implements Initializable {
      * @param name the name of the scene
      */
     private Scene loadScene(String name) throws IOException {
+        System.out.println("Loading scene " + name);
         // Load FXML file
         URL pathFXML = getClass().getResource("../vue/" + name + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
@@ -80,7 +81,6 @@ public class Main extends Application implements Initializable {
         try {
             Scene scene = main.loadScene(name);
             appStage.setScene(scene);
-            System.out.println("scene switched to " + name);
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
@@ -91,7 +91,7 @@ public class Main extends Application implements Initializable {
      * @param name the name of the new scene
      * @param event the event that triggered the switch
      */
-    public static void switchScene(String name, ActionEvent event) {
+    public static void switchScene(String name, Event event) {
         Button target = (Button) event.getSource();
         switchScene(name, target);
     }
