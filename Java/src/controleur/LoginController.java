@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 
 import static modele.donnee.UseDatabase.authenticateUser;
 
+/**
+ * Controller for the Login page
+ */
 public class LoginController implements Initializable {
     /**
      * The text field for the username
