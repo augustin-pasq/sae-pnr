@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 /**
@@ -20,6 +22,11 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class Main extends Application implements Initializable {
+    public ArrayList<String> prevScene = new ArrayList<String>(Collections.singleton("Login"));
+    private String currScene = "Login";
+
+    private static final Main instance = new Main();
+
     /**
      * Entrypoint for the application
      * @param args command line arguments
@@ -76,13 +83,23 @@ public class Main extends Application implements Initializable {
      * @param target An element belonging to the current scene
      */
     public static void switchScene(String name, Control target) {
-        Stage appStage = (Stage) target.getScene().getWindow();
-        Main main = new Main();
-        try {
-            Scene scene = main.loadScene(name);
-            appStage.setScene(scene);
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
+        if (name == null)
+            throw new NullPointerException("Name of the scene is null");
+        else {
+            Stage appStage = (Stage) target.getScene().getWindow();
+            Main main = new Main();
+            try {
+                Scene scene = main.loadScene(name);
+                appStage.setScene(scene);
+
+                if (Main.instance.prevScene.size() > 15) {
+                    Main.instance.prevScene.remove(0);
+                }
+                Main.instance.prevScene.add(Main.instance.currScene);
+                Main.instance.currScene = name;
+            } catch (IOException | NullPointerException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -92,7 +109,25 @@ public class Main extends Application implements Initializable {
      * @param event the event that triggered the switch
      */
     public static void switchScene(String name, Event event) {
-        Button target = (Button) event.getSource();
-        switchScene(name, target);
+        if (name == null)
+            throw new NullPointerException("Name of the scene is null");
+        else {
+            Button target = (Button) event.getSource();
+            switchScene(name, target);
+        }
+    }
+
+    /**
+     * Go back to the previous scene
+     * @param event the event that triggered the method
+     */
+    public static void goBack(Event event) {
+        if (Main.instance.prevScene.size() > 1) {
+            int lastIndex = Main.instance.prevScene.size() - 1;
+            switchScene(Main.instance.prevScene.get(lastIndex), event);
+            lastIndex = Main.instance.prevScene.size() - 1;
+            Main.instance.prevScene.remove(lastIndex);
+            Main.instance.prevScene.remove(--lastIndex);
+        }
     }
 }
