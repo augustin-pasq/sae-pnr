@@ -26,7 +26,7 @@
                <children>
                   <AnchorPane prefHeight="177.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button id="Back" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+                        <Button id="Back" fx:id="backButton" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
                            <graphic>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <cursor>
@@ -41,7 +41,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="HomePage" layoutX="96.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="10.0">
+                        <Button id="HomePage" fx:id="homeButton" layoutX="96.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="10.0">
                            <graphic>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <cursor>
