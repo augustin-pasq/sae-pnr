@@ -24,12 +24,12 @@
          <children>
             <HBox alignment="CENTER" fillHeight="false" prefHeight="73.0" prefWidth="1240.0" spacing="5.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label prefHeight="55.0" prefWidth="241.0" text="Panneau d'" textFill="#00936e">
+                  <Label prefHeight="55.0" prefWidth="241.0" minWidth="264" text="Panneau d'" textFill="#00936e">
                      <font>
                         <Font name="Berlin Sans FB" size="50.0" />
                      </font>
                   </Label>
-                  <Label id="principal" text="admnistration">
+                  <Label id="principal" text="administration">
                      <font>
                         <Font name="Berlin Sans FB" size="50.0" />
                      </font>
@@ -54,7 +54,7 @@
                <children>
                   <AnchorPane prefHeight="120.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button id="Importer" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="180.0" layoutY="9.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" style="-fx-border-color: #00936E; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" text="Importer CSV" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="9.0">
+                        <Button id="Importer" fx:id="importButton" onAction="#importAction" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="180.0" layoutY="9.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" style="-fx-border-color: #00936E; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" text="Importer CSV" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="9.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -76,7 +76,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="120.0" prefWidth="160.0" GridPane.rowIndex="1">
                      <children>
-                        <Button id="Exporter" fx:id="exportButton" onAction="#export" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="180.0" layoutY="21.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" style="-fx-border-color: #00936E; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" text="Exporter en CSV" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="9.0">
+                        <Button id="Exporter" fx:id="exportButton" onAction="#exportAction" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="180.0" layoutY="21.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" style="-fx-border-color: #00936E; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" text="Exporter en CSV" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="9.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -98,7 +98,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="120.0" prefWidth="160.0" GridPane.columnIndex="1">
                      <children>
-                        <Button id="Gerer" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="180.0" layoutY="9.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" style="-fx-border-color: #00936E; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" text="Gérer les espèces" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="9.0">
+                        <Button id="Gerer" fx:id="manageButton" onAction="#manageSpecies" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="180.0" layoutY="9.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" style="-fx-border-color: #00936E; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" text="Gérer les espèces" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="9.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -120,7 +120,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="392.0" prefWidth="606.0">
                      <children>
-                        <Button id="Supprimer" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="180.0" layoutY="9.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" style="-fx-border-color: #00936E; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" text="Supprimer une observation" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="9.0">
+                        <Button id="Supprimer" fx:id="deleteButton" onAction="#deleteObs" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="180.0" layoutY="9.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" style="-fx-border-color: #00936E; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" text="Supprimer une observation" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="9.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
