@@ -23,7 +23,7 @@
                <children>
                   <AnchorPane prefHeight="177.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button id="Back" fx:id="backButton" onAction="#goBack" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+                        <Button id="Back" fx:id="backButton" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
                            <graphic>
                            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                               <Image url="@../../data/Back.png" />
@@ -36,7 +36,7 @@
                            </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="HomePage" fx:id="homeButton" onAction="#goHome" layoutX="96.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="10.0">
+                        <Button id="HomePage" fx:id="homeButton" layoutX="96.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="10.0">
                            <graphic>
                               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <cursor>
@@ -57,7 +57,7 @@
             </HBox>
             <HBox alignment="CENTER" fillHeight="false" prefHeight="337.0" prefWidth="1240.0" spacing="5.0">
                <children>
-                  <Label prefHeight="55.0" prefWidth="200.0" text="Consulter" textFill="#00936e">
+                  <Label prefHeight="55.0" prefWidth="200.0" minWidth="235" text="Consulter" textFill="#00936e">
                      <font>
                         <Font name="Berlin Sans FB" size="50.0" />
                      </font>
@@ -76,7 +76,7 @@
                <children>
                   <AnchorPane prefHeight="263.0" prefWidth="413.0">
                      <children>
-                        <Button id="Consulter" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Consulter une observation" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="77.0">
+                        <Button id="Consulter" fx:id="consultObsButton" onAction="#consultObs" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Consulter une observation" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="77.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -98,7 +98,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="310.0" prefWidth="413.0">
                      <children>
-                        <Button id="Generer" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Générer un graphique">
+                        <Button id="Generer" fx:id="generateChartButton" onAction="#generateChart" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Générer un graphique">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

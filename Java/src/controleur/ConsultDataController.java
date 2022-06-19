@@ -1,23 +1,29 @@
 package controleur;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
+/**
+ * Controller for the ConsultData page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class ConsultDataController extends InteractivePage {
 
-    @Override
-    public void goBack(ActionEvent event) {
-        Main.switchScene("HomePage", backButton);
+    @FXML
+    private Button consultObsButton;
+
+    @FXML
+    private Button generateChartButton;
+
+    @FXML
+    private void consultObs(ActionEvent event) {
+        Main.switchScene("SpeciesChoice", consultObsButton);
     }
 
-    @Override
-    public void goHome(ActionEvent event) {
-        Main.switchScene("HomePage", homeButton);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    private void generateChart(ActionEvent event) {
+        Main.switchScene("GenerateChart", generateChartButton);
     }
 }
