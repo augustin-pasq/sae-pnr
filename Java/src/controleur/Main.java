@@ -22,13 +22,13 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class Main extends Application implements Initializable {
-    public ArrayList<String> prevScene = new ArrayList<String>(Collections.singleton("Login"));
-    private String currScene = "Login";
-
     private static final Main instance = new Main();
+    public ArrayList<String> prevScene = new ArrayList<>(Collections.singleton("Login"));
+    private String currScene = "Login";
 
     /**
      * Entrypoint for the application
+     *
      * @param args command line arguments
      */
     public static void main(String[] args) {
@@ -36,50 +36,9 @@ public class Main extends Application implements Initializable {
     }
 
     /**
-     * Start the application with the Login Screen
-     * @param primaryStage the primary stage
-     * @throws IOException if the application fails to start
-     */
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        Scene scene = loadScene("Login");
-        // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
-        primaryStage.setScene(scene);
-        //primaryStage.setFullScreen(true);
-        primaryStage.setTitle("PNR");
-        primaryStage.show();
-    }
-
-    /**
-     * Inhereted form Initializable
-     * @see javafx.fxml.Initializable
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
-
-    /**
-     * Load a scene from a FXML file
-     * @param name the name of the scene
-     */
-    private Scene loadScene(String name) throws IOException {
-        System.out.println("Loading scene " + name);
-        // Load FXML file
-        URL pathFXML = getClass().getResource("../vue/" + name + ".fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-
-        // Add the stylesheet of the page
-        Scene scene = new Scene(root);
-        URL pathCSS = getClass().getResource("../vue/Style" + name +".css");
-        scene.getStylesheets().addAll(pathCSS.toExternalForm());
-
-        return scene;
-    }
-
-    /**
      * Switch the current scene to a new one
-     * @param name the name of the new scene
+     *
+     * @param name   the name of the new scene
      * @param target An element belonging to the current scene
      */
     public static void switchScene(String name, Control target) {
@@ -105,7 +64,8 @@ public class Main extends Application implements Initializable {
 
     /**
      * Switch the current scene to a new one
-     * @param name the name of the new scene
+     *
+     * @param name  the name of the new scene
      * @param event the event that triggered the switch
      */
     public static void switchScene(String name, Event event) {
@@ -119,6 +79,7 @@ public class Main extends Application implements Initializable {
 
     /**
      * Go back to the previous scene
+     *
      * @param event the event that triggered the method
      */
     public static void goBack(Event event) {
@@ -129,5 +90,50 @@ public class Main extends Application implements Initializable {
             Main.instance.prevScene.remove(lastIndex);
             Main.instance.prevScene.remove(--lastIndex);
         }
+    }
+
+    /**
+     * Start the application with the Login Screen
+     *
+     * @param primaryStage the primary stage
+     * @throws IOException if the application fails to start
+     */
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        Scene scene = loadScene("Login");
+        // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
+        primaryStage.setScene(scene);
+        //primaryStage.setFullScreen(true);
+        primaryStage.setTitle("PNR");
+        primaryStage.show();
+    }
+
+    /**
+     * Inhereted form Initializable
+     *
+     * @see javafx.fxml.Initializable
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    /**
+     * Load a scene from a FXML file
+     *
+     * @param name the name of the scene
+     */
+    private Scene loadScene(String name) throws IOException {
+        System.out.println("Loading scene " + name);
+        // Load FXML file
+        URL pathFXML = getClass().getResource("../vue/" + name + ".fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+
+        // Add the stylesheet of the page
+        Scene scene = new Scene(root);
+        URL pathCSS = getClass().getResource("../vue/Style" + name + ".css");
+        scene.getStylesheets().addAll(pathCSS.toExternalForm());
+
+        return scene;
     }
 }
