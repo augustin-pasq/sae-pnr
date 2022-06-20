@@ -7,10 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import modele.donnee.EspeceObservee;
-
+import java.util.HashMap;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.lang.model.element.QualifiedNameable;
+
+import static modele.donnee.UseDatabase.selectQuery;
 
 public class GenerateChartController extends InteractivePage {
 
@@ -35,7 +38,40 @@ public class GenerateChartController extends InteractivePage {
     }
 
     @FXML
-    private void generate(final Event event){
-        System.out.println("generation");
+    private String generateQuery(final Event event){
+
+        String query = "";
+        if(especeComboBox.getValue() != null && abscisseComboBox.getValue() != null && ordonneeComboBox.getValue() != null){
+            String espece, abscisse, ordonnee;
+            espece = especeComboBox.getValue().toString();
+            if (espece.equals("GCI"))
+                espece = "Obs_" + espece;
+            else
+                espece = "Obs_" + stringTreatment(espece);
+            abscisse = abscisseComboBox.getValue().toString();
+            ordonnee = ordonneeComboBox.getValue().toString();
+
+            query = "SELECT * FROM " + espece + ";";
+        }
+        System.out.println(query);
+        return query;
+    }
+
+    /**
+     * Returns the same string with a capital letter and lower letters.
+     * @param s the string to treat.
+     * @return the same string with a capital letter.
+     */
+    private String stringTreatment(String s){
+        String result = "";
+        for (int i = 0; i < s.length(); i++){
+            if (i == 0){
+                result += s.charAt(i);
+            }
+            else {
+                result += Character.toLowerCase(s.charAt(i));
+            }
+        }
+        return result;
     }
 }
