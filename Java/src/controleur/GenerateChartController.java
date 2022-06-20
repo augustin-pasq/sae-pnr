@@ -34,6 +34,7 @@ public class GenerateChartController extends InteractivePage {
         ordonneeComboBox.setItems(ordoneeList);
     }
 
+    @FXML
     private void generate(final Event event){
         System.out.println("generation");
     }
