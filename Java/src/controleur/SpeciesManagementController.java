@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import modele.donnee.EspeceObservee;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -54,7 +55,7 @@ public class SpeciesManagementController extends InteractivePage {
         speciesContainer.getChildren().add(createAddSpeciesButton());
     }
 
-    private Button createButton(EspeceObservee espece) {
+    private Button createButton(@NotNull EspeceObservee espece) {
         Button button = new Button(espece.toString().toUpperCase());
         button.setFont(new Font("DejaVu Sans Bold", 20));
         button.setAlignment(Pos.CENTER);
@@ -137,5 +138,7 @@ public class SpeciesManagementController extends InteractivePage {
     }
 
     private void addSpecies(final Event event) {
+        TextField target = (TextField) event.getTarget();
+        System.out.println("Adding " + target.getText());
     }
 }
