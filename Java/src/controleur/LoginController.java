@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
      * @see javafx.fxml.Initializable
      */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {(rtr())
+    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
     /**
