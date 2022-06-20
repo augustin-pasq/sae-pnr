@@ -1,9 +1,11 @@
 package controleur;
 
+import javafx.event.Event;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import modele.donnee.EspeceObservee;
 
 import java.net.URL;
@@ -21,12 +23,8 @@ public class GenerateChartController extends InteractivePage {
     private ComboBox<String> abscisseComboBox;
     @FXML
     private ComboBox<String> ordonneeComboBox;
-
-
-    public static void main(String[] args) {
-        GenerateChartController controller = new GenerateChartController();
-    }
-
+    @FXML
+    private Button generateButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,5 +32,9 @@ public class GenerateChartController extends InteractivePage {
         especeComboBox.setItems(especeList);
         abscisseComboBox.setItems(abscisseList);
         ordonneeComboBox.setItems(ordoneeList);
+    }
+
+    private void generate(final Event event){
+        System.out.println("generation");
     }
 }
