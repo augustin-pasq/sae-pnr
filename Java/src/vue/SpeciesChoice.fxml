@@ -57,7 +57,7 @@
             </HBox>
             <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="1240.0" spacing="5.0">
                <children>
-                  <Label prefHeight="55.0" prefWidth="211.0" text="Choix de l'">
+                  <Label prefHeight="55.0" prefWidth="211.0" minWidth="242" text="Choix de l'">
                      <font>
                         <Font name="Berlin Sans FB" size="50.0" />
                      </font>
