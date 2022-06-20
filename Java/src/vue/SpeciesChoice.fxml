@@ -74,7 +74,7 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="917.0" prefWidth="1240.0" spacing="20.0">
                <children>
-                  <Button id="Batraciens" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="BATRACIENS" textAlignment="CENTER">
+                  <Button id="Batraciens" fx:id="consultObsBatButton" onAction="#consultBatObs" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="BATRACIENS" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
