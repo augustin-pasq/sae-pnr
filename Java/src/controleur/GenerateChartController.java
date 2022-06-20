@@ -44,14 +44,13 @@ public class GenerateChartController extends InteractivePage {
         if(especeComboBox.getValue() != null && abscisseComboBox.getValue() != null && ordonneeComboBox.getValue() != null){
             String espece, abscisse, ordonnee;
             espece = especeComboBox.getValue().toString();
-            if (espece.equals("GCI"))
-                espece = "Obs_" + espece;
-            else
-                espece = "Obs_" + stringTreatment(espece);
+            if (!espece.equals("GCI"))
+                espece = stringTreatment(espece);
+            
             abscisse = abscisseComboBox.getValue().toString();
             ordonnee = ordonneeComboBox.getValue().toString();
 
-            query = "SELECT * FROM " + espece + ";";
+            query = "SELECT * FROM vue_allFrom" + espece + " ORDER BY dateObs DESC";
         }
         System.out.println(query);
         return query;
