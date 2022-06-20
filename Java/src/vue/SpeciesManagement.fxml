@@ -62,7 +62,7 @@
                 <HBox id="pageTitle" alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="1240.0"
                       spacing="5.0">
                     <children>
-                        <Label prefHeight="55.0" prefWidth="240.0" text="Gestion des">
+                        <Label prefHeight="55.0" prefWidth="280" text="Gestion des">
                             <font>
                                 <Font name="Berlin Sans FB" size="50.0"/>
                             </font>
