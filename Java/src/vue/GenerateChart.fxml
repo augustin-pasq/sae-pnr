@@ -86,7 +86,10 @@
                         <ComboBox id="ordonnee" fx:id="ordonneeComboBox" maxHeight="78.0" prefHeight="78.0" prefWidth="200.0" promptText="Donnée en ordonnée" />
                         <AnchorPane maxWidth="497.0" prefHeight="175.0" prefWidth="497.0">
                            <children>
-                              <Button id="generer" fx:id="generateButton" onAction="#generate" alignment="CENTER" contentDisplay="CENTER" layoutX="148.0" prefHeight="53.0" prefWidth="200.0" text="GÉNÉRER" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="148.0" AnchorPane.topAnchor="0.0">
+                              <Button  id="generer" fx:id="generateButton" alignment="CENTER" contentDisplay="CENTER"
+                                       onAction="#generateQuery" layoutX="148.0" prefHeight="53.0" prefWidth="200.0" text="GÉNÉRER" textAlignment="CENTER"
+                                       textFill="WHITE" textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="122.0" 
+                                       AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="148.0" AnchorPane.topAnchor="0.0">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
