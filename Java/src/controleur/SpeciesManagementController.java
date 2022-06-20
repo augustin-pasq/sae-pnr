@@ -42,6 +42,7 @@ public class SpeciesManagementController extends InteractivePage {
             especeDelete.put(delete, espece);
 
             AnchorPane anchorPane = new AnchorPane();
+            anchorPane.setMaxWidth(1240.0);
             anchorPane.getChildren().addAll(species, delete);
             speciesContainer.getChildren().add(anchorPane);
 
@@ -103,7 +104,7 @@ public class SpeciesManagementController extends InteractivePage {
         addButton.setId("addButton");
         addButton.setLayoutX(951.0);
         addButton.setMnemonicParsing(false);
-        addButton.setPrefHeight(67.0);
+        addButton.setPrefHeight(78.0);
         addButton.setPrefWidth(88.0);
         ImageView img = new ImageView();
         try {
@@ -120,7 +121,6 @@ public class SpeciesManagementController extends InteractivePage {
 
         AnchorPane add = new AnchorPane();
         add.setMaxWidth(1240.0);
-        add.setPrefHeight(70.0);
         add.setPrefWidth(1240.0);
         add.getChildren().addAll(addField, addButton);
 
