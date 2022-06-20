@@ -3,12 +3,20 @@ package controleur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modele.donnee.UseDatabase;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -51,12 +59,14 @@ public class AdminPanelController implements Initializable {
     /**
      * Export the data from a table to a CSV file
      *
-     * @param table    the table to export
-     * @param filename the name of the file
+     * @param table the table to export
+     * @param dir   the directory to export to
      */
-    public static void exportData(String table, String filename) {
+    public static void exportData(String table, String dir) {
         ArrayList<ArrayList<String>> data = UseDatabase.selectQuery(String.format("SELECT * FROM %s", table));
-        System.out.println(data);
+        ZonedDateTime date = ZonedDateTime.now();
+        String dateString = String.format("%s-%s-%s-%s:%s:%s", date.getDayOfMonth(), date.getMonthValue(), date.getYear(), date.getHour(), date.getMinute(), date.getSecond());
+        String filename = String.format("%s/%s_export_%s.csv", dir, table, dateString);
 
         try (PrintWriter writer = new PrintWriter(filename)) {
             for (ArrayList<String> row : data) {
@@ -72,10 +82,6 @@ public class AdminPanelController implements Initializable {
         } catch (NullPointerException e) {
             System.err.println("Error while exporting data: " + e.getMessage() + " (Table most likely does not exist)");
         }
-    }
-
-    public static void main(String[] args) {
-        exportData("user", "users.csv");
     }
 
     /**
@@ -94,8 +100,26 @@ public class AdminPanelController implements Initializable {
      * @param event the event that triggered the method
      */
     public void exportAction(ActionEvent event) {
-        // Redirect to a page where the user can select a file to export to and which table to export
-        Main.switchScene("Export", this.exportButton);
+        Button target = (Button) event.getSource();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Sélectionner un dossier de destination");
+        File dir = directoryChooser.showDialog(target.getScene().getWindow());
+        if (dir != null) {
+            exportData("Observation", dir.getAbsolutePath());
+
+            Stage appStage = (Stage) target.getScene().getWindow();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(appStage);
+
+            VBox dialogVbox = new VBox();
+            dialogVbox.getChildren().add(new Text("Export terminé"));
+
+            Scene dialogScene = new Scene(dialogVbox);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } else
+            System.err.println("Failed to select a directory");
     }
 
     /**
