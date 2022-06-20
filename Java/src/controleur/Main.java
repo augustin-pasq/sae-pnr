@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +23,7 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class Main extends Application implements Initializable {
-    private static final Main instance = new Main();
+    public static final Main instance = new Main();
     public ArrayList<String> prevScene = new ArrayList<>(Collections.singleton("Login"));
     private String currScene = "Login";
 
@@ -41,24 +42,20 @@ public class Main extends Application implements Initializable {
      * @param name   the name of the new scene
      * @param target An element belonging to the current scene
      */
-    public static void switchScene(String name, Control target) {
-        if (name == null)
-            throw new NullPointerException("Name of the scene is null");
-        else {
-            Stage appStage = (Stage) target.getScene().getWindow();
-            Main main = new Main();
-            try {
-                Scene scene = main.loadScene(name);
-                appStage.setScene(scene);
+    public static void switchScene(@NotNull String name, @NotNull Control target) {
+        Stage appStage = (Stage) target.getScene().getWindow();
+        Main main = new Main();
+        try {
+            Scene scene = main.loadScene(name);
+            appStage.setScene(scene);
 
-                if (Main.instance.prevScene.size() > 15) {
-                    Main.instance.prevScene.remove(0);
-                }
-                Main.instance.prevScene.add(Main.instance.currScene);
-                Main.instance.currScene = name;
-            } catch (IOException | NullPointerException e) {
-                e.printStackTrace();
+            if (Main.instance.prevScene.size() > 15) {
+                Main.instance.prevScene.remove(0);
             }
+            Main.instance.prevScene.add(Main.instance.currScene);
+            Main.instance.currScene = name;
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
         }
     }
 
@@ -68,13 +65,9 @@ public class Main extends Application implements Initializable {
      * @param name  the name of the new scene
      * @param event the event that triggered the switch
      */
-    public static void switchScene(String name, Event event) {
-        if (name == null)
-            throw new NullPointerException("Name of the scene is null");
-        else {
-            Button target = (Button) event.getSource();
-            switchScene(name, target);
-        }
+    public static void switchScene(@NotNull String name, @NotNull Event event) {
+        Button target = (Button) event.getSource();
+        switchScene(name, target);
     }
 
     /**
@@ -82,7 +75,7 @@ public class Main extends Application implements Initializable {
      *
      * @param event the event that triggered the method
      */
-    public static void goBack(Event event) {
+    public static void goBack(@NotNull Event event) {
         if (Main.instance.prevScene.size() > 1) {
             int lastIndex = Main.instance.prevScene.size() - 1;
             switchScene(Main.instance.prevScene.get(lastIndex), event);
@@ -122,12 +115,12 @@ public class Main extends Application implements Initializable {
      *
      * @param name the name of the scene
      */
-    private Scene loadScene(String name) throws IOException {
+    private Scene loadScene(@NotNull String name) throws IOException {
         System.out.println("Loading scene " + name);
         // Load FXML file
         URL pathFXML = getClass().getResource("../vue/" + name + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        AnchorPane root = fxmlLoader.load();
 
         // Add the stylesheet of the page
         Scene scene = new Scene(root);
