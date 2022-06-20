@@ -27,10 +27,6 @@ public class DataHippocampeController extends InteractivePage {
     @FXML
     private ComboBox<Peche> typePecheComboBox;
 
-    public static void main(String[] args) {
-        DataHippocampeController controller = new DataHippocampeController();
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
