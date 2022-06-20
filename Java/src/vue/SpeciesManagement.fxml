@@ -5,6 +5,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,12 +16,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../src/vue/StyleSpeciesManagement.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="405.0" prefWidth="662.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="405.0" prefWidth="662.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
             <Insets left="20.0" right="20.0" />
          </padding>
          <children>
-            <HBox prefHeight="299.0" prefWidth="1240.0">
+            <HBox prefHeight="95.0" prefWidth="1240.0">
                <children>
                   <AnchorPane prefHeight="177.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -71,136 +72,148 @@
                   <Insets bottom="20.0" />
                </padding>
             </HBox>
-            <VBox alignment="CENTER" prefHeight="917.0" prefWidth="576.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="500.0" prefWidth="1000.0" VBox.vgrow="ALWAYS">
                <children>
-                  <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
-                     <children>
-                        <Button id="Batraciens" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="BATRACIENS" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <font>
-                              <Font name="DejaVu Sans Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
-                           <graphic>
-                              <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../data/Red_Bin.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
-                     <children>
-                        <Button id="Chouettes" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="CHOUETTES" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <font>
-                              <Font name="DejaVu Sans Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
-                           <graphic>
-                              <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../data/Red_Bin.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
-                     <children>
-                        <Button id="GCI" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="GRAVELOT A COLLIER INTERROMPU" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <font>
-                              <Font name="DejaVu Sans Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
-                           <graphic>
-                              <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../data/Red_Bin.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
-                     <children>
-                        <Button id="Hippocampes" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="HIPPOCAMPES" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <font>
-                              <Font name="DejaVu Sans Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
-                           <graphic>
-                              <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../data/Red_Bin.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
-                     <children>
-                        <Button id="Loutres" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="LOUTRES" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <font>
-                              <Font name="DejaVu Sans Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
-                           <graphic>
-                              <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../data/Red_Bin.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
-                     <children>
-                        <TextField id="Ajouter" alignment="CENTER" layoutX="338.0" prefHeight="76.0" prefWidth="565.0" promptText="SAISIR UNE ESPECE">
-                           <font>
-                              <Font name="DejaVu Sans Bold" size="20.0" />
-                           </font>
-                        </TextField>
-                        <Button id="bin" layoutX="951.0" layoutY="5.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0">
-                           <graphic>
-                              <ImageView id="add" fitHeight="44.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../data/Button.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
+                  <ScrollPane id="scroll" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="1200.0">
+                    <content>
+                      <AnchorPane id="scroll" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <VBox id="scroll" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0">
+                                 <children>
+                                    <AnchorPane id="P" maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
+                                       <children>
+                                          <Button id="Batraciens" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="BATRACIENS" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <font>
+                                                <Font name="DejaVu Sans Bold" size="20.0" />
+                                             </font>
+                                          </Button>
+                                          <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../data/Red_Bin.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
+                                       <children>
+                                          <Button id="Chouettes" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="CHOUETTES" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <font>
+                                                <Font name="DejaVu Sans Bold" size="20.0" />
+                                             </font>
+                                          </Button>
+                                          <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../data/Red_Bin.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
+                                       <children>
+                                          <Button id="GCI" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="GRAVELOT A COLLIER INTERROMPU" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <font>
+                                                <Font name="DejaVu Sans Bold" size="20.0" />
+                                             </font>
+                                          </Button>
+                                          <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../data/Red_Bin.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
+                                       <children>
+                                          <Button id="Hippocampes" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="HIPPOCAMPES" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <font>
+                                                <Font name="DejaVu Sans Bold" size="20.0" />
+                                             </font>
+                                          </Button>
+                                          <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../data/Red_Bin.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
+                                       <children>
+                                          <Button id="Loutres" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="565.0" text="LOUTRES" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.0" AnchorPane.topAnchor="0.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <font>
+                                                <Font name="DejaVu Sans Bold" size="20.0" />
+                                             </font>
+                                          </Button>
+                                          <Button id="bin" layoutX="947.0" layoutY="1.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <ImageView id="bin" fitHeight="57.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../data/Red_Bin.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane maxWidth="1240.0" prefHeight="78.0" prefWidth="1240.0">
+                                       <children>
+                                          <TextField id="Ajouter" alignment="CENTER" layoutX="338.0" prefHeight="76.0" prefWidth="565.0" promptText="SAISIR UNE ESPECE">
+                                             <font>
+                                                <Font name="DejaVu Sans Bold" size="20.0" />
+                                             </font>
+                                          </TextField>
+                                          <Button id="bin" layoutX="951.0" layoutY="5.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0">
+                                             <graphic>
+                                                <ImageView id="add" fitHeight="44.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../data/Button.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
                </children>
                <VBox.margin>
-                  <Insets bottom="30.0" />
+                  <Insets />
                </VBox.margin>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
    </children>
