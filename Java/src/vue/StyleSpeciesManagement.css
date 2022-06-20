@@ -2,8 +2,15 @@
     -fx-background-image: url("@../../../../data/fondAutre.png");
 }
 
-#Back, #HomePage, #bin, #add{
+#Back, #HomePage, #bin, #add {
     -fx-background-color: rgba(255, 255, 255, 0);
+}
+
+#scroll {
+    -fx-background: rgba(255, 255, 255, 0);
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-background-radius: 15px; 
+    -fx-border-radius: 15px; 
 }
 
 #Batraciens, #Chouettes, #GCI, #Hippocampes, #Loutres, #Ajouter {
