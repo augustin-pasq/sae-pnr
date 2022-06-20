@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
      * @see javafx.fxml.Initializable
      */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle) {(rtr())
     }
 
     /**
@@ -53,8 +53,13 @@ public class LoginController implements Initializable {
      * @param event the event that triggered the method
      */
     @FXML
+<<<<<<< Updated upstream
     private void login(final Event event) {
         String username = usernameField.getText();
+=======
+    private void login(final ActionEvent event) {
+        String username = usernameField.getText(); 
+>>>>>>> Stashed changes
         String password = hashPassword(passField.getText());
 
         if (username.equals("") || password.equals("")) {
