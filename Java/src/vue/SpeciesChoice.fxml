@@ -74,7 +74,7 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="917.0" prefWidth="1240.0" spacing="20.0">
                <children>
-                  <Button id="Batraciens" fx:id="consultObsBatButton" onAction="#consultBatObs" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="BATRACIENS" textAlignment="CENTER">
+                  <Button id="Batraciens" fx:id="consultObsBatracienButton" onAction="#consultBatracienObs" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="BATRACIENS" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -82,7 +82,7 @@
                         <Font name="DejaVu Sans Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="Chouettes" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="CHOUETTES" textAlignment="CENTER">
+                  <Button id="Chouettes" fx:id="consultObsChouetteButton" onAction="#consultChouetteObs" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="CHOUETTES" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -90,7 +90,7 @@
                         <Font name="DejaVu Sans Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="GCI" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="GRAVELOT A COLLIER INTERROMPU" textAlignment="CENTER">
+                  <Button id="GCI" fx:id="consultObsGCIButton" onAction="#consultGCIObs" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="GRAVELOT A COLLIER INTERROMPU" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -98,7 +98,7 @@
                         <Font name="DejaVu Sans Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="Hippocampes" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="HIPPOCAMPES" textAlignment="CENTER">
+                  <Button id="Hippocampes" fx:id="consultObsHippocampeButton" onAction="#consultHippocampeObs" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="HIPPOCAMPES" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -106,7 +106,7 @@
                         <Font name="DejaVu Sans Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="Loutres" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="LOUTRES" textAlignment="CENTER">
+                  <Button id="Loutres" fx:id="consultObsLoutreButton" onAction="#consultLoutreObs" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="565.0" text="LOUTRES" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

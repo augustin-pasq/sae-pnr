@@ -1,44 +1,41 @@
 package controleur;
 
-import modele.donnee.UseDatabase;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import org.jetbrains.annotations.NotNull;
-
+import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-
+import modele.donnee.UseDatabase;
+import java.net.URL;
+import java.util.ResourceBundle;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class ObservationChoiceController extends InteractivePage {
 
+    @FXML
+    private VBox scrollPaneContainer;
+    
     public ArrayList<ArrayList<String>> allObservations;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
-        
-        for (ArrayList<String> observation : allObservations) {
-            Button species = createButton(observation);}
-            /*
-            especes.put(species, espece);
-            especeDelete.put(delete, espece);
-
-            anchorPane.setMaxWidth(1240.0);
-            anchorPane.getChildren().addAll(species, delete);
-            speciesContainer.getChildren().add(anchorPane);
-
+        this.allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien");
+        VBox observationsContainer = new VBox();
+        for (int i = 1; i < allObservations.size(); i++) {
+            Button obs = createButton(allObservations.get(i));
+            observationsContainer.getChildren().add(obs);
         }
-        
-        speciesContainer.getChildren().add(createAddSpeciesButton());*/
+        ScrollPane scrollPane = new ScrollPane(observationsContainer);
+        scrollPaneContainer.getChildren().add(scrollPane);
     }
 
     public void setAllObservations(String espece) {
-        this.allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + espece);
+        this.allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien");
     }
 
     private Button createButton(@NotNull ArrayList<String> observation) {
