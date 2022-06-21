@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataGCI.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox id="hBox" alignment="CENTER" fillHeight="false" layoutY="105.0" prefHeight="105.0" prefWidth="1280.0" spacing="5.0">
          <children>
@@ -319,7 +319,7 @@
                            </font>
                         </TextField>
                      </children>
-                  </HBox>
+                  </HBox>  
                   <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                      <children>
                         <Label prefHeight="16.0" prefWidth="254.0" text="Bague femelle">
