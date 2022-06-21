@@ -95,7 +95,9 @@ public class Main extends Application implements Initializable {
     public static void goBack(@NotNull Event event) {
         if (Main.instance.prevScene.size() > 1) {
             int lastIndex = Main.instance.prevScene.size() - 1;
-            switchScene(Main.instance.prevScene.get(lastIndex), event);
+            Button target = (Button) event.getSource();
+            switchScene(Main.instance.prevScene.get(lastIndex), target, (Data) target.getScene().getUserData());
+
             lastIndex = Main.instance.prevScene.size() - 1;
             Main.instance.prevScene.remove(lastIndex);
             Main.instance.prevScene.remove(--lastIndex);
