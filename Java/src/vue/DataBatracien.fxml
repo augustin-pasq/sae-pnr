@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.DataBatracienController">
    <children>
       <HBox id="hBox" alignment="CENTER" fillHeight="false" layoutY="105.0" prefHeight="105.0" prefWidth="1280.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -280,7 +280,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="meteoComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Météo ciel" />
+                              <ComboBox id="comboBox" fx:id="meteoCielComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Météo ciel" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -324,15 +324,28 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Identifiant de la zone associée">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Zone temporaire ?">
                                  <font>
-                                    <Font name="Berlin Sans FB" size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
                                  <padding>
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Taille" text="Zone ">
+                              <ComboBox id="comboBox" fx:id="zoneTemporaireComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Oui" />
+                           </children>
+                        </HBox>
+                        <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Zone profondeur">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Taille" text="Zone profondeur">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -341,7 +354,7 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Zone temporaire">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Zone surface">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -349,12 +362,16 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="zoneTemporaireComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Zone temporaire" />
+                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Taille" text="Zone surface">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </TextField>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Zone type marée">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Type de Marée ?">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -362,7 +379,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="zoneMareeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Zone marée" />
+                              <ComboBox id="comboBox" fx:id="zoneMareeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Type de Marée" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -393,7 +410,7 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Végétation">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Nature végétation ?">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -402,6 +419,23 @@
                                  </padding>
                               </Label>
                               <ComboBox id="comboBox" fx:id="vegetationComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Végétation" />
+                           </children>
+                        </HBox>
+                        <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Végétation">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Taille" text="Végétation">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </TextField>
                            </children>
                         </HBox>
                      </children>
