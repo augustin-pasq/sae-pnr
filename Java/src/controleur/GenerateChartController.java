@@ -38,6 +38,11 @@ public class GenerateChartController extends InteractivePage {
     }
 
     @FXML
+    /**
+     * Generates a query to get the data for the chart.
+     * @param event The event that triggered the method.
+     * @return the query to make a chart.
+     */
     private String generateQuery(final Event event){
 
         String query = "";
@@ -50,7 +55,7 @@ public class GenerateChartController extends InteractivePage {
             abscisse = abscisseComboBox.getValue().toString();
             ordonnee = ordonneeComboBox.getValue().toString();
 
-            query = "SELECT * FROM vue_allFrom" + espece + " ORDER BY dateObs DESC";
+            query = "SELECT * FROM vue_allFrom" + espece + " ORDER BY dateObs DESC;";
         }
         System.out.println(query);
         return query;
