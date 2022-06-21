@@ -14,10 +14,10 @@ import java.util.ResourceBundle;
 
 public class DataHippocampeController extends InteractivePage {
 
-    ObservableList<EspeceHippocampe> especeList = FXCollections.observableArrayList(EspeceHippocampe.ENTERURUS_AEQUOREUS, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, EspeceHippocampe.HIPPOCAMPUS_HIPPOCAMPUS, EspeceHippocampe.SYNGNATHUS_ACUS);
-    ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.MALE, Sexe.FEMELLE, Sexe.INCONNU);
+    ObservableList<EspeceHippocampe> especeList = FXCollections.observableArrayList(EspeceHippocampe.values());
+    ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
     ObservableList<String> gestantList = FXCollections.observableArrayList("Gestant", "Non gestant");
-    ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.CASIER_CREVETTES, Peche.CASIER_MORGATES, Peche.NON_RENSEIGNE, Peche.PETIT_FILET, Peche.VERVEUX_ANGUILLES);
+    ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.values());
     @FXML
     private ComboBox<EspeceHippocampe> especeComboBox;
     @FXML
