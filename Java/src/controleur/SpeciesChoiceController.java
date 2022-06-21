@@ -28,31 +28,36 @@ public class SpeciesChoiceController extends InteractivePage {
 
     @FXML
     private void consultBatracienObs (ActionEvent event) {
-        goTo(event, "Batracien");
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "Batracien", consultObsBatracienButton);
     }
 
     @FXML
     private void consultChouetteObs (ActionEvent event) {
-        goTo(event, "Chouette");
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "Chouette", consultObsChouetteButton);
     }
 
     @FXML
     private void consultGCIObs (ActionEvent event) {
-        goTo(event, "GCI");
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "GCI", consultObsGCIButton);
     }
 
     @FXML
     private void consultHippocampeObs (ActionEvent event) {
-        goTo(event, "Hippocampe");
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "Hippocampe", consultObsHippocampeButton);
     }
 
     @FXML
     private void consultLoutreObs (ActionEvent event) {
-        goTo(event, "Loutre");
-    }
-
-    private void goTo(ActionEvent event, String name) {
-        ObservationChoiceController.setAllObservations(name);
-        Main.switchScene("ObservationChoice", this.homeButton);
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "Loutre", consultObsLoutreButton);
     }
 }
