@@ -187,7 +187,7 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" layoutX="10.0" layoutY="610.0" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Nombre d'adulte">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Nombre d'adultes">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -221,7 +221,7 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" layoutX="10.0" layoutY="710.0" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Nombre de ponte">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Nombre de pontes">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -238,7 +238,7 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" layoutX="10.0" layoutY="810.0" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Nombre de tétard">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Nombre de tétards">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -324,9 +324,9 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Identifiant de la zone associé">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Identifiant de la zone associée">
                                  <font>
-                                    <Font name="Berlin Sans FB" size="23.0" />
+                                    <Font name="Berlin Sans FB" size="19.0" />
                                  </font>
                                  <padding>
                                     <Insets bottom="-10.0" />
