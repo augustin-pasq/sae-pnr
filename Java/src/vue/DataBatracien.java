@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class DataBat extends Application {
+public class DataBatracien extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -17,13 +17,13 @@ public class DataBat extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource("ConsultBatObs.fxml");
+        URL pathFXML = getClass().getResource("DataBatracien.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
         // Add the stylesheet of the page
         Scene scene = new Scene(root);
-        URL pathCSS = getClass().getResource("ConsultBatObs.css");
+        URL pathCSS = getClass().getResource("StyleDataObs.css");
         scene.getStylesheets().addAll(pathCSS.toExternalForm());
         // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
         primaryStage.setScene(scene);
