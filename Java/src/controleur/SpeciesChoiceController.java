@@ -52,12 +52,7 @@ public class SpeciesChoiceController extends InteractivePage {
     }
 
     private void goTo(ActionEvent event, String name) {
-        Button target = (Button) event.getSource();
-        Data data = (Data) target.getScene().getUserData();
-
-        String suffix = data.get(0).equals("Data") ? name : "";
-        Data newData = new Data(data.get(0), "name");
-
-        Main.switchScene(data.get(0) + suffix, this.homeButton, newData);
+        ObservationChoiceController.setAllObservations(name);
+        Main.switchScene("ObservationChoice", this.homeButton);
     }
 }

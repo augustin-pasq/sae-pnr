@@ -1,9 +1,7 @@
 package controleur;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
@@ -22,16 +20,13 @@ public class ObservationChoiceController extends InteractivePage {
     @FXML
     private VBox scrollPaneContainer;
     
-    public ArrayList<ArrayList<String>> allObservations;
+    public static ArrayList<ArrayList<String>> allObservations;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
-        Scene data = this.scrollPaneContainer.getScene();
-        System.out.println("Data: " + data);
-        //setAllObservations(data.get(1));
 
-        VBox observationsContainer = new VBox();
+        VBox observationsContainer = new VBox(10);
         for (int i = 1; i < allObservations.size(); i++) {
             Button obs = createButton(allObservations.get(i));
             observationsContainer.getChildren().add(obs);
@@ -41,8 +36,8 @@ public class ObservationChoiceController extends InteractivePage {
         scrollPaneContainer.getChildren().add(scrollPane);
     }
 
-    public void setAllObservations(String espece) {
-        this.allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + espece);
+    public static void setAllObservations(String espece) {
+        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + espece);
     }
 
     private Button createButton(@NotNull ArrayList<String> observation) {
