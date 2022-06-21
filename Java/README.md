@@ -19,6 +19,9 @@ There is a script to easily build and run the application:
 
 # Generate the documentation
 ./maker doc
+
+# List all available commands
+./maker help
 ```
 
 **For Windows users**, simply replace `./maker` with `.\maker.exe` with the same commands.
