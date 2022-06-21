@@ -3,6 +3,7 @@ package controleur;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
@@ -10,10 +11,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import modele.donnee.UseDatabase;
-import java.net.URL;
-import java.util.ResourceBundle;
 import org.jetbrains.annotations.NotNull;
+
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class ObservationChoiceController extends InteractivePage {
 
@@ -25,12 +27,16 @@ public class ObservationChoiceController extends InteractivePage {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
+        Scene data = this.scrollPaneContainer.getScene();
+        System.out.println("Data: " + data);
+        //setAllObservations(data.get(1));
 
-        VBox observationsContainer = new VBox(10);
-        for (int i = 1; i < this.allObservations.size(); i++) {
-            Button obs = createButton(this.allObservations.get(i));
+        VBox observationsContainer = new VBox();
+        for (int i = 1; i < allObservations.size(); i++) {
+            Button obs = createButton(allObservations.get(i));
             observationsContainer.getChildren().add(obs);
         }
+
         ScrollPane scrollPane = new ScrollPane(observationsContainer);
         scrollPaneContainer.getChildren().add(scrollPane);
     }
