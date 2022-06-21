@@ -28,36 +28,37 @@ public class SpeciesChoiceController extends InteractivePage {
 
     @FXML
     private void consultBatracienObs (ActionEvent event) {
-        Button target = (Button) event.getSource();
-        Data data = (Data) target.getScene().getUserData();
-        Main.switchScene(data.get(0) + "Batracien", consultObsBatracienButton);
+        goTo(event, "Batracien");
     }
 
     @FXML
     private void consultChouetteObs (ActionEvent event) {
-        Button target = (Button) event.getSource();
-        Data data = (Data) target.getScene().getUserData();
-        Main.switchScene(data.get(0) + "Chouette", consultObsChouetteButton);
+        goTo(event, "Chouette");
     }
 
     @FXML
     private void consultGCIObs (ActionEvent event) {
-        Button target = (Button) event.getSource();
-        Data data = (Data) target.getScene().getUserData();
-        Main.switchScene(data.get(0) + "GCI", consultObsGCIButton);
+        goTo(event, "GCI");
     }
 
     @FXML
     private void consultHippocampeObs (ActionEvent event) {
-        Button target = (Button) event.getSource();
-        Data data = (Data) target.getScene().getUserData();
-        Main.switchScene(data.get(0) + "Hippocampe", consultObsHippocampeButton);
+        goTo(event, "Hippocampe");
     }
 
     @FXML
     private void consultLoutreObs (ActionEvent event) {
+        goTo(event, "Loutre");
+    }
+
+    private void goTo(ActionEvent event, String name) {
         Button target = (Button) event.getSource();
         Data data = (Data) target.getScene().getUserData();
-        Main.switchScene(data.get(0) + "Loutre", consultObsLoutreButton);
+
+        String suffix = data.get(0).equals("Data") ? name : "";
+        Data newData = new Data(data.get(0), name);
+
+        ObservationChoiceController.setAllObservations(name);
+        Main.switchScene(data.get(0) + suffix, this.homeButton, newData);
     }
 }
