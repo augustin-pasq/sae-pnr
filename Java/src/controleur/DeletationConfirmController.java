@@ -12,12 +12,13 @@ public class DeletationConfirmController {
     private Button deleteButton;
 
     @FXML
-    private void abort(ActionEvent event) {
+    public void abort(ActionEvent event) {
         Main.goBack(event);
     }
 
     @FXML
-    private void delete(ActionEvent event) {
-        // TODO
+    public void delete(ActionEvent event) {
+        SpeciesManagementController smc = new SpeciesManagementController();
+        smc.deleteSpecies(event);
     }
 }
