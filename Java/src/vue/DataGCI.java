@@ -17,13 +17,13 @@ public class DataGCI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource("ConsultGravelotObs.fxml");
+        URL pathFXML = getClass().getResource("DataGCI.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
         // Add the stylesheet of the page
         Scene scene = new Scene(root);
-        URL pathCSS = getClass().getResource("ConsultGravelotObs.css");
+        URL pathCSS = getClass().getResource("StyleDataGCI.css");
         scene.getStylesheets().addAll(pathCSS.toExternalForm());
         // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
         primaryStage.setScene(scene);
