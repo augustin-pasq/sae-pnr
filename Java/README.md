@@ -8,7 +8,8 @@
 
 ## Build instructions
 
-There is a script to easily build and run the application:
+There is a script to easily build and run the application.
+Source code is available on [GitHub](https://github.com/finxol/maker).
 
 ```bash
 # Build and run the application
