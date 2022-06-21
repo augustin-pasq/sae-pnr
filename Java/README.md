@@ -4,7 +4,7 @@
 
 - [Java](https://www.java.com/)
 - [MySQL](https://www.mysql.com/)
-- [JavaFX](https://www.openjfx.io/)
+- [JavaFX](https://openjfx.io/)
 
 ## Build instructions
 
