@@ -126,7 +126,8 @@ public class Main extends Application implements Initializable {
         );
         okButton.setStyle("-fx-background-color: #00936E;" +
                 "-fx-background-radius: 30px;" +
-                "-fx-text-fill: white;");
+                "-fx-text-fill: white;" +
+                "-fx-cursor: hand;");
         okButton.setFont(new Font("Berlin Sans FB", 20));
 
         vbox.getChildren().addAll(label, okButton);
