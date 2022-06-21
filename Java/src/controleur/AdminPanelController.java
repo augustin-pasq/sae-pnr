@@ -116,7 +116,7 @@ public class AdminPanelController implements Initializable {
     public void importAction(ActionEvent event) {
         // Get the data passed from the previous scene
         Data data = (Data) ((Button) event.getSource()).getScene().getUserData();
-        System.out.println(EspeceObservee.valueOf(data.get(0)));
+        System.out.println(EspeceObservee.valueOf((String) data.get(0)));
     }
 
     /**
