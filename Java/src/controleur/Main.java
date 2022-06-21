@@ -97,7 +97,7 @@ public class Main extends Application implements Initializable {
      * @param event   the event that triggered the method
      * @return the popup
      */
-    public static Popup showPopup(String message, Event event) {
+    public static Popup showPopup(String message, @NotNull Event event) {
         Control target = (Control) event.getSource();
         return showPopup(message, target);
     }
@@ -109,7 +109,7 @@ public class Main extends Application implements Initializable {
      * @param target  An element belonging to the current scene
      * @return the popup
      */
-    public static Popup showPopup(String message, Control target) {
+    public static Popup showPopup(String message, @NotNull Control target) {
         Stage appStage = (Stage) target.getScene().getWindow();
         Popup popup = new Popup();
         VBox vbox = new VBox();
@@ -182,11 +182,16 @@ public class Main extends Application implements Initializable {
         URL pathFXML = getClass().getResource("../vue/" + name + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = fxmlLoader.load();
-
-        // Add the stylesheet of the page
         Scene scene = new Scene(root);
-        URL pathCSS = getClass().getResource("../vue/Style" + name + ".css");
-        scene.getStylesheets().addAll(pathCSS.toExternalForm());
+
+        try {
+            // Add the stylesheet of the page
+            URL pathCSS = getClass().getResource("../vue/Style" + name + ".css");
+            URL commonCSS = getClass().getResource("../vue/StyleCommon.css");
+            scene.getStylesheets().addAll(pathCSS.toExternalForm(), commonCSS.toExternalForm());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         return scene;
     }
