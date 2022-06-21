@@ -405,7 +405,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="zoneOuverureComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Zone ouverture" />
+                              <ComboBox id="comboBox" fx:id="zoneOuvertureComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Zone ouverture" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
