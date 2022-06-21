@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.DataGCIController">
    <children>
       <HBox id="hBox" alignment="CENTER" fillHeight="false" layoutY="105.0" prefHeight="105.0" prefWidth="1280.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -188,7 +188,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="especeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Nature" />
+                              <ComboBox id="comboBox" fx:id="natureComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Nature" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -218,7 +218,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="especeComboBox112" prefHeight="48.0" prefWidth="400.0" promptText="Non" />
+                              <ComboBox id="comboBox" fx:id="nidObserveComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Oui" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -265,7 +265,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="especeComboBox111" prefHeight="48.0" prefWidth="400.0" promptText="Raison" />
+                              <ComboBox id="comboBox" fx:id="raisonComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Raison" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -295,7 +295,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="especeComboBox1111" prefHeight="48.0" prefWidth="400.0" promptText="Non" />
+                              <ComboBox id="comboBox" fx:id="nidProtegeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Oui" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
