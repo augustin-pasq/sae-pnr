@@ -134,7 +134,7 @@ public class SpeciesManagementController extends InteractivePage {
         return add;
     }
 
-    private void deleteSpecies(final Event event) {
+    public void deleteSpecies(final Event event) {
         Button target = (Button) event.getTarget();
         System.out.println("Deleting " + this.especeDelete.get(target));
     }
