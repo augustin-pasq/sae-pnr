@@ -11,29 +11,26 @@ import javafx.scene.control.Button;
  */
 public class SpeciesChoiceController extends InteractivePage {
 
-    private String nextScene;
-
     @FXML
-    private Button consultObsBatButton;
+    private Button consultObsBatracienButton;
 
     @FXML
     private Button consultObsChouetteButton;
 
     @FXML
-    private Button consultObsGravelotButton;
+    private Button consultObsGCIButton;
 
     @FXML
-    private Button consultObsHippoButton;
+    private Button consultObsHippocampeButton;
 
     @FXML
     private Button consultObsLoutreButton;
 
-
     @FXML
-    private void consultBatObs (ActionEvent event) {
+    private void consultBatracienObs (ActionEvent event) {
         Button target = (Button) event.getSource();
         Data data = (Data) target.getScene().getUserData();
-        Main.switchScene(data.get(0) + "Batracien", consultObsBatButton);
+        Main.switchScene(data.get(0) + "Batracien", consultObsBatracienButton);
     }
 
     @FXML
@@ -44,17 +41,17 @@ public class SpeciesChoiceController extends InteractivePage {
     }
 
     @FXML
-    private void consultGravelotObs (ActionEvent event) {
+    private void consultGCIObs (ActionEvent event) {
         Button target = (Button) event.getSource();
         Data data = (Data) target.getScene().getUserData();
-        Main.switchScene(data.get(0) + "GCI", consultObsGravelotButton);
+        Main.switchScene(data.get(0) + "GCI", consultObsGCIButton);
     }
 
     @FXML
-    private void consultHippoObs (ActionEvent event) {
+    private void consultHippocampeObs (ActionEvent event) {
         Button target = (Button) event.getSource();
         Data data = (Data) target.getScene().getUserData();
-        Main.switchScene(data.get(0) + "Hippocampe", consultObsHippoButton);
+        Main.switchScene(data.get(0) + "Hippocampe", consultObsHippocampeButton);
     }
 
     @FXML
