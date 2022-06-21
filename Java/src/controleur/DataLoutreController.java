@@ -22,7 +22,5 @@ public class DataLoutreController extends InteractivePage {
         super.initialize(url, ressourceBundle);
         this.isAdmin = true;
         indiceComboBox.setItems(indiceList);
-        
-
     }
 }
