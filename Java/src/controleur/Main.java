@@ -48,7 +48,7 @@ public class Main extends Application implements Initializable {
      * @param target An element belonging to the current scene
      * @param data   the data to pass to the new scene
      */
-    public static void switchScene(@NotNull String name, @NotNull Control target, Data data) {
+    public static void switchScene(@NotNull String name, @NotNull Control target, Object data) {
         Stage appStage = (Stage) target.getScene().getWindow();
         Main main = new Main();
         try {
