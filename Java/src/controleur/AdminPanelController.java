@@ -3,13 +3,8 @@ package controleur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import modele.donnee.UseDatabase;
 
 import java.io.File;
@@ -107,17 +102,7 @@ public class AdminPanelController implements Initializable {
         if (dir != null) {
             exportData("Observation", dir.getAbsolutePath());
 
-            Stage appStage = (Stage) target.getScene().getWindow();
-            final Stage dialog = new Stage();
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.initOwner(appStage);
-
-            VBox dialogVbox = new VBox();
-            dialogVbox.getChildren().add(new Text("Export terminé"));
-
-            Scene dialogScene = new Scene(dialogVbox);
-            dialog.setScene(dialogScene);
-            dialog.show();
+            Main.showPopup("Les données on été exportées correctement", event);
         } else
             System.err.println("Failed to select a directory");
     }
