@@ -1,0 +1,14 @@
+#AnchorPane {
+    -fx-background-image: url("@../../../../data/fondAutre.png");
+}
+
+
+#Delete, #DoNotDelete {
+    -fx-background-color: #00936E;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+}
+
+
+
+

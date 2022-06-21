@@ -85,7 +85,9 @@ public class SpeciesManagementController extends InteractivePage {
         Button button = new Button();
         button.setId("bin");
         button.setGraphic(img);
-        button.setOnAction(this::deleteSpecies);
+        button.setOnAction(e -> {
+            Main.switchScene("DeletationConfirm", button);
+        });
 
         return button;
     }
