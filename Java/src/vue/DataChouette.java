@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class ConsultChouetteObs extends Application {
+public class DataChouette extends Application {
 
     public static void main(String[] args) {
         launch(args);

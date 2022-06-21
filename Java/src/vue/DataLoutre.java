@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class ConsultGravelotObs extends Application {
+public class DataLoutre extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -17,13 +17,13 @@ public class ConsultGravelotObs extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource("ConsultGravelotObs.fxml");
+        URL pathFXML = getClass().getResource("ConsultLoutreObs.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
         // Add the stylesheet of the page
         Scene scene = new Scene(root);
-        URL pathCSS = getClass().getResource("ConsultGravelotObs.css");
+        URL pathCSS = getClass().getResource("ConsultLoutreObs.css");
         scene.getStylesheets().addAll(pathCSS.toExternalForm());
         // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
         primaryStage.setScene(scene);

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class ConsultBatObs extends Application {
+public class DataBat extends Application {
 
     public static void main(String[] args) {
         launch(args);
