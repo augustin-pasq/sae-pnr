@@ -12,43 +12,52 @@ import javafx.scene.control.Button;
 public class SpeciesChoiceController extends InteractivePage {
 
     @FXML
-    private Button consultObsBatButton;
+    private Button consultObsBatracienButton;
 
     @FXML
     private Button consultObsChouetteButton;
 
     @FXML
-    private Button consultObsGravelotButton;
+    private Button consultObsGCIButton;
 
     @FXML
-    private Button consultObsHippoButton;
+    private Button consultObsHippocampeButton;
 
     @FXML
     private Button consultObsLoutreButton;
 
-
     @FXML
-    private void consultBatObs (ActionEvent event) {
-        Main.switchScene("ConsultBatObs", consultObsBatButton);
+    private void consultBatracienObs (ActionEvent event) {
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "Batracien", consultObsBatracienButton);
     }
 
     @FXML
     private void consultChouetteObs (ActionEvent event) {
-        Main.switchScene("ConsultChouetteObs", consultObsChouetteButton);
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "Chouette", consultObsChouetteButton);
     }
 
     @FXML
-    private void consultGravelotObs (ActionEvent event) {
-        Main.switchScene("ConsultGravelotObs", consultObsGravelotButton);
+    private void consultGCIObs (ActionEvent event) {
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "GCI", consultObsGCIButton);
     }
 
     @FXML
-    private void consultHippoObs (ActionEvent event) {
-        Main.switchScene("ConsultHippoObs", consultObsHippoButton);
+    private void consultHippocampeObs (ActionEvent event) {
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "Hippocampe", consultObsHippocampeButton);
     }
 
     @FXML
     private void consultLoutreObs (ActionEvent event) {
-        Main.switchScene("ConsultLoutreObs", consultObsLoutreButton);
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+        Main.switchScene(data.get(0) + "Loutre", consultObsLoutreButton);
     }
 }

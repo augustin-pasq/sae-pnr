@@ -46,13 +46,15 @@ public class Main extends Application implements Initializable {
      *
      * @param name   the name of the new scene
      * @param target An element belonging to the current scene
+     * @param data   the data to pass to the new scene
      */
-    public static void switchScene(@NotNull String name, @NotNull Control target) {
+    public static void switchScene(@NotNull String name, @NotNull Control target, Data data) {
         Stage appStage = (Stage) target.getScene().getWindow();
         Main main = new Main();
         try {
             Scene scene = main.loadScene(name);
             appStage.setScene(scene);
+            scene.setUserData(data);
 
             if (Main.instance.prevScene.size() > 15) {
                 Main.instance.prevScene.remove(0);
@@ -67,12 +69,22 @@ public class Main extends Application implements Initializable {
     /**
      * Switch the current scene to a new one
      *
+     * @param name   the name of the new scene
+     * @param target An element belonging to the current scene
+     */
+    public static void switchScene(@NotNull String name, @NotNull Control target) {
+        switchScene(name, target, null);
+    }
+
+    /**
+     * Switch the current scene to a new one
+     *
      * @param name  the name of the new scene
      * @param event the event that triggered the switch
      */
     public static void switchScene(@NotNull String name, @NotNull Event event) {
         Button target = (Button) event.getSource();
-        switchScene(name, target);
+        switchScene(name, target, null);
     }
 
     /**
