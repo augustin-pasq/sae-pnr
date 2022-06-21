@@ -59,7 +59,7 @@
                     <Font name="Berlin Sans FB" size="50.0" />
                 </font>
             </Label>
-            <Label id="principal" text="une espèce">
+            <Label id="principal" text="une observation">
                 <font>
                     <Font name="Berlin Sans FB" size="50.0" />
                 </font>
