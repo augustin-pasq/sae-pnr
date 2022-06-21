@@ -24,7 +24,10 @@ public class HomePageController implements Initializable {
     public void move(final ActionEvent event) {
         Button target = (Button) event.getSource();
         switch (target.getId()) {
-            case "Saisir" -> Main.switchScene("EnterData", target);
+            case "Saisir" -> {
+                Data data = new Data("Data");
+                Main.switchScene("SpeciesChoice", target, data);
+            }
             case "Modifier" -> Main.switchScene("ModifyData", target);
             case "Consulter" -> Main.switchScene("ConsultData", target);
             default -> System.err.println("Error: unknown button \"" + target.getText() + "\"");

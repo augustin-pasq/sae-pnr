@@ -91,6 +91,12 @@ public class LoginController implements Initializable {
     private void changeScene(final String username, final Event event) {
         Control target = (Control) event.getSource();
         if (username.equals("admin")) {
+            /*
+            * Pass data to the next scene
+            Data o = new Data("BATRACIEN");
+            System.out.println("AdminPanelController initialized " + target);
+            Main.switchScene("AdminPanel", target, o);
+             */
             Main.switchScene("AdminPanel", target);
         } else {
             Main.switchScene("HomePage", target);

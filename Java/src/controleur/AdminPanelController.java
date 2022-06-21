@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.DirectoryChooser;
+import modele.donnee.EspeceObservee;
 import modele.donnee.UseDatabase;
 
 import java.io.File;
@@ -113,8 +114,9 @@ public class AdminPanelController implements Initializable {
      * @param event the event that triggered the method
      */
     public void importAction(ActionEvent event) {
-        // Redirect to a page where the user can select a file to import from and which table to import from
-        Main.switchScene("Import", this.importButton);
+        // Get the data passed from the previous scene
+        Data data = (Data) ((Button) event.getSource()).getScene().getUserData();
+        System.out.println(EspeceObservee.valueOf(data.get(0)));
     }
 
     /**
