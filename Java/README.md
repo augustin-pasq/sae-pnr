@@ -4,28 +4,11 @@
 
 - [Java](https://www.java.com/)
 - [MySQL](https://www.mysql.com/)
-
-## TODO
-
-Pages à ajouter :
-- [ ] Page confirmation opération réussie
-- [ ] Page confirmation opération échouée
-- [ ] Page confirmation de suppression
-- [ ] Pages de saisie d'une observation
-- [ ] Page de modification d'une observation
-- [ ] Page de consultation d'une observation
-- [ ] Page d'ajout d'un champ de saisie
-- [ ] Page de modification d'un champ de saisie
-- [ ] Page de choix de l'observation
-
-Optionnel :
-- Fonction d'importation de données
-- Génération de graphiques
-- Ajout d'espèce
+- [JavaFX](https://www.openjfx.io/)
 
 ## Build instructions
 
-There is a script to easily build the application:
+There is a script to easily build and run the application:
 
 ```bash
 # Build and run the application
@@ -38,6 +21,6 @@ There is a script to easily build the application:
 ./maker doc
 ```
 
-**For Windows users**, simply replace the `./maker` with `.\maker.exe` with the same commands.
+**For Windows users**, simply replace `./maker` with `.\maker.exe` with the same commands.
 
 There are no dependencies to this script.
