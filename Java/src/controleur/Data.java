@@ -9,13 +9,13 @@ public class Data {
     /**
      * The data to pass
      */
-    private String[] data;
+    private final Object[] data;
 
     /**
      * Constructor
      * @param data the data to pass
      */
-    public Data(String... data) {
+    public Data(Object... data) {
         this.data = data;
     }
 
@@ -24,7 +24,7 @@ public class Data {
      * @param i the index
      * @return the data at index i
      */
-    public String get(int i) {
+    public Object get(int i) {
         return data[i];
     }
 
@@ -32,7 +32,7 @@ public class Data {
      * Get all the data
      * @return all the data
      */
-    public String[] getAll() {
+    public Object[] getAll() {
         return data;
     }
 
@@ -50,7 +50,7 @@ public class Data {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (String s : data) {
+        for (Object s : data) {
             sb.append(s);
             sb.append(", ");
         }
