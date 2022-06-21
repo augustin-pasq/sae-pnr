@@ -17,13 +17,13 @@ public class DataChouette extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource("ConsultChouetteObs.fxml");
+        URL pathFXML = getClass().getResource("DataChouette.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
         // Add the stylesheet of the page
         Scene scene = new Scene(root);
-        URL pathCSS = getClass().getResource("ConsultChouetteObs.css");
+        URL pathCSS = getClass().getResource("StyleDataObs.css");
         scene.getStylesheets().addAll(pathCSS.toExternalForm());
         // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
         primaryStage.setScene(scene);

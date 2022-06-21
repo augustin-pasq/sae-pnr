@@ -6,8 +6,9 @@
     -fx-background-color: None
 }
 
-#scrollPane {
-    -fx-background: None
+.scroll-pane {
+    -fx-background: rgba(255, 255, 255, 0);
+    -fx-background-color: rgba(255, 255, 255, 0);
 }
 
 #comboBox, #textField {
@@ -28,6 +29,3 @@
     -fx-background-color: #00936E;
     -fx-background-radius: 30px;
 }
-
-
-
