@@ -72,7 +72,7 @@
          <children>
             <ScrollPane id="scrollPane" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="900.0" pannable="true" prefWidth="900.0" VBox.vgrow="ALWAYS">
                <content>
-                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefWidth="1000.0">
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefWidth="800.0">
                      <children>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>

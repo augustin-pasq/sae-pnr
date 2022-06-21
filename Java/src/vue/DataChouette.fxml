@@ -72,7 +72,7 @@
          <children>
             <ScrollPane id="scrollPane" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="900.0" pannable="true" prefWidth="900.0" VBox.vgrow="ALWAYS">
                <content>
-                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefWidth="1000.0">
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefWidth="800.0">
                      <children>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
@@ -185,19 +185,6 @@
                               <ComboBox id="comboBox" fx:id="especeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Espèce" />
                            </children>
                         </HBox>
-                        <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
-                           <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Sexe">
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="23.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="-10.0" />
-                                 </padding>
-                              </Label>
-                              <ComboBox id="comboBox" fx:id="sexeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Sexe" />
-                           </children>
-                        </HBox>
                         <HBox id="hBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="1078.0">
                            <children>
                               <Label prefHeight="16.0" prefWidth="254.0" text="Protocole suivi ?">
@@ -208,7 +195,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="protocoleComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Oui" />
+                              <ComboBox id="comboBox" fx:id="protocoleComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Non" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" layoutX="10.0" layoutY="610.0" prefHeight="100.0" prefWidth="1078.0">
@@ -256,6 +243,19 @@
                                     <Font size="19.0" />
                                  </font>
                               </TextField>
+                           </children>
+                        </HBox>
+                        <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Espèce">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
+                              <ComboBox id="comboBox" fx:id="especeComboBox1" prefHeight="48.0" prefWidth="400.0" promptText="Espèce" />
                            </children>
                         </HBox>
                      </children>
