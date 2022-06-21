@@ -9,8 +9,6 @@
 #scroll {
     -fx-background: rgba(255, 255, 255, 0);
     -fx-background-color: rgba(255, 255, 255, 0);
-    -fx-background-radius: 15px; 
-    -fx-border-radius: 15px; 
 }
 
 #species, #add {
