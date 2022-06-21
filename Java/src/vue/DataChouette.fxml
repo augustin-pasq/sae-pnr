@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.DataChouetteController">
    <children>
       <HBox id="hBox" alignment="CENTER" fillHeight="false" layoutY="105.0" prefHeight="105.0" prefWidth="1280.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -172,6 +172,32 @@
                               </TextField>
                            </children>
                         </HBox>
+                        <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Espèce">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
+                              <ComboBox id="comboBox" fx:id="especeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Espèce" />
+                           </children>
+                        </HBox>
+                        <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Sexe">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
+                              <ComboBox id="comboBox" fx:id="sexeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Sexe" />
+                           </children>
+                        </HBox>
                         <HBox id="hBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="1078.0">
                            <children>
                               <Label prefHeight="16.0" prefWidth="254.0" text="Protocole suivi ?">
@@ -182,7 +208,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="especeComboBox1121" prefHeight="48.0" prefWidth="400.0" promptText="Non" />
+                              <ComboBox id="comboBox" fx:id="protocoleComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Oui" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" layoutX="10.0" layoutY="610.0" prefHeight="100.0" prefWidth="1078.0">
@@ -195,7 +221,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="especeComboBox1122" prefHeight="48.0" prefWidth="400.0" promptText="Type d'observation" />
+                              <ComboBox id="comboBox" fx:id="typeObservationComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Type d'observation" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" layoutX="10.0" layoutY="410.0" prefHeight="100.0" prefWidth="1078.0">
