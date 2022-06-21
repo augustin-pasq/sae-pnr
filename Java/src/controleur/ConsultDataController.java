@@ -19,7 +19,8 @@ public class ConsultDataController extends InteractivePage {
 
     @FXML
     private void consultObs(ActionEvent event) {
-        Main.switchScene("SpeciesChoice", consultObsButton);
+        Data data = new Data("ObservationChoice");
+        Main.switchScene("SpeciesChoice", consultObsButton, data);
     }
 
     @FXML
