@@ -204,7 +204,7 @@ public class Main extends Application implements Initializable {
             URL commonCSS = getClass().getResource("../vue/StyleCommon.css");
             scene.getStylesheets().addAll(pathCSS.toExternalForm(), commonCSS.toExternalForm());
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            System.err.println("No stylesheet found for scene " + name);
         }
 
         return scene;
