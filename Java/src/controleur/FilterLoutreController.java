@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class FilterLoutreController extends InteractivePage {
 
-    private final String ANIMAL = "Loutre";  
+    private final String ANIMAL = "Loutre";
     ObservableList<String> indiceList = FXCollections.observableArrayList("Positif", "Négatif", "Non prospection");
 
     @FXML
@@ -82,7 +82,7 @@ public class FilterLoutreController extends InteractivePage {
         }
     }
 
-    
+
     /**
      * Check if all fields are valid
      *
@@ -110,7 +110,7 @@ public class FilterLoutreController extends InteractivePage {
                 int m = Integer.parseInt(timeSplit[1]);
                 if (!(0 <= h && h < 24 && 0 <= m && m < 60))
                     throw new IllegalArgumentException("L'heure doit être valide");
-                
+
             }
         }
 
@@ -128,19 +128,20 @@ public class FilterLoutreController extends InteractivePage {
     }
 
     /**
-     * 
-     * @param filter
-     * @param lastName
-     * @param firstName
-     * @param date
-     * @param time
-     * @param lambertX
-     * @param lambertY
-     * @param commune
-     * @param lieuDit
-     * @param indice
+     * Initialize the filter with the data entered by the user
+     *
+     * @param filter    the filter to initialize
+     * @param lastName  last name of the observer
+     * @param firstName first name of the observer
+     * @param date      date of the observation
+     * @param time      time of the observation
+     * @param lambertX  lambert X coordinate of the observation
+     * @param lambertY  lambert Y coordinate of the observation
+     * @param commune   town of the observation
+     * @param lieuDit   locality of the observation
+     * @param indice    index of the observation
      */
-    private void initFilter(HashMap<Object,String> filter, String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit, String indice){
+    private void initFilter(HashMap<Object, String> filter, String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit, String indice) {
         filter.put(lastName, "nom");
         filter.put(firstName, "prenom");
         filter.put(date, "dateObs");
@@ -152,20 +153,26 @@ public class FilterLoutreController extends InteractivePage {
         filter.put(indice, "indice");
     }
 
-    private String makeRestriction(HashMap<Object, String> filter){
+    /**
+     * Make the SQL restriction string from the filter HashMap
+     *
+     * @param filter the filter to make the restriction from
+     * @return the SQL restriction string
+     */
+    private String makeRestriction(HashMap<Object, String> filter) {
         String query = "";
         int nbRestriction = 0;
 
-        for (Object o : filter.keySet()){
-            if (!(o == null)){
+        for (Object o : filter.keySet()) {
+            if (!(o == null)) {
                 String value = o.toString();
-                if (!value.equals("")){
-                    if (nbRestriction > 0){
+                if (!value.equals("")) {
+                    if (nbRestriction > 0) {
                         query = query + " AND " + filter.get(o) + " =\"" + value + "\"";
                     } else {
                         query = query + " WHERE " + filter.get(o) + " =\"" + value + "\"";
                     }
-                    nbRestriction ++;
+                    nbRestriction++;
                 }
             }
         }
