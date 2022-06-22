@@ -408,7 +408,7 @@
             <Insets bottom="50.0" />
          </padding>
          <children>
-            <Button id="valider" onAction="#goBack" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="245.0" text="Supprimer" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button id="valider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="67.0" prefWidth="245.0" text="Supprimer" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Berlin Sans FB" size="20.0" />
                </font>
