@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class DeletationConfirmController {
+public class DeletionConfirmController {
     @FXML
     private Button doNotDeleteButton;
 

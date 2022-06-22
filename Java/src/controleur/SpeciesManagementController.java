@@ -86,7 +86,7 @@ public class SpeciesManagementController extends InteractivePage {
         button.setId("bin");
         button.setGraphic(img);
         button.setOnAction(e -> {
-            Main.switchScene("DeletationConfirm", button);
+            Main.switchScene("DeletionConfirm", button);
         });
 
         return button;
