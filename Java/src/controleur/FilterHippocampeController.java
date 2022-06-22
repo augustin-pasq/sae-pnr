@@ -121,10 +121,9 @@ public class FilterHippocampeController extends InteractivePage {
         HashMap<Object, String> filter = new HashMap<>();
         this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, espece, sexe, temperature, typePeche, size, gestant);
         String restriction = this.makeRestriction(filter);
-        
-        System.out.println(restriction);
 
-        Data data = new Data(ANIMAL, restriction);
+        Data userData = (Data) this.homeButton.getScene().getUserData();
+        Data data = new Data(userData.get(0), ANIMAL, restriction);
         ObservationChoiceController.setAllObservations(ANIMAL, restriction);
         Main.switchScene("ObservationChoice", this.validateButton, data);
     }

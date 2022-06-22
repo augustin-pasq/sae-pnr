@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class EditHippocampe extends Application {
+public class DeleteLoutreObs extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -17,7 +17,7 @@ public class EditHippocampe extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource("EditHippocampe.fxml");
+        URL pathFXML = getClass().getResource("DeleteLoutreObs.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
@@ -25,9 +25,9 @@ public class EditHippocampe extends Application {
         Scene scene = new Scene(root);
         URL pathCSS = getClass().getResource("StyleDataObs.css");
         scene.getStylesheets().addAll(pathCSS.toExternalForm());
-        // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo 
+        // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
         primaryStage.setScene(scene);
-        //primaryStage.setFullScreen(true); 
+        //primaryStage.setFullScreen(true);
         primaryStage.setTitle("PNR");
         primaryStage.show();
     }

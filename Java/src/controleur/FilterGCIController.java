@@ -137,7 +137,8 @@ public class FilterGCIController extends InteractivePage {
                         leNid, nomPlage, raisonArretObservation, nbEnvols, protection, bagueMale, bagueFemelle);
         String restriction = this.makeRestriction(filter);
 
-        Data data = new Data(ANIMAL, restriction);
+        Data userData = (Data) this.homeButton.getScene().getUserData();
+        Data data = new Data(userData.get(0), ANIMAL, restriction);
         ObservationChoiceController.setAllObservations(ANIMAL, restriction);
         Main.switchScene("ObservationChoice", this.validateButton, data);
     }
