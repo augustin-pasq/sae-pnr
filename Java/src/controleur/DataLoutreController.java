@@ -53,8 +53,8 @@ public class DataLoutreController extends InteractivePage {
 
     @FXML
     public void validate(ActionEvent event) {
-        String lastName = lastNameField.getText();
-        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText().toUpperCase();
+        String firstName = firstNameField.getText().toUpperCase();
         LocalDate date = dateField.getValue();
         String time = timeField.getText();
         String lambertX = lambertXField.getText();
@@ -64,7 +64,7 @@ public class DataLoutreController extends InteractivePage {
         String indice = indiceComboBox.getValue();
 
         try {
-            checkFields(lastName, firstName, time, lambertX, lambertY, commune, lieuDit);
+            checkFields(lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit);
             final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
             ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
@@ -118,29 +118,32 @@ public class DataLoutreController extends InteractivePage {
         }
     }
 
-    private void checkFields(String lastName, String firstName, String time, String lambertX, String lambertY, String commune, String lieuDit) throws IllegalArgumentException {
+    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (date == null)
+            throw new IllegalArgumentException("La date est obligatoire");
 
         String[] timeSplit = time.split(":");
         int h = Integer.parseInt(timeSplit[0]);
         int m = Integer.parseInt(timeSplit[1]);
         if (!time.matches("\\d{2}:\\d{2}") && 0 < h && h < 24 && 0 < m && m < 60)
-            throw new IllegalArgumentException("Le temps doit être au format hh:mm");
+            throw new IllegalArgumentException("L'heure ne peut pas être vide et doit être au format hh:mm");
 
         if (!lambertX.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La coordonnée Lambert X doit être un nombre");
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
 
         if (!lambertY.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La coordonnée Lambert Y doit être un nombre");
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
 
         if (!commune.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("La commune ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException("La commune ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!lieuDit.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le lieu dit ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException("Le lieu ne peut pas être vide et dit ne doit contenir que des lettres, espaces et tirets");
     }
 }
