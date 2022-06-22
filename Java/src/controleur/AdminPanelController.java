@@ -67,7 +67,8 @@ public class AdminPanelController implements Initializable {
 
         try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(file))) {
             for (String table : tables) {
-                String filename = String.format("/%s.csv", table);
+                String dir = file.getName().replace(".zip", "");
+                String filename = String.format("%s/%s.csv", dir, table);
                 ZipEntry e = new ZipEntry(filename);
                 out.putNextEntry(e);
 
