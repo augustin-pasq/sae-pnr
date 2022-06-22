@@ -1,7 +1,5 @@
 package controleur;
 
-import java.util.Arrays;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,32 +27,41 @@ public class SpeciesChoiceController extends InteractivePage {
     private Button consultObsLoutreButton;
 
     @FXML
-    private void consultBatracienObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("Batracien");
-        Main.switchScene("ObservationChoice", consultObsBatracienButton);
+    private void consultBatracienObs(ActionEvent event) {
+        goTo("Batracien");
     }
 
     @FXML
-    private void consultChouetteObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("Chouette");
-        Main.switchScene("ObservationChoice", consultObsChouetteButton);
+    private void consultChouetteObs(ActionEvent event) {
+        goTo("Chouette");
     }
 
     @FXML
-    private void consultGCIObs (ActionEvent event) {
+    private void consultGCIObs(ActionEvent event) {
         ObservationChoiceController.setAllObservations("GCI");
-        Main.switchScene("ObservationChoice", consultObsGCIButton);
+        goTo("GCI");
     }
 
     @FXML
-    private void consultHippocampeObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("Hippocampe");
-        Main.switchScene("ObservationChoice", consultObsHippocampeButton);
+    private void consultHippocampeObs(ActionEvent event) {
+        goTo("Hippocampe");
     }
 
     @FXML
-    private void consultLoutreObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("Loutre");
-        Main.switchScene("ObservationChoice", consultObsLoutreButton);
+    private void consultLoutreObs(ActionEvent event) {
+        goTo("Loutre");
+    }
+
+    private void goTo(String species) {
+        Data data = (Data) this.backButton.getScene().getUserData();
+        String scene = (String) data.get(0);
+        switch (scene) {
+            case "Data" -> Main.switchScene("Data" + species, this.homeButton, data); // For observation insertion
+            case "Edit" -> Main.switchScene(scene + species, this.homeButton, data); // For observation modification
+            case "ObservationChoice" -> {
+                ObservationChoiceController.setAllObservations(species);
+                Main.switchScene(scene, this.homeButton, data); // For observation consultation
+            }
+        }
     }
 }
