@@ -38,6 +38,8 @@ public abstract class InteractivePage implements Initializable {
      * @param event the event that triggered the method
      */
     public void goHome(final ActionEvent event) {
+        Data data = (Data) this.homeButton.getScene().getUserData();
+        this.isAdmin = data.isAdmin();
         if (isAdmin) {
             Main.switchScene("AdminPanel", homeButton);
         } else {

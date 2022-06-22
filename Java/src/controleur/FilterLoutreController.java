@@ -69,6 +69,7 @@ public class FilterLoutreController extends InteractivePage {
 
         Data userData = (Data) this.homeButton.getScene().getUserData();
         Data data = new Data(userData.get(0), ANIMAL, restriction);
+        data.setAdmin(userData.isAdmin());
         ObservationChoiceController.setAllObservations(ANIMAL, restriction);
         Main.switchScene("ObservationChoice", this.validateButton, data);
     }

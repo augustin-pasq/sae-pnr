@@ -134,7 +134,9 @@ public class AdminPanelController implements Initializable {
      * @param event the event that triggered the method
      */
     public void deleteObs(ActionEvent event) {
-        Main.switchScene("SpeciesChoice", this.deleteButton);
+        Data data = new Data("Delete");
+        data.setAdmin(true);
+        Main.switchScene("SpeciesChoice", this.deleteButton, data);
     }
 
     /**

@@ -10,6 +10,7 @@ public class Data {
      * The data to pass
      */
     private final Object[] data;
+    private boolean isAdmin = false;
 
     /**
      * Constructor
@@ -42,6 +43,22 @@ public class Data {
      */
     public int size() {
         return data.length;
+    }
+
+    /**
+     * Check if the user is an admin
+     * @return true if the user is an admin
+     */
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    /**
+     * Set the admin status
+     * @param isAdmin true if the user is an admin
+     */
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     /**

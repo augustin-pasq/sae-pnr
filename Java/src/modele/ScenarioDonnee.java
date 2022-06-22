@@ -204,11 +204,11 @@ public class ScenarioDonnee {
         Lieu vannes = new Lieu(268045.333, 6744460.457);
         Lieu arradon = new Lieu(263077.46, 6741405.844);
 
-        ObsHippocampe hippocampe1 = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, 9.5, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
+        ObsHippocampe hippocampe1 = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, 9.5, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTULATUS, Sexe.MALE);
 
         try {
             p("Création d'un hippocampe avec un taille = -1");
-            ObsHippocampe hippocampeTailleNegatif = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, -1, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTLATUS, Sexe.MALE);
+            ObsHippocampe hippocampeTailleNegatif = new ObsHippocampe(1, dixHuitMai, now, vannes, listeObs, -1, Peche.CASIER_CREVETTES, EspeceHippocampe.HIPPOCAMPUS_GUTTULATUS, Sexe.MALE);
         } catch (IllegalArgumentException e) {
             p("Taille négative : " + e.getMessage());
         }
