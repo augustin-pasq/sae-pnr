@@ -28,14 +28,14 @@ public class HomePageController implements Initializable {
                 Data data = new Data("Data");
                 Main.switchScene("SpeciesChoiceForAdding", target, data);
             }
-            case "Modifier" -> Main.switchScene("ModifyData", target);
+            case "Modifier" -> {
+                Data data = new Data("Edit");
+                Main.switchScene("ModifyData", target);
+            }
             case "Consulter" -> Main.switchScene("ConsultData", target);
+            case "logout" -> Main.switchScene("Login", target);
             default -> System.err.println("Error: unknown button \"" + target.getText() + "\"");
         }
-    }
-
-    public void logout(final ActionEvent event) {
-        Main.switchScene("Login", this.logout);
     }
 
     @Override

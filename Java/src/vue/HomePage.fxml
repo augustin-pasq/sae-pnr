@@ -113,7 +113,7 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button id="logout" fx:id="logout" onAction="#logout" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="-18.0">
+                        <Button id="logout" fx:id="logout" onAction="#move" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="-18.0">
                            <graphic>
                            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                               <Image url="@../../data/Exit.png" />
