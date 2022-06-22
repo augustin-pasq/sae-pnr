@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Point3D?>
-<?import javafx.geometry.Rectangle2D?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -236,53 +232,26 @@
             <Insets bottom="50.0" />
          </padding>
          <children>
-            <Button id="valider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goBack" prefHeight="67.0" prefWidth="245.0" text="Supprimer" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button id="valider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="67.0" prefWidth="245.0" text="Supprimer" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Berlin Sans FB" size="20.0" />
                </font>
             </Button>
-         </children>
-      </HBox>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="299.0" prefWidth="1240.0">
-         <children>
-            <AnchorPane prefHeight="177.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Button id="Back" fx:id="backButton" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
-                     <graphic>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                           <image>
-                              <Image url="@../../data/Back.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button id="HomePage" fx:id="homeButton" layoutX="96.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="10.0">
-                     <graphic>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                           <image>
-                              <Image url="@../../data/Home_Page.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </AnchorPane>
-         </children>
-      </HBox>
-   </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
+            <Button id="HomePage" fx:id="homeButton" layoutX="96.0" layoutY="10.0" mnemonicParsing="false"
+                    prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="96.0"
+                    AnchorPane.topAnchor="10.0">
+                <graphic>
+                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <cursor>
+                            <Cursor fx:constant="DEFAULT"/>
+                        </cursor>
+                        <viewport>
+                            <Rectangle2D/>
+                        </viewport>
+                        <Image url="@../../data/Home_Page.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </AnchorPane>
+    </HBox>
 </AnchorPane>

@@ -100,6 +100,11 @@ public class ObservationChoiceController extends InteractivePage {
                             //EditBatracienObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditBatracienObs", button, data);
                         }
+                        case "Delete" -> {
+                            System.out.println("DeleteBatracienObs");
+                            //DeleteBatracienObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("DeleteBatracienObs", button, data);
+                        }
                     }
                 }
                 case "Chouette" -> {
@@ -111,6 +116,11 @@ public class ObservationChoiceController extends InteractivePage {
                         case "Edit" -> {
                             EditChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
                             Main.switchScene("EditChouetteObs", button, data);
+                        }
+                        case "Delete" -> {
+                            System.out.println("DeleteChouetteObs");
+                            //DeleteChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
+                            Main.switchScene("DeleteChouetteObs", button, data);
                         }
                     }
                 }
@@ -124,6 +134,11 @@ public class ObservationChoiceController extends InteractivePage {
                             EditHippocampeObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditHippocampeObs", button, data);
                         }
+                        case "Delete" -> {
+                            System.out.println("DeleteHippocampeObs");
+                            //DeleteHippocampeObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("DeleteHippocampeObs", button, data);
+                        }
                     }
                 }
                 case "Loutre" -> {
@@ -135,6 +150,12 @@ public class ObservationChoiceController extends InteractivePage {
                         case "Edit" -> {
                             EditLoutreObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditLoutreObs", button, data);
+                        }
+                        case "Delete" -> {
+                            System.out.println("DeleteLoutreObs");
+                            System.out.println("isAdmin = " + data.isAdmin());
+                            DeleteLoutreObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("DeleteLoutreObs", button, data);
                         }
                     }
                 }
@@ -148,6 +169,11 @@ public class ObservationChoiceController extends InteractivePage {
                             System.out.println("EditGCIObs");
                             //EditGCIObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditGCIObs", button, data);
+                        }
+                        case "Delete" -> {
+                            System.out.println("DeleteGCIObs");
+                            //DeleteGCIObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("DeleteGCIObs", button, data);
                         }
                     }
                 }
