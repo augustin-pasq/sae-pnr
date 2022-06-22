@@ -125,7 +125,7 @@ public class FilterGCIController extends InteractivePage {
 
         HashMap<Object, String> filter = new HashMap<>();
         this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, nature, nombre, presentMaisNonObs, 
-                        leNid, nomPlage, raisonArretObservation, nbEnvols,protection, bagueMale, bagueFemelle);
+                        leNid, nomPlage, raisonArretObservation, nbEnvols, protection, bagueMale, bagueFemelle);
         String restriction = this.makeRestriction(filter);
         
         System.out.println(restriction);
@@ -141,6 +141,7 @@ public class FilterGCIController extends InteractivePage {
                             String nomPlage, String raisonArretObservation, Integer nbEnvols,
                             Integer protection, String bagueMale, String bagueFemelle){
 
+        
         filter.put(lastName, "nom");
         filter.put(firstName, "prenom"); 
         filter.put(date, "dateObs");
@@ -148,10 +149,25 @@ public class FilterGCIController extends InteractivePage {
         filter.put(lambertX, "lieu_Lambert_X");
         filter.put(lambertY, "lieu_Lambert_Y");
         filter.put(nature, "nature");
-        filter.put(String.valueOf(nombre), "nombre");
+
+        if (nombre == null) filter.put("", "nombre");
+        else filter.put(nombre, "nombre");
+
+        if (presentMaisNonObs == null) filter.put("", "presentMaisNonObs");
+        else filter.put(presentMaisNonObs, "presentMaisNonObs");
+
+        if (leNid == null) filter.put("", "leNid");
+        else filter.put(leNid, "leNid");
+
+        filter.put(nomPlage, "nomPlage");
         filter.put(raisonArretObservation, "raisonArretObservation");
-        filter.put(String.valueOf(nbEnvols), "nbEnvols");
-        filter.put(String.valueOf(protection), "protection");
+
+        if (nbEnvols == null) filter.put("", "nbEnvols");
+        else filter.put(nbEnvols, "nbEnvols");
+
+        if (protection == null) filter.put("", "protection");
+        else filter.put(protection, "protection");         
+
         filter.put(bagueMale, "bagueMale");
         filter.put(bagueFemelle, "bagueFemelle");
     }
@@ -163,7 +179,7 @@ public class FilterGCIController extends InteractivePage {
         for (Object o : filter.keySet()){
             if (!(o == null)){
                 String value = o.toString();
-                if (!value.equals("")){
+                if (!value.isEmpty()){
                     if (nbRestriction > 0){
                         query = query + " AND " + filter.get(o) + " =\"" + value + "\"";
                     } else {
