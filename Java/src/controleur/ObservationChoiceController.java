@@ -1,5 +1,6 @@
 package controleur;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ObservationChoiceController extends InteractivePage {
@@ -59,6 +61,18 @@ public class ObservationChoiceController extends InteractivePage {
     public static void setAllObservations(String esp) {
         espece = esp;
         allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp);
+    }
+
+    public static void setAllObservations(String esp, String restriction){
+        espece = esp;
+        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp + " " + restriction);
+    }
+
+    public void getData(ActionEvent event) {
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+
+        System.out.println(Arrays.toString(data.getAll()));
     }
 
     private Button createButton(@NotNull ArrayList<String> observation) {
