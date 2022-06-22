@@ -90,7 +90,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" fx:id="firstNameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="lastNameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -248,7 +248,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" fx:id="nomPlageField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="plageField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
