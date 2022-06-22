@@ -20,7 +20,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
-
+/**
+ * Controller for the DataGCI page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class DataGCIController extends InteractivePage {
     ObservableList<ContenuNid> natureList = FXCollections.observableArrayList(ContenuNid.values());
     ObservableList<String> nidObserveList = FXCollections.observableArrayList("Oui", "Non");
@@ -60,7 +64,12 @@ public class DataGCIController extends InteractivePage {
     @FXML
     private TextField bagueFemelleField;
 
-
+    /**
+     * Initializes the scene
+     *
+     * @param url             the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -200,12 +209,18 @@ public class DataGCIController extends InteractivePage {
     /**
      * Check if all fields are valid
      *
-     * @param lastName  last name of the observer
-     * @param firstName first name of the observer
-     * @param date      date of the observation
-     * @param time      time of the observation
-     * @param lambertX  lambert X coordinate of the observation
-     * @param lambertY  lambert Y coordinate of the observation
+     * @param lastName     last name of the observer
+     * @param firstName    first name of the observer
+     * @param date         date of the observation
+     * @param time         time of the observation
+     * @param lambertX     lambert X coordinate of the observation
+     * @param lambertY     lambert Y coordinate of the observation
+     * @param nombre       number of birds observed
+     * @param idNid        id of the nid
+     * @param plage        name of the beach
+     * @param nbEnvol      number of birds that flew away
+     * @param bagueMale    name of the male ring
+     * @param bagueFemelle name of the female ring
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
     private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
