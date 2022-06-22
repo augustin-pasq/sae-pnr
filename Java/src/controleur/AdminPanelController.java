@@ -24,6 +24,11 @@ import java.util.zip.ZipOutputStream;
  */
 public class AdminPanelController implements Initializable {
     /**
+     * The list of tables in the database
+     */
+    String[] tables = {"Lieu", "Observateur", "AObserve", "Obs_Hippocampe", "Obs_Loutre", "Obs_GCI", "Nid_GCI", "Chouette", "Obs_Chouette", "ZoneHumide", "Obs_Batracien", "Vegetation", "Lieu_Vegetation"};
+
+    /**
      * The exit button
      */
     @FXML
@@ -56,15 +61,9 @@ public class AdminPanelController implements Initializable {
     /**
      * Export the data from a table to a CSV file
      *
-     * @param table the table to export
-     * @param dir   the directory to export to
+     * @param file The zip file to export to
      */
     public void exportData(File file) {
-        /*ArrayList<ArrayList<String>> data = UseDatabase.selectQuery(String.format("SELECT * FROM %s", table));
-        */
-
-        String[] tables = {"Lieu", "Observateur", "AObserve", "Obs_Hippocampe", "Obs_Loutre", "Obs_GCI", "Nid_GCI", "Chouette", "Obs_Chouette", "ZoneHumide", "Obs_Batracien", "Vegetation", "Lieu_Vegetation"};
-
         try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(file))) {
             for (String table : tables) {
                 String dir = file.getName().replace(".zip", "");
