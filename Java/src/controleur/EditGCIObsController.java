@@ -40,7 +40,7 @@ public class EditGCIObsController extends InteractivePage {
         nidObserveComboBox.setItems(nidObserveList);
         raisonComboBox.setItems(raisonList);
         nidProtegeComboBox.setItems(nidProtegeList);
-        
+        /*
         nom.setText(observation.get(11));
         prenom.setText(observation.get(12));
         date.setText(observation.get(13));
@@ -57,10 +57,7 @@ public class EditGCIObsController extends InteractivePage {
         protege.setText(observation.get(8));
         male.setText(observation.get(9));
         femelle.setText(observation.get(10));
-
-
-        
-
+        */
     }
 
     public static void setObs(int numObs) {
@@ -70,5 +67,4 @@ public class EditGCIObsController extends InteractivePage {
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }
-}
 }
