@@ -2,10 +2,13 @@ package controleur;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -22,6 +25,9 @@ public class ObservationChoiceController extends InteractivePage {
     @FXML
     private VBox scrollPaneContainer;
 
+    @FXML
+    private HBox legendeContainer;
+
     private static ArrayList<ArrayList<String>> allObservations;
 
     private static String espece;
@@ -29,6 +35,18 @@ public class ObservationChoiceController extends InteractivePage {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
+
+        Label legende = new Label();
+        if (espece.equals("Chouette")) {
+            legende.setText("   Date   -    Heure");
+        } else {
+            legende.setText("   Date             -   Heure      -   Observateur");
+        }
+        legende.setPrefWidth(1225);
+        legende.setPrefHeight(50);
+        legende.setFont(new Font("DejaVu Sans Bold", 20));
+        legendeContainer.getChildren().add(legende);
+
 
         VBox observationsContainer = new VBox(10);
         for (int i = 1; i < allObservations.size(); i++) {
@@ -60,14 +78,14 @@ public class ObservationChoiceController extends InteractivePage {
     private Button createButton(@NotNull ArrayList<String> observation) {
         Button button = new Button();
         if (espece.equals("Chouette")) {
-            button.setText((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 2) + "   -   " + observation.get(observation.size() - 1)).toUpperCase());
+            button.setText((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3)).toUpperCase());
         } else {
-            button.setText((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 2) + "   -   " + observation.get(observation.size() - 1) + "   -   " + observation.get(observation.size() - 5) + " " + observation.get(observation.size() - 6)).toUpperCase());
+            button.setText((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 5) + " " + observation.get(observation.size() - 6)).toUpperCase());
         }
         button.setFont(new Font("DejaVu Sans Bold", 20));
-        button.setAlignment(Pos.CENTER);
-        button.setContentDisplay(ContentDisplay.CENTER);
-        button.setTextAlignment(TextAlignment.CENTER);
+        button.setAlignment(Pos.CENTER_LEFT);
+        button.setContentDisplay(ContentDisplay.LEFT);
+        button.setTextAlignment(TextAlignment.LEFT);
         button.setPrefWidth(1225);
         button.setPrefHeight(76);
         button.setMnemonicParsing(false);
@@ -77,7 +95,6 @@ public class ObservationChoiceController extends InteractivePage {
             switch (espece) {
                 case "Batracien" -> {
                     ConsultBatracienObsController.setObs(Integer.parseInt(observation.get(0)));
-                    System.out.println(Integer.parseInt(observation.get(0)));
                     Main.switchScene("ConsultBatracienObs", button, data);
                 }
                 case "Chouette" -> {
