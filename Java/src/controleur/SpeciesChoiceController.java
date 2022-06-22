@@ -58,7 +58,8 @@ public class SpeciesChoiceController extends InteractivePage {
         String suffix = data.get(0).equals("Data") ? name : "";
         Data newData = new Data(data.get(0), name);
 
-        ObservationChoiceController.setAllObservations(name);
+        ObservationChoiceController occ = new ObservationChoiceController();
+        occ.setEspece(name);
         Main.switchScene(data.get(0) + suffix, this.homeButton, newData);
     }
 }

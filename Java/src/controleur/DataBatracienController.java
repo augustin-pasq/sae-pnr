@@ -50,7 +50,7 @@ public class DataBatracienController extends InteractivePage {
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
-        this.isAdmin = true;
+        this.isAdmin = false;
         especeComboBox.setItems(especeList);
         meteoCielComboBox.setItems(meteoCielList);
         meteoTemperatureComboBox.setItems(meteoTemperatureList);
