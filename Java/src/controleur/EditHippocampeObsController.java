@@ -81,12 +81,14 @@ public class EditHippocampeObsController extends InteractivePage {
         timeField.setText(observation.get(10));
         lambertXField.setText(observation.get(11));
         lambertYField.setText(observation.get(12));
-        EspeceHippocampe saisieEspece = EspeceHippocampe.valueOf(observation.get(1));
+        EspeceHippocampe saisieEspece = EspeceHippocampe.valueOf(observation.get(1).replace(" ", "_").toUpperCase());
         especeComboBox.getSelectionModel().select(saisieEspece);
-        Sexe saisieSexe = Sexe.valueOf(observation.get(2));
+        Sexe saisieSexe = Sexe.valueOf(observation.get(2).replace(" ", "_").toUpperCase());
         sexeComboBox.getSelectionModel().select(saisieSexe);
         temperatureField.setText(observation.get(3));
-        Peche saisiePeche = Peche.valueOf(observation.get(4));
+        for (char c : observation.get(4)) {
+            
+        }
         typePecheComboBox.getSelectionModel().select(saisiePeche);
         sizeField.setText(observation.get(5));
         gestantComboBox.getSelectionModel().select(observation.get(6));

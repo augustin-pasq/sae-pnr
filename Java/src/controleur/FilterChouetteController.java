@@ -12,6 +12,7 @@ import modele.donnee.EspeceChouette;
 import modele.donnee.Sexe;
 import modele.donnee.TypeObservation;
 import modele.donnee.UseDatabase;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -22,12 +23,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
 
 public class FilterChouetteController extends InteractivePage {
 
+    private final String ANIMAL = "Chouette";
     ObservableList<EspeceChouette> especeList = FXCollections.observableArrayList(EspeceChouette.values());
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
     ObservableList<String> protocoleList = FXCollections.observableArrayList("Oui", "Non");
@@ -67,7 +70,9 @@ public class FilterChouetteController extends InteractivePage {
     }
 
     @FXML
-    private void validate(ActionEvent event) {
+    private void filter(ActionEvent event) {
+
+        // Init //
         String lastName = lastNameField.getText().toUpperCase();
         String firstName = firstNameField.getText().toUpperCase();
         LocalDate date = dateField.getValue();
@@ -82,87 +87,115 @@ public class FilterChouetteController extends InteractivePage {
         String typeObservation = typeObservationComboBox.getValue() == null ? "" : typeObservationComboBox.getValue().toString();
         String sexe = sexeComboBox.getValue() == null ? "" : sexeComboBox.getValue().toString();
 
+        //
+
         try {
             checkFields(lastName, firstName, date, time, lambertX, lambertY);
-            final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
-            int idObservateur;
-            if (observateur.size() == 1) {
-                idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
-            } else {
-                idObservateur = Integer.parseInt(observateur.get(1).get(0));
-            }
+            HashMap<Object, String> filter = new HashMap<>();
+            this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, espece, protocole, typeObservation, sexe);
+            String restriction = this.makeRestriction(filter);
+            System.out.print(restriction);
+            Data userData = (Data) this.homeButton.getScene().getUserData();
+            Data data = new Data(userData.get(0), ANIMAL, restriction);
+            Main.switchScene("ObservationChoice", this.validateButton, data);
 
-            Connection conn = UseDatabase.MySQLConnection();
-
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm" );
-            LocalTime localTime = LocalTime.parse(time, formatter);
-
-            String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement prep = conn.prepareStatement(q);
-            prep.setInt(1, idObs);
-            prep.setString(2, lambertX);
-            prep.setString(3, lambertY);
-            prep.setDate(4, java.sql.Date.valueOf(date));
-            prep.setTime(5, Time.valueOf(localTime));
-            prep.executeUpdate();
-
-            UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
-                    idObs, idObservateur));
-
-            String numIndividu = UUID.randomUUID().toString().replace("-", "");
-            UseDatabase.updateQuery(String.format("INSERT INTO Chouette (numIndividu, espece, sexe) VALUES ('%s', '%s', '%s')",
-                    numIndividu, espece, sexe));
-
-            String typeObs = typeObservation.replace("_", " ET ").replace("VISUELLE", "VISUEL");
-            System.out.println(typeObs);
-            UseDatabase.updateQuery(String.format("INSERT INTO Obs_Chouette (numObs, leNumIndividu, typeObs, protocole) VALUES ('%s', '%s', '%s', '%s')",
-                    idObs, numIndividu, typeObs, protocole));
-
-            Main.showPopup("Observation enregistrée correctement", event, false);
-
-            prep.close();
-            conn.close();
         } catch (IllegalArgumentException e) {
             Main.showPopup(e.getMessage(), event, true);
-        } catch (SQLException e) {
-            Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
-            System.err.println(e.getMessage());
-        } catch (NullPointerException e) {
-            Main.showPopup(e.getMessage(), event, true);
-            System.err.println(e.getMessage());
-        } catch (Exception e) {
-            Main.showPopup("Une erreur inconnue est survenue", event, true);
-            e.printStackTrace();
         }
     }
 
-    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY) throws IllegalArgumentException {
-        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
+    /**
+     * Check if all fields are valid
+     * @param lastName last name of the observer
+     * @param firstName first name of the observer
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     */
+    private void checkFields( String lastName,  String firstName, LocalDate date, String time,  String lambertX,  String lambertY) throws IllegalArgumentException {
+        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !lastName.isEmpty())
             throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
-
-        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
+            
+        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !firstName.isEmpty())
             throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
-        if (date == null)
-            throw new IllegalArgumentException("La date est obligatoire");
+        if (time != null && !time.isEmpty()) {
+            if (!time.matches("\\d{2}:\\d{2}"))
+                throw new IllegalArgumentException("L'heure doit être au format hh:mm");
+            else {
+                String[] timeSplit = time.split(":");
+                int h = Integer.parseInt(timeSplit[0]);
+                int m = Integer.parseInt(timeSplit[1]);
+                if (!(0 <= h && h < 24 && 0 <= m && m < 60))
+                    throw new IllegalArgumentException("L'heure doit être valide");
+                
+            }
+        }
 
-        String[] timeSplit = time.split(":");
-        int h = Integer.parseInt(timeSplit[0]);
-        int m = Integer.parseInt(timeSplit[1]);
-        if (!time.matches("\\d{2}:\\d{2}") && 0 < h && h < 24 && 0 < m && m < 60)
-            throw new IllegalArgumentException("L'heure ne peut pas être vide et doit être au format hh:mm");
-
-        if (!lambertX.matches("\\d+(\\.\\d+)?"))
+        if (!lambertX.matches("\\d+(\\.\\d+)?") && !lambertX.isEmpty())
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
 
-        if (!lambertY.matches("\\d+(\\.\\d+)?"))
+        if (!lambertY.matches("\\d+(\\.\\d+)?") && !lambertY.isEmpty())
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+    }
+
+    /**
+     * Adds in a filter the values of the field with the associated database column names.
+     * @param filter the filter of the observation
+     * @param lastName the last name of the observation
+     * @param firstName the first name of the observation
+     * @param date the date of the observation
+     * @param time the time of the observation
+     * @param lambertX the coordinate X of the observation
+     * @param lambertY the oordinate Y of the observation
+     * @param espece the specie of the observation
+     * @param protocole the protocol of the observation
+     * @param typeObs the type of the observation
+     * @param sexe the sexe of the observation
+     */
+    private void initFilter(HashMap<Object, String> filter, String lastName, String firstName, LocalDate date, String time, 
+                            String lambertX, String lambertY, String espece, Integer protocole, String typeObs, String sexe){
+
+        filter.put(lastName, "nom");
+        filter.put(firstName, "prenom"); 
+        filter.put(date, "dateObs");
+        filter.put(time, "heureObs");
+        filter.put(lambertX, "lieu_Lambert_X");
+        filter.put(lambertY, "lieu_Lambert_Y");
+        filter.put(espece, "espece");
+
+        if (protocole == null) filter.put("", "protocole");
+        else filter.put(protocole, "protocole");
+
+        filter.put(typeObs, "typeObs");
+        filter.put(sexe, "sexe");
+    }
+
+    /**
+     * Edit the select query to get data from the database
+     * @param filter the filter containing the values of the fields with the associated database column names.
+     * @return the end of the query, corresponding to the restriction of a query.
+     */
+    private String makeRestriction(HashMap<Object, String> filter){
+        String query = "";
+        int nbRestriction = 0;
+
+        for (Object o : filter.keySet()){
+            if (!(o == null)){
+                String value = o.toString();
+                if (!value.isEmpty()){
+                    if (nbRestriction > 0){
+                        query = query + " AND " + filter.get(o) + " =\"" + value + "\"";
+                    } else {
+                        query = query + " WHERE " + filter.get(o) + " =\"" + value + "\"";
+                    }
+                    nbRestriction ++;
+                }
+            }
+        }
+        return query;
     }
 }
