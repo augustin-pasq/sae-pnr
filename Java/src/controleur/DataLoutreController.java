@@ -11,10 +11,7 @@ import javafx.scene.control.TextField;
 import modele.donnee.UseDatabase;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Time;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -68,12 +65,12 @@ public class DataLoutreController extends InteractivePage {
 
         try {
             checkFields(lastName, firstName, time, lambertX, lambertY, commune, lieuDit);
-            final Integer idObs = UUID.randomUUID().hashCode();
+            final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
             ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
-                idObservateur = UUID.randomUUID().hashCode();
+                idObservateur = Math.abs(UUID.randomUUID().hashCode());
                 UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
                         idObservateur, lastName, firstName));
             } else {
@@ -85,7 +82,7 @@ public class DataLoutreController extends InteractivePage {
             UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
                     lambertX, lambertY));
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm:ssZ" );
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(time, formatter);
 
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
@@ -93,7 +90,7 @@ public class DataLoutreController extends InteractivePage {
             prep.setInt(1, idObs);
             prep.setString(2, lambertX);
             prep.setString(3, lambertY);
-            prep.setDate(4, java.sql.Date.valueOf(date));
+            prep.setDate(4, Date.valueOf(date));
             prep.setTime(5, Time.valueOf(localTime));
             prep.executeUpdate();
 
