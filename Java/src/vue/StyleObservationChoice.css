@@ -3,7 +3,7 @@
 }
 
 #Back, #HomePage {
-    -fx-background-color: None
+    -fx-background-color: transparent;
 }
 
 .scroll-pane {

@@ -1,7 +1,10 @@
-#AnchorPane, #logout {
-    -fx-background-color: rgba(255, 255, 255, 0);
+#anchorPane {
+    -fx-background-image: url("@../../../../data/fondAutre.png");
 }
 
+#logout {
+    -fx-background:none;
+}
 
 #Supprimer, #Gerer, #Importer, #Exporter {
     -fx-border-color: #00936E; 

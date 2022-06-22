@@ -1,7 +1,10 @@
-#AnchorPane, #Back, #HomePage{
-    -fx-background-color: rgba(255, 255, 255, 0);
+#AnchorPane{
+    -fx-background-image: url("@../../../../data/fondAutre.png");
 }
 
+#Back, #HomePage{
+    -fx-background-color: transparent;
+}
 
 #Batraciens, #Chouettes, #GCI, #Hippocampes, #Loutres {
     -fx-border-color: #00936E; 

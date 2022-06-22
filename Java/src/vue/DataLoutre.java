@@ -23,7 +23,7 @@ public class DataLoutre extends Application {
 
         // Add the stylesheet of the page
         Scene scene = new Scene(root);
-        URL pathCSS = getClass().getResource("StyleDataHippocampe.css");
+        URL pathCSS = getClass().getResource("StyleDataObs.css");
         scene.getStylesheets().addAll(pathCSS.toExternalForm());
         // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
         primaryStage.setScene(scene);

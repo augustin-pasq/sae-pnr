@@ -3,7 +3,7 @@
 }
 
 #Back, #HomePage, #save {
-    -fx-background: none;
+    -fx-background-color: transparent;
 }
 
 #espece, #ordonnee, #abcisse {
