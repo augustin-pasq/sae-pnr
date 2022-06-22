@@ -21,15 +21,22 @@ import java.util.ResourceBundle;
 
 public class ObservationChoiceController extends InteractivePage {
 
+    private static ArrayList<ArrayList<String>> allObservations;
+    private static String espece;
     @FXML
     private VBox scrollPaneContainer;
-
     @FXML
     private HBox legendeContainer;
 
-    private static ArrayList<ArrayList<String>> allObservations;
+    public static void setAllObservations(String esp) {
+        espece = esp;
+        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp);
+    }
 
-    private static String espece;
+    public static void setAllObservations(String esp, String restriction) {
+        espece = esp;
+        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp + " " + restriction);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,16 +64,6 @@ public class ObservationChoiceController extends InteractivePage {
         scrollPaneContainer.getChildren().add(scrollPane);
     }
 
-    public static void setAllObservations(String esp) {
-        espece = esp;
-        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp);
-    }
-
-    public static void setAllObservations(String esp, String restriction){
-        espece = esp;
-        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp + " " + restriction);
-    }
-
     public void getData(ActionEvent event) {
         Button target = (Button) event.getSource();
         Data data = (Data) target.getScene().getUserData();
@@ -91,17 +88,73 @@ public class ObservationChoiceController extends InteractivePage {
         button.setId("observation");
         button.setOnAction(e -> {
             Data data = (Data) this.homeButton.getScene().getUserData();
-            switch ((String) data.get(0)) {
-                case "Consult" -> {
-                    int i = espece.equals("Chouette") ? 3 : 0;
-                    ConsultBatracienObsController.setObs(Integer.parseInt(observation.get(i)));
-                    Main.switchScene("Consult" + espece + "Obs", button, data);
+            switch (espece) {
+                case "Batracien" -> {
+                    switch ((String) data.get(0)) {
+                        case "ConsultData" -> {
+                            ConsultBatracienObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("ConsultBatracienObs", button, data);
+                        }
+                        case "Edit" -> {
+                            System.out.println("EditBatracienObs");
+                            //EditBatracienObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("EditBatracienObs", button, data);
+                        }
+                    }
                 }
-                case "Edit" -> {
-
+                case "Chouette" -> {
+                    switch ((String) data.get(0)) {
+                        case "ConsultData" -> {
+                            ConsultChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
+                            Main.switchScene("ConsultChouetteObs", button, data);
+                        }
+                        case "Edit" -> {
+                            System.out.println("EditGChouetteObs");
+                            //EditChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
+                            Main.switchScene("EditChouetteObs", button, data);
+                        }
+                    }
+                }
+                case "Hippocampe" -> {
+                    switch ((String) data.get(0)) {
+                        case "ConsultData" -> {
+                            ConsultHippocampeObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("ConsultHippocampeObs", button, data);
+                        }
+                        case "Edit" -> {
+                            System.out.println("EditHippocampeObs");
+                            EditHippocampeObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("EditHippocampeObs", button, data);
+                        }
+                    }
+                }
+                case "Loutre" -> {
+                    switch ((String) data.get(0)) {
+                        case "ConsultData" -> {
+                            ConsultLoutreObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("ConsultLoutreObs", button, data);
+                        }
+                        case "Edit" -> {
+                            System.out.println("EditLoutreObs");
+                            EditLoutreObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("EditLoutreObs", button, data);
+                        }
+                    }
+                }
+                case "GCI" -> {
+                    switch ((String) data.get(0)) {
+                        case "ConsultData" -> {
+                            ConsultGCIObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("ConsultGCIObs", button, data);
+                        }
+                        case "Edit" -> {
+                            System.out.println("EditGCIObs");
+                            //EditGCIObsController.setObs(Integer.parseInt(observation.get(0)));
+                            Main.switchScene("EditGCIObs", button, data);
+                        }
+                    }
                 }
             }
-            
         });
         return button;
     }

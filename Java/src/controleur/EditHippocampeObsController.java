@@ -76,8 +76,8 @@ public class EditHippocampeObsController extends InteractivePage {
         typePecheComboBox.setItems(typePecheList);
         lastNameField.setText(observation.get(7));
         firstNameField.setText(observation.get(8));
-        LocalDate saisie = LocalDate.parse(observation.get(9));
-        dateField = new DatePicker(saisie);
+        LocalDate saisieDate = LocalDate.parse(observation.get(9));
+        dateField = new DatePicker(saisieDate);
         timeField.setText(observation.get(10));
         lambertXField.setText(observation.get(11));
         lambertYField.setText(observation.get(12));
