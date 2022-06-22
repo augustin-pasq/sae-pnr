@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
+import javafx.event.ActionEvent;
 
 public class ConsultGCIObsController extends InteractivePage {
 
@@ -68,5 +69,9 @@ public class ConsultGCIObsController extends InteractivePage {
 
     public static void setObs(int numObs) {
         observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+    }
+
+    public void goBack(ActionEvent event) {
+        Main.goBack(event);
     }
 }

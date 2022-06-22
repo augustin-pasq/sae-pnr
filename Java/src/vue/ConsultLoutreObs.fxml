@@ -236,11 +236,10 @@
             <Insets bottom="50.0" />
          </padding>
          <children>
-            <Button id="valider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="245.0" text="Retour aux observations" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button id="valider" onAction="#goBack" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="245.0" text="Retour aux observations" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Berlin Sans FB" size="20.0" />
                </font>
-
             </Button>
          </children>
       </HBox>
