@@ -96,7 +96,7 @@ public class ObservationChoiceController extends InteractivePage {
                             Main.switchScene("ConsultBatracienObs", button, data);
                         }
                         case "Edit" -> {
-                            System.out.println("EditGCIObs");
+                            System.out.println("EditBatracienObs");
                             //EditBatracienObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditBatracienObs", button, data);
                         }
@@ -109,7 +109,7 @@ public class ObservationChoiceController extends InteractivePage {
                             Main.switchScene("ConsultChouetteObs", button, data);
                         }
                         case "Edit" -> {
-                            System.out.println("EditGCIObs");
+                            System.out.println("EditGChouetteObs");
                             //EditChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
                             Main.switchScene("EditChouetteObs", button, data);
                         }
@@ -122,7 +122,7 @@ public class ObservationChoiceController extends InteractivePage {
                             Main.switchScene("ConsultHippocampeObs", button, data);
                         }
                         case "Edit" -> {
-                            System.out.println("EditGCIObs");
+                            System.out.println("EditHippocampeObs");
                             EditHippocampeObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditHippocampeObs", button, data);
                         }
@@ -135,7 +135,7 @@ public class ObservationChoiceController extends InteractivePage {
                             Main.switchScene("ConsultLoutreObs", button, data);
                         }
                         case "Edit" -> {
-                            System.out.println("EditGCIObs");
+                            System.out.println("EditLoutreObs");
                             EditLoutreObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditLoutreObs", button, data);
                         }
