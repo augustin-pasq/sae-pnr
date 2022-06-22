@@ -1,21 +1,20 @@
 package controleur;
 
-public class EditBatracienObsController {
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import modele.donnee.EspeceBatracien;
+import modele.donnee.UseDatabase;
 
-    package controleur;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-    import javafx.collections.FXCollections;
-    import javafx.collections.ObservableList;
-    import javafx.fxml.FXML;
-    import javafx.scene.control.ComboBox;
-    import javafx.scene.control.DatePicker;
-    import javafx.scene.control.TextField;
-    import modele.donnee.EspeceBatracien;
-
-    import java.net.URL;
-    import java.time.LocalDate;
-    import java.util.ArrayList;
-    import java.util.ResourceBundle;
+public class EditBatracienObsController extends InteractivePage {
 
     private static ArrayList<String> observation;
 
@@ -79,6 +78,11 @@ public class EditBatracienObsController {
     @FXML
     private TextField vegetationField;
 
+    public static void setObs(int numObs) {
+        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE numObs = " + numObs + ";")
+                .get(1);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -120,11 +124,6 @@ public class EditBatracienObsController {
         zoneOuvertureComboBox.getSelectionModel().select(observation.get(18));
         vegetationComboBox.getSelectionModel().select(observation.get(20));
 
-    }
-
-    public static void setObs(int numObs) {
-        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE numObs = " + numObs + ";")
-                .get(1);
     }
 
 }
