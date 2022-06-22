@@ -66,6 +66,9 @@ public class SpeciesChoiceController extends InteractivePage {
                 ObservationChoiceController.setAllObservations(species);
                 Main.switchScene(scene, this.homeButton, data); // For observation consultation
             }
+            case "Filter" -> {
+                Main.switchScene(scene + species, this.homeButton, data); // For observation filter
+            }
         }
     }
 }

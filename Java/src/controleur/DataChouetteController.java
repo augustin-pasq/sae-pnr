@@ -12,6 +12,7 @@ import modele.donnee.EspeceChouette;
 import modele.donnee.Sexe;
 import modele.donnee.TypeObservation;
 import modele.donnee.UseDatabase;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -101,7 +102,7 @@ public class DataChouetteController extends InteractivePage {
             UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
                     lambertX, lambertY));
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm" );
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(time, formatter);
 
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
@@ -135,15 +136,25 @@ public class DataChouetteController extends InteractivePage {
             Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
             System.err.println(e.getMessage());
         } catch (NullPointerException e) {
-            Main.showPopup(e.getMessage(), event, true);
-            System.err.println(e.getMessage());
+            Main.showPopup("Merci de remplir tous les champs", event, true);
+            e.printStackTrace();
         } catch (Exception e) {
             Main.showPopup("Une erreur inconnue est survenue", event, true);
             e.printStackTrace();
         }
     }
 
-    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY) throws IllegalArgumentException {
+    /**
+     * Check if all fields are valid
+     * @param lastName last name of the observer
+     * @param firstName first name of the observer
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     */
+    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time, @NotNull String lambertX, @NotNull String lambertY) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
@@ -153,11 +164,16 @@ public class DataChouetteController extends InteractivePage {
         if (date == null)
             throw new IllegalArgumentException("La date est obligatoire");
 
+        if (time == null)
+            throw new IllegalArgumentException("L'heure est obligatoire");
+        if (!time.matches("\\d{2}:\\d{2}"))
+            throw new IllegalArgumentException("L'heure doit être au format hh:mm");
         String[] timeSplit = time.split(":");
         int h = Integer.parseInt(timeSplit[0]);
         int m = Integer.parseInt(timeSplit[1]);
-        if (!time.matches("\\d{2}:\\d{2}") && 0 < h && h < 24 && 0 < m && m < 60)
-            throw new IllegalArgumentException("L'heure ne peut pas être vide et doit être au format hh:mm");
+        if (!(0 <= h && h < 24 && 0 <= m && m < 60)) {
+            throw new IllegalArgumentException("L'heure doit être valide");
+        }
 
         if (!lambertX.matches("\\d+(\\.\\d+)?"))
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");

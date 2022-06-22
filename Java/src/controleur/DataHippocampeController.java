@@ -11,6 +11,7 @@ import modele.donnee.EspeceHippocampe;
 import modele.donnee.Peche;
 import modele.donnee.Sexe;
 import modele.donnee.UseDatabase;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -180,19 +181,19 @@ public class DataHippocampeController extends InteractivePage {
             // If no exception has been thrown, the observation has been successfully added
             Main.showPopup("Observation enregistrée correctement", event, false);
 
-            // Close the connection
+            // Close the connections
             prep.close();
             conn.close();
         } catch (IllegalArgumentException e) {
             // If one of the fields is not valid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);
         } catch (SQLException e) {
-            // If an SQL exception has been thrown, show a popup with the error message
+            // If an SQL exception has been thrown, show a popup with an error message
             Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
             System.err.println(e.getMessage());
         } catch (NullPointerException e) {
-            Main.showPopup(e.getMessage(), event, true);
-            System.err.println(e.getMessage());
+            Main.showPopup("Merci de remplir tous les champs", event, true);
+            e.printStackTrace();
         } catch (Exception e) {
             // Catch all other exceptions, show a popup with a generic error message
             Main.showPopup("Une erreur inconnue est survenue", event, true);
@@ -200,7 +201,17 @@ public class DataHippocampeController extends InteractivePage {
         }
     }
 
-    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String temperature, String size) throws IllegalArgumentException {
+    /**
+     * Check if all fields are valid
+     * @param lastName last name of the observer
+     * @param firstName first name of the observer
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     */
+    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time, @NotNull String lambertX, @NotNull String lambertY, @NotNull String temperature, @NotNull String size) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
