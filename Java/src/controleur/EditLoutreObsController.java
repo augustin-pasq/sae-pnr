@@ -86,7 +86,7 @@ public class EditLoutreObsController extends InteractivePage {
     private static ArrayList<String> observation;
 
     public static void setObs(int numObs) {
-        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";").get(1);
+        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
     }
 
     public void goBack(ActionEvent event) {
@@ -102,6 +102,20 @@ public class EditLoutreObsController extends InteractivePage {
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
+
+        System.out.println(observation.toString());
+
+        lastNameField.setText(observation.get(4));
+        firstNameField.setText(observation.get(5));
+        LocalDate saisie = LocalDate.parse(observation.get(6));
+        dateField = new DatePicker(saisie);
+        timeField.setText(observation.get(7));
+        lambertXField.setText(observation.get(8));
+        lambertYField.setText(observation.get(9));
+        communeField.setText(observation.get(1));
+        lieuDitField.setText(observation.get(2));
+        indiceComboBox.getSelectionModel().select(observation.get(3));
+        validateButton.setText(observation.get(4));
         indiceComboBox.setItems(indiceList);
     }
 

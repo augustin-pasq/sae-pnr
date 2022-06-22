@@ -135,7 +135,6 @@ public class ObservationChoiceController extends InteractivePage {
                             Main.switchScene("ConsultLoutreObs", button, data);
                         }
                         case "Edit" -> {
-                            System.out.println("EditLoutreObs");
                             EditLoutreObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditLoutreObs", button, data);
                         }
