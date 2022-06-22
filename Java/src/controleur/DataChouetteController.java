@@ -19,6 +19,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -99,10 +101,8 @@ public class DataChouetteController extends InteractivePage {
             UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
                     lambertX, lambertY));
 
-            String[] timeSplit = time.split(":");
-            int h = Integer.parseInt(timeSplit[0]);
-            int m = Integer.parseInt(timeSplit[1]);
-            Time timeObject = new Time(h * 3600L + m * 60L);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm:ssZ" );
+            LocalTime localTime = LocalTime.parse(time, formatter);
 
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement prep = conn.prepareStatement(q);
@@ -110,7 +110,7 @@ public class DataChouetteController extends InteractivePage {
             prep.setString(2, lambertX);
             prep.setString(3, lambertY);
             prep.setDate(4, java.sql.Date.valueOf(date));
-            prep.setTime(5, timeObject);
+            prep.setTime(5, Time.valueOf(localTime));
             prep.executeUpdate();
 
             UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
@@ -125,7 +125,7 @@ public class DataChouetteController extends InteractivePage {
             UseDatabase.updateQuery(String.format("INSERT INTO Obs_Chouette (numObs, leNumIndividu, typeObs, protocole) VALUES ('%s', '%s', '%s', '%s')",
                     idObs, numIndividu, typeObs, protocole));
 
-            Main.showPopup("Observation enregistrée avec succès", event, false);
+            Main.showPopup("Observation enregistrée correctement", event, false);
 
             prep.close();
             conn.close();
@@ -133,10 +133,10 @@ public class DataChouetteController extends InteractivePage {
             Main.showPopup(e.getMessage(), event, true);
         } catch (SQLException e) {
             Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         } catch (NullPointerException e) {
             Main.showPopup(e.getMessage(), event, true);
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         } catch (Exception e) {
             Main.showPopup("Une erreur inconnue est survenue", event, true);
             e.printStackTrace();
@@ -144,10 +144,10 @@ public class DataChouetteController extends InteractivePage {
     }
 
     private void checkFields(String lastName, String firstName, String time, String lambertX, String lambertY) throws IllegalArgumentException {
-        if (!lastName.matches("[a-zA-Z\\-éèàçê\\ ]+"))
+        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le nom ne doit contenir que des lettres, espaces et tirets");
 
-        if (!firstName.matches("[a-zA-Z\\-éèàç\\ ]+"))
+        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le prénom ne doit contenir que des lettres, espaces et tirets");
 
         String[] timeSplit = time.split(":");
