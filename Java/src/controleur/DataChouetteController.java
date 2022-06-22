@@ -84,12 +84,12 @@ public class DataChouetteController extends InteractivePage {
 
         try {
             checkFields(lastName, firstName, time, lambertX, lambertY);
-            final Integer idObs = UUID.randomUUID().hashCode();
+            final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
             ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
-                idObservateur = UUID.randomUUID().hashCode();
+                idObservateur = Math.abs(UUID.randomUUID().hashCode());
                 UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
                         idObservateur, lastName, firstName));
             } else {
@@ -101,7 +101,7 @@ public class DataChouetteController extends InteractivePage {
             UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
                     lambertX, lambertY));
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm:ssZ" );
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm" );
             LocalTime localTime = LocalTime.parse(time, formatter);
 
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
