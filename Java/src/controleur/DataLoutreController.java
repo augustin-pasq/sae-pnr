@@ -122,10 +122,10 @@ public class DataLoutreController extends InteractivePage {
     }
 
     private void checkFields(String lastName, String firstName, String time, String lambertX, String lambertY, String commune, String lieuDit) throws IllegalArgumentException {
-        if (!lastName.matches("[a-zA-Z\\-éèàçê\\ ]+"))
+        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le nom ne doit contenir que des lettres, espaces et tirets");
 
-        if (!firstName.matches("[a-zA-Z\\-éèàç\\ ]+"))
+        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le prénom ne doit contenir que des lettres, espaces et tirets");
 
         String[] timeSplit = time.split(":");
@@ -140,10 +140,10 @@ public class DataLoutreController extends InteractivePage {
         if (!lambertY.matches("\\d+(\\.\\d+)?"))
             throw new IllegalArgumentException("La coordonnée Lambert Y doit être un nombre");
 
-        if (!commune.matches("[a-zA-Z\\-éèàçê\\ ]+"))
+        if (!commune.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("La commune ne doit contenir que des lettres, espaces et tirets");
 
-        if (!lieuDit.matches("[a-zA-Z\\-éèàçê\\ ]+"))
+        if (!lieuDit.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le lieu dit ne doit contenir que des lettres, espaces et tirets");
     }
 }

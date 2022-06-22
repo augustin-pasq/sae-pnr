@@ -144,10 +144,10 @@ public class DataChouetteController extends InteractivePage {
     }
 
     private void checkFields(String lastName, String firstName, String time, String lambertX, String lambertY) throws IllegalArgumentException {
-        if (!lastName.matches("[a-zA-Z\\-éèàçê\\ ]+"))
+        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le nom ne doit contenir que des lettres, espaces et tirets");
 
-        if (!firstName.matches("[a-zA-Z\\-éèàç\\ ]+"))
+        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le prénom ne doit contenir que des lettres, espaces et tirets");
 
         String[] timeSplit = time.split(":");
