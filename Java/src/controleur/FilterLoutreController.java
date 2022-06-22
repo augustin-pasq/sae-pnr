@@ -20,9 +20,11 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+import controleur.ObservationChoiceController;
 
 public class FilterLoutreController extends InteractivePage {
 
+    private final String ANIMAL = "Loutre";  
     ObservableList<String> indiceList = FXCollections.observableArrayList("Positif", "Négatif", "Non prospection");
 
     @FXML
@@ -66,9 +68,11 @@ public class FilterLoutreController extends InteractivePage {
 
         HashMap<Object, String> filter = new HashMap<>();
         this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit, indice);
-        String query = this.makeRestriction(filter);
+        String restriction = this.makeRestriction(filter);
 
-        Main.switchScene("ObservationChoice", validateButton, query);
+        Data data = new Data(ANIMAL, restriction);
+        ObservationChoiceController.setAllObservations(ANIMAL, restriction);
+        Main.switchScene("ObservationChoice", this.validateButton, data);
     }
 
     private void initFilter(HashMap<Object,String> filter, String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit, String indice){
@@ -84,7 +88,7 @@ public class FilterLoutreController extends InteractivePage {
     }
 
     private String makeRestriction(HashMap<Object, String> filter){
-        String query = "SELECT * FROM vue_AllFromLoutre";
+        String query = "";
         int nbRestriction = 0;
 
         for (Object o : filter.keySet()){
@@ -100,7 +104,6 @@ public class FilterLoutreController extends InteractivePage {
                 }
             }
         }
-        query = query + ";";
         return query;
     }
 }

@@ -45,6 +45,11 @@ public class ObservationChoiceController extends InteractivePage {
         allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp);
     }
 
+    public static void setAllObservations(String esp, String restriction){
+        espece = esp;
+        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp + " " + restriction);
+    }
+
     public void getData(ActionEvent event) {
         Button target = (Button) event.getSource();
         Data data = (Data) target.getScene().getUserData();
