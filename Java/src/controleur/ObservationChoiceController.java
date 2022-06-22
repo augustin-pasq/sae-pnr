@@ -118,8 +118,7 @@ public class ObservationChoiceController extends InteractivePage {
                             Main.switchScene("ConsultChouetteObs", button, data);
                         }
                         case "Edit" -> {
-                            System.out.println("EditGChouetteObs");
-                            //EditChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
+                            EditChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
                             Main.switchScene("EditChouetteObs", button, data);
                         }
                         case "Delete" -> {
