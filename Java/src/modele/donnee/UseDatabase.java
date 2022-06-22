@@ -75,7 +75,7 @@ public class UseDatabase {
             success = true;
             stmt.close();
         } catch (SQLException e) {
-            System.out.println("Error executing query:" + e.getMessage());
+            System.err.println("Error executing query:" + e.getMessage());
         }
 
         return success;
