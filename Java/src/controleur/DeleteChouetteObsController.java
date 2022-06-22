@@ -6,6 +6,5 @@ package controleur;
  * @author Groupe SAE PNR 1D1
  */
 public class DeleteChouetteObsController extends InteractivePage {
-
-
+    
 }
