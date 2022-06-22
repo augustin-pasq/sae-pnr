@@ -14,7 +14,6 @@ import modele.donnee.TypeObservation;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.ProcessBuilder.Redirect.Type;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

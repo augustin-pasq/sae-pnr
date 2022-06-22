@@ -122,7 +122,6 @@ public class ObservationChoiceController extends InteractivePage {
                             Main.switchScene("ConsultHippocampeObs", button, data);
                         }
                         case "Edit" -> {
-                            System.out.println("EditHippocampeObs");
                             EditHippocampeObsController.setObs(Integer.parseInt(observation.get(0)));
                             Main.switchScene("EditHippocampeObs", button, data);
                         }

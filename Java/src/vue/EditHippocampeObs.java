@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class EditHippocampe extends Application {
+public class EditHippocampeObs extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -17,7 +17,7 @@ public class EditHippocampe extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource("EditHippocampe.fxml");
+        URL pathFXML = getClass().getResource("EditHippocampeObs.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
