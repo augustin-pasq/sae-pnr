@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -175,11 +176,9 @@ public class Main extends Application implements Initializable {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Scene scene = loadScene("Login");
-        // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
+        primaryStage.getIcons().setAll(new Image(getClass().getResource("../../data/Logo_PNR.png").toExternalForm())); // Application logo
         primaryStage.setScene(scene);
-        //primaryStage.setFullScreen(true);
         primaryStage.setTitle("PNR");
-        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
