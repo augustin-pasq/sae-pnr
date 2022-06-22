@@ -139,79 +139,10 @@ public class FilterBatracienController extends InteractivePage {
         try {
             // Check if the data is valid
             checkFields(lastName, firstName, date, time, lambertX, lambertY, nbAdultes, nbAmplexus, nbPontes, nbTetards,
-                    temperature, zoneProfondeur, zoneSurface, vegetation);
-            // Generate a unique id for the new observation
-            final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
-
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
-            int idObservateur;
-            if (observateur.size() == 1) {
-                idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
-            } else {
-                idObservateur = Integer.parseInt(observateur.get(1).get(0));
-            }
-
-            Connection conn = UseDatabase.MySQLConnection();
-
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime localTime = LocalTime.parse(time, formatter);
-
-            String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement prep = conn.prepareStatement(q);
-            prep.setInt(1, idObs);
-            prep.setString(2, lambertX);
-            prep.setString(3, lambertY);
-            prep.setDate(4, Date.valueOf(date));
-            prep.setTime(5, Time.valueOf(localTime));
-            prep.executeUpdate();
-
-            UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES (%d, '%s')",
-                    idObs, idObservateur));
-
-            int idVegeLieu = Math.abs(UUID.randomUUID().hashCode());
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu_Vegetation (idVegeLieu) VALUES (%d)",
-                    idVegeLieu));
-
-            int idVege = Math.abs(UUID.randomUUID().hashCode());
-            UseDatabase.updateQuery(String.format("INSERT INTO Vegetation (idVege, decrit_LieuVege, vegetation, natureVege) VALUES (%d, %d, '%s', '%s')",
-                    idVege, idVegeLieu, vegetation, natureVegetation));
-
-            ArrayList<ArrayList<String>> zoneHumide = UseDatabase.selectQuery(
-                    String.format("SELECT zh_id FROM ZoneHumide WHERE zh_temporaire = %d AND zh_profondeur = %d AND zh_surface = %d AND zh_typeMare = '%s' AND zh_pente = '%s' AND zh_ouverture = '%s'",
-                            zoneTemporaire, Integer.parseInt(zoneProfondeur), Integer.parseInt(zoneSurface), zoneMaree, zonePente, zoneOuverture));
-            int zh_id;
-            if (zoneHumide.size() == 1) {
-                zh_id = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO ZoneHumide (zh_id, zh_temporaire, zh_profondeur, zh_surface, zh_typeMare, zh_pente, zh_ouverture) VALUES (%d, %d, %d, %d, '%s', '%s', '%s')",
-                        zh_id, zoneTemporaire, Integer.parseInt(zoneProfondeur), Integer.parseInt(zoneSurface), zoneMaree, zonePente, zoneOuverture));
-            } else {
-                zh_id = Integer.parseInt(zoneHumide.get(1).get(0));
-            }
-
-            UseDatabase.updateQuery(String.format("INSERT INTO Obs_Batracien (espece, obsB, concernes_vege, concerne_ZH, temperature, meteo_ciel, meteo_temp, meteo_vent, meteo_pluie, nombreAdultes, nombreAmplexus, nombrePonte, nombreTetard)" +
-                                                                    "VALUES ('%s', %d, %d, %d, '%s', '%s', '%s', '%s', '%s', %d, %d, %d, %d)",
-                    espece, idObs, idVege, zh_id, temperature, meteoCiel, meteoTemperature, meteoVent, meteoPluie, Integer.parseInt(nbAdultes), Integer.parseInt(nbAmplexus), Integer.parseInt(nbPontes), Integer.parseInt(nbTetards)));
-
-            Main.showPopup("Observation enregistrée correctement", event, false);
-
-            prep.close();
-            conn.close();
+                        temperature, zoneProfondeur, zoneSurface, vegetation);
+            
         } catch (IllegalArgumentException e) {
-            Main.showPopup(e.getMessage(), event, true);
-        } catch (SQLException e) {
-            Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
-            System.err.println(e.getMessage());
-        } catch (NullPointerException e) {
-            Main.showPopup("Merci de remplir tous les champs", event, true);
-            e.printStackTrace();
-        } catch (Exception e) {
-            Main.showPopup("Une erreur inconnue est survenue", event, true);
-            e.printStackTrace();
+                Main.showPopup(e.getMessage(), event, true);
         }
     }
 
@@ -226,11 +157,11 @@ public class FilterBatracienController extends InteractivePage {
      * @param lambertY  lambert Y coordinate of the observation
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
-    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
-                             @NotNull String lambertX,@NotNull String lambertY, @NotNull String nbAdultes,
-                             @NotNull String nbAmplexus, @NotNull String nbPontes, @NotNull String nbTetards,
-                             @NotNull String temperature, @NotNull String zoneProfondeur, @NotNull String zoneSurface,
-                             @NotNull String vegetation) throws IllegalArgumentException {
+    private void checkFields(String lastName, String firstName, LocalDate date, String time,
+                            String lambertX, String lambertY, String nbAdultes,
+                            String nbAmplexus, String nbPontes, String nbTetards,
+                            String temperature, String zoneProfondeur, String zoneSurface,
+                            String vegetation) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !lastName.isEmpty())
             throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
