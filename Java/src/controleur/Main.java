@@ -179,6 +179,7 @@ public class Main extends Application implements Initializable {
         primaryStage.setScene(scene);
         //primaryStage.setFullScreen(true);
         primaryStage.setTitle("PNR");
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
