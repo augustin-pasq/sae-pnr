@@ -2,7 +2,6 @@ package controleur;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -92,26 +91,14 @@ public class ObservationChoiceController extends InteractivePage {
         button.setId("observation");
         button.setOnAction(e -> {
             Data data = (Data) this.homeButton.getScene().getUserData();
-            switch (espece) {
-                case "Batracien" -> {
-                    ConsultBatracienObsController.setObs(Integer.parseInt(observation.get(0)));
-                    Main.switchScene("ConsultBatracienObs", button, data);
+            switch ((String) data.get(0)) {
+                case "Consult" -> {
+                    int i = espece.equals("Chouette") ? 3 : 0;
+                    ConsultBatracienObsController.setObs(Integer.parseInt(observation.get(i)));
+                    Main.switchScene("Consult" + espece + "Obs", button, data);
                 }
-                case "Chouette" -> {
-                    ConsultChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
-                    Main.switchScene("ConsultChouetteObs", button, data);
-                }
-                case "GCI" -> {
-                    ConsultGCIObsController.setObs(Integer.parseInt(observation.get(0)));
-                    Main.switchScene("ConsultGCIObs", button, data);
-                }
-                case "Hippocampe" -> {
-                    ConsultHippocampeObsController.setObs(Integer.parseInt(observation.get(0)));
-                    Main.switchScene("ConsultHippocampeObs", button, data);
-                }
-                case "Loutre" -> {
-                    ConsultLoutreObsControler.setObs(Integer.parseInt(observation.get(0)));
-                    Main.switchScene("ConsultLoutreObs", button, data);
+                case "Edit" -> {
+
                 }
             }
             

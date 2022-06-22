@@ -67,7 +67,8 @@ public class FilterLoutreController extends InteractivePage {
         this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit, indice);
         String restriction = this.makeRestriction(filter);
 
-        Data data = new Data(ANIMAL, restriction);
+        Data userData = (Data) this.homeButton.getScene().getUserData();
+        Data data = new Data(userData.get(0), ANIMAL, restriction);
         ObservationChoiceController.setAllObservations(ANIMAL, restriction);
         Main.switchScene("ObservationChoice", this.validateButton, data);
     }
