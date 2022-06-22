@@ -170,19 +170,18 @@ public class FilterLoutreController extends InteractivePage {
 
         for (Object o : filter.keySet()){
             if (!(o == null)){
-                if (!filter.toString().equals("")){
-                    String value = o.toString();
-                    if (!value.equals("")){
-                        if (nbRestriction > 0){
-                            query = query + " AND " + filter.get(o) + " =\"" + value + "\"";
-                        } else {
-                            query = query + " WHERE " + filter.get(o) + " =\"" + value + "\"";
-                        }
-                        nbRestriction ++;
+                String value = o.toString();
+                if (!value.equals("")){
+                    if (nbRestriction > 0){
+                        query = query + " AND " + filter.get(o) + " =\"" + value + "\"";
+                    } else {
+                        query = query + " WHERE " + filter.get(o) + " =\"" + value + "\"";
                     }
+                    nbRestriction ++;
                 }
             }
         }
+        query = query + ";";
         return query;
     }
 }
