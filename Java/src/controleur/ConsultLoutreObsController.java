@@ -1,14 +1,15 @@
 package controleur;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
 
-public class ConsultLoutreObsControler extends InteractivePage {
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class ConsultLoutreObsController extends InteractivePage {
 
     @FXML
     private Label nom;
