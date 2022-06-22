@@ -52,7 +52,12 @@ public class ObservationChoiceController extends InteractivePage {
     }
 
     private Button createButton(@NotNull ArrayList<String> observation) {
-        Button button = new Button((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 2) + "   -   " + observation.get(observation.size() - 1) + "   -   " + observation.get(observation.size() - 5) + " " + observation.get(observation.size() - 6)).toUpperCase());
+        Button button = new Button();
+        if (espece.equals("Chouette")) {
+            button.setText((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 2) + "   -   " + observation.get(observation.size() - 1)).toUpperCase());
+        } else {
+            button.setText((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 2) + "   -   " + observation.get(observation.size() - 1) + "   -   " + observation.get(observation.size() - 5) + " " + observation.get(observation.size() - 6)).toUpperCase());
+        }
         button.setFont(new Font("DejaVu Sans Bold", 20));
         button.setAlignment(Pos.CENTER);
         button.setContentDisplay(ContentDisplay.CENTER);
@@ -62,8 +67,29 @@ public class ObservationChoiceController extends InteractivePage {
         button.setMnemonicParsing(false);
         button.setId("observation");
         button.setOnAction(e -> {
-            ConsultLoutreObsControler.setObs(Integer.parseInt(observation.get(0)));
-            Main.switchScene("Consult" + espece + "Obs", button);
+            switch (espece){
+                case "Batracien":
+                    ConsultBatracienObsControler.setObs(Integer.parseInt(observation.get(0)));
+                    Main.switchScene("ConsultBatracienObs", button);
+                    break;
+                case "Chouette":
+                    ConsultChouetteObsControler.setObs(Integer.parseInt(observation.get(3)));
+                    Main.switchScene("ConsultChouetteObs", button);
+                    break;
+                case "GCI":
+                    ConsultGCIObsControler.setObs(Integer.parseInt(observation.get(0)));
+                    Main.switchScene("ConsultGCIObs", button);
+                    break;
+                case "Hippocampe":
+                    ConsultHippocampeObsControler.setObs(Integer.parseInt(observation.get(0)));
+                    Main.switchScene("ConsultHippocampeObs", button);
+                    break;
+                case "Loutre":
+                    ConsultLoutreObsControler.setObs(Integer.parseInt(observation.get(0)));
+                    Main.switchScene("ConsultLoutreObs", button);
+                    break;
+            }
+            
         });
         return button;
     }

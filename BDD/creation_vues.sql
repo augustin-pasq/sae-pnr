@@ -1,11 +1,9 @@
 CREATE OR REPLACE VIEW vue_allFromChouette
 AS
-SELECT Obs_Chouette.*, espece, sexe, nom, prenom, dateObs, heureObs, lieu_Lambert_X, lieu_Lambert_Y
+SELECT Obs_Chouette.*, espece, sexe, dateObs, heureObs, lieu_Lambert_X, lieu_Lambert_Y
     FROM Obs_Chouette
         JOIN Chouette ON leNumIndividu = numIndividu
             JOIN Observation ON numObs = idObs
-                JOIN AObserve ON idObs = lobservation
-                    JOIN Observateur ON lobservateur = idObservateur
 ;
 
 CREATE OR REPLACE VIEW vue_allFromGCI
