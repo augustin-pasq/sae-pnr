@@ -75,17 +75,18 @@ public class EditChouetteObsController extends InteractivePage {
         sexeComboBox.setItems(sexeList);
         protocoleComboBox.setItems(protocoleList);
         typeObservationComboBox.setItems(typeObservationList);
+
         LocalDate saisieDate = LocalDate.parse(observation.get(6));
         dateField = new DatePicker(saisieDate);
         timeField.setText(observation.get(7));
         lambertXField.setText(observation.get(8));
         lambertYField.setText(observation.get(9));
-        EspeceChouette saisieChouette = EspeceChouette.valueOf(observation.get(3));
+        EspeceChouette saisieChouette = EspeceChouette.valueOf(observation.get(4).toUpperCase());
         especeComboBox.getSelectionModel().select(saisieChouette);
         protocoleComboBox.getSelectionModel().select(observation.get(0));
-        TypeObservation saisieObservation = TypeObservation.valueOf(observation.get(1));
+        TypeObservation saisieObservation = TypeObservation.valueOf(observation.get(1).replace(" et ", "_").toUpperCase());
         typeObservationComboBox.getSelectionModel().select(saisieObservation);
-        Sexe saisieSexe = Sexe.valueOf(observation.get(5));
+        Sexe saisieSexe = Sexe.valueOf(observation.get(5).toUpperCase());
         sexeComboBox.getSelectionModel().select(saisieSexe);
     }
 
