@@ -100,8 +100,8 @@ public class DataHippocampeController extends InteractivePage {
         }
 
         String temperature = temperatureField.getText();
-        String typePeche = null;
         // format the type de peche as it is required in the database
+        String typePeche = null;
         if (typePecheComboBox.getValue() != null) {
             String tmp = typePecheComboBox.getValue().toString();
             StringBuilder typePecheSb = new StringBuilder();

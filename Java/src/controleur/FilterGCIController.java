@@ -16,7 +16,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-
+/**
+ * Controller of the filter GCI.
+ */
 public class FilterGCIController extends InteractivePage {
 
     private final String ANIMAL = "GCI";
@@ -61,6 +63,9 @@ public class FilterGCIController extends InteractivePage {
     private Button validateButton;
 
     @Override
+    /**
+     * Initialise the controller class.
+     */
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
         this.isAdmin = true;
@@ -70,7 +75,11 @@ public class FilterGCIController extends InteractivePage {
         nidProtegeComboBox.setItems(nidProtegeList);
     }
 
+
     @FXML
+    /**
+     * Method called when the user clicks on the validate button.
+     */
     public void filter(ActionEvent event){
 
         // Init //
@@ -134,6 +143,26 @@ public class FilterGCIController extends InteractivePage {
         Main.switchScene("ObservationChoice", this.validateButton, data);
     }
 
+    /**
+     * Adds in a filter the values of the field with the associated database column names.
+     * @param filter the filter of the observation
+     * @param lastName the last name of the observation
+     * @param firstName the first name of the observation
+     * @param date the date of the observation
+     * @param time the time of the observation
+     * @param lambertX the coordinate X of the observation
+     * @param lambertY the oordinate Y of the observation
+     * @param nature the nature of the observation
+     * @param nombre the number of items of the observation
+     * @param presentMaisNonObs boolean value which is true if the nest have already been observed
+     * @param leNid the nest id
+     * @param nomPlage the beach
+     * @param raisonArretObservation the reason why the prospecting has been stopped
+     * @param nbEnvols the number of flights
+     * @param protection boolean value which is true if the nest is under protection
+     * @param bagueMale the code of the male
+     * @param bagueFemelle the code of the female
+     */
     private void initFilter(HashMap<Object, String> filter, String lastName, String firstName,
                             LocalDate date, String time, String lambertX, String lambertY,
                             String nature, Integer nombre, Integer presentMaisNonObs, Integer leNid,
@@ -171,6 +200,11 @@ public class FilterGCIController extends InteractivePage {
         filter.put(bagueFemelle, "bagueFemelle");
     }
     
+    /**
+     * Edit the select query to get data from the database
+     * @param filter the filter containing the values of the fields with the associated database column names.
+     * @return the end of the query, corresponding to the restriction of a query.
+     */
     private String makeRestriction(HashMap<Object, String> filter){
         String query = "";
         int nbRestriction = 0;

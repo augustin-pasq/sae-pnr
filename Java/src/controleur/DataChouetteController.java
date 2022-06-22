@@ -26,7 +26,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
-
+/**
+ * Controller for the DataChouette page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class DataChouetteController extends InteractivePage {
 
     ObservableList<EspeceChouette> especeList = FXCollections.observableArrayList(EspeceChouette.values());
@@ -57,6 +61,12 @@ public class DataChouetteController extends InteractivePage {
     @FXML
     private Button validateButton;
 
+    /**
+     * Initialize the scene
+     *
+     * @param url            the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -67,6 +77,10 @@ public class DataChouetteController extends InteractivePage {
         typeObservationComboBox.setItems(typeObservationList);
     }
 
+    /**
+     * Validate the data and add it to the database
+     * @param event the event that triggered the method
+     */
     @FXML
     private void validate(ActionEvent event) {
         String lastName = lastNameField.getText().toUpperCase();
@@ -146,12 +160,13 @@ public class DataChouetteController extends InteractivePage {
 
     /**
      * Check if all fields are valid
-     * @param lastName last name of the observer
+     *
+     * @param lastName  last name of the observer
      * @param firstName first name of the observer
-     * @param date date of the observation
-     * @param time time of the observation
-     * @param lambertX lambert X coordinate of the observation
-     * @param lambertY lambert Y coordinate of the observation
+     * @param date      date of the observation
+     * @param time      time of the observation
+     * @param lambertX  lambert X coordinate of the observation
+     * @param lambertY  lambert Y coordinate of the observation
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
     private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time, @NotNull String lambertX, @NotNull String lambertY) throws IllegalArgumentException {
