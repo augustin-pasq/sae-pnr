@@ -90,7 +90,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="lastNameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -107,7 +107,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="firstNameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -137,7 +137,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="timeField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -154,7 +154,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="lambertXField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -171,7 +171,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="lambertYField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -201,7 +201,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="numberField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -231,7 +231,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="identifiantNidField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -248,7 +248,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="plageNameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -278,7 +278,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="nbEnvolField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -308,7 +308,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="bagueMaleField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -325,7 +325,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="bagueFemelleField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
