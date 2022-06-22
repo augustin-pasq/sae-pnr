@@ -68,6 +68,7 @@ public class DataHippocampeController extends InteractivePage {
 
     @FXML
     public void validate(ActionEvent event) {
+        // get all the fields
         String lastName = lastNameField.getText().toUpperCase();
         String firstName = firstNameField.getText().toUpperCase();
         LocalDate date = dateField.getValue();
@@ -75,6 +76,7 @@ public class DataHippocampeController extends InteractivePage {
         String lambertX = lambertXField.getText();
         String lambertY = lambertYField.getText();
         String espece = null;
+        // format the species as it is required in the database
         if (especeComboBox.getValue() != null) {
             espece = especeComboBox.getValue().toString();
             StringBuilder especeSb = new StringBuilder();
@@ -90,6 +92,7 @@ public class DataHippocampeController extends InteractivePage {
         }
 
         String sexe = null;
+        // format the sexe as it is required in the database
         if (sexeComboBox.getValue() != null) {
             sexe = sexeComboBox.getValue().toString().charAt(0) +
                     sexeComboBox.getValue().toString().substring(1).toLowerCase();
@@ -97,6 +100,7 @@ public class DataHippocampeController extends InteractivePage {
 
         String temperature = temperatureField.getText();
         String typePeche = null;
+        // format the type de peche as it is required in the database
         if (typePecheComboBox.getValue() != null) {
             String tmp = typePecheComboBox.getValue().toString();
             StringBuilder typePecheSb = new StringBuilder();
@@ -112,33 +116,42 @@ public class DataHippocampeController extends InteractivePage {
         }
 
         String size = sizeField.getText();
-        int gestant = 0;
+        int gestant = 0; // 0 if not gestant, 1 if gestant, as it is required in the database
         if (gestantComboBox.getValue() != null) {
             gestant = gestantComboBox.getValue().equals("Gestant") ? 1 : 0;
         }
 
         try {
+            // check the validity of the fields
             checkFields(lastName, firstName, date, time, lambertX, lambertY, temperature, size);
-            final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
+            // Generate a unique id for the new observation
+            final int idObs = Math.abs(UUID.randomUUID().hashCode());
 
+            // try to get the observer's id if it exists
             ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
+                // if it doesn't exist, create it with a unique id
                 idObservateur = Math.abs(UUID.randomUUID().hashCode());
                 UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
                         idObservateur, lastName, firstName));
             } else {
+                // if it exists, get its id
                 idObservateur = Integer.parseInt(observateur.get(1).get(0));
             }
 
+            // Get a new connection to the database for the prepared statements
             Connection conn = UseDatabase.MySQLConnection();
 
+            // Insert the coordinates in the database. If they already exist, the SQLIntegrityConstraintViolationException is caught by useDatabase and ignored
             UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
                     lambertX, lambertY));
 
+            // Format the time to an object
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(time, formatter);
 
+            // Insert the observation in the database with a prepared statement (mostly because of the time)
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement prep = conn.prepareStatement(q);
             prep.setInt(1, idObs);
@@ -148,9 +161,11 @@ public class DataHippocampeController extends InteractivePage {
             prep.setTime(5, Time.valueOf(localTime));
             prep.executeUpdate();
 
+            // Insert the link between the observation and the observer in the database
             UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
                     idObs, idObservateur));
 
+            // Insert the hippocampe linked to the observation in the database with a prepared statement
             String q2 = "INSERT INTO Obs_Hippocampe (obsH, espece, sexe, temperatureEau, typePeche, taille, gestant) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement prep2 = conn.prepareStatement(q2);
             prep2.setInt(1, idObs);
@@ -162,19 +177,24 @@ public class DataHippocampeController extends InteractivePage {
             prep2.setInt(7, gestant);
             prep2.executeUpdate();
 
+            // If no exception has been thrown, the observation has been successfully added
             Main.showPopup("Observation enregistrée correctement", event, false);
 
+            // Close the connection
             prep.close();
             conn.close();
         } catch (IllegalArgumentException e) {
+            // If one of the fields is not valid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);
         } catch (SQLException e) {
+            // If an SQL exception has been thrown, show a popup with the error message
             Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
             System.err.println(e.getMessage());
         } catch (NullPointerException e) {
             Main.showPopup(e.getMessage(), event, true);
             System.err.println(e.getMessage());
         } catch (Exception e) {
+            // Catch all other exceptions, show a popup with a generic error message
             Main.showPopup("Une erreur inconnue est survenue", event, true);
             e.printStackTrace();
         }
