@@ -109,8 +109,9 @@ public class FilterHippocampeController extends InteractivePage {
             }
             typePeche = tmp.equals("NON_RENSEIGNE") ? null : typePecheSb.toString();
         }
-
+         
         String size = sizeField.getText();
+
         Integer gestant = null;
         if (gestantComboBox.getValue() != null) {
             gestant = gestantComboBox.getValue().equals("Gestant") ? 1 : 0;
@@ -120,7 +121,7 @@ public class FilterHippocampeController extends InteractivePage {
 
         try {
             // check the validity of the fields
-            checkFields(lastName, firstName, date, time, lambertX, lambertY, temperature, size);
+            checkFields(lastName, firstName, date, time, lambertX, lambertY, temperature, String.valueOf(size));
 
             HashMap<Object, String> filter = new HashMap<>();
             this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, espece, sexe, temperature, typePeche, size, gestant);
@@ -128,11 +129,11 @@ public class FilterHippocampeController extends InteractivePage {
 
             Data userData = (Data) this.homeButton.getScene().getUserData();
             Data data = new Data(userData.get(0), ANIMAL, restriction);
+            data.setAdmin(userData.isAdmin());
             ObservationChoiceController.setAllObservations(ANIMAL, restriction);
             Main.switchScene("ObservationChoice", this.validateButton, data);
 
         } catch (IllegalArgumentException e) {
-            // If one of the fields is not valid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);
         }
     }
@@ -156,7 +157,7 @@ public class FilterHippocampeController extends InteractivePage {
     private void initFilter(HashMap<Object, String> filter, String lastName, String firstName,
                             LocalDate date, String time, String lambertX, String lambertY, 
                             String espece, String sexe, String temperature, String typePeche, 
-                            String size, int gestant){
+                            String size, Integer gestant){
 
         filter.put(lastName, "nom");
         filter.put(firstName, "prenom"); 
@@ -168,7 +169,7 @@ public class FilterHippocampeController extends InteractivePage {
         filter.put(sexe, "sexe");
         filter.put(temperature, "temperatureEau");
         filter.put(typePeche, "typePeche");
-        filter.put(size, "taille");
+        filter.put(size , "taille");
         this.putInteger(filter, gestant, "gestant");
     }
 
@@ -210,6 +211,7 @@ public class FilterHippocampeController extends InteractivePage {
         if (!temperature.matches("\\d+(\\.\\d+)?") && !temperature.isEmpty()) 
             throw new IllegalArgumentException("La température doit être un nombre");
 
+        System.out.println("size :" +size);
         if (!size.matches("\\d+(\\.\\d+)?") && !size.isEmpty())
             throw new IllegalArgumentException("La taille doit être un nombre");
     }
