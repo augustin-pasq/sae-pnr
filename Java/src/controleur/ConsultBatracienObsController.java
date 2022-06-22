@@ -89,6 +89,7 @@ public class ConsultBatracienObsController extends InteractivePage {
         natureVegetation.setText(observation.get(19));
         vegetation.setText(observation.get(20));
     }
+    
     public static void setObs(int numObs) {
         observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE ObsB = " + numObs + ";").get(1);
     }

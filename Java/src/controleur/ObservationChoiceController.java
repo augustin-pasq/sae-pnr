@@ -80,7 +80,7 @@ public class ObservationChoiceController extends InteractivePage {
                     Main.switchScene("ConsultChouetteObs", button, data);
                 }
                 case "GCI" -> {
-                    ConsultGCIObsControler.setObs(Integer.parseInt(observation.get(0)));
+                    ConsultGCIObsController.setObs(Integer.parseInt(observation.get(0)));
                     Main.switchScene("ConsultGCIObs", button, data);
                 }
                 case "Hippocampe" -> {
