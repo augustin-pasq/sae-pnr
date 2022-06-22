@@ -1,19 +1,15 @@
 package controleur;
 
-import javafx.event.Event;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import modele.donnee.EspeceObservee;
-import java.util.HashMap;
+
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import javax.lang.model.element.QualifiedNameable;
-
-import static modele.donnee.UseDatabase.selectQuery;
 
 public class GenerateChartController extends InteractivePage {
 
@@ -38,13 +34,17 @@ public class GenerateChartController extends InteractivePage {
     }
 
     @FXML
+    public void makeChart(Event event) {
+        Main.showPopup("Cette fonctionnalité n'est pas encore implémentée", this.homeButton, false);
+    }
+
     /**
      * Generates a query to get the data for the chart.
      * @param event The event that triggered the method.
      * @return the query to make a chart.
      */
+    @FXML
     private String generateQuery(final Event event){
-
         String query = "";
         if(especeComboBox.getValue() != null && abscisseComboBox.getValue() != null && ordonneeComboBox.getValue() != null){
             String espece, abscisse, ordonnee;
