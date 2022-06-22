@@ -44,7 +44,7 @@ public class ObservationChoiceController extends InteractivePage {
 
         Label legende = new Label();
         if (espece.equals("Chouette")) {
-            legende.setText("   Date   -    Heure");
+            legende.setText(" Id    -   Date    -   Heure    -   Observateur");
         } else {
             legende.setText("   Date             -   Heure      -   Observateur");
         }
@@ -74,7 +74,7 @@ public class ObservationChoiceController extends InteractivePage {
     private Button createButton(@NotNull ArrayList<String> observation) {
         Button button = new Button();
         if (espece.equals("Chouette")) {
-            button.setText((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3)).toUpperCase());
+            button.setText(observation.get(3) + "   -   " + observation.get(observation.size() - 4) + "   -   " + (observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3)).toUpperCase());
         } else {
             button.setText((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 5) + " " + observation.get(observation.size() - 6)).toUpperCase());
         }
