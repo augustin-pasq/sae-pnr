@@ -63,15 +63,23 @@ public class FilterLoutreController extends InteractivePage {
 
         //
 
-        HashMap<Object, String> filter = new HashMap<>();
-        this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit, indice);
-        String restriction = this.makeRestriction(filter);
+        try {
+            // Check the validity of the data
+            checkFields(lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit);
+            HashMap<Object, String> filter = new HashMap<>();
+            this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit, indice);
+            String restriction = this.makeRestriction(filter);
 
-        Data userData = (Data) this.homeButton.getScene().getUserData();
-        Data data = new Data(userData.get(0), ANIMAL, restriction);
-        data.setAdmin(userData.isAdmin());
-        ObservationChoiceController.setAllObservations(ANIMAL, restriction);
-        Main.switchScene("ObservationChoice", this.validateButton, data);
+            Data userData = (Data) this.homeButton.getScene().getUserData();
+            Data data = new Data(userData.get(0), ANIMAL, restriction);
+            data.setAdmin(userData.isAdmin());
+            ObservationChoiceController.setAllObservations(ANIMAL, restriction);
+            Main.switchScene("ObservationChoice", this.validateButton, data);
+
+        } catch (IllegalArgumentException e) {
+            // If one of the fields is invalid, show a popup with the error message
+            Main.showPopup(e.getMessage(), event, true);
+        }
     }
 
     private void initFilter(HashMap<Object,String> filter, String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit, String indice){
@@ -85,6 +93,51 @@ public class FilterLoutreController extends InteractivePage {
         filter.put(lieuDit, "lieuDit");
         filter.put(indice, "indice");
     }
+
+    /**
+     * Check if all fields are valid
+     *
+     * @param lastName  last name of the observer
+     * @param firstName first name of the observer
+     * @param date      date of the observation
+     * @param time      time of the observation
+     * @param lambertX  lambert X coordinate of the observation
+     * @param lambertY  lambert Y coordinate of the observation
+     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     */
+    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit) throws IllegalArgumentException {
+        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !lastName.isEmpty())
+            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !firstName.isEmpty())
+            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (time != null && !time.isEmpty()) {
+            if (!time.matches("\\d{2}:\\d{2}"))
+                throw new IllegalArgumentException("L'heure doit être au format hh:mm");
+            else {
+                String[] timeSplit = time.split(":");
+                int h = Integer.parseInt(timeSplit[0]);
+                int m = Integer.parseInt(timeSplit[1]);
+                if (!(0 <= h && h < 24 && 0 <= m && m < 60))
+                    throw new IllegalArgumentException("L'heure doit être valide");
+                
+            }
+        }
+
+        if (!lambertX.matches("\\d+(\\.\\d+)?") && !lambertX.isEmpty())
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
+
+        if (!lambertY.matches("\\d+(\\.\\d+)?") && !lambertY.isEmpty())
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+
+        if (!commune.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !commune.isEmpty())
+            throw new IllegalArgumentException("La commune ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (!lieuDit.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !lieuDit.isEmpty())
+            throw new IllegalArgumentException("Le lieu ne peut pas être vide et dit ne doit contenir que des lettres, espaces et tirets");
+    }
+
 
     private String makeRestriction(HashMap<Object, String> filter){
         String query = "";
@@ -104,5 +157,16 @@ public class FilterLoutreController extends InteractivePage {
             }
         }
         return query;
+    }
+
+    /**
+     *  Formats an Integer to be placed in the filter.
+     * @param filter the filter
+     * @param value the integer
+     * @param column the intefer's column name
+     */
+    private void putInteger(HashMap<Object, String> filter, Integer value, String column){
+        if (value == null) filter.put("", "nombre");
+        else filter.put(value, column);
     }
 }
