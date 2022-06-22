@@ -246,7 +246,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" fx:id="nbTetardField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
+                              <TextField id="textField" fx:id="nbTetardsField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Pas de filtre">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -455,7 +455,7 @@
             <Insets bottom="50.0" />
          </padding>
          <children>
-            <Button id="valider" fx:id="validateButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#filter" prefHeight="67.0" prefWidth="177.0" text="Valider" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button id="valider" fx:id="validateButton"  alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#filter" prefHeight="67.0" prefWidth="177.0" text="Valider" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Berlin Sans FB" size="20.0" />
                </font>
