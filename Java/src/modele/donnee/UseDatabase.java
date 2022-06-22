@@ -66,7 +66,7 @@ public class UseDatabase {
      * @param query the query to make
      * @return a boolean indicating whether the update is successful
      */
-    public static boolean updateQuery(String query) {
+    public static boolean updateQuery(String query) throws SQLException {
         boolean success = false;
 
         try {
@@ -74,8 +74,8 @@ public class UseDatabase {
             stmt.executeUpdate(query);
             success = true;
             stmt.close();
-        } catch (SQLException e) {
-            System.err.println("Error executing query:" + e.getMessage());
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.err.println("Error executing query: " + e.getMessage());
         }
 
         return success;
