@@ -96,8 +96,8 @@ public class FilterChouetteController extends InteractivePage {
             this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, espece, protocole, typeObservation, sexe);
             String restriction = this.makeRestriction(filter);
             System.out.print(restriction);
-            Data data = new Data(ANIMAL, restriction);
-            ObservationChoiceController.setAllObservations(ANIMAL, restriction);
+            Data userData = (Data) this.homeButton.getScene().getUserData();
+            Data data = new Data(userData.get(0), ANIMAL, restriction);
             Main.switchScene("ObservationChoice", this.validateButton, data);
 
         } catch (IllegalArgumentException e) {
