@@ -66,8 +66,9 @@ public class FilterLoutreController extends InteractivePage {
 
         HashMap<Object, String> filter = new HashMap<>();
         this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit, indice);
-        String restriction = this.makeRestriction(filter);
-        System.out.println(restriction);
+        String query = this.makeRestriction(filter);
+
+        Main.switchScene("ObservationChoice", validateButton, query);
     }
 
     private void initFilter(HashMap<Object,String> filter, String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit, String indice){
