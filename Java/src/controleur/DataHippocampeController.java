@@ -59,7 +59,6 @@ public class DataHippocampeController extends InteractivePage {
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
-        this.isAdmin = true;
         especeComboBox.setItems(especeList);
         sexeComboBox.setItems(sexeList);
         gestantComboBox.setItems(gestantList);
