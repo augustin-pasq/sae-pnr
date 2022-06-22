@@ -86,9 +86,15 @@ public class EditHippocampeObsController extends InteractivePage {
         Sexe saisieSexe = Sexe.valueOf(observation.get(2).replace(" ", "_").toUpperCase());
         sexeComboBox.getSelectionModel().select(saisieSexe);
         temperatureField.setText(observation.get(3));
-        for (char c : observation.get(4)) {
-            
+        String typePecheBDD =  observation.get(4);
+        String typePeche = "";
+        for (int i = 0; i < typePecheBDD.length(); i++) {
+            if (Character.isUpperCase(typePecheBDD.charAt(i))) {
+                typePeche += '_';
+            }
+            typePeche = typePeche + typePecheBDD.charAt(i);
         }
+        Peche saisiePeche = Peche.valueOf(typePeche.toUpperCase());
         typePecheComboBox.getSelectionModel().select(saisiePeche);
         sizeField.setText(observation.get(5));
         gestantComboBox.getSelectionModel().select(observation.get(6));

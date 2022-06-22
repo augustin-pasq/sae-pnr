@@ -11,9 +11,9 @@ public enum EspeceHippocampe {
      */
     SYNGNATHUS_ACUS,
     /**
-     * The Hippocampus Guttlatus species of the hippocampe.
+     * The Hippocampus Guttulatus species of the hippocampe.
      */
-    HIPPOCAMPUS_GUTTLATUS,
+    HIPPOCAMPUS_GUTTULATUS,
     /**
      * The Hippocampus Hippocampus species of the hippocampe.
      */
