@@ -71,7 +71,8 @@ public class ObservationChoiceController extends InteractivePage {
             Data data = (Data) this.homeButton.getScene().getUserData();
             switch (espece) {
                 case "Batracien" -> {
-                    ConsultBatracienObsControler.setObs(Integer.parseInt(observation.get(0)));
+                    ConsultBatracienObsController.setObs(Integer.parseInt(observation.get(0)));
+                    System.out.println(Integer.parseInt(observation.get(0)));
                     Main.switchScene("ConsultBatracienObs", button, data);
                 }
                 case "Chouette" -> {
