@@ -112,6 +112,9 @@ public class DataLoutreController extends InteractivePage {
         String commune = communeField.getText();
         String lieuDit = lieuDitField.getText();
         String indice = indiceComboBox.getValue();
+        if (indice == null) {
+            indice = "Non prospection";
+        }
 
         try {
             // Check the validity of the data

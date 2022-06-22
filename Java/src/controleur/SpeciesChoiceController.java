@@ -57,7 +57,7 @@ public class SpeciesChoiceController extends InteractivePage {
         String scene = (String) data.get(0);
         switch (scene) {
             case "Data" -> Main.switchScene("Data" + species, this.homeButton, data); // For observation insertion
-            case "Edit", "ConsultData" -> Main.switchScene("Filter" + species, this.homeButton, data);
+            case "Edit", "ConsultData", "Delete" -> Main.switchScene("Filter" + species, this.homeButton, data);
             default -> System.out.println("Error: " + scene + " is not a valid scene");
         }
     }
