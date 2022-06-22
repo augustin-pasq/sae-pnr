@@ -203,7 +203,6 @@ public class Main extends Application implements Initializable {
      * @param name the name of the scene
      */
     private Scene loadScene(@NotNull String name) throws IOException {
-        System.out.println("Loading scene " + name);
         // Load FXML file
         URL pathFXML = getClass().getResource("../vue/" + name + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
