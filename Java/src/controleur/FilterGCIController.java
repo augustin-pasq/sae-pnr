@@ -75,7 +75,6 @@ public class FilterGCIController extends InteractivePage {
         nidProtegeComboBox.setItems(nidProtegeList);
     }
 
-
     @FXML
     /**
      * Method called when the user clicks on the validate button.
