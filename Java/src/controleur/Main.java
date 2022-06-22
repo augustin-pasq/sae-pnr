@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
@@ -111,9 +112,9 @@ public class Main extends Application implements Initializable {
      * @param event   the event that triggered the method
      * @return the popup
      */
-    public static Popup showPopup(String message, @NotNull Event event) {
+    public static Popup showPopup(String message, @NotNull Event event, boolean error) {
         Control target = (Control) event.getSource();
-        return showPopup(message, target);
+        return showPopup(message, target, error);
     }
 
     /**
@@ -123,22 +124,27 @@ public class Main extends Application implements Initializable {
      * @param target  An element belonging to the current scene
      * @return the popup
      */
-    public static Popup showPopup(String message, @NotNull Control target) {
+    public static Popup showPopup(String message, @NotNull Control target, boolean error) {
         Stage appStage = (Stage) target.getScene().getWindow();
         Popup popup = new Popup();
         VBox vbox = new VBox();
+        String colour = error ? "#a20e29" : "#00936E";
 
         Label label = new Label(message);
         label.setMinWidth(80);
-        label.setMinHeight(50);
+        label.setMinHeight(35);
         label.setAlignment(Pos.CENTER);
         label.setFont(new Font("DejaVu Sans Bold", 20));
+        label.setStyle("-fx-text-fill: black;" +
+                "-fx-padding: 10px;");
+        label.setWrapText(true);
+        label.setTextAlignment(TextAlignment.CENTER);
 
         Button okButton = new Button("OK");
         okButton.setOnAction(event ->
                 popup.hide()
         );
-        okButton.setStyle("-fx-background-color: #00936E;" +
+        okButton.setStyle("-fx-background-color: " + colour +";" +
                 "-fx-background-radius: 30px;" +
                 "-fx-text-fill: white;" +
                 "-fx-cursor: hand;");
@@ -147,7 +153,7 @@ public class Main extends Application implements Initializable {
         vbox.getChildren().addAll(label, okButton);
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(10);
-        vbox.setStyle("-fx-border-color: black;" +
+        vbox.setStyle("-fx-border-color: " + colour + ";" +
                 "-fx-border-width: 2px;" +
                 "-fx-border-radius: 5px;" +
                 "-fx-background-color: white;");
