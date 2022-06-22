@@ -125,7 +125,7 @@ public class DataChouetteController extends InteractivePage {
             UseDatabase.updateQuery(String.format("INSERT INTO Obs_Chouette (numObs, leNumIndividu, typeObs, protocole) VALUES ('%s', '%s', '%s', '%s')",
                     idObs, numIndividu, typeObs, protocole));
 
-            Main.showPopup("Observation enregistrée avec succès", event, false);
+            Main.showPopup("Observation enregistrée correctement", event, false);
 
             prep.close();
             conn.close();
@@ -133,10 +133,10 @@ public class DataChouetteController extends InteractivePage {
             Main.showPopup(e.getMessage(), event, true);
         } catch (SQLException e) {
             Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         } catch (NullPointerException e) {
             Main.showPopup(e.getMessage(), event, true);
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         } catch (Exception e) {
             Main.showPopup("Une erreur inconnue est survenue", event, true);
             e.printStackTrace();
