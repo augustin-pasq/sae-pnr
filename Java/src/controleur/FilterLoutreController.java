@@ -158,15 +158,4 @@ public class FilterLoutreController extends InteractivePage {
         }
         return query;
     }
-
-    /**
-     *  Formats an Integer to be placed in the filter.
-     * @param filter the filter
-     * @param value the integer
-     * @param column the intefer's column name
-     */
-    private void putInteger(HashMap<Object, String> filter, Integer value, String column){
-        if (value == null) filter.put("", "nombre");
-        else filter.put(value, column);
-    }
 }
