@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
+import javafx.event.ActionEvent;
 
 public class ConsultBatracienObsController extends InteractivePage {
 
@@ -89,7 +90,12 @@ public class ConsultBatracienObsController extends InteractivePage {
         natureVegetation.setText(observation.get(19));
         vegetation.setText(observation.get(20));
     }
+    
     public static void setObs(int numObs) {
         observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE ObsB = " + numObs + ";").get(1);
+    }
+
+    public void goBack(ActionEvent event) {
+        Main.goBack(event);
     }
 }

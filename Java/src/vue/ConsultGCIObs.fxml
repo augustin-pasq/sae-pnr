@@ -5,11 +5,8 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.DataGCIController">
+<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ConsultGCIObsController">
    <children>
       <HBox id="hBox" alignment="CENTER" fillHeight="false" layoutY="105.0" prefHeight="105.0" prefWidth="1280.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -90,11 +87,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Nom de l'observateur">
+                              <Label fx:id="nom" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -107,11 +107,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Prénom de l'observateur">
+                              <Label fx:id="prenom" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -124,12 +127,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <DatePicker id="dateBox" prefHeight="48.0" prefWidth="400.0" promptText="Date de l'observation" />
-                           </children>
-                        </HBox>
-                        <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
-                           <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Heure (HH:MM)">
+                              <Label fx:id="date" prefHeight="16.0" prefWidth="254.0">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -137,11 +135,26 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Heure d'observation">
+                           </children>
+                        </HBox>
+                        <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Heure">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="heure" prefHeight="16.0" prefWidth="254.0">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -154,11 +167,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Coordonnées Lambert X">
+                              <Label fx:id="coordX" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -171,11 +187,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Coordonnées Lambert Y">
+                              <Label fx:id="coordY" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -188,7 +207,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="natureComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Nature" />
+                              <Label fx:id="nature" prefHeight="16.0" prefWidth="254.0">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -201,11 +227,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Nombre">
+                              <Label fx:id="nombre" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -218,7 +247,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="nidObserveComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Oui" />
+                              <Label fx:id="dejaObserve" prefHeight="16.0" prefWidth="254.0">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -231,11 +267,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Identifiant du nid">
+                              <Label fx:id="idNid" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -248,11 +287,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Nom de la plage">
+                              <Label fx:id="plage" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -265,7 +307,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="raisonComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Raison" />
+                              <Label fx:id="raisonStop" prefHeight="16.0" prefWidth="254.0">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -278,11 +327,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Nombre d'envols">
+                              <Label fx:id="nbEnvols" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -295,7 +347,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <ComboBox id="comboBox" fx:id="nidProtegeComboBox" prefHeight="48.0" prefWidth="400.0" promptText="Oui" />
+                              <Label fx:id="protege" prefHeight="16.0" prefWidth="254.0">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="23.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -308,11 +367,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Code">
+                              <Label fx:id="male" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -325,11 +387,14 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Code">
+                              <Label fx:id="femelle" prefHeight="16.0" prefWidth="254.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
-                              </TextField>
+                                 <padding>
+                                    <Insets bottom="-10.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
                      </children>
@@ -338,12 +403,12 @@
             </ScrollPane>
          </children>
       </VBox>
-      <HBox id="hBox" alignment="CENTER" fillHeight="false" layoutX="10.0" layoutY="625.0" prefHeight="117.0" prefWidth="2000.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox id="hBox" alignment="CENTER" fillHeight="false" layoutY="615.0" prefHeight="117.0" prefWidth="2000.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <padding>
             <Insets bottom="50.0" />
          </padding>
          <children>
-            <Button id="valider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="177.0" text="Valider" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button id="valider" onAction="#goBack" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="245.0" text="Retour aux observations" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Berlin Sans FB" size="20.0" />
                </font>

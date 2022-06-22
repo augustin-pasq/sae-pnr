@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
+import javafx.event.ActionEvent;
 
 public class ConsultChouetteObsController extends InteractivePage {
 
@@ -48,5 +49,9 @@ public class ConsultChouetteObsController extends InteractivePage {
 
     public static void setObs(int numObs) {
         observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";").get(1);
+    }
+
+    public void goBack(ActionEvent event) {
+        Main.goBack(event);
     }
 }

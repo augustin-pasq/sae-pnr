@@ -3,7 +3,7 @@ package controleur;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
@@ -48,5 +48,9 @@ public class ConsultLoutreObsControler extends InteractivePage {
 
     public static void setObs(int numObs) {
         observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
+    }
+
+    public void goBack(ActionEvent event) {
+        Main.goBack(event);
     }
 }
