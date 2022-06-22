@@ -68,28 +68,28 @@ public class DataChouetteController extends InteractivePage {
 
     @FXML
     private void validate(ActionEvent event) {
-        String lastName = lastNameField.getText();
-        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText().toUpperCase();
+        String firstName = firstNameField.getText().toUpperCase();
         LocalDate date = dateField.getValue();
         String time = timeField.getText();
         String lambertX = lambertXField.getText();
         String lambertY = lambertYField.getText();
-        EspeceChouette espece = especeComboBox.getValue();
+        String espece = especeComboBox.getValue() == null ? "" : especeComboBox.getValue().toString();
         Integer protocole = null;
         if (protocoleComboBox.getValue() != null) {
             protocole = protocoleComboBox.getValue().equals("Oui") ? 1 : 0;
         }
-        TypeObservation typeObservation = typeObservationComboBox.getValue();
-        Sexe sexe = sexeComboBox.getValue();
+        String typeObservation = typeObservationComboBox.getValue() == null ? "" : typeObservationComboBox.getValue().toString();
+        String sexe = sexeComboBox.getValue() == null ? "" : sexeComboBox.getValue().toString();
 
         try {
-            checkFields(lastName, firstName, time, lambertX, lambertY);
-            final Integer idObs = UUID.randomUUID().hashCode();
+            checkFields(lastName, firstName, date, time, lambertX, lambertY);
+            final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
             ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
-                idObservateur = UUID.randomUUID().hashCode();
+                idObservateur = Math.abs(UUID.randomUUID().hashCode());
                 UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
                         idObservateur, lastName, firstName));
             } else {
@@ -101,7 +101,7 @@ public class DataChouetteController extends InteractivePage {
             UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
                     lambertX, lambertY));
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm:ssZ" );
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm" );
             LocalTime localTime = LocalTime.parse(time, formatter);
 
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
@@ -118,9 +118,9 @@ public class DataChouetteController extends InteractivePage {
 
             String numIndividu = UUID.randomUUID().toString().replace("-", "");
             UseDatabase.updateQuery(String.format("INSERT INTO Chouette (numIndividu, espece, sexe) VALUES ('%s', '%s', '%s')",
-                    numIndividu, espece.toString(), sexe.toString()));
+                    numIndividu, espece, sexe));
 
-            String typeObs = typeObservation.toString().replace("_", " ET ").replace("VISUELLE", "VISUEL");
+            String typeObs = typeObservation.replace("_", " ET ").replace("VISUELLE", "VISUEL");
             System.out.println(typeObs);
             UseDatabase.updateQuery(String.format("INSERT INTO Obs_Chouette (numObs, leNumIndividu, typeObs, protocole) VALUES ('%s', '%s', '%s', '%s')",
                     idObs, numIndividu, typeObs, protocole));
@@ -143,23 +143,26 @@ public class DataChouetteController extends InteractivePage {
         }
     }
 
-    private void checkFields(String lastName, String firstName, String time, String lambertX, String lambertY) throws IllegalArgumentException {
+    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (date == null)
+            throw new IllegalArgumentException("La date est obligatoire");
 
         String[] timeSplit = time.split(":");
         int h = Integer.parseInt(timeSplit[0]);
         int m = Integer.parseInt(timeSplit[1]);
         if (!time.matches("\\d{2}:\\d{2}") && 0 < h && h < 24 && 0 < m && m < 60)
-            throw new IllegalArgumentException("Le temps doit être au format hh:mm");
+            throw new IllegalArgumentException("L'heure ne peut pas être vide et doit être au format hh:mm");
 
         if (!lambertX.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La coordonnée Lambert X doit être un nombre");
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
 
         if (!lambertY.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La coordonnée Lambert Y doit être un nombre");
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
     }
 }

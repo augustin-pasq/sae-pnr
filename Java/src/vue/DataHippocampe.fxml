@@ -84,7 +84,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Nom de l'observateur">
+                              <TextField id="textField" fx:id="lastNameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Nom de l'observateur">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -101,7 +101,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Prénom de l'observateur">
+                              <TextField id="textField" fx:id="firstNameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Prénom de l'observateur">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -118,7 +118,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <DatePicker id="dateBox" prefHeight="48.0" prefWidth="400.0" promptText="Date de l'observation" />
+                              <DatePicker id="dateBox" fx:id="dateField" prefHeight="48.0" prefWidth="400.0" promptText="Date de l'observation" />
                            </children>
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
@@ -131,7 +131,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Heure d'observation">
+                              <TextField id="textField" fx:id="timeField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Heure d'observation">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -148,7 +148,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Coordonnées Lambert X">
+                              <TextField id="textField" fx:id="lambertXField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Coordonnées Lambert X">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -165,7 +165,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Coordonnées Lambert Y">
+                              <TextField id="textField" fx:id="lambertYField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Coordonnées Lambert Y">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -208,7 +208,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Température">
+                              <TextField id="textField" fx:id="temperatureField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Température">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -238,7 +238,7 @@
                                     <Insets bottom="-10.0" />
                                  </padding>
                               </Label>
-                              <TextField id="textField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Taille">
+                              <TextField id="textField" fx:id="sizeField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="400.0" promptText="Taille">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -275,7 +275,7 @@
             <Insets bottom="50.0" />
          </padding>
          <children>
-            <Button id="valider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="177.0" text="Valider" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button id="valider" onAction="#validate" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="177.0" text="Valider" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Berlin Sans FB" size="20.0" />
                </font>
