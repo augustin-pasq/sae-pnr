@@ -4,17 +4,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import modele.donnee.EspeceObservee;
 import modele.donnee.UseDatabase;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Controller for the Login page
@@ -22,6 +23,11 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class AdminPanelController implements Initializable {
+    /**
+     * The list of tables in the database
+     */
+    String[] tables = {"Lieu", "Observateur", "AObserve", "Obs_Hippocampe", "Obs_Loutre", "Obs_GCI", "Nid_GCI", "Chouette", "Obs_Chouette", "ZoneHumide", "Obs_Batracien", "Vegetation", "Lieu_Vegetation"};
+
     /**
      * The exit button
      */
@@ -55,25 +61,34 @@ public class AdminPanelController implements Initializable {
     /**
      * Export the data from a table to a CSV file
      *
-     * @param table the table to export
-     * @param dir   the directory to export to
+     * @param file The zip file to export to
      */
-    public static void exportData(String table, String dir) {
-        ArrayList<ArrayList<String>> data = UseDatabase.selectQuery(String.format("SELECT * FROM %s", table));
-        ZonedDateTime date = ZonedDateTime.now();
-        String dateString = String.format("%s-%s-%s-%s:%s:%s", date.getDayOfMonth(), date.getMonthValue(), date.getYear(), date.getHour(), date.getMinute(), date.getSecond());
-        String filename = String.format("%s/%s_export_%s.csv", dir, table, dateString);
+    public void exportData(File file) {
+        try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(file))) {
+            for (String table : tables) {
+                String dir = file.getName().replace(".zip", "");
+                String filename = String.format("%s/%s.csv", dir, table);
+                ZipEntry e = new ZipEntry(filename);
+                out.putNextEntry(e);
 
-        try (PrintWriter writer = new PrintWriter(filename)) {
-            for (ArrayList<String> row : data) {
-                writer.print(row.remove(0));
-                for (String cell : row) {
-                    writer.print(",");
-                    writer.print(cell);
+                StringBuilder sb = new StringBuilder();
+                ArrayList<ArrayList<String>> rows = UseDatabase.selectQuery(String.format("SELECT * FROM %s", table));
+                for (ArrayList<String> row : rows) {
+                    for (String cell : row) {
+                        sb.append(cell);
+                        sb.append(",");
+                    }
+                    sb.append("\n");
                 }
-                writer.println();
+
+                byte[] data = sb.toString().getBytes();
+                out.write(data, 0, data.length);
+                out.closeEntry();
             }
-        } catch (FileNotFoundException e) {
+
+            Main.showPopup("Les données on été exportées correctement", this.exitButton, false);
+        } catch (IOException e) {
+            Main.showPopup("Erreur lors de l'export", this.exitButton, true);
             e.printStackTrace();
         } catch (NullPointerException e) {
             System.err.println("Error while exporting data: " + e.getMessage() + " (Table most likely does not exist)");
@@ -96,16 +111,24 @@ public class AdminPanelController implements Initializable {
      * @param event the event that triggered the method
      */
     public void exportAction(ActionEvent event) {
-        Button target = (Button) event.getSource();
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Sélectionner un dossier de destination");
-        File dir = directoryChooser.showDialog(target.getScene().getWindow());
-        if (dir != null) {
-            exportData("Observation", dir.getAbsolutePath());
+        Window window = this.exitButton.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        ZonedDateTime date = ZonedDateTime.now();
+        String dateString = String.format("%s-%s-%s-%s:%s:%s", date.getDayOfMonth(), date.getMonthValue(), date.getYear(), date.getHour(), date.getMinute(), date.getSecond());
 
-            Main.showPopup("Les données on été exportées correctement", event, false);
-        } else
-            System.err.println("Failed to select a directory");
+        //Set extension filter for csv files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ZIP files (*.zip)", "*.zip");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName("export_" + dateString + ".zip");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setTitle("Sélectionnez le dossier de destination");
+
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(window);
+
+        if (file != null) {
+            exportData(file);
+        }
     }
 
     /**

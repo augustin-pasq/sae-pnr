@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class DeletionConfirmController {
+public class DeletionConfirmController extends InteractivePage {
     @FXML
     private Button doNotDeleteButton;
 
@@ -18,7 +18,6 @@ public class DeletionConfirmController {
 
     @FXML
     public void delete(ActionEvent event) {
-        SpeciesManagementController smc = new SpeciesManagementController();
-        smc.deleteSpecies(event);
+        Data data = (Data) this.deleteButton.getScene().getRoot().getUserData();
     }
 }
