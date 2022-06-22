@@ -44,9 +44,9 @@ public class ObservationChoiceController extends InteractivePage {
 
         Label legende = new Label();
         if (espece.equals("Chouette")) {
-            legende.setText("   Date   -    Heure");
+            legende.setText("     Date -    Heure");
         } else {
-            legende.setText("   Date             -   Heure      -   Observateur");
+            legende.setText("       Date         -   Heure  -   Observateur");
         }
         legende.setPrefWidth(1225);
         legende.setPrefHeight(50);
@@ -55,12 +55,16 @@ public class ObservationChoiceController extends InteractivePage {
 
 
         VBox observationsContainer = new VBox(10);
+        observationsContainer.setPrefWidth(800);
         for (int i = 1; i < allObservations.size(); i++) {
             Button obs = createButton(allObservations.get(i));
             observationsContainer.getChildren().add(obs);
         }
 
         ScrollPane scrollPane = new ScrollPane(observationsContainer);
+        scrollPane.setPrefWidth(900);
+        scrollPane.setMaxWidth(900);
+        scrollPane.setMaxHeight(Double.MAX_VALUE);
         scrollPaneContainer.getChildren().add(scrollPane);
     }
 

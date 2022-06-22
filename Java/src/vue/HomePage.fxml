@@ -40,7 +40,7 @@
                <children>
                   <AnchorPane prefHeight="263.0" prefWidth="413.0">
                      <children>
-                        <Button id="Saisir" fx:id="saisir" onAction="#move" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Saisir des données" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="77.0">
+                        <Button id="Saisir" fx:id="saisir" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" onAction="#move" prefHeight="220.0" prefWidth="250.0" text="Saisir des données" wrapText="true" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="77.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -62,7 +62,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="129.0" prefWidth="413.0">
                      <children>
-                        <Button id="Modifier" fx:id="modifier" onAction="#move" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0" text="Modifier des données">
+                        <Button id="Modifier" fx:id="modifier" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" onAction="#move" prefHeight="220.0" prefWidth="250.0" text="Modifier des données" wrapText="true">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -84,7 +84,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="310.0" prefWidth="413.0">
                      <children>
-                        <Button id="Consulter" fx:id="consulter" onAction="#move" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" prefHeight="220.0" prefWidth="250.0"  text="Consulter des données">
+                        <Button id="Consulter" fx:id="consulter" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="65.0" layoutY="77.0" mnemonicParsing="false" onAction="#move" prefHeight="220.0" prefWidth="250.0" text="Consulter des données" wrapText="true">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -113,7 +113,7 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button id="logout" fx:id="logout" onAction="#move" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="-18.0">
+                        <Button id="logout" fx:id="logout" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" onAction="#move" prefHeight="43.0" prefWidth="88.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="-18.0">
                            <graphic>
                            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                               <Image url="@../../data/Exit.png" />
