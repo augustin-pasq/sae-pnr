@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,27 +68,28 @@ public class ObservationChoiceController extends InteractivePage {
         button.setMnemonicParsing(false);
         button.setId("observation");
         button.setOnAction(e -> {
-            switch (espece){
-                case "Batracien":
+            Data data = (Data) this.homeButton.getScene().getUserData();
+            switch (espece) {
+                case "Batracien" -> {
                     ConsultBatracienObsControler.setObs(Integer.parseInt(observation.get(0)));
-                    Main.switchScene("ConsultBatracienObs", button);
-                    break;
-                case "Chouette":
+                    Main.switchScene("ConsultBatracienObs", button, data);
+                }
+                case "Chouette" -> {
                     ConsultChouetteObsController.setObs(Integer.parseInt(observation.get(3)));
-                    Main.switchScene("ConsultChouetteObs", button);
-                    break;
-                case "GCI":
+                    Main.switchScene("ConsultChouetteObs", button, data);
+                }
+                case "GCI" -> {
                     ConsultGCIObsControler.setObs(Integer.parseInt(observation.get(0)));
-                    Main.switchScene("ConsultGCIObs", button);
-                    break;
-                case "Hippocampe":
+                    Main.switchScene("ConsultGCIObs", button, data);
+                }
+                case "Hippocampe" -> {
                     ConsultHippocampeObsControler.setObs(Integer.parseInt(observation.get(0)));
-                    Main.switchScene("ConsultHippocampeObs", button);
-                    break;
-                case "Loutre":
+                    Main.switchScene("ConsultHippocampeObs", button, data);
+                }
+                case "Loutre" -> {
                     ConsultLoutreObsControler.setObs(Integer.parseInt(observation.get(0)));
-                    Main.switchScene("ConsultLoutreObs", button);
-                    break;
+                    Main.switchScene("ConsultLoutreObs", button, data);
+                }
             }
             
         });
