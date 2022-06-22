@@ -83,9 +83,12 @@ public class EditLoutreObsController extends InteractivePage {
     @FXML
     private Button validateButton;
 
+    private static int idObs;
+
     private static ArrayList<String> observation;
 
     public static void setObs(int numObs) {
+        idObs = numObs;
         observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
     }
 
@@ -105,8 +108,6 @@ public class EditLoutreObsController extends InteractivePage {
 
         System.out.println(observation.toString());
 
-        lastNameField.setText(observation.get(4));
-        firstNameField.setText(observation.get(5));
         LocalDate saisie = LocalDate.parse(observation.get(6));
         dateField = new DatePicker(saisie);
         timeField.setText(observation.get(7));
@@ -140,57 +141,10 @@ public class EditLoutreObsController extends InteractivePage {
         try {
             // Check the validity of the data
             checkFields(lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit);
-            // Generate a unique id for the observation
-            final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
-            // Try to get the observer's id if it exists
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
-            int idObservateur;
-            if (observateur.size() == 1) {
-                // If the observer doesn't exist, create it, with a unique id
-                idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
-            } else {
-                // If the observer exists, get its id
-                idObservateur = Integer.parseInt(observateur.get(1).get(0));
-            }
+            UseDatabase.updateQuery(String.format("UPDATE Obs_Loutre SET commune = '%s', lieuDit = '%s', indice = '%s' WHERE ObsL = '%s", commune, lieuDit, indice, idObs));
+            UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE ObsL = '%s", date, time, lambertX, lambertY));
 
-            // Get a connection to the database for the prepared statements
-            Connection conn = UseDatabase.MySQLConnection();
-
-            // Insert the coordinates in the database. If they already exist, the SQLIntegrityConstraintViolationException is caught by useDatabase and ignored
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
-
-            // Format the time as an object
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime localTime = LocalTime.parse(time, formatter);
-
-            // Insert the observation in the database with a prepared statement (mostly because of the time)
-            String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement prep = conn.prepareStatement(q);
-            prep.setInt(1, idObs);
-            prep.setString(2, lambertX);
-            prep.setString(3, lambertY);
-            prep.setDate(4, Date.valueOf(date));
-            prep.setTime(5, Time.valueOf(localTime));
-            prep.executeUpdate();
-
-            // Insert the link between the observation and the observer in the database
-            UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
-                    idObs, idObservateur));
-
-            // Insert the loutre linked to the observation in the database
-            UseDatabase.updateQuery(String.format("INSERT INTO Obs_Loutre (obsL, commune, lieuDit, indice) VALUES ('%s', '%s', '%s', '%s')",
-                    idObs, commune, lieuDit, indice));
-
-            // If no exception has been thrown, the observation has been successfully added
-            Main.showPopup("Observation enregistrée correctement", event, false);
-
-            // Close the connections
-            prep.close();
-            conn.close();
         } catch (IllegalArgumentException e) {
             // If one of the fields is invalid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);

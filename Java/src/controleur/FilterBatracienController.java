@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -84,6 +85,8 @@ public class FilterBatracienController extends InteractivePage {
     private ComboBox<String> vegetationComboBox;
     @FXML
     private TextField vegetationField;
+    @FXML
+    private Button validateButton;
 
 
     @Override
@@ -142,8 +145,17 @@ public class FilterBatracienController extends InteractivePage {
             checkFields(lastName, firstName, date, time, lambertX, lambertY, nbAdultes, nbAmplexus, nbPontes, nbTetards,
                         temperature, zoneProfondeur, zoneSurface, vegetation);
 
-            
-            
+            HashMap<Object, String> filter = new HashMap<>();
+            this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, espece, nbAdultes, nbAmplexus, nbPontes, nbTetards,
+                    temperature, meteoCiel, meteoTemperature, meteoVent, meteoPluie, zoneTemporaire, zoneProfondeur, zoneSurface, zoneMaree,
+                    zonePente, zoneOuverture, natureVegetation, vegetation);
+            String restriction = this.makeRestriction(filter);
+
+            Data userData = (Data) this.homeButton.getScene().getUserData();
+            Data data = new Data(userData.get(0), ANIMAL, restriction);
+            ObservationChoiceController.setAllObservations(ANIMAL, restriction);
+            Main.switchScene("ObservationChoice", this.validateButton, data);
+
         } catch (IllegalArgumentException e) {
                 Main.showPopup(e.getMessage(), event, true);
         }
@@ -171,18 +183,18 @@ public class FilterBatracienController extends InteractivePage {
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !firstName.isEmpty())
             throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
-        if (date == null)
-            throw new IllegalArgumentException("La date est obligatoire");
 
-        if (time == null)
-            throw new IllegalArgumentException("L'heure est obligatoire");
-        if (!time.matches("\\d{2}:\\d{2}"))
-            throw new IllegalArgumentException("L'heure doit être au format hh:mm");
-        String[] timeSplit = time.split(":");
-        int h = Integer.parseInt(timeSplit[0]);
-        int m = Integer.parseInt(timeSplit[1]);
-        if (!(0 <= h && h < 24 && 0 <= m && m < 60)) {
-            throw new IllegalArgumentException("L'heure doit être valide");
+        if (time != null && !time.isEmpty()) {
+            if (!time.matches("\\d{2}:\\d{2}"))
+                throw new IllegalArgumentException("L'heure doit être au format hh:mm");
+            else {
+                String[] timeSplit = time.split(":");
+                int h = Integer.parseInt(timeSplit[0]);
+                int m = Integer.parseInt(timeSplit[1]);
+                if (!(0 <= h && h < 24 && 0 <= m && m < 60))
+                    throw new IllegalArgumentException("L'heure doit être valide");
+
+            }
         }
 
         if (!lambertX.matches("\\d+(\\.\\d+)?") && !lambertX.isEmpty())
@@ -251,5 +263,37 @@ public class FilterBatracienController extends InteractivePage {
     private void putInteger(HashMap<Object, String> filter, Integer value, String column){
         if (value == null) filter.put("", "nombre");
         else filter.put(value, column);
+    }
+
+    private void initFilter(HashMap<Object, String> filter, String lastName, String firstName, LocalDate date, String time,
+                        String lambertX, String lambertY, String espece, String nbAdulte, String nbAmplexus, String nbPontes, String nbTetards, String temperature,
+                            String meteoCiel, String meteoTemperature, String meteoVent, String meteoPluie, Integer zoneTemporaire,
+                            String zoneProfondeur, String zoneSurface, String zoneMaree, String zonePente, String zoneOuverture,
+                            String natureVegetation, String vegetation) {
+
+        filter.put(lastName, "nom");
+        filter.put(firstName, "prenon");
+        filter.put(date, "dateObs");
+        filter.put(time, "heureObs");
+        filter.put(lambertX, "lieu_Lambert_X");
+        filter.put(lambertY, "lieu_Lambert_Y");
+        filter.put(espece, "espece");
+        filter.put(nbAdulte, "nbAdultes");
+        filter.put(nbAmplexus, "nbAmplexus");
+        filter.put(nbPontes, "nbPOntes");
+        filter.put(nbTetards, "nbTetards");
+        filter.put(temperature, "temperature");
+        filter.put(meteoCiel, "meteoCiel");
+        filter.put(meteoTemperature, "meteoTemperature");
+        filter.put(meteoVent, "meteoVent");
+        filter.put(meteoPluie, "meteoPluie");
+        this.putInteger(filter, zoneTemporaire, "zoneTemporaire");
+        filter.put(zoneProfondeur, "zoneProfondeur");
+        filter.put(zoneSurface, "zoneSurface");
+        filter.put(zoneMaree, "zoneMaree");
+        filter.put(zonePente, "zonePente");
+        filter.put(zoneOuverture, "zoneOuverture");
+        filter.put(natureVegetation, "natureVegetation");
+        filter.put(vegetation, "vegetation");
     }
 }
