@@ -26,7 +26,7 @@ public class HomePageController implements Initializable {
         switch (target.getId()) {
             case "Saisir" -> {
                 Data data = new Data("Data");
-                Main.switchScene("SpeciesChoice", target, data);
+                Main.switchScene("SpeciesChoiceForAdding", target, data);
             }
             case "Modifier" -> Main.switchScene("ModifyData", target);
             case "Consulter" -> Main.switchScene("ConsultData", target);

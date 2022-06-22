@@ -28,15 +28,12 @@ public class ConsultLoutreObsControler extends InteractivePage {
     private Label lieudit;
     @FXML
     private Label indice;
-    private ArrayList<String> observation;
-    private String espece;
+
+    private static ArrayList<String> observation;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
-
-        setEspece("Loutre");
-        setObs(756);
 
         nom.setText(observation.get(4));
         prenom.setText(observation.get(5));
@@ -49,11 +46,7 @@ public class ConsultLoutreObsControler extends InteractivePage {
         indice.setText(observation.get(3));
     }
 
-    public void setObs(int numObs) {
-        this.observation = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + this.espece + " WHERE ObsL = " + numObs + ";").get(1);
-    }
-
-    public void setEspece(String espece) {
-        this.espece = espece;
+    public static void setObs(int numObs) {
+        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
     }
 }
