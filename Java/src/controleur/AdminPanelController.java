@@ -103,7 +103,7 @@ public class AdminPanelController implements Initializable {
         if (dir != null) {
             exportData("Observation", dir.getAbsolutePath());
 
-            Main.showPopup("Les données on été exportées correctement", event);
+            Main.showPopup("Les données on été exportées correctement", event, false);
         } else
             System.err.println("Failed to select a directory");
     }
