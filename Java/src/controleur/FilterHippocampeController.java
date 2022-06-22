@@ -4,33 +4,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import modele.donnee.EspeceHippocampe;
 import modele.donnee.Peche;
 import modele.donnee.Sexe;
-import modele.donnee.UseDatabase;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.UUID;
+
 
 
 public class FilterHippocampeController extends InteractivePage {
 
+    private final String ANIMAL = "Hippocampe";  
     ObservableList<EspeceHippocampe> especeList = FXCollections.observableArrayList(EspeceHippocampe.values());
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
     ObservableList<String> gestantList = FXCollections.observableArrayList("Gestant", "Non gestant");
     ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.values());
+
     @FXML
     private TextField lastNameField;
     @FXML
@@ -55,6 +51,8 @@ public class FilterHippocampeController extends InteractivePage {
     private TextField sizeField;
     @FXML
     private ComboBox<String> gestantComboBox;
+    @FXML
+    private Button validateButton;
 
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
@@ -63,11 +61,12 @@ public class FilterHippocampeController extends InteractivePage {
         sexeComboBox.setItems(sexeList);
         gestantComboBox.setItems(gestantList);
         typePecheComboBox.setItems(typePecheList);
-
     }
 
     @FXML
-    public void validate(ActionEvent event) {
+    public void filter(ActionEvent event) {
+
+        // Init //
         String lastName = lastNameField.getText().toUpperCase();
         String firstName = firstNameField.getText().toUpperCase();
         LocalDate date = dateField.getValue();
@@ -117,100 +116,55 @@ public class FilterHippocampeController extends InteractivePage {
             gestant = gestantComboBox.getValue().equals("Gestant") ? 1 : 0;
         }
 
-        try {
-            checkFields(lastName, firstName, date, time, lambertX, lambertY, temperature, size);
-            final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
+        //
 
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
-            int idObservateur;
-            if (observateur.size() == 1) {
-                idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
-            } else {
-                idObservateur = Integer.parseInt(observateur.get(1).get(0));
+        HashMap<Object, String> filter = new HashMap<>();
+        this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, espece, sexe, temperature, typePeche, size, gestant);
+        String restriction = this.makeRestriction(filter);
+        
+        System.out.println(restriction);
+
+        Data data = new Data(ANIMAL, restriction);
+        ObservationChoiceController.setAllObservations(ANIMAL, restriction);
+        Main.switchScene("ObservationChoice", this.validateButton, data);
+    }
+
+        private void initFilter(HashMap<Object, String> filter, String lastName, String firstName,
+                                LocalDate date, String time, String lambertX, String lambertY, 
+                                String espece, String sexe, String temperature, String typePeche, 
+                                String size, int gestant){
+
+            filter.put(lastName, "nom");
+            filter.put(firstName, "prenom"); 
+            filter.put(date, "dateObs");
+            filter.put(time, "heureObs");
+            filter.put(lambertX, "lieu_Lambert_X");
+            filter.put(lambertY, "lieu_Lambert_Y");
+            filter.put(espece, "espece");
+            filter.put(sexe, "sexe");
+            filter.put(temperature, "temperatureEau");
+            filter.put(typePeche, "typePeche");
+            filter.put(size, "taille");
+            filter.put(String.valueOf(gestant), "gestant");
+        }
+
+        private String makeRestriction(HashMap<Object, String> filter){
+            String query = "";
+            int nbRestriction = 0;
+    
+            for (Object o : filter.keySet()){
+                if (!(o == null)){
+                    String value = o.toString();
+                    if (!value.equals("")){
+                        if (nbRestriction > 0){
+                            query = query + " AND " + filter.get(o) + " =\"" + value + "\"";
+                        } else {
+                            query = query + " WHERE " + filter.get(o) + " =\"" + value + "\"";
+                        }
+                        nbRestriction ++;
+                    }
+                }
             }
-
-            Connection conn = UseDatabase.MySQLConnection();
-
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime localTime = LocalTime.parse(time, formatter);
-
-            String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement prep = conn.prepareStatement(q);
-            prep.setInt(1, idObs);
-            prep.setString(2, lambertX);
-            prep.setString(3, lambertY);
-            prep.setDate(4, java.sql.Date.valueOf(date));
-            prep.setTime(5, Time.valueOf(localTime));
-            prep.executeUpdate();
-
-            UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
-                    idObs, idObservateur));
-
-            String q2 = "INSERT INTO Obs_Hippocampe (obsH, espece, sexe, temperatureEau, typePeche, taille, gestant) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement prep2 = conn.prepareStatement(q2);
-            prep2.setInt(1, idObs);
-            prep2.setString(2, espece);
-            prep2.setString(3, sexe);
-            prep2.setString(4, temperature);
-            prep2.setString(5, typePeche);
-            prep2.setString(6, size);
-            prep2.setInt(7, gestant);
-            prep2.executeUpdate();
-
-            Main.showPopup("Observation enregistrée correctement", event, false);
-
-            prep.close();
-            conn.close();
-        } catch (IllegalArgumentException e) {
-            Main.showPopup(e.getMessage(), event, true);
-        } catch (SQLException e) {
-            Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
-            System.err.println(e.getMessage());
-        } catch (NullPointerException e) {
-            Main.showPopup(e.getMessage(), event, true);
-            System.err.println(e.getMessage());
-        } catch (Exception e) {
-            Main.showPopup("Une erreur inconnue est survenue", event, true);
-            e.printStackTrace();
+            return query;
         }
     }
-
-    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String temperature, String size) throws IllegalArgumentException {
-        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
-
-        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
-
-        if (date == null)
-            throw new IllegalArgumentException("La date est obligatoire");
-
-        if (time == null)
-            throw new IllegalArgumentException("L'heure est obligatoire");
-        if (!time.matches("\\d{2}:\\d{2}"))
-            throw new IllegalArgumentException("L'heure doit être au format hh:mm");
-        String[] timeSplit = time.split(":");
-        int h = Integer.parseInt(timeSplit[0]);
-        int m = Integer.parseInt(timeSplit[1]);
-        if (!(0 <= h && h < 24 && 0 <= m && m < 60)) {
-            throw new IllegalArgumentException("L'heure doit être valide");
-        }
-
-        if (!lambertX.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La coordonnée Lambert X doit être un nombre");
-
-        if (!lambertY.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La coordonnée Lambert Y doit être un nombre");
-
-        if (!temperature.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La température doit être un nombre");
-
-        if (!size.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La taille doit être un nombre");
-    }
-}

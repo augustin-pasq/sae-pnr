@@ -8,19 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import modele.donnee.UseDatabase;
 
 import java.net.URL;
-import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
-import controleur.ObservationChoiceController;
 
 public class FilterLoutreController extends InteractivePage {
 
@@ -55,7 +48,9 @@ public class FilterLoutreController extends InteractivePage {
     }
 
     @FXML
-    public void filterQuery(ActionEvent event) {
+    public void filter(ActionEvent event) {
+
+        // Init //
         String lastName = lastNameField.getText().toUpperCase();
         String firstName = firstNameField.getText().toUpperCase();
         LocalDate date = dateField.getValue();
@@ -65,6 +60,8 @@ public class FilterLoutreController extends InteractivePage {
         String commune = communeField.getText();
         String lieuDit = lieuDitField.getText();
         String indice = indiceComboBox.getValue();
+
+        //
 
         HashMap<Object, String> filter = new HashMap<>();
         this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit, indice);
