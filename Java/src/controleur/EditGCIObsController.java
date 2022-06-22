@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import modele.donnee.ContenuNid;
 import modele.donnee.UseDatabase;
 
@@ -31,6 +32,38 @@ public class EditGCIObsController extends InteractivePage {
     @FXML
     private ComboBox<String> nidProtegeComboBox;
 
+    @FXML
+    private Label nom;
+    @FXML
+    private Label prenom;
+    @FXML
+    private Label date;
+    @FXML
+    private Label heure;
+    @FXML
+    private Label coordX;
+    @FXML
+    private Label coordY;
+    @FXML
+    private Label nature;
+    @FXML
+    private Label nombre;
+    @FXML
+    private Label dejaObserve;
+    @FXML
+    private Label idNid;
+    @FXML
+    private Label plage;
+    @FXML
+    private Label raisonStop;
+    @FXML
+    private Label nbEnvols;
+    @FXML
+    private Label protege;
+    @FXML
+    private Label male;
+    @FXML
+    private Label femelle;
 
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
@@ -71,4 +104,4 @@ public class EditGCIObsController extends InteractivePage {
         Main.goBack(event);
     }
 }
-}
+
