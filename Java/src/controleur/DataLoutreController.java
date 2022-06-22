@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -83,10 +85,8 @@ public class DataLoutreController extends InteractivePage {
             UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
                     lambertX, lambertY));
 
-            String[] timeSplit = time.split(":");
-            int h = Integer.parseInt(timeSplit[0]);
-            int m = Integer.parseInt(timeSplit[1]);
-            Time timeObject = new Time(h * 3600L + m * 60L);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "HH:mm:ssZ" );
+            LocalTime localTime = LocalTime.parse(time, formatter);
 
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement prep = conn.prepareStatement(q);
@@ -94,7 +94,7 @@ public class DataLoutreController extends InteractivePage {
             prep.setString(2, lambertX);
             prep.setString(3, lambertY);
             prep.setDate(4, java.sql.Date.valueOf(date));
-            prep.setTime(5, timeObject);
+            prep.setTime(5, Time.valueOf(localTime));
             prep.executeUpdate();
 
             UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
