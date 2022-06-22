@@ -94,32 +94,22 @@ public class FilterGCIController extends InteractivePage {
             nature = natureComboBox.getValue().toString();
         }
 
-        Integer nombre = null;
-        if (!nombreField.getText().isEmpty()){
-            nombre = Integer.parseInt(nombreField.getText());
-        }
+        String nombre = nombreField.getText();
 
         Integer presentMaisNonObs = null;
         if (nidObserveComboBox.getValue() != null) {
             presentMaisNonObs = nidObserveComboBox.getValue().equals("Oui") ? 1 : 0;
         }
 
-        Integer leNid = null;
-        if (!idField.getText().isEmpty()){
-            leNid = Integer.parseInt(idField.getText());
-        }
-
-        String nomPlage = plageField.getText();
+        String idNid = idField.getText();
+        String plage = plageField.getText();
 
         String raisonArretObservation = null;
         if (raisonComboBox.getValue() != null){
             raisonArretObservation = raisonComboBox.getValue().toString();
         }
         
-        Integer nbEnvols = null;
-        if (!nbEnvolField.getText().isEmpty()){
-            nbEnvols = Integer.parseInt(nbEnvolField.getText());
-        }
+        String nbEnvol = nbEnvolField.getText();
 
         Integer protection = null;
         if (nidProtegeComboBox.getValue() != null) {
@@ -131,16 +121,89 @@ public class FilterGCIController extends InteractivePage {
         
         //
 
-        HashMap<Object, String> filter = new HashMap<>();
-        this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, nature, nombre, presentMaisNonObs, 
-                        leNid, nomPlage, raisonArretObservation, nbEnvols, protection, bagueMale, bagueFemelle);
-        String restriction = this.makeRestriction(filter);
+        try {
+            // Check if the data is valid
+            checkFields(lastName, firstName, date, time, lambertX, lambertY, nombre, idNid, plage, nbEnvol, bagueMale, bagueFemelle);
 
-        Data userData = (Data) this.homeButton.getScene().getUserData();
-        Data data = new Data(userData.get(0), ANIMAL, restriction);
-        data.setAdmin(userData.isAdmin());
-        ObservationChoiceController.setAllObservations(ANIMAL, restriction);
-        Main.switchScene("ObservationChoice", this.validateButton, data);
+            HashMap<Object, String> filter = new HashMap<>();
+            this.initFilter(filter, lastName, firstName, date, time, lambertX, lambertY, nature, nombre, presentMaisNonObs, 
+                            idNid, plage, raisonArretObservation, nbEnvol, protection, bagueMale, bagueFemelle);
+            String restriction = this.makeRestriction(filter);
+
+            Data userData = (Data) this.homeButton.getScene().getUserData();
+            Data data = new Data(userData.get(0), ANIMAL, restriction);
+            data.setAdmin(userData.isAdmin());
+            ObservationChoiceController.setAllObservations(ANIMAL, restriction);
+            Main.switchScene("ObservationChoice", this.validateButton, data);
+
+        } catch (IllegalArgumentException e) {
+            Main.showPopup(e.getMessage(), event, true);
+        }
+    }
+
+    /**
+     * Check if all fields are valid
+     *
+     * @param lastName     last name of the observer
+     * @param firstName    first name of the observer
+     * @param date         date of the observation
+     * @param time         time of the observation
+     * @param lambertX     lambert X coordinate of the observation
+     * @param lambertY     lambert Y coordinate of the observation
+     * @param nombre       number of birds observed
+     * @param idNid        id of the nid
+     * @param plage        name of the beach
+     * @param nbEnvol      number of birds that flew away
+     * @param bagueMale    name of the male ring
+     * @param bagueFemelle name of the female ring
+     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     */
+    private void checkFields(String lastName, String firstName, LocalDate date, String time,
+                                String lambertX, String lambertY, String nombre,
+                                String idNid, String plage, String nbEnvol,
+                                String bagueMale, String bagueFemelle) throws IllegalArgumentException {
+
+        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !lastName.isEmpty())
+            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !firstName.isEmpty())
+            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (time != null && !time.isEmpty()) {
+            if (!time.matches("\\d{2}:\\d{2}"))
+                throw new IllegalArgumentException("L'heure doit être au format hh:mm");
+            else {
+                String[] timeSplit = time.split(":");
+                int h = Integer.parseInt(timeSplit[0]);
+                int m = Integer.parseInt(timeSplit[1]);
+                if (!(0 <= h && h < 24 && 0 <= m && m < 60))
+                    throw new IllegalArgumentException("L'heure doit être valide");
+            }
+        }
+
+        if (!lambertX.matches("\\d+(\\.\\d+)?") && !lambertX.isEmpty())
+            throw new IllegalArgumentException("La coordonnée Lambert X ne peut pas être vide et doit être un nombre");
+
+        if (!lambertY.matches("\\d+(\\.\\d+)?") && !lambertY.isEmpty())
+            throw new IllegalArgumentException("La coordonnée Lambert Y ne peut pas être vide et doit être un nombre");
+
+        if (!nombre.matches("\\d+") && !nombre.isEmpty())
+            throw new IllegalArgumentException("Le nombre d'individus ne peut pas être vide et doit être un entier");
+
+        if (!idNid.matches("\\d+") && !idNid.isEmpty())
+            throw new IllegalArgumentException("L'identifiant de nid ne peut pas être vide et doit être un entier");
+
+        if (!plage.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !plage.isEmpty())
+            throw new IllegalArgumentException("La plage ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (!nbEnvol.matches("\\d+") && !nbEnvol.isEmpty())
+            throw new IllegalArgumentException("Le nombre d'envol ne peut pas être vide et doit être un entier");
+
+        if (!bagueMale.matches("[a-zA-Z\\d\\-/#]+") && !bagueMale.isEmpty())
+            throw new IllegalArgumentException("La bague mâle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
+
+        if (!bagueFemelle.matches("[a-zA-Z\\d\\-/#]+") && !bagueFemelle.isEmpty())
+            throw new IllegalArgumentException("La bague femelle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
     }
 
     /**
@@ -155,18 +218,18 @@ public class FilterGCIController extends InteractivePage {
      * @param nature the nature of the observation
      * @param nombre the number of items of the observation
      * @param presentMaisNonObs boolean value which is true if the nest have already been observed
-     * @param leNid the nest id
-     * @param nomPlage the beach
+     * @param idNid the nest id
+     * @param plage the beach
      * @param raisonArretObservation the reason why the prospecting has been stopped
-     * @param nbEnvols the number of flights
+     * @param nbEnvol the number of flights
      * @param protection boolean value which is true if the nest is under protection
      * @param bagueMale the code of the male
      * @param bagueFemelle the code of the female
      */
     private void initFilter(HashMap<Object, String> filter, String lastName, String firstName,
                             LocalDate date, String time, String lambertX, String lambertY,
-                            String nature, Integer nombre, Integer presentMaisNonObs, Integer leNid,
-                            String nomPlage, String raisonArretObservation, Integer nbEnvols,
+                            String nature, String nombre, Integer presentMaisNonObs, String idNid,
+                            String plage, String raisonArretObservation, String nbEnvol,
                             Integer protection, String bagueMale, String bagueFemelle){
 
         
@@ -177,12 +240,12 @@ public class FilterGCIController extends InteractivePage {
         filter.put(lambertX, "lieu_Lambert_X");
         filter.put(lambertY, "lieu_Lambert_Y");
         filter.put(nature, "nature");
-        this.putInteger(filter, nombre, "nombre");
+        filter.put(nombre, "nombre");
         this.putInteger(filter, presentMaisNonObs, "presentMaisNonObs");
-        this.putInteger(filter, leNid, "leNid");
-        filter.put(nomPlage, "nomPlage");
+        filter.put(idNid, "idNid");
+        filter.put(plage, "plage");
         filter.put(raisonArretObservation, "raisonArretObservation");
-        this.putInteger(filter, nbEnvols, "nbEnvols");
+        filter.put(nbEnvol, "nbEnvol");
         this.putInteger(filter, protection, "protection");
         filter.put(bagueMale, "bagueMale");
         filter.put(bagueFemelle, "bagueFemelle");

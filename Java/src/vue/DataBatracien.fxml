@@ -324,7 +324,7 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Zone temporaire ?">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Zone temporaire">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -371,7 +371,7 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Type de Marée ?">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Type de Marée">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -410,7 +410,7 @@
                         </HBox>
                         <HBox id="hBox" alignment="CENTER" prefHeight="100.0" prefWidth="1078.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="254.0" text="Nature végétation ?">
+                              <Label prefHeight="16.0" prefWidth="254.0" text="Nature végétation">
                                  <font>
                                     <Font name="Berlin Sans FB" size="23.0" />
                                  </font>
@@ -455,7 +455,7 @@
             <Insets bottom="50.0" />
          </padding>
          <children>
-            <Button id="valider" onAction="#validate" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="67.0" prefWidth="177.0" text="Valider" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button id="valider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#validate" prefHeight="67.0" prefWidth="177.0" text="Valider" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Berlin Sans FB" size="20.0" />
                </font>

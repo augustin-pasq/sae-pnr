@@ -88,7 +88,6 @@ public class FilterChouetteController extends InteractivePage {
             
             Data userData = (Data) this.homeButton.getScene().getUserData();
             Data data = new Data(userData.get(0), ANIMAL, restriction);
-            data.setAdmin(userData.isAdmin());
             ObservationChoiceController.setAllObservations(ANIMAL, restriction);
             Main.switchScene("ObservationChoice", this.validateButton, data);
 
@@ -107,7 +106,7 @@ public class FilterChouetteController extends InteractivePage {
      * @param lambertY lambert Y coordinate of the observation
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
-    private void checkFields(String lastName,  String firstName, LocalDate date, String time,  String lambertX,  String lambertY) throws IllegalArgumentException {
+    private void checkFields( String lastName,  String firstName, LocalDate date, String time,  String lambertX,  String lambertY) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !lastName.isEmpty())
             throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
             

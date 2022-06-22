@@ -97,7 +97,7 @@ public class EditBatracienObsController extends InteractivePage {
         zonePenteComboBox.setItems(typePenteList);
         zoneOuvertureComboBox.setItems(typeOuvertureList);
         vegetationComboBox.setItems(typeVegetationList);
-
+        
         lastNameField.setText(observation.get(22));
         firstNameField.setText(observation.get(23));
         LocalDate saisieDate = LocalDate.parse(observation.get(24));

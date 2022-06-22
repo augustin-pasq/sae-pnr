@@ -9,19 +9,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import modele.donnee.EspeceBatracien;
-import modele.donnee.UseDatabase;
-import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
-import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.UUID;
-
 
 public class FilterBatracienController extends InteractivePage {
 
@@ -228,43 +220,6 @@ public class FilterBatracienController extends InteractivePage {
             throw new IllegalArgumentException("La vegetation ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
     }
 
-    /**
-     * Edit the select query to get data from the database
-     * @param filter the filter containing the values of the fields with the associated database column names.
-     * @return the end of the query, corresponding to the restriction of a query.
-     */
-    private String makeRestriction(HashMap<Object, String> filter){
-        String query = "";
-        int nbRestriction = 0;
-
-        for (Object o : filter.keySet()){
-            if (!(o == null)){
-                String value = o.toString();
-                if (!value.isEmpty()){
-                    if (nbRestriction > 0){
-                        query = query + " AND " + filter.get(o) + " =\"" + value + "\"";
-                    } else {
-                        query = query + " WHERE " + filter.get(o) + " =\"" + value + "\"";
-                    }
-                    nbRestriction ++;
-                }
-            }
-        }
-        return query;
-    }
-
-
-    /**
-     *  Formats an Integer to be placed in the filter.
-     * @param filter the filter
-     * @param value the integer
-     * @param column the intefer's column name
-     */
-    private void putInteger(HashMap<Object, String> filter, Integer value, String column){
-        if (value == null) filter.put("", "nombre");
-        else filter.put(value, column);
-    }
-
     private void initFilter(HashMap<Object, String> filter, String lastName, String firstName, LocalDate date, String time,
                         String lambertX, String lambertY, String espece, String nbAdulte, String nbAmplexus, String nbPontes, String nbTetards, String temperature,
                             String meteoCiel, String meteoTemperature, String meteoVent, String meteoPluie, Integer zoneTemporaire,
@@ -295,5 +250,41 @@ public class FilterBatracienController extends InteractivePage {
         filter.put(zoneOuverture, "zoneOuverture");
         filter.put(natureVegetation, "natureVegetation");
         filter.put(vegetation, "vegetation");
+    }
+
+    /**
+     * Edit the select query to get data from the database
+     * @param filter the filter containing the values of the fields with the associated database column names.
+     * @return the end of the query, corresponding to the restriction of a query.
+     */
+    private String makeRestriction(HashMap<Object, String> filter){
+        String query = "";
+        int nbRestriction = 0;
+
+        for (Object o : filter.keySet()){
+            if (!(o == null)){
+                String value = o.toString();
+                if (!value.isEmpty()){
+                    if (nbRestriction > 0){
+                        query = query + " AND " + filter.get(o) + " =\"" + value + "\"";
+                    } else {
+                        query = query + " WHERE " + filter.get(o) + " =\"" + value + "\"";
+                    }
+                    nbRestriction ++;
+                }
+            }
+        }
+        return query;
+    }
+
+    /**
+     *  Formats an Integer to be placed in the filter.
+     * @param filter the filter
+     * @param value the integer
+     * @param column the intefer's column name
+     */
+    private void putInteger(HashMap<Object, String> filter, Integer value, String column){
+        if (value == null) filter.put("", "nombre");
+        else filter.put(value, column);
     }
 }

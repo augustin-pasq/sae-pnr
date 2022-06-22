@@ -1,151 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.GenerateChartController">
-   <children>
-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="405.0" prefWidth="662.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <padding>
-            <Insets left="20.0" right="20.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="299.0" prefWidth="1240.0">
-               <children>
-                  <AnchorPane prefHeight="177.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Button id="Back" fx:id="backButton" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
-                           <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                                 <image>
-                                    <Image url="@../../data/Back.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button id="HomePage" fx:id="homeButton" layoutX="96.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="10.0">
-                           <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                                 <image>
-                                    <Image url="@../../data/Home_Page.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" fillHeight="false" prefHeight="393.0" prefWidth="1240.0" spacing="5.0">
-               <children>
-                  <Label prefHeight="55.0" prefWidth="246.0" text="Génerer un">
-                     <font>
-                        <Font name="Berlin Sans FB" size="50.0" />
-                     </font>
-                  </Label>
-                  <Label id="principal" text="graphique" textFill="#00936e">
-                     <font>
-                        <Font name="Berlin Sans FB" size="50.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets bottom="50.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="743.0" prefWidth="1240.0" spacing="60.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="264.0" prefWidth="731.0" spacing="50.0">
-                     <children>
-                        <ComboBox id="espece" fx:id="especeComboBox" maxHeight="78.0" prefHeight="78.0" prefWidth="200.0" promptText="Espèce" />
-                        <ComboBox id="abcisse" fx:id="abscisseComboBox" maxHeight="78.0" prefHeight="78.0" prefWidth="200.0" promptText="Donnée en abscisse" />
-                        <ComboBox id="ordonnee" fx:id="ordonneeComboBox" maxHeight="78.0" prefHeight="78.0" prefWidth="200.0" promptText="Donnée en ordonnée" />
-                        <AnchorPane maxWidth="497.0" prefHeight="175.0" prefWidth="497.0">
-                           <children>
-                              <Button  id="generer" fx:id="generateButton" alignment="CENTER" contentDisplay="CENTER"
-                                       onAction="#generateQuery" layoutX="148.0" prefHeight="53.0" prefWidth="200.0" text="GÉNÉRER" textAlignment="CENTER"
-                                       textFill="WHITE" textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="122.0" 
-                                       AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="148.0" AnchorPane.topAnchor="0.0">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                                 <effect>
-                                    <Blend />
-                                 </effect>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="20.0" />
-                                 </font>
-                              </Button>
-                              <Button id="save" alignment="CENTER" contentDisplay="CENTER" layoutX="394.0" prefHeight="55.0" prefWidth="88.0" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                                 <effect>
-                                    <Blend />
-                                 </effect>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                                 <font>
-                                    <Font name="Berlin Sans FB" size="20.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView id="save" fitHeight="48.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../data/Save.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                     <opaqueInsets>
-                        <Insets bottom="40.0" />
-                     </opaqueInsets>
-                  </VBox>
-                  <ImageView fitHeight="654.0" fitWidth="684.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../data/Bar_Chart.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
-   <stylesheets>
-      <URL value="@StyleDataHippocampe.css" />
-      <URL value="@StyleGenerateChart.css" />
-   </stylesheets>
+<?import java.net.URL?>
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.GenerateChartController">
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
+    <stylesheets>
+        <URL value="@StyleDataHippocampe.css"/>
+        <URL value="@StyleGenerateChart.css"/>
+    </stylesheets>
+    <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="405.0"
+          prefWidth="662.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <padding>
+            <Insets left="20.0" right="20.0"/>
+        </padding>
+        <HBox prefHeight="299.0" prefWidth="1240.0">
+            <AnchorPane prefHeight="177.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
+                <Button id="Back" fx:id="backButton" layoutX="459.0" layoutY="10.0" mnemonicParsing="false"
+                        prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+                    <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT"/>
+                            </cursor>
+                            <viewport>
+                                <Rectangle2D/>
+                            </viewport>
+                            <Image url="@../../data/Back.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="HomePage" fx:id="homeButton" layoutX="96.0" layoutY="10.0" mnemonicParsing="false"
+                        prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="96.0"
+                        AnchorPane.topAnchor="10.0">
+                    <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT"/>
+                            </cursor>
+                            <viewport>
+                                <Rectangle2D/>
+                            </viewport>
+                            <Image url="@../../data/Home_Page.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </AnchorPane>
+        </HBox>
+        <HBox alignment="CENTER" fillHeight="false" prefHeight="393.0" prefWidth="1240.0" spacing="5.0">
+            <padding>
+                <Insets bottom="50.0"/>
+            </padding>
+            <Label prefHeight="55.0" prefWidth="246.0" text="Génerer un">
+                <font>
+                    <Font name="Berlin Sans FB" size="50.0"/>
+                </font>
+            </Label>
+            <Label id="principal" text="graphique" textFill="#00936e">
+                <font>
+                    <Font name="Berlin Sans FB" size="50.0"/>
+                </font>
+            </Label>
+        </HBox>
+        <HBox prefHeight="743.0" prefWidth="1240.0" spacing="60.0">
+            <VBox alignment="CENTER" prefHeight="264.0" prefWidth="731.0" spacing="50.0">
+                <opaqueInsets>
+                    <Insets bottom="40.0"/>
+                </opaqueInsets>
+                <ComboBox id="espece" fx:id="especeComboBox" maxHeight="78.0" prefHeight="78.0" prefWidth="200.0"
+                          promptText="Espèce"/>
+                <ComboBox id="abcisse" fx:id="abscisseComboBox" maxHeight="78.0" prefHeight="78.0"
+                          prefWidth="200.0" promptText="Donnée en abscisse"/>
+                <ComboBox id="ordonnee" fx:id="ordonneeComboBox" maxHeight="78.0" prefHeight="78.0"
+                          prefWidth="200.0" promptText="Donnée en ordonnée"/>
+                <AnchorPane maxWidth="497.0" prefHeight="175.0" prefWidth="497.0">
+                    <Button id="generer" fx:id="generateButton" alignment="CENTER" contentDisplay="CENTER"
+                            onAction="#makeChart" layoutX="148.0" prefHeight="53.0" prefWidth="200.0"
+                            text="GÉNÉRER" textAlignment="CENTER"
+                            textFill="WHITE" textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="122.0"
+                            AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="148.0"
+                            AnchorPane.topAnchor="0.0">
+                        <cursor>
+                            <Cursor fx:constant="DEFAULT"/>
+                        </cursor>
+                        <effect>
+                            <Blend/>
+                        </effect>
+                        <opaqueInsets>
+                            <Insets/>
+                        </opaqueInsets>
+                        <font>
+                            <Font name="Berlin Sans FB" size="20.0"/>
+                        </font>
+                    </Button>
+                    <Button id="save" alignment="CENTER" contentDisplay="CENTER" layoutX="394.0"
+                            prefHeight="55.0" prefWidth="88.0" textAlignment="CENTER" textFill="WHITE"
+                            textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="113.0"
+                            AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                        <cursor>
+                            <Cursor fx:constant="DEFAULT"/>
+                        </cursor>
+                        <effect>
+                            <Blend/>
+                        </effect>
+                        <opaqueInsets>
+                            <Insets/>
+                        </opaqueInsets>
+                        <font>
+                            <Font name="Berlin Sans FB" size="20.0"/>
+                        </font>
+                        <graphic>
+                            <ImageView id="save" fitHeight="48.0" fitWidth="59.0" pickOnBounds="true"
+                                       preserveRatio="true">
+                                <Image url="@../../data/Save.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </AnchorPane>
+            </VBox>
+            <ImageView fitHeight="654.0" fitWidth="684.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../data/Bar_Chart.png"/>
+            </ImageView>
+        </HBox>
+    </VBox>
 </AnchorPane>
