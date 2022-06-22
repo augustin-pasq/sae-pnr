@@ -82,18 +82,7 @@ public class FilterLoutreController extends InteractivePage {
         }
     }
 
-    private void initFilter(HashMap<Object,String> filter, String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit, String indice){
-        filter.put(lastName, "nom");
-        filter.put(firstName, "prenom");
-        filter.put(date, "dateObs");
-        filter.put(time, "heureObs");
-        filter.put(lambertX, "lieu_Lambert_X");
-        filter.put(lambertY, "lieu_Lambert_Y");
-        filter.put(commune, "commune");
-        filter.put(lieuDit, "lieuDit");
-        filter.put(indice, "indice");
-    }
-
+    
     /**
      * Check if all fields are valid
      *
@@ -138,6 +127,30 @@ public class FilterLoutreController extends InteractivePage {
             throw new IllegalArgumentException("Le lieu ne peut pas être vide et dit ne doit contenir que des lettres, espaces et tirets");
     }
 
+    /**
+     * 
+     * @param filter
+     * @param lastName
+     * @param firstName
+     * @param date
+     * @param time
+     * @param lambertX
+     * @param lambertY
+     * @param commune
+     * @param lieuDit
+     * @param indice
+     */
+    private void initFilter(HashMap<Object,String> filter, String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit, String indice){
+        filter.put(lastName, "nom");
+        filter.put(firstName, "prenom");
+        filter.put(date, "dateObs");
+        filter.put(time, "heureObs");
+        filter.put(lambertX, "lieu_Lambert_X");
+        filter.put(lambertY, "lieu_Lambert_Y");
+        filter.put(commune, "commune");
+        filter.put(lieuDit, "lieuDit");
+        filter.put(indice, "indice");
+    }
 
     private String makeRestriction(HashMap<Object, String> filter){
         String query = "";

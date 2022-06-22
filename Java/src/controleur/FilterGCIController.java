@@ -176,25 +176,13 @@ public class FilterGCIController extends InteractivePage {
         filter.put(lambertX, "lieu_Lambert_X");
         filter.put(lambertY, "lieu_Lambert_Y");
         filter.put(nature, "nature");
-
-        if (nombre == null) filter.put("", "nombre");
-        else filter.put(nombre, "nombre");
-
-        if (presentMaisNonObs == null) filter.put("", "presentMaisNonObs");
-        else filter.put(presentMaisNonObs, "presentMaisNonObs");
-
-        if (leNid == null) filter.put("", "leNid");
-        else filter.put(leNid, "leNid");
-
+        this.putInteger(filter, nombre, "nombre");
+        this.putInteger(filter, presentMaisNonObs, "presentMaisNonObs");
+        this.putInteger(filter, leNid, "leNid");
         filter.put(nomPlage, "nomPlage");
         filter.put(raisonArretObservation, "raisonArretObservation");
-
-        if (nbEnvols == null) filter.put("", "nbEnvols");
-        else filter.put(nbEnvols, "nbEnvols");
-
-        if (protection == null) filter.put("", "protection");
-        else filter.put(protection, "protection");         
-
+        this.putInteger(filter, nbEnvols, "nbEnvols");
+        this.putInteger(filter, protection, "protection");
         filter.put(bagueMale, "bagueMale");
         filter.put(bagueFemelle, "bagueFemelle");
     }
@@ -222,5 +210,16 @@ public class FilterGCIController extends InteractivePage {
             }
         }
         return query;
+    }
+
+    /**
+     *  Formats an Integer to be placed in the filter.
+     * @param filter the filter
+     * @param value the integer
+     * @param column the intefer's column name
+     */
+    private void putInteger(HashMap<Object, String> filter, Integer value, String column){
+        if (value == null) filter.put("", "nombre");
+        else filter.put(value, column);
     }
 }
