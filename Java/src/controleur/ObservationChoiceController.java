@@ -1,5 +1,6 @@
 package controleur;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ObservationChoiceController extends InteractivePage {
@@ -19,16 +21,14 @@ public class ObservationChoiceController extends InteractivePage {
     @FXML
     private VBox scrollPaneContainer;
 
-    private ArrayList<ArrayList<String>> allObservations;
+    private static ArrayList<ArrayList<String>> allObservations;
 
-    private String espece;
+    private static String espece;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
 
-        setEspece("Loutre");
-        setAllObservations();
         VBox observationsContainer = new VBox(10);
         for (int i = 1; i < allObservations.size(); i++) {
             Button obs = createButton(allObservations.get(i));
@@ -39,16 +39,20 @@ public class ObservationChoiceController extends InteractivePage {
         scrollPaneContainer.getChildren().add(scrollPane);
     }
 
-    public void setAllObservations() {
-        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + this.espece);
+    public static void setAllObservations(String esp) {
+        espece = esp;
+        allObservations = UseDatabase.selectQuery("SELECT * FROM vue_allFrom" + esp);
     }
 
-    public void setEspece(String espece) {
-        this.espece = espece;
+    public void getData(ActionEvent event) {
+        Button target = (Button) event.getSource();
+        Data data = (Data) target.getScene().getUserData();
+
+        System.out.println(Arrays.toString(data.getAll()));
     }
 
     private Button createButton(@NotNull ArrayList<String> observation) {
-        Button button = new Button((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 2) + "   -   " + observation.get(observation.size() - 1) + "   -   " + observation.get(observation.size() - 5) + "   -   " + observation.get(observation.size() - 6)).toUpperCase());
+        Button button = new Button((observation.get(observation.size() - 4) + "   -   " + observation.get(observation.size() - 3) + "   -   " + observation.get(observation.size() - 2) + "   -   " + observation.get(observation.size() - 1) + "   -   " + observation.get(observation.size() - 5) + " " + observation.get(observation.size() - 6)).toUpperCase());
         button.setFont(new Font("DejaVu Sans Bold", 20));
         button.setAlignment(Pos.CENTER);
         button.setContentDisplay(ContentDisplay.CENTER);
@@ -58,8 +62,8 @@ public class ObservationChoiceController extends InteractivePage {
         button.setMnemonicParsing(false);
         button.setId("observation");
         button.setOnAction(e -> {
-
-            Main.switchScene("Consult" + this.espece + "Obs", button);
+            ConsultLoutreObsControler.setObs(Integer.parseInt(observation.get(0)));
+            Main.switchScene("Consult" + espece + "Obs", button);
         });
         return button;
     }

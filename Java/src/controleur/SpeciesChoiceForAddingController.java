@@ -1,7 +1,5 @@
 package controleur;
 
-import java.util.Arrays;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +9,7 @@ import javafx.scene.control.Button;
  *
  * @author Groupe SAE PNR 1D1
  */
-public class SpeciesChoiceController extends InteractivePage {
+public class SpeciesChoiceForAddingController extends InteractivePage {
 
     @FXML
     private Button consultObsBatracienButton;
@@ -30,31 +28,30 @@ public class SpeciesChoiceController extends InteractivePage {
 
     @FXML
     private void consultBatracienObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("Batracien");
-        Main.switchScene("ObservationChoice", consultObsBatracienButton);
+        goTo(event, "Batracien");
     }
 
     @FXML
     private void consultChouetteObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("Chouette");
-        Main.switchScene("ObservationChoice", consultObsChouetteButton);
+        goTo(event, "Chouette");
     }
 
     @FXML
     private void consultGCIObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("GCI");
-        Main.switchScene("ObservationChoice", consultObsGCIButton);
+        goTo(event, "GCI");
     }
 
     @FXML
     private void consultHippocampeObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("Hippocampe");
-        Main.switchScene("ObservationChoice", consultObsHippocampeButton);
+        goTo(event, "Hippocampe");
     }
 
     @FXML
     private void consultLoutreObs (ActionEvent event) {
-        ObservationChoiceController.setAllObservations("Loutre");
-        Main.switchScene("ObservationChoice", consultObsLoutreButton);
+        goTo(event, "Loutre");
+    }
+
+    private void goTo(ActionEvent event, String name) {
+        Main.switchScene("Data" + name, this.homeButton);
     }
 }
