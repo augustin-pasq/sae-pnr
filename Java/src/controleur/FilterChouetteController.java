@@ -11,21 +11,11 @@ import javafx.scene.control.TextField;
 import modele.donnee.EspeceChouette;
 import modele.donnee.Sexe;
 import modele.donnee.TypeObservation;
-import modele.donnee.UseDatabase;
-import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 
 public class FilterChouetteController extends InteractivePage {
@@ -167,10 +157,7 @@ public class FilterChouetteController extends InteractivePage {
         filter.put(lambertX, "lieu_Lambert_X");
         filter.put(lambertY, "lieu_Lambert_Y");
         filter.put(espece, "espece");
-
-        if (protocole == null) filter.put("", "protocole");
-        else filter.put(protocole, "protocole");
-
+        this.putInteger(filter, protocole, "protocole");
         filter.put(typeObs, "typeObs");
         filter.put(sexe, "sexe");
     }
@@ -198,5 +185,16 @@ public class FilterChouetteController extends InteractivePage {
             }
         }
         return query;
+    }
+
+    /**
+     *  Formats an Integer to be placed in the filter.
+     * @param filter the filter
+     * @param value the integer
+     * @param column the intefer's column name
+     */
+    private void putInteger(HashMap<Object, String> filter, Integer value, String column){
+        if (value == null) filter.put("", "nombre");
+        else filter.put(value, column);
     }
 }
