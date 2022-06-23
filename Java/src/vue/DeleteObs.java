@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class DeleteLoutreObs extends Application {
+public class DeleteObs extends Application {
 
     public static void main(String[] args) {
         launch(args);
