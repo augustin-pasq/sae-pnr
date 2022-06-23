@@ -19,21 +19,45 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class DeleteObsController extends InteractivePage {
-
+    /**
+     * The list of observations
+     */
     private static ArrayList<ArrayList<String>> observation;
+    /**
+     * The species name
+     */
     private static String espece = "unset";
+    /**
+     * The species id
+     */
     private String id;
+    /**
+     * The observer's name
+     */
     private String lastName;
+    /**
+     * The observer's first name
+     */
     private String firstName;
     @FXML
     private Label especeLabel;
     @FXML
     private VBox container;
 
+    /**
+     * Sets the list of observations
+     *
+     * @param obs the list of observations
+     */
     public static void setObs(ArrayList<ArrayList<String>> obs) {
         observation = obs;
     }
 
+    /**
+     * Sets the species name
+     *
+     * @param e the species name
+     */
     public static void setEspece(String e) {
         espece = e;
     }
@@ -61,6 +85,13 @@ public class DeleteObsController extends InteractivePage {
         }
     }
 
+    /**
+     * Creates a button for the observation
+     *
+     * @param title the title of the observation
+     * @param value the value of the observation
+     * @return the button in an HBox
+     */
     private HBox createButton(String title, String value) {
         title = parseTitle(title);
         Label titleLabel = new Label(title);
@@ -85,6 +116,12 @@ public class DeleteObsController extends InteractivePage {
         return hbox;
     }
 
+    /**
+     * Parses the title of the observation to format it for the user
+     *
+     * @param title the title of the observation
+     * @return the formatted title
+     */
     private String parseTitle(String title) {
         StringBuilder formattedTitle = new StringBuilder();
 

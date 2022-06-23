@@ -26,10 +26,23 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 
+/**
+ * Controller for the DataHippocampe page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class DataHippocampeController extends InteractivePage {
-
+    /**
+     * The list of the species
+     */
     ObservableList<EspeceHippocampe> especeList = FXCollections.observableArrayList(EspeceHippocampe.values());
+    /**
+     * The list of the possible genders
+     */
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
+    /**
+     * List of possibilities whether the
+     */
     ObservableList<String> gestantList = FXCollections.observableArrayList("Gestant", "Non gestant");
     ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.values());
     @FXML
