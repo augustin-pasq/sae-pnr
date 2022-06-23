@@ -27,7 +27,7 @@ public class AdminPanelController implements Initializable {
     /**
      * The list of tables in the database
      */
-    public String[] tables = {"Lieu", "Observateur", "AObserve", "Obs_Hippocampe", "Obs_Loutre", "Obs_GCI", "Nid_GCI", "Chouette", "Obs_Chouette", "ZoneHumide", "Obs_Batracien", "Vegetation", "Lieu_Vegetation"};
+    public final String[] tables = {"Lieu", "Observateur", "AObserve", "Obs_Hippocampe", "Obs_Loutre", "Obs_GCI", "Nid_GCI", "Chouette", "Obs_Chouette", "ZoneHumide", "Obs_Batracien", "Vegetation", "Lieu_Vegetation"};
 
     /**
      * The exit button
