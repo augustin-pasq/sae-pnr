@@ -147,10 +147,11 @@ public class FilterGCIController extends InteractivePage {
     @FXML
     private Button validateButton;
 
-    @Override
     /**
-     * Initialise the controller class.
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
      */
+    @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
         this.isAdmin = true;
@@ -160,12 +161,13 @@ public class FilterGCIController extends InteractivePage {
         nidProtegeComboBox.setItems(nidProtegeList);
     }
 
-    @FXML
+    
     /**
-     * Method called when the user clicks on the validate button.
+     * Validate the data filter the select query
+     * @param event the event that triggered the method
      */
+    @FXML
     public void filter(ActionEvent event){
-
         // Init //
         String lastName = lastNameField.getText().toUpperCase();
         String firstName = firstNameField.getText().toUpperCase();
@@ -229,17 +231,17 @@ public class FilterGCIController extends InteractivePage {
     /**
      * Check if all fields are valid
      *
-     * @param lastName     last name of the observer
-     * @param firstName    first name of the observer
-     * @param date         date of the observation
-     * @param time         time of the observation
-     * @param lambertX     lambert X coordinate of the observation
-     * @param lambertY     lambert Y coordinate of the observation
-     * @param nombre       number of birds observed
-     * @param idNid        id of the nid
-     * @param plage        name of the beach
-     * @param nbEnvol      number of birds that flew away
-     * @param bagueMale    name of the male ring
+     * @param lastName last name of the observer
+     * @param firstName first name of the observer
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @param nombre number of birds observed
+     * @param idNid id of the nid
+     * @param plage name of the beach
+     * @param nbEnvol number of birds that flew away
+     * @param bagueMale name of the male ring
      * @param bagueFemelle name of the female ring
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
