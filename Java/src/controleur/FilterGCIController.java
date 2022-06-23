@@ -10,55 +10,140 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import modele.donnee.ContenuNid;
 
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
- * Controller of the filter GCI.
+ * Controller for the FilterGCI page
  */
 public class FilterGCIController extends InteractivePage {
 
+    /**
+     * The animal value
+     */
     private final String ANIMAL = "GCI";
+
+    /**
+     * The observation nature list
+     */
     ObservableList<ContenuNid> natureList = FXCollections.observableArrayList(ContenuNid.values());
+    
+    /**
+     * The observed nest list
+     */
     ObservableList<String> nidObserveList = FXCollections.observableArrayList("Oui", "Non");
+    
+    /**
+     * The reason list
+     */
     ObservableList<String> raisonList = FXCollections.observableArrayList("Envol", "Inconnu", "Maree", "Pietinement", "Prédation");
+    
+    /**
+     * The protected nest list
+     */
     ObservableList<String> nidProtegeList = FXCollections.observableArrayList("Oui", "Non");
 
+    /**
+     * The last naame of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The nature of the observation
+     */
     @FXML
     private ComboBox<ContenuNid> natureComboBox;
+
+    /**
+     * The amount of items (nature attribute) observed
+     */
     @FXML
     private TextField nombreField;
+
+    /**
+     * Indicates if the nid is already observed
+     */
     @FXML
     private ComboBox<String> nidObserveComboBox;
+
+    /**
+     * The ID of the nest
+     */
     @FXML
     private TextField idField;
+
+    /**
+     * The name of the beach
+     */
     @FXML
     private TextField plageField;
+
+    /**
+     * The reason why the observation was stopped
+     */
     @FXML
     private ComboBox<String> raisonComboBox;
+
+    /**
+     * The amount of flight in the nest
+     */
     @FXML
     private TextField nbEnvolField;
+
+    /**
+     * Indicates if the nest is protected
+     */
     @FXML
     private ComboBox<String> nidProtegeComboBox;
+
+    /**
+     * The code of the male ring
+     */
     @FXML
     private TextField bagueMaleField;
+
+    /**
+     * The code of the female ring
+     */
     @FXML
     private TextField bagueFemelleField;
+
+    /**
+     * The button to validate the filter
+     */
     @FXML
     private Button validateButton;
 
