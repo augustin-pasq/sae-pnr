@@ -8,5 +8,6 @@ public class SuccessController extends InteractivePage {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.homeButton.setOnAction(super::goHome);
+        this.backButton.setOnAction(super::goHome);
     }
 }

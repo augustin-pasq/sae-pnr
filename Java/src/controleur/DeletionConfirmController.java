@@ -71,7 +71,8 @@ public class DeletionConfirmController implements Initializable {
             UseDatabase.updateQuery(String.format("DELETE FROM Observation WHERE idObs = %d;",
                     Integer.parseInt(id)));
 
-            Main.switchScene("Success", event);
+            data.setAdmin(true);
+            Main.switchScene("Success", this.deleteButton, data);
 
         } catch (SQLException e) {
             Main.showPopup("Une erreur est survenue lors de la suppression de l'observation.", this.deleteButton, true);
