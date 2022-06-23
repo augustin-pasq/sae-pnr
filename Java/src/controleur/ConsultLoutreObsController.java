@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,25 +11,62 @@ import java.util.ResourceBundle;
 
 /**
  * Controller for the ConsultLoutreObs page
+ *
+ * @author Groupe SAE PNR 1D1
  */
 public class ConsultLoutreObsController extends InteractivePage {
 
+    /**
+     * The last name of the observer
+     */
     @FXML
     private Label nom;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private Label prenom;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private Label date;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private Label heure;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private Label coordX;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private Label coordY;
+
+    /**
+     * The village where the otter is observed
+     */
     @FXML
     private Label commune;
+
+    /**
+     * The hamlet where the otter is observed
+     */
     @FXML
     private Label lieudit;
+
+    /**
+     * Indicates if the index is positive, negative or not determined
+     */
     @FXML
     private Label indice;
 
@@ -67,7 +103,8 @@ public class ConsultLoutreObsController extends InteractivePage {
      */
     public static void setObs(int numObs) {
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";")
+                    .get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

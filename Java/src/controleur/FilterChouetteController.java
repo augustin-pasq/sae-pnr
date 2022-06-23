@@ -17,38 +17,106 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-
+/**
+ * Controller for the FilterChouette page
+ */
 public class FilterChouetteController extends InteractivePage {
 
+    /**
+     * The animal value
+     */
     private final String ANIMAL = "Chouette";
+
+    /**
+     * The specie list
+     */
     ObservableList<EspeceChouette> especeList = FXCollections.observableArrayList(EspeceChouette.values());
+    
+    /**
+     * The gender list
+     */
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
+    
+    /**
+     * The protocole list
+     */
     ObservableList<String> protocoleList = FXCollections.observableArrayList("Oui", "Non");
+    
+    /**
+     * The observation type list
+     */
     ObservableList<TypeObservation> typeObservationList = FXCollections.observableArrayList(TypeObservation.values());
 
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The species of the observation
+     */
     @FXML
     private ComboBox<EspeceChouette> especeComboBox;
+
+    /**
+     * Indicates if the observation protocol is followed
+     */
     @FXML
     private ComboBox<String> protocoleComboBox;
+
+    /**
+     * The type of the observation
+     */
     @FXML
     private ComboBox<TypeObservation> typeObservationComboBox;
+
+    /**
+     * The gender of the owl
+     */
     @FXML
     private ComboBox<Sexe> sexeComboBox;
+
+    /**
+     * The button to validate the filter
+     */
     @FXML
     private Button validateButton;
 
+    /**
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -59,6 +127,11 @@ public class FilterChouetteController extends InteractivePage {
         typeObservationComboBox.setItems(typeObservationList);
     }
 
+    /**
+     * Filter the select query
+     * 
+     * @param event the event that triggered the method
+     */
     @FXML
     private void filter(ActionEvent event) {
 
@@ -126,11 +199,24 @@ public class FilterChouetteController extends InteractivePage {
             }
         }
 
-        if (!lambertX.matches("\\d+(\\.\\d+)?") && !lambertX.isEmpty())
-            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
+        if (!lambertX.isEmpty()) {
+            if (!lambertX.matches("\\d+(\\.\\d+)?"))
+                throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
 
-        if (!lambertY.matches("\\d+(\\.\\d+)?") && !lambertY.isEmpty())
-            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+            float lambertXInt = Float.parseFloat(lambertX);
+            if (0 > lambertXInt || lambertXInt > 1300000)
+                throw new IllegalArgumentException("La coordonnée Lambert X doit être comprise entre 0 et 1300000");
+        }
+
+        if (!lambertY.isEmpty()) {
+            if (!lambertY.matches("\\d+(\\.\\d+)?"))
+                throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+
+            float lambertYInt = Float.parseFloat(lambertY);
+            if (lambertYInt < 6000000 || lambertYInt > 7200000)
+                throw new IllegalArgumentException("La coordonnée Lambert Y doit être comprise entre 6000000 et 7200000");
+
+        }
     }
 
     /**
@@ -191,7 +277,7 @@ public class FilterChouetteController extends InteractivePage {
      *  Formats an Integer to be placed in the filter.
      * @param filter the filter
      * @param value the integer
-     * @param column the intefer's column name
+     * @param column the integer's column name
      */
     private void putInteger(HashMap<Object, String> filter, Integer value, String column){
         if (value == null) filter.put("", "nombre");

@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,24 +16,63 @@ import java.util.ResourceBundle;
  */
 public class ConsultChouetteObsController extends InteractivePage {
 
+    /**
+     * The first name of the observer
+     */
     @FXML
     private Label nom;
+
+    /**
+     * The last name of the observer
+     */
     @FXML
     private Label prenom;
+    
+    /**
+     * The date of the observation
+     */
     @FXML
     private Label date;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private Label heure;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private Label coordX;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private Label coordY;
+
+    /**
+     * The species of the observation
+     */
     @FXML
     private Label especeChouette;
+
+    /**
+     * Indicates if the observation protocol is followed
+     */
     @FXML
     private Label protocole;
+
+    /**
+     * The type of the observation
+     */
     @FXML
     private Label typeObs;
+
+    /**
+     * The gender of the owl
+     */
     @FXML
     private Label sexe;
 
@@ -65,11 +103,13 @@ public class ConsultChouetteObsController extends InteractivePage {
 
     /**
      * Sets the observation to display
+     * 
      * @param numObs the id of observation to display
      */
     public static void setObs(int numObs) {
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";")
+                    .get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -77,6 +117,7 @@ public class ConsultChouetteObsController extends InteractivePage {
 
     /**
      * Handles the back button click
+     * 
      * @param event the event that triggered the click
      */
     public void goBack(ActionEvent event) {

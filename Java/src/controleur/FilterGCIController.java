@@ -10,62 +10,148 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import modele.donnee.ContenuNid;
 
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
- * Controller of the filter GCI.
+ * Controller for the FilterGCI page
  */
 public class FilterGCIController extends InteractivePage {
 
+    /**
+     * The animal value
+     */
     private final String ANIMAL = "GCI";
+
+    /**
+     * The observation nature list
+     */
     ObservableList<ContenuNid> natureList = FXCollections.observableArrayList(ContenuNid.values());
+    
+    /**
+     * The observed nest list
+     */
     ObservableList<String> nidObserveList = FXCollections.observableArrayList("Oui", "Non");
+    
+    /**
+     * The reason list
+     */
     ObservableList<String> raisonList = FXCollections.observableArrayList("Envol", "Inconnu", "Maree", "Pietinement", "Prédation");
+    
+    /**
+     * The protected nest list
+     */
     ObservableList<String> nidProtegeList = FXCollections.observableArrayList("Oui", "Non");
 
+    /**
+     * The last naame of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The nature of the observation
+     */
     @FXML
     private ComboBox<ContenuNid> natureComboBox;
+
+    /**
+     * The amount of items (nature attribute) observed
+     */
     @FXML
     private TextField nombreField;
+
+    /**
+     * Indicates if the nid is already observed
+     */
     @FXML
     private ComboBox<String> nidObserveComboBox;
+
+    /**
+     * The ID of the nest
+     */
     @FXML
     private TextField idField;
+
+    /**
+     * The name of the beach
+     */
     @FXML
     private TextField plageField;
+
+    /**
+     * The reason why the observation was stopped
+     */
     @FXML
     private ComboBox<String> raisonComboBox;
+
+    /**
+     * The amount of flight in the nest
+     */
     @FXML
     private TextField nbEnvolField;
+
+    /**
+     * Indicates if the nest is protected
+     */
     @FXML
     private ComboBox<String> nidProtegeComboBox;
+
+    /**
+     * The code of the male ring
+     */
     @FXML
     private TextField bagueMaleField;
+
+    /**
+     * The code of the female ring
+     */
     @FXML
     private TextField bagueFemelleField;
+
+    /**
+     * The button to validate the filter
+     */
     @FXML
     private Button validateButton;
 
-    @Override
     /**
-     * Initialise the controller class.
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
      */
+    @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
         this.isAdmin = true;
@@ -75,12 +161,14 @@ public class FilterGCIController extends InteractivePage {
         nidProtegeComboBox.setItems(nidProtegeList);
     }
 
-    @FXML
+    
     /**
-     * Method called when the user clicks on the validate button.
+     * Filter the select query
+     * 
+     * @param event the event that triggered the method
      */
+    @FXML
     public void filter(ActionEvent event){
-
         // Init //
         String lastName = lastNameField.getText().toUpperCase();
         String firstName = firstNameField.getText().toUpperCase();
@@ -144,17 +232,17 @@ public class FilterGCIController extends InteractivePage {
     /**
      * Check if all fields are valid
      *
-     * @param lastName     last name of the observer
-     * @param firstName    first name of the observer
-     * @param date         date of the observation
-     * @param time         time of the observation
-     * @param lambertX     lambert X coordinate of the observation
-     * @param lambertY     lambert Y coordinate of the observation
-     * @param nombre       number of birds observed
-     * @param idNid        id of the nid
-     * @param plage        name of the beach
-     * @param nbEnvol      number of birds that flew away
-     * @param bagueMale    name of the male ring
+     * @param lastName last name of the observer
+     * @param firstName first name of the observer
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @param nombre number of birds observed
+     * @param idNid id of the nid
+     * @param plage name of the beach
+     * @param nbEnvol number of birds that flew away
+     * @param bagueMale name of the male ring
      * @param bagueFemelle name of the female ring
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
@@ -181,11 +269,24 @@ public class FilterGCIController extends InteractivePage {
             }
         }
 
-        if (!lambertX.matches("\\d+(\\.\\d+)?") && !lambertX.isEmpty())
-            throw new IllegalArgumentException("La coordonnée Lambert X ne peut pas être vide et doit être un nombre");
+        if (!lambertX.isEmpty()) {
+            if (!lambertX.matches("\\d+(\\.\\d+)?"))
+                throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
 
-        if (!lambertY.matches("\\d+(\\.\\d+)?") && !lambertY.isEmpty())
-            throw new IllegalArgumentException("La coordonnée Lambert Y ne peut pas être vide et doit être un nombre");
+            float lambertXInt = Float.parseFloat(lambertX);
+            if (0 > lambertXInt || lambertXInt > 1300000)
+                throw new IllegalArgumentException("La coordonnée Lambert X doit être comprise entre 0 et 1300000");
+        }
+
+        if (!lambertY.isEmpty()) {
+            if (!lambertY.matches("\\d+(\\.\\d+)?"))
+                throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+
+            float lambertYInt = Float.parseFloat(lambertY);
+            if (lambertYInt < 6000000 || lambertYInt > 7200000)
+                throw new IllegalArgumentException("La coordonnée Lambert Y doit être comprise entre 6000000 et 7200000");
+
+        }
 
         if (!nombre.matches("\\d+") && !nombre.isEmpty())
             throw new IllegalArgumentException("Le nombre d'individus ne peut pas être vide et doit être un entier");
@@ -280,7 +381,7 @@ public class FilterGCIController extends InteractivePage {
      *  Formats an Integer to be placed in the filter.
      * @param filter the filter
      * @param value the integer
-     * @param column the intefer's column name
+     * @param column the integer's column name
      */
     private void putInteger(HashMap<Object, String> filter, Integer value, String column){
         if (value == null) filter.put("", "nombre");

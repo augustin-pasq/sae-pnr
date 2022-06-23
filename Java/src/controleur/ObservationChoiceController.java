@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.geometry.Insets;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,15 +19,38 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the ObservationChoice page
+ */
 public class ObservationChoiceController extends InteractivePage {
 
+    /*
+     * The select query results
+     */
     private static ArrayList<ArrayList<String>> allObservations;
+
+    /*
+     * The specie
+     */
     private static String espece;
+
+    /**
+     * The container which contains the scroll pane
+     */
     @FXML
     private VBox scrollPaneContainer;
+
+    /**
+     * The contains which contains the columns description
+     */
     @FXML
     private HBox legendeContainer;
 
+    /**
+     * Select the observations from the specie
+     * 
+     * @param esp the specie
+     */
     public static void setAllObservations(String esp) {
         espece = esp;
         try {
@@ -36,6 +60,12 @@ public class ObservationChoiceController extends InteractivePage {
         }
     }
 
+    /**
+     * Select the observations from the specie with the restriction
+     * 
+     * @param esp the specie
+     * @param restriction the restriction
+     */
     public static void setAllObservations(String esp, String restriction) {
         espece = esp;
         try {
@@ -45,6 +75,10 @@ public class ObservationChoiceController extends InteractivePage {
         }
     }
 
+    /**
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -62,6 +96,7 @@ public class ObservationChoiceController extends InteractivePage {
 
 
         VBox observationsContainer = new VBox(10);
+        observationsContainer.setPadding(new Insets(0, 200, 0, 0));
         for (int i = 1; i < allObservations.size(); i++) {
             ArrayList<ArrayList<String>> observation = new ArrayList<>();
             observation.add(allObservations.get(0));
@@ -74,6 +109,7 @@ public class ObservationChoiceController extends InteractivePage {
         scrollPaneContainer.getChildren().add(scrollPane);
     }
 
+    
     private Button createButton(@NotNull ArrayList<ArrayList<String>> observation) {
         Button button = new Button();
         ArrayList<String> obs = observation.get(1);
@@ -86,7 +122,7 @@ public class ObservationChoiceController extends InteractivePage {
         button.setAlignment(Pos.CENTER_LEFT);
         button.setContentDisplay(ContentDisplay.LEFT);
         button.setTextAlignment(TextAlignment.LEFT);
-        button.setPrefWidth(1225);
+        button.setPrefWidth(1100);
         button.setPrefHeight(76);
         button.setMnemonicParsing(false);
         button.setId("observation");

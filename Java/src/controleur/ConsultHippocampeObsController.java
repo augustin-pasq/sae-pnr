@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,28 +20,76 @@ public class ConsultHippocampeObsController extends InteractivePage {
      * The observation to display
      */
     private static ArrayList<String> observation;
+
+    /**
+     * The last name of the observer
+     */
     @FXML
     private Label nom;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private Label prenom;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private Label date;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private Label heure;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private Label coordX;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private Label coordY;
+
+    /**
+     * The specie of the seahorse
+     */
     @FXML
     private Label especeHippocampe;
+
+    /**
+     * The gender of the seahorse
+     */
     @FXML
     private Label sexe;
+
+    /**
+     * The temperature of the water
+     */
     @FXML
     private Label eau;
+
+    /**
+     * The type of fishing of the seahorse
+     */
     @FXML
     private Label peche;
+
+    /**
+     * The size of the seahorse
+     */
     @FXML
     private Label taille;
+
+    /**
+     * Indicates if the seahorse is pregnant
+     */
     @FXML
     private Label gestant;
 
@@ -53,7 +100,8 @@ public class ConsultHippocampeObsController extends InteractivePage {
      */
     public static void setObs(int numObs) {
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";")
+                    .get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

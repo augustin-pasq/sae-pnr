@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import modele.donnee.ContenuNid;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
-
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
@@ -26,41 +25,117 @@ import java.util.UUID;
  * @author Groupe SAE PNR 1D1
  */
 public class DataGCIController extends InteractivePage {
+    /**
+     * The list of nest content possibilities
+     */
     ObservableList<ContenuNid> natureList = FXCollections.observableArrayList(ContenuNid.values());
+    /**
+     * The list of possibilities to whether the nest is observed or not
+     */
     ObservableList<String> nidObserveList = FXCollections.observableArrayList("Oui", "Non");
-    ObservableList<String> raisonList = FXCollections.observableArrayList("Envol", "Inconnu", "Maree", "Pietinement", "Prédation");
+    /**
+     * List of possibilities of reasons to stop the observation
+     */
+    ObservableList<String> raisonList = FXCollections.observableArrayList("Envol", "Inconnu", "Maree", "Pietinement",
+            "Prédation");
+    /**
+     * List of possibilities of reasons to whether
+     */
     ObservableList<String> nidProtegeList = FXCollections.observableArrayList("Oui", "Non");
 
+    /**
+     * The last naame of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The nature of the observation
+     */
     @FXML
     private ComboBox<ContenuNid> natureComboBox;
+
+    /**
+     * The amount of items (nature attribute) observed
+     */
     @FXML
     private TextField nombreField;
+
+    /**
+     * Indicates if the nid is already observed
+     */
     @FXML
     private ComboBox<String> nidObserveComboBox;
+
+    /**
+     * The ID of the nest
+     */
     @FXML
     private TextField idNidField;
+
+    /**
+     * The name of the beach
+     */
     @FXML
     private TextField plageField;
+
+    /**
+     * The reason why the observation was stopped
+     */
     @FXML
     private ComboBox<String> raisonComboBox;
+
+    /**
+     * The amount of flight in the nest
+     */
     @FXML
     private TextField nbEnvolField;
+
+    /**
+     * Indicates if the nest is protected
+     */
     @FXML
     private ComboBox<String> nidProtegeComboBox;
+
+    /**
+     * The code of the male ring
+     */
     @FXML
     private TextField bagueMaleField;
+
+    /**
+     * The code of the female ring
+     */
     @FXML
     private TextField bagueFemelleField;
 
@@ -112,10 +187,10 @@ public class DataGCIController extends InteractivePage {
         String bagueMale = bagueMaleField.getText();
         String bagueFemelle = bagueFemelleField.getText();
 
-
         try {
             // Check if the data is valid
-            checkFields(lastName, firstName, date, time, lambertX, lambertY, nombre, idNid, plage, nbEnvol, bagueMale, bagueFemelle);
+            checkFields(lastName, firstName, date, time, lambertX, lambertY, nombre, idNid, plage, nbEnvol, bagueMale,
+                    bagueFemelle);
             // Generate a unique id for the new observation
             final int idObs = Math.abs(UUID.randomUUID().hashCode());
 
@@ -155,7 +230,8 @@ public class DataGCIController extends InteractivePage {
 
             System.out.println("raison: " + raison);
             ArrayList<ArrayList<String>> nid = UseDatabase.selectQuery(
-                    String.format("SELECT idNid, nomPlage, raisonArretObservation, nbEnvol, protection, bagueMale, bagueFemelle FROM Nid_GCI WHERE idNid = '%s' LIMIT 1",
+                    String.format(
+                            "SELECT idNid, nomPlage, raisonArretObservation, nbEnvol, protection, bagueMale, bagueFemelle FROM Nid_GCI WHERE idNid = '%s' LIMIT 1",
                             idNid));
             if (nid.size() == 1) {
                 String q2 = "INSERT INTO Nid_GCI (idNid, nomPlage, raisonArretObservation, nbEnvol, protection, bagueMale, bagueFemelle) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -174,10 +250,10 @@ public class DataGCIController extends InteractivePage {
                 if (!(nidData.get(1).equals(plage) && nidData.get(2).equals(raison) && nidData.get(3).equals(nbEnvol) &&
                         nidData.get(4).equals(nidProtege) && nidData.get(5).equals(bagueMale) &&
                         nidData.get(6).equals(bagueFemelle))) {
-                    throw new IllegalArgumentException("Les données correspondant à cet identifiant de nid ne correspondent pas aux données entrées");
+                    throw new IllegalArgumentException(
+                            "Les données correspondant à cet identifiant de nid ne correspondent pas aux données entrées");
                 }
             }
-
 
             String q3 = "INSERT INTO Obs_GCI (obsG, leNid, nature, nombre, presentMaisNonObs) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement p = conn.prepareStatement(q3);
@@ -221,17 +297,20 @@ public class DataGCIController extends InteractivePage {
      * @param nbEnvol      number of birds that flew away
      * @param bagueMale    name of the male ring
      * @param bagueFemelle name of the female ring
-     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     * @throws IllegalArgumentException if one of the fields is invalid, with a
+     *                                  detailed message
      */
     private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
-                             @NotNull String lambertX, @NotNull String lambertY, @NotNull String nombre,
-                             @NotNull String idNid, @NotNull String plage, @NotNull String nbEnvol,
-                             @NotNull String bagueMale, @NotNull String bagueFemelle) throws IllegalArgumentException {
+            @NotNull String lambertX, @NotNull String lambertY, @NotNull String nombre,
+            @NotNull String idNid, @NotNull String plage, @NotNull String nbEnvol,
+            @NotNull String bagueMale, @NotNull String bagueFemelle) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (date == null)
             throw new IllegalArgumentException("La date est obligatoire");
@@ -248,10 +327,16 @@ public class DataGCIController extends InteractivePage {
         }
 
         if (!lambertX.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La coordonnée Lambert X ne peut pas être vide et doit être un nombre");
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
+        float lambertXInt = Float.parseFloat(lambertX);
+        if (0 > lambertXInt || lambertXInt > 1300000)
+            throw new IllegalArgumentException("La coordonnée Lambert X doit être comprise entre 0 et 1300000");
 
         if (!lambertY.matches("\\d+(\\.\\d+)?"))
-            throw new IllegalArgumentException("La coordonnée Lambert Y ne peut pas être vide et doit être un nombre");
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+        float lambertYInt = Float.parseFloat(lambertY);
+        if (lambertYInt < 6000000 || lambertYInt > 7200000)
+            throw new IllegalArgumentException("La coordonnée Lambert Y doit être comprise entre 6000000 et 7200000");
 
         if (!nombre.matches("\\d+"))
             throw new IllegalArgumentException("Le nombre d'individus ne peut pas être vide et doit être un entier");
@@ -260,15 +345,18 @@ public class DataGCIController extends InteractivePage {
             throw new IllegalArgumentException("L'identifiant de nid ne peut pas être vide et doit être un entier");
 
         if (!plage.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("La plage ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "La plage ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!nbEnvol.matches("\\d+"))
             throw new IllegalArgumentException("Le nombre d'envol ne peut pas être vide et doit être un entier");
 
         if (!bagueMale.matches("[a-zA-Z\\d\\-/#]+"))
-            throw new IllegalArgumentException("La bague mâle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
+            throw new IllegalArgumentException(
+                    "La bague mâle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
 
         if (!bagueFemelle.matches("[a-zA-Z\\d\\-/#]+"))
-            throw new IllegalArgumentException("La bague femelle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
+            throw new IllegalArgumentException(
+                    "La bague femelle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
     }
 }

@@ -11,9 +11,16 @@ import javafx.scene.control.Button;
  */
 public class ConsultDataController extends InteractivePage {
 
+
+    /**
+     * The button to accede to the page of observation consultation
+     */
     @FXML
     private Button consultObsButton;
 
+    /**
+     * The button to accede to the page of chart generation
+     */
     @FXML
     private Button generateChartButton;
 

@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,36 +20,100 @@ public class ConsultGCIObsController extends InteractivePage {
      * The observation to display
      */
     private static ArrayList<String> observation;
+
+    /**
+     * The last naame of the observer
+     */
     @FXML
     private Label nom;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private Label prenom;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private Label date;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private Label heure;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private Label coordX;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private Label coordY;
+
+    /**
+     * The nature of the observation
+     */
     @FXML
     private Label nature;
+
+    /**
+     * The amount of items (nature attribute) observed
+     */
     @FXML
     private Label nombre;
+
+    /**
+     * Indicates if the nid is already observed
+     */
     @FXML
     private Label dejaObserve;
+
+    /**
+     * The ID of the nest
+     */
     @FXML
     private Label idNid;
+
+    /**
+     * The name of the beach
+     */
     @FXML
     private Label plage;
+
+    /**
+     * The reason why the observation was stopped
+     */
     @FXML
     private Label raisonStop;
+
+    /**
+     * The amount of flight in the nest
+     */
     @FXML
     private Label nbEnvols;
+
+    /**
+     * Indicates if the nest is protected
+     */
     @FXML
     private Label protege;
+
+    /**
+     * The code of the male ring
+     */
     @FXML
     private Label male;
+
+    /**
+     * The code of the female ring
+     */
     @FXML
     private Label femelle;
 

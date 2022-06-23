@@ -15,72 +15,220 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the FilterBatracien page
+ */
 public class FilterBatracienController extends InteractivePage {
 
+    /**
+     * The animal value
+     */
     private final String ANIMAL = "Batracien";
+
+    /**
+     * The species list
+     */
     ObservableList<EspeceBatracien> especeList = FXCollections.observableArrayList(EspeceBatracien.values());
+    
+    /**
+     * The sky condition
+     */
     ObservableList<String> meteoCielList = FXCollections.observableArrayList("dégagé", "semi-dégagé", "nuageux");
+    
+    /**
+     * The weather temperature list
+     */
     ObservableList<String> meteoTemperatureList = FXCollections.observableArrayList("froid", "moyen", "chaud");
+    
+    /**
+     * The weather wind list
+     */
     ObservableList<String> meteoVentList = FXCollections.observableArrayList("non", "léger", "moyen", "fort");
+    
+    /**
+     * The weather rain list
+     */
     ObservableList<String> meteoPluieList = FXCollections.observableArrayList("non", "légère", "moyenne", "forte");
+   
+    /**
+     * The temporary humid area list
+     */
     ObservableList<String> zoneTemporaireList = FXCollections.observableArrayList("Oui", "Non");
+    
+    /**
+     * The tide type list
+     */
     ObservableList<String> typeMareeList = FXCollections.observableArrayList("Prairie", "Etang", "Marais", "Mare");
+    
+    /**
+     * The slope type list
+     */
     ObservableList<String> typePenteList = FXCollections.observableArrayList("Raide", "Abrupte", "Douce");
+    
+    /**
+     * The opening type list
+     */
     ObservableList<String> typeOuvertureList = FXCollections.observableArrayList("Abritee", "Semi-Abritee", "Ouverte");
+    
+    /**
+     * The vegetation type list
+     */
     ObservableList<String> typeVegetationList = FXCollections.observableArrayList("environnement", "bordure", "ripisyle");
 
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X coordinate of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y coordinate of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The specie of the observation
+     */
     @FXML
     private ComboBox<EspeceBatracien> especeComboBox;
+
+    /**
+     * The number of adults of the observation
+     */
     @FXML
     private TextField nbAdultesField;
+
+    /**
+     * The number of amplexus of the observation
+     */
     @FXML
     private TextField nbAmplexusField;
+
+    /**
+     * The number of clutch of the observation
+     */
     @FXML
     private TextField nbPontesField;
+
+    /**
+     * The number of tadpole of the observation
+     */
     @FXML
     private TextField nbTetardsField;
+
+    /**
+     * The water temperature of the observation
+     */
     @FXML
     private TextField temperatureField;
+
+    /**
+     * The sky condition of the observation
+     */
     @FXML
     private ComboBox<String> meteoCielComboBox;
+
+    /**
+     * The air temperature of the observation
+     */
     @FXML
     private ComboBox<String> meteoTemperatureComboBox;
+
+    /**
+     * The wind intensity of the observation
+     */
     @FXML
     private ComboBox<String> meteoVentComboBox;
+
+    /**
+     * The rain intensity of the observation
+     */
     @FXML
     private ComboBox<String> meteoPluieComboBox;
+
+    /**
+     * The temporary humid area value of the observation
+     */
     @FXML
     private ComboBox<String> zoneTemporaireComboBox;
+
+    /**
+     * The depth of the area
+     */
     @FXML
     private TextField zoneProfondeurField;
+
+    /**
+     * The surface of the area
+     */
     @FXML
     private TextField zoneSurfaceField;
+
+    /**
+     * The tide's type of the area
+     */
     @FXML
     private ComboBox<String> zoneMareeComboBox;
+
+    /**
+     * The slope of the area
+     */
     @FXML
     private ComboBox<String> zonePenteComboBox;
+
+    /**
+     * The opening of the area
+     */
     @FXML
     private ComboBox<String> zoneOuvertureComboBox;
+
+    /**
+     * The vegetation of the area
+     */
     @FXML
     private ComboBox<String> vegetationComboBox;
+
+     /**
+     * The vegetation's type of the area
+     */
     @FXML
     private TextField vegetationField;
+
+    /**
+     * The button to validate the filter
+     */
     @FXML
     private Button validateButton;
 
-
+    /**
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -98,7 +246,8 @@ public class FilterBatracienController extends InteractivePage {
     }
 
     /**
-     * Validate the data and add it to the database
+     * Filter the select query
+     * 
      * @param event the event that triggered the method
      */
     @FXML
@@ -156,12 +305,21 @@ public class FilterBatracienController extends InteractivePage {
     /**
      * Check if all fields are valid
      *
-     * @param lastName  last name of the observer
+     * @param lastName last name of the observer
      * @param firstName first name of the observer
-     * @param date      date of the observation
-     * @param time      time of the observation
-     * @param lambertX  lambert X coordinate of the observation
-     * @param lambertY  lambert Y coordinate of the observation
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @param nbAdultes number of adults of the observation
+     * @param nbAmplexus number of amplexus of the observation
+     * @param nbPontes number of clutch of the observation
+     * @param nbTetards number of tadpole of the observation
+     * @param temperature temperature of the observation
+     * @param zoneProfondeur area depth of the observation
+     * @param zoneSurface area surface of the observation
+     * @param vegetation vegetation of the observation
+     * 
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
     private void checkFields(String lastName, String firstName, LocalDate date, String time,
@@ -189,11 +347,24 @@ public class FilterBatracienController extends InteractivePage {
             }
         }
 
-        if (!lambertX.matches("\\d+(\\.\\d+)?") && !lambertX.isEmpty())
-            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
+        if (!lambertX.isEmpty()) {
+            if (!lambertX.matches("\\d+(\\.\\d+)?"))
+                throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
 
-        if (!lambertY.matches("\\d+(\\.\\d+)?") && !lambertY.isEmpty())
-            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+            float lambertXInt = Float.parseFloat(lambertX);
+            if (0 > lambertXInt || lambertXInt > 1300000)
+                throw new IllegalArgumentException("La coordonnée Lambert X doit être comprise entre 0 et 1300000");
+        }
+
+        if (!lambertY.isEmpty()) {
+            if (!lambertY.matches("\\d+(\\.\\d+)?"))
+                throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+
+            float lambertYInt = Float.parseFloat(lambertY);
+            if (lambertYInt < 6000000 || lambertYInt > 7200000)
+                throw new IllegalArgumentException("La coordonnée Lambert Y doit être comprise entre 6000000 et 7200000");
+
+        }
 
         if (!nbAdultes.matches("\\d+") && !nbAdultes.isEmpty())
             throw new IllegalArgumentException("Le nombre d'adultes ne peut pas être vide et doit être un entier");
@@ -220,6 +391,30 @@ public class FilterBatracienController extends InteractivePage {
             throw new IllegalArgumentException("La vegetation ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
     }
 
+    /**
+     * Initialize the filter with the fields values
+     * 
+     * @param filter the filter to initialize
+     * @param lastName last name of the observer
+     * @param firstName first name of the observer
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @param espece the specie of the observation
+     * @param nbAdulte number of adults of the observation
+     * @param nbAmplexus number of amplexus of the observation
+     * @param nbPontes number of clutch of the observation
+     * @param nbTetards number of tadpole of the observation
+     * @param temperature temperature of the observation
+     * @param zoneProfondeur area depth of the observation
+     * @param zoneSurface area surface of the observation
+     * @param zoneMaree tide type of the observation
+     * @param zonePente slope type of the observation
+     * @param zoneOuverture opening type of the observation
+     * @param natureVegetation vegetation type of the observation
+     * @param vegetation vegetation of the observation
+     */
     private void initFilter(HashMap<Object, String> filter, String lastName, String firstName, LocalDate date, String time,
                         String lambertX, String lambertY, String espece, String nbAdulte, String nbAmplexus, String nbPontes, String nbTetards, String temperature,
                             String meteoCiel, String meteoTemperature, String meteoVent, String meteoPluie, Integer zoneTemporaire,
@@ -278,10 +473,10 @@ public class FilterBatracienController extends InteractivePage {
     }
 
     /**
-     *  Formats an Integer to be placed in the filter.
+     * Formats an Integer to be placed in the filter.
      * @param filter the filter
      * @param value the integer
-     * @param column the intefer's column name
+     * @param column the integer's column name
      */
     private void putInteger(HashMap<Object, String> filter, Integer value, String column){
         if (value == null) filter.put("", "nombre");

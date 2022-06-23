@@ -13,7 +13,6 @@ import modele.donnee.Sexe;
 import modele.donnee.TypeObservation;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,38 +32,93 @@ import java.util.UUID;
  */
 public class DataChouetteController extends InteractivePage {
 
+    /**
+     * The list of owl species
+     */
     ObservableList<EspeceChouette> especeList = FXCollections.observableArrayList(EspeceChouette.values());
+    /**
+     * The list of possible gender
+     */
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
+    /**
+     * The list of option to whether the protocol is followed or not
+     */
     ObservableList<String> protocoleList = FXCollections.observableArrayList("Oui", "Non");
+    /**
+     * The list of types of observations
+     */
     ObservableList<TypeObservation> typeObservationList = FXCollections.observableArrayList(TypeObservation.values());
 
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The species of the observation
+     */
     @FXML
     private ComboBox<EspeceChouette> especeComboBox;
+
+    /**
+     * Indicates if the observation protocol is followed
+     */
     @FXML
     private ComboBox<String> protocoleComboBox;
+
+    /**
+     * The type of the observation
+     */
     @FXML
     private ComboBox<TypeObservation> typeObservationComboBox;
+
+    /**
+     * The gender of the owl
+     */
     @FXML
     private ComboBox<Sexe> sexeComboBox;
+
+    /**
+     * The button to validate the insert
+     */
     @FXML
     private Button validateButton;
 
     /**
      * Initialize the scene
      *
-     * @param url            the url of the page
+     * @param url             the url of the page
      * @param ressourceBundle the resource bundle of the page
      */
     @Override
@@ -79,6 +133,7 @@ public class DataChouetteController extends InteractivePage {
 
     /**
      * Validate the data and add it to the database
+     *
      * @param event the event that triggered the method
      */
     @FXML
@@ -94,27 +149,32 @@ public class DataChouetteController extends InteractivePage {
         if (protocoleComboBox.getValue() != null) {
             protocole = protocoleComboBox.getValue().equals("Oui") ? 1 : 0;
         }
-        String typeObservation = typeObservationComboBox.getValue() == null ? "" : typeObservationComboBox.getValue().toString();
+        String typeObservation = typeObservationComboBox.getValue() == null ? ""
+                : typeObservationComboBox.getValue().toString();
         String sexe = sexeComboBox.getValue() == null ? "" : sexeComboBox.getValue().toString();
 
         try {
             checkFields(lastName, firstName, date, time, lambertX, lambertY);
             final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
+            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(
+                    String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1",
+                            lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
                 idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
+                UseDatabase.updateQuery(
+                        String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
+                                idObservateur, lastName, firstName));
             } else {
                 idObservateur = Integer.parseInt(observateur.get(1).get(0));
             }
 
             Connection conn = UseDatabase.MySQLConnection();
 
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
+            UseDatabase.updateQuery(
+                    String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
+                            lambertX, lambertY));
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(time, formatter);
@@ -128,16 +188,19 @@ public class DataChouetteController extends InteractivePage {
             prep.setTime(5, Time.valueOf(localTime));
             prep.executeUpdate();
 
-            UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
-                    idObs, idObservateur));
+            UseDatabase
+                    .updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
+                            idObs, idObservateur));
 
             String numIndividu = UUID.randomUUID().toString().replace("-", "");
-            UseDatabase.updateQuery(String.format("INSERT INTO Chouette (numIndividu, espece, sexe) VALUES ('%s', '%s', '%s')",
-                    numIndividu, espece, sexe));
+            UseDatabase.updateQuery(
+                    String.format("INSERT INTO Chouette (numIndividu, espece, sexe) VALUES ('%s', '%s', '%s')",
+                            numIndividu, espece, sexe));
 
             String typeObs = typeObservation.replace("_", " ET ").replace("VISUELLE", "VISUEL");
             System.out.println(typeObs);
-            UseDatabase.updateQuery(String.format("INSERT INTO Obs_Chouette (numObs, leNumIndividu, typeObs, protocole) VALUES ('%s', '%s', '%s', '%s')",
+            UseDatabase.updateQuery(String.format(
+                    "INSERT INTO Obs_Chouette (numObs, leNumIndividu, typeObs, protocole) VALUES ('%s', '%s', '%s', '%s')",
                     idObs, numIndividu, typeObs, protocole));
 
             Main.showPopup("Observation enregistrée correctement", event, false);
@@ -167,14 +230,18 @@ public class DataChouetteController extends InteractivePage {
      * @param time      time of the observation
      * @param lambertX  lambert X coordinate of the observation
      * @param lambertY  lambert Y coordinate of the observation
-     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     * @throws IllegalArgumentException if one of the fields is invalid, with a
+     *                                  detailed message
      */
-    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time, @NotNull String lambertX, @NotNull String lambertY) throws IllegalArgumentException {
+    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
+            @NotNull String lambertX, @NotNull String lambertY) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (date == null)
             throw new IllegalArgumentException("La date est obligatoire");
@@ -192,8 +259,14 @@ public class DataChouetteController extends InteractivePage {
 
         if (!lambertX.matches("\\d+(\\.\\d+)?"))
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
+        float lambertXInt = Float.parseFloat(lambertX);
+        if (0 > lambertXInt || lambertXInt > 1300000)
+            throw new IllegalArgumentException("La coordonnée Lambert X doit être comprise entre 0 et 1300000");
 
         if (!lambertY.matches("\\d+(\\.\\d+)?"))
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+        float lambertYInt = Float.parseFloat(lambertY);
+        if (lambertYInt < 6000000 || lambertYInt > 7200000)
+            throw new IllegalArgumentException("La coordonnée Lambert Y doit être comprise entre 6000000 et 7200000");
     }
 }

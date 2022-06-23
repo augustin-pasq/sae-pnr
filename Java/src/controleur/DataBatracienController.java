@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import modele.donnee.EspeceBatracien;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.function.ThrowingRunnable;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
@@ -20,9 +20,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
-
 /**
  * Controller for the DataBatracien page
+ *
+ * @author Groupe SAE PNR 1D1
  */
 public class DataBatracienController extends InteractivePage {
 
@@ -63,60 +64,161 @@ public class DataBatracienController extends InteractivePage {
      */
     ObservableList<String> typeOuvertureList = FXCollections.observableArrayList("Abritee", "Semi-Abritee", "Ouverte");
     /**
-     * The list of types of
+     * The list of types of vegetation
      */
-    ObservableList<String> typeVegetationList = FXCollections.observableArrayList("environnement", "bordure", "ripisyle");
+    ObservableList<String> typeVegetationList = FXCollections.observableArrayList("environnement", "bordure",
+            "ripisyle");
 
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X coordinate of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y coordinate of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The specie of the observation
+     */
     @FXML
     private ComboBox<EspeceBatracien> especeComboBox;
+
+    /**
+     * The number of adults of the observation
+     */
     @FXML
     private TextField nbAdultesField;
+
+    /**
+     * The number of amplexus of the observation
+     */
     @FXML
     private TextField nbAmplexusField;
+
+    /**
+     * The number of clutch of the observation
+     */
     @FXML
     private TextField nbPontesField;
+
+    /**
+     * The number of tadpole of the observation
+     */
     @FXML
     private TextField nbTetardsField;
+
+    /**
+     * The water temperature of the observation
+     */
     @FXML
     private TextField temperatureField;
+
+    /**
+     * The sky condition of the observation
+     */
     @FXML
     private ComboBox<String> meteoCielComboBox;
+
+    /**
+     * The air temperature of the observation
+     */
     @FXML
     private ComboBox<String> meteoTemperatureComboBox;
+
+    /**
+     * The wind intensity of the observation
+     */
     @FXML
     private ComboBox<String> meteoVentComboBox;
+
+    /**
+     * The rain intensity of the observation
+     */
     @FXML
     private ComboBox<String> meteoPluieComboBox;
+
+    /**
+     * The temporary humid area value of the observation
+     */
     @FXML
     private ComboBox<String> zoneTemporaireComboBox;
+
+    /**
+     * The depth of the area
+     */
     @FXML
     private TextField zoneProfondeurField;
+
+    /**
+     * The surface of the area
+     */
     @FXML
     private TextField zoneSurfaceField;
+
+    /**
+     * The tide's type of the area
+     */
     @FXML
     private ComboBox<String> zoneMareeComboBox;
+
+    /**
+     * The slope of the area
+     */
     @FXML
     private ComboBox<String> zonePenteComboBox;
+
+    /**
+     * The opening of the area
+     */
     @FXML
     private ComboBox<String> zoneOuvertureComboBox;
+
+    /**
+     * The vegetation of the area
+     */
     @FXML
     private ComboBox<String> vegetationComboBox;
+
+    /**
+     * The vegetation's type of the area
+     */
     @FXML
     private TextField vegetationField;
 
-
+    /**
+     * Initializes the controller class.
+     *
+     * @param url             the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -136,6 +238,7 @@ public class DataBatracienController extends InteractivePage {
 
     /**
      * Validate the data and add it to the database
+     *
      * @param event the event that triggered the method
      */
     @FXML
@@ -153,7 +256,8 @@ public class DataBatracienController extends InteractivePage {
         String nbTetards = nbTetardsField.getText();
         String temperature = temperatureField.getText();
         String meteoCiel = meteoCielComboBox.getValue() == null ? null : meteoCielComboBox.getValue().toLowerCase();
-        String meteoTemperature = meteoTemperatureComboBox.getValue() == null ? null : meteoTemperatureComboBox.getValue().toLowerCase();
+        String meteoTemperature = meteoTemperatureComboBox.getValue() == null ? null
+                : meteoTemperatureComboBox.getValue().toLowerCase();
         String meteoVent = meteoVentComboBox.getValue() == null ? null : meteoVentComboBox.getValue().toLowerCase();
         String meteoPluie = meteoPluieComboBox.getValue() == null ? null : meteoPluieComboBox.getValue().toLowerCase();
         Integer zoneTemporaire = null;
@@ -168,7 +272,6 @@ public class DataBatracienController extends InteractivePage {
         String natureVegetation = vegetationComboBox.getValue() == null ? null : vegetationComboBox.getValue();
         String vegetation = this.vegetationField.getText();
 
-
         try {
             // Check if the data is valid
             checkFields(lastName, firstName, date, time, lambertX, lambertY, nbAdultes, nbAmplexus, nbPontes, nbTetards,
@@ -176,20 +279,24 @@ public class DataBatracienController extends InteractivePage {
             // Generate a unique id for the new observation
             final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
+            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(
+                    String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1",
+                            lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
                 idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
+                UseDatabase.updateQuery(
+                        String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
+                                idObservateur, lastName, firstName));
             } else {
                 idObservateur = Integer.parseInt(observateur.get(1).get(0));
             }
 
             Connection conn = UseDatabase.MySQLConnection();
 
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
+            UseDatabase.updateQuery(
+                    String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
+                            lambertX, lambertY));
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(time, formatter);
@@ -211,24 +318,33 @@ public class DataBatracienController extends InteractivePage {
                     idVegeLieu));
 
             int idVege = Math.abs(UUID.randomUUID().hashCode());
-            UseDatabase.updateQuery(String.format("INSERT INTO Vegetation (idVege, decrit_LieuVege, vegetation, natureVege) VALUES (%d, %d, '%s', '%s')",
+            UseDatabase.updateQuery(String.format(
+                    "INSERT INTO Vegetation (idVege, decrit_LieuVege, vegetation, natureVege) VALUES (%d, %d, '%s', '%s')",
                     idVege, idVegeLieu, vegetation, natureVegetation));
 
             ArrayList<ArrayList<String>> zoneHumide = UseDatabase.selectQuery(
-                    String.format("SELECT zh_id FROM ZoneHumide WHERE zh_temporaire = %d AND zh_profondeur = %d AND zh_surface = %d AND zh_typeMare = '%s' AND zh_pente = '%s' AND zh_ouverture = '%s'",
-                            zoneTemporaire, Integer.parseInt(zoneProfondeur), Integer.parseInt(zoneSurface), zoneMaree, zonePente, zoneOuverture));
+                    String.format(
+                            "SELECT zh_id FROM ZoneHumide WHERE zh_temporaire = %d AND zh_profondeur = %d AND zh_surface = %d AND zh_typeMare = '%s' AND zh_pente = '%s' AND zh_ouverture = '%s'",
+                            zoneTemporaire, Integer.parseInt(zoneProfondeur), Integer.parseInt(zoneSurface), zoneMaree,
+                            zonePente, zoneOuverture));
             int zh_id;
             if (zoneHumide.size() == 1) {
                 zh_id = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO ZoneHumide (zh_id, zh_temporaire, zh_profondeur, zh_surface, zh_typeMare, zh_pente, zh_ouverture) VALUES (%d, %d, %d, %d, '%s', '%s', '%s')",
-                        zh_id, zoneTemporaire, Integer.parseInt(zoneProfondeur), Integer.parseInt(zoneSurface), zoneMaree, zonePente, zoneOuverture));
+                UseDatabase.updateQuery(String.format(
+                        "INSERT INTO ZoneHumide (zh_id, zh_temporaire, zh_profondeur, zh_surface, zh_typeMare, zh_pente, zh_ouverture) VALUES (%d, %d, %d, %d, '%s', '%s', '%s')",
+                        zh_id, zoneTemporaire, Integer.parseInt(zoneProfondeur), Integer.parseInt(zoneSurface),
+                        zoneMaree, zonePente, zoneOuverture));
             } else {
                 zh_id = Integer.parseInt(zoneHumide.get(1).get(0));
             }
 
-            UseDatabase.updateQuery(String.format("INSERT INTO Obs_Batracien (espece, obsB, concernes_vege, concerne_ZH, temperature, meteo_ciel, meteo_temp, meteo_vent, meteo_pluie, nombreAdultes, nombreAmplexus, nombrePonte, nombreTetard)" +
-                                                                    "VALUES ('%s', %d, %d, %d, '%s', '%s', '%s', '%s', '%s', %d, %d, %d, %d)",
-                    espece, idObs, idVege, zh_id, temperature, meteoCiel, meteoTemperature, meteoVent, meteoPluie, Integer.parseInt(nbAdultes), Integer.parseInt(nbAmplexus), Integer.parseInt(nbPontes), Integer.parseInt(nbTetards)));
+            UseDatabase.updateQuery(String.format(
+                    "INSERT INTO Obs_Batracien (espece, obsB, concernes_vege, concerne_ZH, temperature, meteo_ciel, meteo_temp, meteo_vent, meteo_pluie, nombreAdultes, nombreAmplexus, nombrePonte, nombreTetard)"
+                            +
+                            "VALUES ('%s', %d, %d, %d, '%s', '%s', '%s', '%s', '%s', %d, %d, %d, %d)",
+                    espece, idObs, idVege, zh_id, temperature, meteoCiel, meteoTemperature, meteoVent, meteoPluie,
+                    Integer.parseInt(nbAdultes), Integer.parseInt(nbAmplexus), Integer.parseInt(nbPontes),
+                    Integer.parseInt(nbTetards)));
 
             Main.showPopup("Observation enregistrée correctement", event, false);
 
@@ -257,18 +373,23 @@ public class DataBatracienController extends InteractivePage {
      * @param time      time of the observation
      * @param lambertX  lambert X coordinate of the observation
      * @param lambertY  lambert Y coordinate of the observation
-     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     * @return
+     * @throws IllegalArgumentException if one of the fields is invalid, with a
+     *                                  detailed message
      */
-    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
-                             @NotNull String lambertX,@NotNull String lambertY, @NotNull String nbAdultes,
-                             @NotNull String nbAmplexus, @NotNull String nbPontes, @NotNull String nbTetards,
-                             @NotNull String temperature, @NotNull String zoneProfondeur, @NotNull String zoneSurface,
-                             @NotNull String vegetation) throws IllegalArgumentException {
+    public ThrowingRunnable checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date,
+            String time,
+            @NotNull String lambertX, @NotNull String lambertY, @NotNull String nbAdultes,
+            @NotNull String nbAmplexus, @NotNull String nbPontes, @NotNull String nbTetards,
+            @NotNull String temperature, @NotNull String zoneProfondeur, @NotNull String zoneSurface,
+            @NotNull String vegetation) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (date == null)
             throw new IllegalArgumentException("La date est obligatoire");
@@ -286,9 +407,15 @@ public class DataBatracienController extends InteractivePage {
 
         if (!lambertX.matches("\\d+(\\.\\d+)?"))
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
+        float lambertXInt = Float.parseFloat(lambertX);
+        if (0 > lambertXInt || lambertXInt > 1300000)
+            throw new IllegalArgumentException("La coordonnée Lambert X doit être comprise entre 0 et 1300000");
 
         if (!lambertY.matches("\\d+(\\.\\d+)?"))
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+        float lambertYInt = Float.parseFloat(lambertY);
+        if (lambertYInt < 6000000 || lambertYInt > 7200000)
+            throw new IllegalArgumentException("La coordonnée Lambert Y doit être comprise entre 6000000 et 7200000");
 
         if (!nbAdultes.matches("\\d+"))
             throw new IllegalArgumentException("Le nombre d'adultes ne peut pas être vide et doit être un entier");
@@ -312,6 +439,8 @@ public class DataBatracienController extends InteractivePage {
             throw new IllegalArgumentException("La zone de surface doit être un nombre");
 
         if (!vegetation.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("La vegetation ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "La vegetation ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+        return null;
     }
 }
