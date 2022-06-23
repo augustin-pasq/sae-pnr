@@ -123,7 +123,7 @@ public class Chouette implements IObs<ObsChouette> {
      * Add an observation to the list of observations
      *
      * @param obs the observation to add
-     * @see modele.donnee.lObs#ajouterUneObs(ObsChouette)
+     * @see modele.donnee.IObs
      */
     public void ajouterUneObs(ObsChouette obs) {
         if (obs == null) throw new NullPointerException("Observation can't be null");
@@ -134,7 +134,7 @@ public class Chouette implements IObs<ObsChouette> {
      * Add several observations to the list of observations
      *
      * @param obs the list of observations to add
-     * @see modele.donnee.lObs#ajouterPlsObs(ArrayList)
+     * @see modele.donnee.IObs#ajouterPlsObs(ArrayList)
      */
     public void ajouterPlsObs(ArrayList<ObsChouette> obs) {
         if (obs == null || obs.size() == 0)
@@ -145,7 +145,7 @@ public class Chouette implements IObs<ObsChouette> {
     /**
      * Remove all observations from the list of observations
      *
-     * @see modele.donnee.lObs#videObs()
+     * @see modele.donnee.IObs#videObs()
      */
     public void videObs() {
         this.lesObservations.clear();
@@ -155,7 +155,7 @@ public class Chouette implements IObs<ObsChouette> {
      * Remove an observation from the list of observations
      *
      * @param idObs the id of the observation to remove
-     * @see modele.donnee.lObs#retireObs(int)
+     * @see modele.donnee.IObs#retireObs(int)
      */
     public boolean retireObs(int idObs) {
         try {
@@ -169,7 +169,7 @@ public class Chouette implements IObs<ObsChouette> {
     /**
      * Get the number of observations
      *
-     * @see modele.donnee.lObs#nbObs()
+     * @see modele.donnee.IObs#nbObs()
      */
     public int nbObs() {
         return this.lesObservations.size();
