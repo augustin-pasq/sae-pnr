@@ -1,6 +1,5 @@
 package controleur;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -17,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ObservationChoiceController extends InteractivePage {
@@ -74,13 +72,6 @@ public class ObservationChoiceController extends InteractivePage {
 
         ScrollPane scrollPane = new ScrollPane(observationsContainer);
         scrollPaneContainer.getChildren().add(scrollPane);
-    }
-
-    public void getData(ActionEvent event) {
-        Button target = (Button) event.getSource();
-        Data data = (Data) target.getScene().getUserData();
-
-        System.out.println(Arrays.toString(data.getAll()));
     }
 
     private Button createButton(@NotNull ArrayList<ArrayList<String>> observation) {
