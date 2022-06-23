@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import modele.donnee.ContenuNid;
 import modele.donnee.EspeceBatracien;
 import modele.donnee.UseDatabase;
 
