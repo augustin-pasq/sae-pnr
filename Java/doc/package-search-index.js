@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"controleur"},{"l":"modele"},{"l":"modele.donnee"},{"l":"modele.traitement"},{"l":"test"}];updateSearchResults();
