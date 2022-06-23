@@ -19,7 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * Controller for the Login page
+ * Controller for the Admin Panel page
  *
  * @author Groupe SAE PNR 1D1
  */
