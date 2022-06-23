@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ConsultLoutreObsController">
+<AnchorPane id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@StyleDataObs.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ConsultLoutreObsController">
    <children>
       <HBox id="hBox" alignment="CENTER" fillHeight="false" layoutY="105.0" prefHeight="105.0" prefWidth="1280.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -236,9 +243,9 @@
             </Button>
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="299.0" prefWidth="1240.0">
+      <HBox layoutX="1.0" layoutY="-1.0" prefHeight="277.0" prefWidth="1240.0">
          <children>
-            <AnchorPane prefHeight="177.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
+            <AnchorPane prefHeight="278.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
                <children>
                   <Button id="Back" fx:id="backButton" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
                      <graphic>
