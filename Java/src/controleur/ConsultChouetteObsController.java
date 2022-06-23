@@ -18,24 +18,63 @@ import java.util.ResourceBundle;
 public class ConsultChouetteObsController extends InteractivePage {
 
     @FXML
+    /**
+     * The first name of the observer
+     */
     private Label nom;
+
     @FXML
+    /**
+     * The last name of the observer
+     */
     private Label prenom;
     @FXML
+
+    /**
+     * The date of the observation
+     */
     private Label date;
+
     @FXML
+    /**
+     * The time of the observation
+     */
     private Label heure;
+
     @FXML
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     private Label coordX;
+
     @FXML
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     private Label coordY;
+
     @FXML
+    /**
+     * The species of the observation
+     */
     private Label especeChouette;
+
     @FXML
+    /**
+     * Indicates if the observation protocol is followed
+     */
     private Label protocole;
+
     @FXML
+    /**
+     * The type of the observation
+     */
     private Label typeObs;
+
     @FXML
+    /**
+     * The sex of the owl
+     */
     private Label sexe;
 
     /**
@@ -65,11 +104,13 @@ public class ConsultChouetteObsController extends InteractivePage {
 
     /**
      * Sets the observation to display
+     * 
      * @param numObs the id of observation to display
      */
     public static void setObs(int numObs) {
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";")
+                    .get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -77,6 +118,7 @@ public class ConsultChouetteObsController extends InteractivePage {
 
     /**
      * Handles the back button click
+     * 
      * @param event the event that triggered the click
      */
     public void goBack(ActionEvent event) {

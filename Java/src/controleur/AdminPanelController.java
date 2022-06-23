@@ -19,7 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * Controller for the Login page
+ * Controller for the Admin Panel page
  *
  * @author Groupe SAE PNR 1D1
  */
@@ -27,7 +27,8 @@ public class AdminPanelController implements Initializable {
     /**
      * The list of tables in the database
      */
-    public final String[] tables = {"Lieu", "Observateur", "AObserve", "Obs_Hippocampe", "Obs_Loutre", "Obs_GCI", "Nid_GCI", "Chouette", "Obs_Chouette", "ZoneHumide", "Obs_Batracien", "Vegetation", "Lieu_Vegetation"};
+    public final String[] tables = { "Lieu", "Observateur", "AObserve", "Obs_Hippocampe", "Obs_Loutre", "Obs_GCI",
+            "Nid_GCI", "Chouette", "Obs_Chouette", "ZoneHumide", "Obs_Batracien", "Vegetation", "Lieu_Vegetation" };
 
     /**
      * The exit button
@@ -103,16 +104,17 @@ public class AdminPanelController implements Initializable {
         Window window = this.exitButton.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         ZonedDateTime date = ZonedDateTime.now();
-        String dateString = String.format("%s-%s-%s-%s:%s:%s", date.getDayOfMonth(), date.getMonthValue(), date.getYear(), date.getHour(), date.getMinute(), date.getSecond());
+        String dateString = String.format("%s-%s-%s-%s:%s:%s", date.getDayOfMonth(), date.getMonthValue(),
+                date.getYear(), date.getHour(), date.getMinute(), date.getSecond());
 
-        //Set extension filter for csv files
+        // Set extension filter for csv files
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ZIP files (*.zip)", "*.zip");
         fileChooser.getExtensionFilters().add(extFilter);
         fileChooser.setInitialFileName("export_" + dateString + ".zip");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.setTitle("Sélectionnez le dossier de destination");
 
-        //Show save file dialog
+        // Show save file dialog
         File file = fileChooser.showSaveDialog(window);
 
         if (file != null) {
