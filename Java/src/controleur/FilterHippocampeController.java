@@ -17,43 +17,118 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-
-
+/**
+ * Controller for the FilterHippocampe page
+ */
 public class FilterHippocampeController extends InteractivePage {
 
+    /**
+     * The animal value
+     */
     private final String ANIMAL = "Hippocampe";  
+    
+    /**
+     * The specie list
+     */
     ObservableList<EspeceHippocampe> especeList = FXCollections.observableArrayList(EspeceHippocampe.values());
+    
+    /**
+     * The gender list
+     */
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
+    
+    /**
+     * The pregnancy list
+     */
     ObservableList<String> gestantList = FXCollections.observableArrayList("Gestant", "Non gestant");
+   
+   /**
+    * The fishing type list
+    */
     ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.values());
 
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+     /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The specie of the seahorse
+     */
     @FXML
     private ComboBox<EspeceHippocampe> especeComboBox;
+
+    /**
+     * The gender of the seahorse
+     */
     @FXML
     private ComboBox<Sexe> sexeComboBox;
+
+    /**
+     * The temperature of the water
+     */
     @FXML
     private TextField temperatureField;
+
+    /**
+     * The type of fishing of the seahorse
+     */
     @FXML
     private ComboBox<Peche> typePecheComboBox;
+
+    /**
+     * The size of the seahorse
+     */
     @FXML
     private TextField sizeField;
+
+    /**
+     * Indicates if the seahorse is pregnant
+     */
     @FXML
     private ComboBox<String> gestantComboBox;
+
+    /**
+     * The button to validate the filter
+     */
     @FXML
     private Button validateButton;
 
+    /**
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -63,6 +138,11 @@ public class FilterHippocampeController extends InteractivePage {
         typePecheComboBox.setItems(typePecheList);
     }
 
+    /**
+     * Filter the select query
+     * 
+     * @param event the event that triggered the method
+     */
     @FXML
     public void filter(ActionEvent event) {
 
@@ -140,19 +220,19 @@ public class FilterHippocampeController extends InteractivePage {
 
     /**
      * Adds in a filter the values of the field with the associated database column names.
-     * @param filter
-     * @param lastName
-     * @param firstName
-     * @param date
-     * @param time
-     * @param lambertX
-     * @param lambertY
-     * @param espece
-     * @param sexe
-     * @param temperature
-     * @param typePeche
-     * @param size
-     * @param gestant
+     * @param filter the filter
+     * @param lastName the last name of the observer
+     * @param firstName the first name of the observer
+     * @param date the date of the observation
+     * @param time the time of the observation
+     * @param lambertX the X Lambert93 coordinates of the observation
+     * @param lambertY the Y Lambert93 coordinates of the observation
+     * @param espece the specie of the seahorse
+     * @param sexe the gender of the seaborn
+     * @param temperature the temperature of the water
+     * @param typePeche the fishing type
+     * @param size the size of the seaborn
+     * @param gestant the pregnancy of the seaborn
      */
     private void initFilter(HashMap<Object, String> filter, String lastName, String firstName,
                             LocalDate date, String time, String lambertX, String lambertY, 
@@ -181,6 +261,8 @@ public class FilterHippocampeController extends InteractivePage {
      * @param time time of the observation
      * @param lambertX lambert X coordinate of the observation
      * @param lambertY lambert Y coordinate of the observation
+     * @param temperature temperature of the water
+     * @param size size of the seaborn
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
     private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String temperature, String size) throws IllegalArgumentException {
@@ -230,8 +312,8 @@ public class FilterHippocampeController extends InteractivePage {
     }
 
     /**
-     *
      * Edit the select query to get data from the database
+     * 
      * @param filter the filter containing the values of the fields with the associated database column names.
      * @return the end of the query, corresponding to the restriction of a query.
      */
@@ -256,10 +338,10 @@ public class FilterHippocampeController extends InteractivePage {
     }
 
     /**
-     *  Formats an Integer to be placed in the filter.
+     * Formats an Integer to be placed in the filter.
      * @param filter the filter
      * @param value the integer
-     * @param column the intefer's column name
+     * @param column the integer's column name
      */
     private void putInteger(HashMap<Object, String> filter, Integer value, String column){
         if (value == null) filter.put("", "nombre");

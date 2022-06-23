@@ -76,10 +76,8 @@ public class ConsultLoutreObsController extends InteractivePage {
     private static ArrayList<String> observation;
 
     /**
-     * Initialise the scene
-     *
-     * @param url            the url of the page
-     * @param resourceBundle the resource bundle of the page
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
