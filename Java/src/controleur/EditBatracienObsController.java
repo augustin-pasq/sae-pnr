@@ -2,6 +2,7 @@ package controleur;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -225,7 +226,16 @@ public class EditBatracienObsController extends InteractivePage {
         }
     }
 
-    @Override
+    /**
+     * Go back to the previous page
+     *
+     * @param event the event that triggered the action
+     */
+    public void goBack(ActionEvent event) {
+        Main.goBack(event);
+    }
+
+
     /**
      * Allows you to initialise the attributes of the page, firstly the ComboBoxes
      * and then by initialising the fields with the data from the database
@@ -233,6 +243,7 @@ public class EditBatracienObsController extends InteractivePage {
      * @param url             the url of the page
      * @param ressourceBundle the resource bundle of the page
      */
+    @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
         this.isAdmin = false;

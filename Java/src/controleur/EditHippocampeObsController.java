@@ -24,53 +24,137 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
-
+/**
+ * Controller for the EditHippocampeObs page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class EditHippocampeObsController extends InteractivePage {
-
-    ObservableList<EspeceHippocampe> especeList = FXCollections.observableArrayList(EspeceHippocampe.values());
-    ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
-    ObservableList<String> gestantList = FXCollections.observableArrayList("Gestant", "Non gestant");
-    ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.values());
-    @FXML
-    private TextField lastNameField;
-    @FXML
-    private TextField firstNameField;
-    @FXML
-    private DatePicker dateField;
-    @FXML
-    private TextField timeField;
-    @FXML
-    private TextField lambertXField;
-    @FXML
-    private TextField lambertYField;
-    @FXML
-    private ComboBox<EspeceHippocampe> especeComboBox;
-    @FXML
-    private ComboBox<Sexe> sexeComboBox;
-    @FXML
-    private TextField temperatureField;
-    @FXML
-    private ComboBox<Peche> typePecheComboBox;
-    @FXML
-    private TextField sizeField;
-    @FXML
-    private ComboBox<String> gestantComboBox;
 
     private static ArrayList<String> observation;
 
+    /**
+     * The list of the species
+     */
+    ObservableList<EspeceHippocampe> especeList = FXCollections.observableArrayList(EspeceHippocampe.values());
+    /**
+     * The list of the possible genders
+     */
+    ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
+    /**
+     * List of the possible states of gestation
+     */
+    ObservableList<String> gestantList = FXCollections.observableArrayList("Gestant", "Non gestant");
 
+    /**
+     * List of the possible types of fishing
+     */
+    ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.values());
+
+    /**
+     * The last name of the observer
+     */
+    @FXML
+    private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
+    @FXML
+    private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
+    @FXML
+    private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
+    @FXML
+    private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
+    @FXML
+    private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
+    @FXML
+    private TextField lambertYField;
+
+    /**
+     * The spec of the seahorse
+     */
+    @FXML
+    private ComboBox<EspeceHippocampe> especeComboBox;
+
+    /**
+     * The gender of the seahorse
+     */
+    @FXML
+    private ComboBox<Sexe> sexeComboBox;
+
+    /**
+     * The temperature of the water
+     */
+    @FXML
+    private TextField temperatureField;
+
+    /**
+     * The type of fishing of the seahorse
+     */
+    @FXML
+    private ComboBox<Peche> typePecheComboBox;
+
+    /**
+     * The size of the seahorse
+     */
+    @FXML
+    private TextField sizeField;
+
+    /**
+     * Indicates if the seahorse is gestant
+     */
+    @FXML
+    private ComboBox<String> gestantComboBox;
+
+    /**
+     * Allows you to retrieve all the data of an observation by making a query in
+     * the database
+     * 
+     * @param numObs Observation number
+     */
     public static void setObs(int numObs) {
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";")
+                    .get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Go back to the previous page
+     *
+     * @param event the event that triggered the action
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }
 
+    
+    /**
+     * Allows you to initialise the attributes of the page, firstly the ComboBoxes
+     * and then by initialising the fields with the data from the database
+     *
+     * @param url             the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -90,7 +174,7 @@ public class EditHippocampeObsController extends InteractivePage {
         Sexe saisieSexe = Sexe.valueOf(observation.get(2).replace(" ", "_").toUpperCase());
         sexeComboBox.getSelectionModel().select(saisieSexe);
         temperatureField.setText(observation.get(3));
-        String typePecheBDD =  observation.get(4);
+        String typePecheBDD = observation.get(4);
         String typePeche = "";
         for (int i = 0; i < typePecheBDD.length(); i++) {
             if (Character.isUpperCase(typePecheBDD.charAt(i))) {
@@ -102,7 +186,7 @@ public class EditHippocampeObsController extends InteractivePage {
         typePecheComboBox.getSelectionModel().select(saisiePeche);
         sizeField.setText(observation.get(5));
         gestantComboBox.getSelectionModel().select(observation.get(6));
-        
+
     }
 
     @FXML
@@ -160,20 +244,24 @@ public class EditHippocampeObsController extends InteractivePage {
             checkFields(lastName, firstName, date, time, lambertX, lambertY, temperature, size);
             final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
+            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(
+                    String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1",
+                            lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
                 idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
+                UseDatabase.updateQuery(
+                        String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
+                                idObservateur, lastName, firstName));
             } else {
                 idObservateur = Integer.parseInt(observateur.get(1).get(0));
             }
 
             Connection conn = UseDatabase.MySQLConnection();
 
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
+            UseDatabase.updateQuery(
+                    String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
+                            lambertX, lambertY));
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(time, formatter);
@@ -187,8 +275,9 @@ public class EditHippocampeObsController extends InteractivePage {
             prep.setTime(5, Time.valueOf(localTime));
             prep.executeUpdate();
 
-            UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
-                    idObs, idObservateur));
+            UseDatabase
+                    .updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
+                            idObs, idObservateur));
 
             String q2 = "INSERT INTO Obs_Hippocampe (obsH, espece, sexe, temperatureEau, typePeche, taille, gestant) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement prep2 = conn.prepareStatement(q2);
@@ -219,14 +308,17 @@ public class EditHippocampeObsController extends InteractivePage {
         }
     }
 
-    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String temperature, String size) throws IllegalArgumentException {
+    private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX,
+            String lambertY, String temperature, String size) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
-        if (date == null )
+        if (date == null)
             throw new IllegalArgumentException("La date est obligatoire");
 
         if (time == null)

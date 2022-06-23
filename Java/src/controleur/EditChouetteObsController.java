@@ -26,39 +26,105 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
-
+/**
+ * Controller for the EditChouetteObs page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class EditChouetteObsController extends InteractivePage {
 
+
+    /**
+     * The list of owl species
+     */
     ObservableList<EspeceChouette> especeList = FXCollections.observableArrayList(EspeceChouette.values());
+    /**
+     * The list of possible gender
+     */
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
+    /**
+     * The list of option to whether the protocol is followed or not
+     */
     ObservableList<String> protocoleList = FXCollections.observableArrayList("Oui", "Non");
+    /**
+     * The list of types of observations
+     */
     ObservableList<TypeObservation> typeObservationList = FXCollections.observableArrayList(TypeObservation.values());
 
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The species of the observation
+     */
     @FXML
     private ComboBox<EspeceChouette> especeComboBox;
+
+    /**
+     * Indicates if the observation protocol is followed
+     */
     @FXML
     private ComboBox<String> protocoleComboBox;
+
+    /**
+     * The type of the observation
+     */
     @FXML
     private ComboBox<TypeObservation> typeObservationComboBox;
+
+    /**
+     * The gender of the owl
+     */
     @FXML
     private ComboBox<Sexe> sexeComboBox;
+
+    /**
+     * The button to validate the insert
+     */
     @FXML
     private Button validateButton;
 
     private static ArrayList<String> observation;
 
+    /**
+     * Allows you to retrieve all the data of an observation by making a query in
+     * the database
+     * 
+     * @param numObs Observation number
+     */
     public static void setObs(int numObs) {
         try {
             observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";").get(1);
@@ -67,10 +133,22 @@ public class EditChouetteObsController extends InteractivePage {
         }
     }
 
+    /**
+     * Go back to the previous page
+     *
+     * @param event the event that triggered the action
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }
 
+    /**
+     * Allows you to initialise the attributes of the page, firstly the ComboBoxes
+     * and then by initialising the fields with the data from the database
+     *
+     * @param url             the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -95,6 +173,11 @@ public class EditChouetteObsController extends InteractivePage {
         sexeComboBox.getSelectionModel().select(saisieSexe);
     }
 
+    /**
+     * Validate the data and add it to the database
+     *
+     * @param event the event that triggered the method
+     */
     @FXML
     private void validate(ActionEvent event) {
         String lastName = lastNameField.getText().toUpperCase();
