@@ -42,18 +42,6 @@ public class AdminPanelController implements Initializable {
     public Button exportButton;
 
     /**
-     * The import button
-     */
-    @FXML
-    public Button importButton;
-
-    /**
-     * The species management button
-     */
-    @FXML
-    public Button manageButton;
-
-    /**
      * The observation deletion button
      */
     @FXML
@@ -149,7 +137,7 @@ public class AdminPanelController implements Initializable {
      * @param event the event that triggered the method
      */
     public void manageSpecies(ActionEvent event) {
-        Main.switchScene("SpeciesManagement", this.manageButton);
+        Main.switchScene("SpeciesManagement", this.deleteButton);
     }
 
     /**
