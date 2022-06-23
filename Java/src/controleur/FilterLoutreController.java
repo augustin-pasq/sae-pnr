@@ -14,39 +14,96 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-
+/**
+ * Controller for the FilterLoutre page
+ */
 public class FilterLoutreController extends InteractivePage {
 
+    /**
+     * The animal value
+     */
     private final String ANIMAL = "Loutre";
+
+    /**
+     * The indication list
+     */
     ObservableList<String> indiceList = FXCollections.observableArrayList("Positif", "Négatif", "Non prospection");
 
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+     /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The village where the otter is observed
+     */
     @FXML
     private TextField communeField;
+
+    /**
+     * The hamlet where the otter is observed
+     */
     @FXML
     private TextField lieuDitField;
+
+    /**
+     * Indicates if the index is positive, negative or not determined
+     */
     @FXML
     private ComboBox<String> indiceComboBox;
+
+    /**
+     * The observation to display
+     */
     @FXML
     private Button validateButton;
 
+    /**
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
         indiceComboBox.setItems(indiceList);
     }
 
+    /**
+     * Filter the select query
+     * 
+     * @param event the event that triggered the method
+     */
     @FXML
     public void filter(ActionEvent event) {
 
@@ -86,12 +143,14 @@ public class FilterLoutreController extends InteractivePage {
     /**
      * Check if all fields are valid
      *
-     * @param lastName  last name of the observer
+     * @param lastName last name of the observer
      * @param firstName first name of the observer
-     * @param date      date of the observation
-     * @param time      time of the observation
-     * @param lambertX  lambert X coordinate of the observation
-     * @param lambertY  lambert Y coordinate of the observation
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @param commune village where the otter is observed
+     * @param lieuDit hamlet where the otter is observed
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
     private void checkFields(String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit) throws IllegalArgumentException {
@@ -143,16 +202,16 @@ public class FilterLoutreController extends InteractivePage {
     /**
      * Initialize the filter with the data entered by the user
      *
-     * @param filter    the filter to initialize
-     * @param lastName  last name of the observer
+     * @param filter the filter to initialize
+     * @param lastName last name of the observer
      * @param firstName first name of the observer
-     * @param date      date of the observation
-     * @param time      time of the observation
-     * @param lambertX  lambert X coordinate of the observation
-     * @param lambertY  lambert Y coordinate of the observation
-     * @param commune   town of the observation
-     * @param lieuDit   locality of the observation
-     * @param indice    index of the observation
+     * @param date date of the observation
+     * @param time time of the observation
+     * @param lambertX lambert X coordinate of the observation
+     * @param lambertY lambert Y coordinate of the observation
+     * @param commune village of the observation
+     * @param lieuDit hamlet of the observation
+     * @param indice index of the observation
      */
     private void initFilter(HashMap<Object, String> filter, String lastName, String firstName, LocalDate date, String time, String lambertX, String lambertY, String commune, String lieuDit, String indice) {
         filter.put(lastName, "nom");
@@ -167,10 +226,10 @@ public class FilterLoutreController extends InteractivePage {
     }
 
     /**
-     * Make the SQL restriction string from the filter HashMap
-     *
-     * @param filter the filter to make the restriction from
-     * @return the SQL restriction string
+     * Edit the select query to get data from the database
+     * 
+     * @param filter the filter containing the values of the fields with the associated database column names.
+     * @return the end of the query, corresponding to the restriction of a query.
      */
     private String makeRestriction(HashMap<Object, String> filter) {
         String query = "";
