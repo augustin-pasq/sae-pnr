@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import modele.donnee.EspeceBatracien;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
+import org.junit.function.ThrowingRunnable;
 
 import java.net.URL;
 import java.sql.*;
@@ -23,6 +24,8 @@ import java.util.UUID;
 
 /**
  * Controller for the DataBatracien page
+ *
+ * @author Groupe SAE PNR 1D1
  */
 public class DataBatracienController extends InteractivePage {
 
@@ -63,7 +66,7 @@ public class DataBatracienController extends InteractivePage {
      */
     ObservableList<String> typeOuvertureList = FXCollections.observableArrayList("Abritee", "Semi-Abritee", "Ouverte");
     /**
-     * The list of types of
+     * The list of types of vegetation
      */
     ObservableList<String> typeVegetationList = FXCollections.observableArrayList("environnement", "bordure", "ripisyle");
 
@@ -116,7 +119,12 @@ public class DataBatracienController extends InteractivePage {
     @FXML
     private TextField vegetationField;
 
-
+    /**
+     * Initializes the controller class.
+     *
+     * @param url             the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -136,6 +144,7 @@ public class DataBatracienController extends InteractivePage {
 
     /**
      * Validate the data and add it to the database
+     *
      * @param event the event that triggered the method
      */
     @FXML
@@ -227,7 +236,7 @@ public class DataBatracienController extends InteractivePage {
             }
 
             UseDatabase.updateQuery(String.format("INSERT INTO Obs_Batracien (espece, obsB, concernes_vege, concerne_ZH, temperature, meteo_ciel, meteo_temp, meteo_vent, meteo_pluie, nombreAdultes, nombreAmplexus, nombrePonte, nombreTetard)" +
-                                                                    "VALUES ('%s', %d, %d, %d, '%s', '%s', '%s', '%s', '%s', %d, %d, %d, %d)",
+                            "VALUES ('%s', %d, %d, %d, '%s', '%s', '%s', '%s', '%s', %d, %d, %d, %d)",
                     espece, idObs, idVege, zh_id, temperature, meteoCiel, meteoTemperature, meteoVent, meteoPluie, Integer.parseInt(nbAdultes), Integer.parseInt(nbAmplexus), Integer.parseInt(nbPontes), Integer.parseInt(nbTetards)));
 
             Main.showPopup("Observation enregistrée correctement", event, false);
@@ -257,13 +266,14 @@ public class DataBatracienController extends InteractivePage {
      * @param time      time of the observation
      * @param lambertX  lambert X coordinate of the observation
      * @param lambertY  lambert Y coordinate of the observation
+     * @return
      * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
      */
-    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
-                             @NotNull String lambertX,@NotNull String lambertY, @NotNull String nbAdultes,
-                             @NotNull String nbAmplexus, @NotNull String nbPontes, @NotNull String nbTetards,
-                             @NotNull String temperature, @NotNull String zoneProfondeur, @NotNull String zoneSurface,
-                             @NotNull String vegetation) throws IllegalArgumentException {
+    public ThrowingRunnable checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
+                                        @NotNull String lambertX, @NotNull String lambertY, @NotNull String nbAdultes,
+                                        @NotNull String nbAmplexus, @NotNull String nbPontes, @NotNull String nbTetards,
+                                        @NotNull String temperature, @NotNull String zoneProfondeur, @NotNull String zoneSurface,
+                                        @NotNull String vegetation) throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
@@ -313,5 +323,6 @@ public class DataBatracienController extends InteractivePage {
 
         if (!vegetation.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("La vegetation ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+        return null;
     }
 }

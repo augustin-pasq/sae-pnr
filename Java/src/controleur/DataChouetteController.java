@@ -33,9 +33,21 @@ import java.util.UUID;
  */
 public class DataChouetteController extends InteractivePage {
 
+    /**
+     * The list of owl species
+     */
     ObservableList<EspeceChouette> especeList = FXCollections.observableArrayList(EspeceChouette.values());
+    /**
+     * The list of possible gender
+     */
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
+    /**
+     * The list of option to whether the protocol is followed or not
+     */
     ObservableList<String> protocoleList = FXCollections.observableArrayList("Oui", "Non");
+    /**
+     * The list of types of observations
+     */
     ObservableList<TypeObservation> typeObservationList = FXCollections.observableArrayList(TypeObservation.values());
 
     @FXML
@@ -64,7 +76,7 @@ public class DataChouetteController extends InteractivePage {
     /**
      * Initialize the scene
      *
-     * @param url            the url of the page
+     * @param url             the url of the page
      * @param ressourceBundle the resource bundle of the page
      */
     @Override
@@ -79,6 +91,7 @@ public class DataChouetteController extends InteractivePage {
 
     /**
      * Validate the data and add it to the database
+     *
      * @param event the event that triggered the method
      */
     @FXML

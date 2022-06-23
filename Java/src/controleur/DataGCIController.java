@@ -26,9 +26,21 @@ import java.util.UUID;
  * @author Groupe SAE PNR 1D1
  */
 public class DataGCIController extends InteractivePage {
+    /**
+     * The list of nest content possibilities
+     */
     ObservableList<ContenuNid> natureList = FXCollections.observableArrayList(ContenuNid.values());
+    /**
+     * The list of possibilities to whether the nest is observed or not
+     */
     ObservableList<String> nidObserveList = FXCollections.observableArrayList("Oui", "Non");
+    /**
+     * List of possibilities of reasons to stop the observation
+     */
     ObservableList<String> raisonList = FXCollections.observableArrayList("Envol", "Inconnu", "Maree", "Pietinement", "Prédation");
+    /**
+     * List of possibilities of reasons to whether
+     */
     ObservableList<String> nidProtegeList = FXCollections.observableArrayList("Oui", "Non");
 
     @FXML
