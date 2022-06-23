@@ -96,7 +96,7 @@ public class ConsultBatracienObsController extends InteractivePage {
 
     /**
      * The sky condition of the observation
-    */
+     */
     @FXML
     private Label ciel;
 
@@ -107,7 +107,7 @@ public class ConsultBatracienObsController extends InteractivePage {
     private Label meteoTemperature;
 
     /**
-     * The wind intensity of the observation	
+     * The wind intensity of the observation
      */
     @FXML
     private Label vent;
@@ -173,7 +173,8 @@ public class ConsultBatracienObsController extends InteractivePage {
      */
     public static void setObs(int numObs) {
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE ObsB = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE ObsB = " + numObs + ";")
+                    .get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
