@@ -140,6 +140,8 @@ public class EditGCIObsController extends InteractivePage {
     @FXML
     private TextField obsGField;
 
+    private static int idObs;
+
 
     private static ArrayList<String> observation;
 
@@ -150,8 +152,9 @@ public class EditGCIObsController extends InteractivePage {
      * @param numObs Observation number
      */
     public static void setObs(int numObs) {
+        idObs = numObs;
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE obsB = " + numObs + ";").get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
