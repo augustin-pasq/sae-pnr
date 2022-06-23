@@ -10,7 +10,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
-
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
@@ -22,7 +21,7 @@ import java.util.UUID;
 
 /**
  * Controller for the DataLoutre page
- *x
+ * 
  * @author Groupe SAE PNR 1D1
  */
 public class DataLoutreController extends InteractivePage {
@@ -123,13 +122,16 @@ public class DataLoutreController extends InteractivePage {
             final Integer idObs = Math.abs(UUID.randomUUID().hashCode());
 
             // Try to get the observer's id if it exists
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
+            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(
+                    String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1",
+                            lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
                 // If the observer doesn't exist, create it, with a unique id
                 idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
+                UseDatabase.updateQuery(
+                        String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
+                                idObservateur, lastName, firstName));
             } else {
                 // If the observer exists, get its id
                 idObservateur = Integer.parseInt(observateur.get(1).get(0));
@@ -138,15 +140,18 @@ public class DataLoutreController extends InteractivePage {
             // Get a connection to the database for the prepared statements
             Connection conn = UseDatabase.MySQLConnection();
 
-            // Insert the coordinates in the database. If they already exist, the SQLIntegrityConstraintViolationException is caught by useDatabase and ignored
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
+            // Insert the coordinates in the database. If they already exist, the
+            // SQLIntegrityConstraintViolationException is caught by useDatabase and ignored
+            UseDatabase.updateQuery(
+                    String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
+                            lambertX, lambertY));
 
             // Format the time as an object
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(time, formatter);
 
-            // Insert the observation in the database with a prepared statement (mostly because of the time)
+            // Insert the observation in the database with a prepared statement (mostly
+            // because of the time)
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement prep = conn.prepareStatement(q);
             prep.setInt(1, idObs);
@@ -157,11 +162,13 @@ public class DataLoutreController extends InteractivePage {
             prep.executeUpdate();
 
             // Insert the link between the observation and the observer in the database
-            UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
-                    idObs, idObservateur));
+            UseDatabase
+                    .updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
+                            idObs, idObservateur));
 
             // Insert the loutre linked to the observation in the database
-            UseDatabase.updateQuery(String.format("INSERT INTO Obs_Loutre (obsL, commune, lieuDit, indice) VALUES ('%s', '%s', '%s', '%s')",
+            UseDatabase.updateQuery(String.format(
+                    "INSERT INTO Obs_Loutre (obsL, commune, lieuDit, indice) VALUES ('%s', '%s', '%s', '%s')",
                     idObs, commune, lieuDit, indice));
 
             // If no exception has been thrown, the observation has been successfully added
@@ -196,14 +203,19 @@ public class DataLoutreController extends InteractivePage {
      * @param time      time of the observation
      * @param lambertX  lambert X coordinate of the observation
      * @param lambertY  lambert Y coordinate of the observation
-     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     * @throws IllegalArgumentException if one of the fields is invalid, with a
+     *                                  detailed message
      */
-    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time, @NotNull String lambertX, @NotNull String lambertY, @NotNull String commune, @NotNull String lieuDit) throws IllegalArgumentException {
+    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
+            @NotNull String lambertX, @NotNull String lambertY, @NotNull String commune, @NotNull String lieuDit)
+            throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (date == null)
             throw new IllegalArgumentException("La date est obligatoire");
@@ -226,9 +238,11 @@ public class DataLoutreController extends InteractivePage {
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
 
         if (!commune.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("La commune ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "La commune ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!lieuDit.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le lieu ne peut pas être vide et dit ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le lieu ne peut pas être vide et dit ne doit contenir que des lettres, espaces et tirets");
     }
 }

@@ -17,6 +17,7 @@ public class Data {
 
     /**
      * Constructor
+     * 
      * @param data the data to pass
      */
     public Data(Object... data) {
@@ -26,6 +27,7 @@ public class Data {
 
     /**
      * Get the data at specified index
+     * 
      * @param i the index
      * @return the data at index i
      */
@@ -35,6 +37,7 @@ public class Data {
 
     /**
      * Get all the data
+     * 
      * @return all the data
      */
     public ArrayList<Object> getAll() {
@@ -43,6 +46,7 @@ public class Data {
 
     /**
      * Get the size of the data
+     * 
      * @return the size of the data
      */
     public int size() {
@@ -51,6 +55,7 @@ public class Data {
 
     /**
      * Check if the user is an admin
+     * 
      * @return true if the user is an admin
      */
     public boolean isAdmin() {
@@ -59,6 +64,7 @@ public class Data {
 
     /**
      * Set the admin status
+     * 
      * @param isAdmin true if the user is an admin
      */
     public void setAdmin(boolean isAdmin) {
@@ -67,6 +73,7 @@ public class Data {
 
     /**
      * Get the data as a string
+     * 
      * @return the data as a string
      */
     public String toString() {

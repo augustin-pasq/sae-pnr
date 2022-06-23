@@ -12,7 +12,6 @@ import modele.donnee.Peche;
 import modele.donnee.Sexe;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +23,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
-
 
 /**
  * Controller for the DataHippocampe page
@@ -41,35 +39,93 @@ public class DataHippocampeController extends InteractivePage {
      */
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
     /**
-     * List of possibilities whether the
+     * List of the possible states of gestation
      */
     ObservableList<String> gestantList = FXCollections.observableArrayList("Gestant", "Non gestant");
+
+    /**
+     * List of the possible types of fishing
+     */
     ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.values());
+
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     @FXML
     private TextField lambertYField;
+
+    /**
+     * The spec of the seahorse
+     */
     @FXML
     private ComboBox<EspeceHippocampe> especeComboBox;
+
+    /**
+     * The gender of the seahorse
+     */
     @FXML
     private ComboBox<Sexe> sexeComboBox;
+
+    /**
+     * The temperature of the water
+     */
     @FXML
     private TextField temperatureField;
+
+    /**
+     * The type of fishing of the seahorse
+     */
     @FXML
     private ComboBox<Peche> typePecheComboBox;
+
+    /**
+     * The size of the seahorse
+     */
     @FXML
     private TextField sizeField;
+
+    /**
+     * Indicates if the seahorse is gestant
+     */
     @FXML
     private ComboBox<String> gestantComboBox;
 
+    /**
+     * Initializes the scene
+     *
+     * @param url             the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -80,6 +136,11 @@ public class DataHippocampeController extends InteractivePage {
 
     }
 
+    /**
+     * Validate the data and add it to the database
+     *
+     * @param event the event that triggered the method
+     */
     @FXML
     public void validate(ActionEvent event) {
         // get all the fields
@@ -142,13 +203,16 @@ public class DataHippocampeController extends InteractivePage {
             final int idObs = Math.abs(UUID.randomUUID().hashCode());
 
             // try to get the observer's id if it exists
-            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
+            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(
+                    String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1",
+                            lastName, firstName));
             int idObservateur;
             if (observateur.size() == 1) {
                 // if it doesn't exist, create it with a unique id
                 idObservateur = Math.abs(UUID.randomUUID().hashCode());
-                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
-                        idObservateur, lastName, firstName));
+                UseDatabase.updateQuery(
+                        String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
+                                idObservateur, lastName, firstName));
             } else {
                 // if it exists, get its id
                 idObservateur = Integer.parseInt(observateur.get(1).get(0));
@@ -157,15 +221,18 @@ public class DataHippocampeController extends InteractivePage {
             // Get a new connection to the database for the prepared statements
             Connection conn = UseDatabase.MySQLConnection();
 
-            // Insert the coordinates in the database. If they already exist, the SQLIntegrityConstraintViolationException is caught by useDatabase and ignored
-            UseDatabase.updateQuery(String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
-                    lambertX, lambertY));
+            // Insert the coordinates in the database. If they already exist, the
+            // SQLIntegrityConstraintViolationException is caught by useDatabase and ignored
+            UseDatabase.updateQuery(
+                    String.format("INSERT INTO Lieu (coord_Lambert_X, coord_Lambert_Y) VALUES ('%s', '%s')",
+                            lambertX, lambertY));
 
             // Format the time to an object
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime localTime = LocalTime.parse(time, formatter);
 
-            // Insert the observation in the database with a prepared statement (mostly because of the time)
+            // Insert the observation in the database with a prepared statement (mostly
+            // because of the time)
             String q = "INSERT INTO Observation (idObs, lieu_Lambert_X, lieu_Lambert_Y, dateObs, heureObs) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement prep = conn.prepareStatement(q);
             prep.setInt(1, idObs);
@@ -176,10 +243,12 @@ public class DataHippocampeController extends InteractivePage {
             prep.executeUpdate();
 
             // Insert the link between the observation and the observer in the database
-            UseDatabase.updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
-                    idObs, idObservateur));
+            UseDatabase
+                    .updateQuery(String.format("INSERT INTO AObserve (lobservation, lobservateur) VALUES ('%s', '%s')",
+                            idObs, idObservateur));
 
-            // Insert the hippocampe linked to the observation in the database with a prepared statement
+            // Insert the hippocampe linked to the observation in the database with a
+            // prepared statement
             String q2 = "INSERT INTO Obs_Hippocampe (obsH, espece, sexe, temperatureEau, typePeche, taille, gestant) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement prep2 = conn.prepareStatement(q2);
             prep2.setInt(1, idObs);
@@ -216,20 +285,26 @@ public class DataHippocampeController extends InteractivePage {
 
     /**
      * Check if all fields are valid
-     * @param lastName last name of the observer
+     * 
+     * @param lastName  last name of the observer
      * @param firstName first name of the observer
-     * @param date date of the observation
-     * @param time time of the observation
-     * @param lambertX lambert X coordinate of the observation
-     * @param lambertY lambert Y coordinate of the observation
-     * @throws IllegalArgumentException if one of the fields is invalid, with a detailed message
+     * @param date      date of the observation
+     * @param time      time of the observation
+     * @param lambertX  lambert X coordinate of the observation
+     * @param lambertY  lambert Y coordinate of the observation
+     * @throws IllegalArgumentException if one of the fields is invalid, with a
+     *                                  detailed message
      */
-    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time, @NotNull String lambertX, @NotNull String lambertY, @NotNull String temperature, @NotNull String size) throws IllegalArgumentException {
+    private void checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date, String time,
+            @NotNull String lambertX, @NotNull String lambertY, @NotNull String temperature, @NotNull String size)
+            throws IllegalArgumentException {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
-            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+            throw new IllegalArgumentException(
+                    "Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
         if (date == null)
             throw new IllegalArgumentException("La date est obligatoire");

@@ -19,28 +19,41 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class DeleteObsController extends InteractivePage {
+    
     /**
      * The list of observations
      */
     private static ArrayList<ArrayList<String>> observation;
+    
     /**
      * The species name
      */
     private static String espece = "unset";
+    
     /**
      * The species id
      */
     private String id;
+    
     /**
      * The observer's name
      */
     private String lastName;
+    
     /**
      * The observer's first name
      */
     private String firstName;
+
+    /**
+     * The label associated to the species
+     */
     @FXML
     private Label especeLabel;
+
+    /**
+     * The container of the button 
+     */
     @FXML
     private VBox container;
 
@@ -62,6 +75,12 @@ public class DeleteObsController extends InteractivePage {
         espece = e;
     }
 
+    /**
+     * Initializes the controller class.
+     *
+     * @param url             the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
