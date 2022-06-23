@@ -273,7 +273,6 @@ public class EditGCIObsController extends InteractivePage {
             }
             UseDatabase.updateQuery(String.format("UPDATE Nid_GCI SET nomPlage = '%s', raisonArretObservation = '%s' , nbEnvol = %d , protection = %d , bagueMale = '%s' ," +
                     "bagueFemelle = '%s' WHERE idNid = %d", plage, raisonArret, Integer.valueOf(nbEnvol), nidProtege, bagueMale, bagueFemelle, Integer.valueOf(leNid)));
-            System.out.println(nature);
 
             Connection conn = UseDatabase.MySQLConnection();
             String q3 = "UPDATE Obs_GCI SET nature = ?, nombre = ?, leNid = ? WHERE obsG = ?";
@@ -285,11 +284,10 @@ public class EditGCIObsController extends InteractivePage {
             p.executeUpdate();
 
             UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE idObs = '%s'", date, time, lambertX, lambertY, idObs));
-            System.out.println("30");
+
             UseDatabase.updateQuery(String.format("UPDATE AObserve set lobservateur = %d WHERE lobservateur = %d", idObservateur, idObs));
-            System.out.println("31");
-            Main.showPopup("Donnée mis a jour correctement", lastNameField, false);
-            System.out.println("32");
+
+            Main.showPopup("Données mises à jour correctement", lastNameField, false);
         } catch (IllegalArgumentException e) {
             // If one of the fields is invalid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);

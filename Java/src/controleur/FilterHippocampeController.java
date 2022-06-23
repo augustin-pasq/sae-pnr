@@ -312,8 +312,8 @@ public class FilterHippocampeController extends InteractivePage {
     }
 
     /**
-     *
      * Edit the select query to get data from the database
+     * 
      * @param filter the filter containing the values of the fields with the associated database column names.
      * @return the end of the query, corresponding to the restriction of a query.
      */
