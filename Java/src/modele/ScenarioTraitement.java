@@ -14,6 +14,8 @@ import java.util.HashMap;
 
 /**
  * Scenario class for the traitement package
+ *
+ * @author Groupe SAE PNR 1D1
  */
 public class ScenarioTraitement {
     /**

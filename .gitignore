@@ -2,6 +2,7 @@
 .idea
 .vscode
 Java/SAE-PNR.iml
+Java/doc
 
 # Compiled classes
 Java/class

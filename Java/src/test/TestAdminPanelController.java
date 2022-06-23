@@ -15,6 +15,10 @@ import static org.junit.Assert.assertTrue;
  * @author Groupe SAE PNR 1D1
  */
 public class TestAdminPanelController {
+
+    /**
+     * Entry of the test
+     */
     @Test
     public void test() {
         AdminPanelController apc = new AdminPanelController();

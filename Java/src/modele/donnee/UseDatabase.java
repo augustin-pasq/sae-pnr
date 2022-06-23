@@ -65,6 +65,7 @@ public class UseDatabase {
      *
      * @param query the query to make
      * @return a boolean indicating whether the update is successful
+     * @throws SQLException if the query fails
      */
     public static boolean updateQuery(String query) throws SQLException {
         boolean success = false;
@@ -86,6 +87,7 @@ public class UseDatabase {
      *
      * @param query the query to make
      * @return an ArrayList of the results of the query
+     * @throws SQLException if the query failed
      */
     public static ArrayList<ArrayList<String>> selectQuery(String query) throws SQLException {
         ArrayList<ArrayList<String>> output = null;
@@ -124,6 +126,7 @@ public class UseDatabase {
      * @param username the username of the user
      * @param password the password of the user
      * @return a boolean indicating whether the user is authenticated
+     * @throws NoInternetException if the user is not connected to the internet
      */
     public static boolean authenticateUser(String username, String password) throws NoInternetException {
         boolean success = false;

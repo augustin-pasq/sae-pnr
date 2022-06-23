@@ -12,6 +12,11 @@ import java.util.ArrayList;
  * @author Groupe PNR 1D1
  */
 public class ScenarioDonnee {
+    /**
+     * Entry point of the program
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         p("## Scenario de données");
         ArrayList<Observateur> listeObs = testObservateur();
@@ -24,6 +29,11 @@ public class ScenarioDonnee {
         testObsBatracien(listeObs);
     }
 
+    /**
+     * Test the class Observateur
+     *
+     * @return the list of observers
+     */
     public static ArrayList<Observateur> testObservateur() {
         p("\n--- Test de la classe Observateur ---\n");
 
@@ -68,7 +78,11 @@ public class ScenarioDonnee {
         return listeObs;
     }
 
-
+    /**
+     * Test the class Chouette
+     *
+     * @param listeObs the list of observers
+     */
     public static void testChouette(ArrayList<Observateur> listeObs) {
         p("\n--- Test la classe Chouette ---\n");
 
@@ -180,6 +194,11 @@ public class ScenarioDonnee {
         p("");
     }
 
+    /**
+     * Test the class ObsChouette
+     *
+     * @param listeObs the list of observers
+     */
     public static void testObsChouette(ArrayList<Observateur> listeObs) {
         p("\n--- Test de la classe ObsChouette ---\n");
         Date dixHuitMai = new Date(0);
@@ -195,6 +214,11 @@ public class ScenarioDonnee {
         p("Type d'observation : " + obsChouette.getTypeObs());
     }
 
+    /**
+     * Test the class ObsHippocampe
+     *
+     * @param listeObs the list of observers
+     */
     public static void testObsHippocampe(ArrayList<Observateur> listeObs) {
         p("\n--- Test de la classe ObsHippocampe ---\n");
 
@@ -281,6 +305,11 @@ public class ScenarioDonnee {
 
     }
 
+    /**
+     * Test the class ObsLoutre
+     *
+     * @param listeObs the list of observers
+     */
     public static void testObsLoutre(ArrayList<Observateur> listeObs) {
         p("\n--- Test de la classe ObsLoutre ---\n");
 
@@ -299,6 +328,11 @@ public class ScenarioDonnee {
         p("Espece : " + loutre1.especeObs());
     }
 
+    /**
+     * Test the class GCI
+     *
+     * @param listeObs the list of observers
+     */
     public static void testGCI(ArrayList<Observateur> listeObs) {
         Lieu vannes = new Lieu(268045.333, 6744460.457);
         Lieu arradon = new Lieu(263077.46, 6741405.844);
@@ -402,7 +436,9 @@ public class ScenarioDonnee {
         p("1");
     }
 
-
+    /**
+     * Test the class Lieu
+     */
     public static void testLieu() {
         p("\n--- Test de la classe Lieu ---\n");
         Lieu vannes = new Lieu(268045.333, 6744460.457);

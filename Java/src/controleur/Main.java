@@ -31,8 +31,17 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class Main extends Application implements Initializable {
+    /**
+     * The main instance of the application
+     */
     public static final Main instance = new Main();
+    /**
+     * List of the previous scenes
+     */
     public ArrayList<String> prevScene = new ArrayList<>(Collections.singleton("Login"));
+    /**
+     * The current scene
+     */
     private String currScene = "Login";
 
     /**
@@ -219,20 +228,5 @@ public class Main extends Application implements Initializable {
         }
 
         return scene;
-    }
-
-    /**
-     * Execute an action after a delay
-     * @param runnable the action to execute
-     * @param delay the delay in milliseconds
-     */
-    public static void setTimeoutSync(Runnable runnable, int delay) {
-        try {
-            Thread.sleep(delay);
-            runnable.run();
-        }
-        catch (Exception e){
-            System.err.println(e);
-        }
     }
 }
