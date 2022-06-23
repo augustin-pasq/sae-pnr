@@ -15,7 +15,7 @@ public class UseDatabase {
     /**
      * The address of the database
      */
-    public static String address = "mysql.ozna.me";
+    public static String address = "";
 
     /**
      * The username to connect to the database
