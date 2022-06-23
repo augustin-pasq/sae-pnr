@@ -128,7 +128,8 @@ public class FilterChouetteController extends InteractivePage {
     }
 
     /**
-     * Validate the data filter the select query
+     * Filter the select query
+     * 
      * @param event the event that triggered the method
      */
     @FXML
@@ -263,7 +264,7 @@ public class FilterChouetteController extends InteractivePage {
      *  Formats an Integer to be placed in the filter.
      * @param filter the filter
      * @param value the integer
-     * @param column the intefer's column name
+     * @param column the integer's column name
      */
     private void putInteger(HashMap<Object, String> filter, Integer value, String column){
         if (value == null) filter.put("", "nombre");

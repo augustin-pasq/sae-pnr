@@ -58,7 +58,7 @@ public class ConsultHippocampeObsController extends InteractivePage {
     private Label coordY;
 
     /**
-     * The spec of the seahorse
+     * The specie of the seahorse
      */
     @FXML
     private Label especeHippocampe;
@@ -88,7 +88,7 @@ public class ConsultHippocampeObsController extends InteractivePage {
     private Label taille;
 
     /**
-     * Indicates if the seahorse is gestant
+     * Indicates if the seahorse is pregnant
      */
     @FXML
     private Label gestant;

@@ -246,7 +246,8 @@ public class FilterBatracienController extends InteractivePage {
     }
 
     /**
-     * Validate the data filter the select query
+     * Filter the select query
+     * 
      * @param event the event that triggered the method
      */
     @FXML
