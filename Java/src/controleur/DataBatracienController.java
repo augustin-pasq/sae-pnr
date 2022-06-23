@@ -373,16 +373,24 @@ public class DataBatracienController extends InteractivePage {
      * @param time      time of the observation
      * @param lambertX  lambert X coordinate of the observation
      * @param lambertY  lambert Y coordinate of the observation
+     * @param nbAdultes number of adults of the observation
+     * @param nbAmplexus number of amplexus of the observation
+     * @param nbPontes number of clutch of the observation
+     * @param nbTetards number of tadpole of the observation
+     * @param temperature temperature of the observation
+     * @param zoneProfondeur area depth of the observation
+     * @param zoneSurface area surface of the observation
+     * @param vegetation vegetation of the observation
      * @return
      * @throws IllegalArgumentException if one of the fields is invalid, with a
      *                                  detailed message
      */
     public ThrowingRunnable checkFields(@NotNull String lastName, @NotNull String firstName, LocalDate date,
-            String time,
-            @NotNull String lambertX, @NotNull String lambertY, @NotNull String nbAdultes,
-            @NotNull String nbAmplexus, @NotNull String nbPontes, @NotNull String nbTetards,
-            @NotNull String temperature, @NotNull String zoneProfondeur, @NotNull String zoneSurface,
-            @NotNull String vegetation) throws IllegalArgumentException {
+                                        String time, @NotNull String lambertX, @NotNull String lambertY, 
+                                        @NotNull String nbAdultes, @NotNull String nbAmplexus, @NotNull String nbPontes, 
+                                        @NotNull String nbTetards, @NotNull String temperature, @NotNull String zoneProfondeur,
+                                        @NotNull String zoneSurface, @NotNull String vegetation) throws IllegalArgumentException {
+        
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException(
                     "Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");

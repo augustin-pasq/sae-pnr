@@ -135,11 +135,21 @@ public class SpeciesManagementController extends InteractivePage {
         return add;
     }
 
+    /**
+     * Delete a species from the database
+     * 
+     * @param event the event
+     */
     public void deleteSpecies(final Event event) {
         Button target = (Button) event.getTarget();
         System.out.println("Deleting " + this.especeDelete.get(target));
     }
 
+    /**
+     * Add a species to the database
+     * 
+     * @param event the event
+     */
     private void addSpecies(final Event event) {
         TextField target = (TextField) event.getTarget();
         System.out.println("Adding " + target.getText());

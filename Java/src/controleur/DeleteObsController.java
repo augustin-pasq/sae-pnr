@@ -79,7 +79,7 @@ public class DeleteObsController extends InteractivePage {
      * Initializes the controller class.
      *
      * @param url             the url of the page
-     * @param ressourceBundle the resource bundle of the page
+     * @param resourceBundle the resource bundle of the page
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
