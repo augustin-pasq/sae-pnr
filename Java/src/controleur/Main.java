@@ -229,19 +229,4 @@ public class Main extends Application implements Initializable {
 
         return scene;
     }
-
-    /**
-     * Execute an action after a delay
-     * @param runnable the action to execute
-     * @param delay the delay in milliseconds
-     */
-    public static void setTimeoutSync(Runnable runnable, int delay) {
-        try {
-            Thread.sleep(delay);
-            runnable.run();
-        }
-        catch (Exception e){
-            System.err.println(e);
-        }
-    }
 }
