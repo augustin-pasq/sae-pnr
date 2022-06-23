@@ -21,6 +21,9 @@ Source code is available on [GitHub](https://github.com/finxol/maker).
 # Generate the documentation
 ./maker doc
 
+# Run JUnit tests
+./maker test
+
 # List all available commands
 ./maker help
 ```
