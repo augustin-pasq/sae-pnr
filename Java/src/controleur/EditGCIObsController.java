@@ -190,11 +190,8 @@ public class EditGCIObsController extends InteractivePage {
             p.executeUpdate();
 
             UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE idObs = '%s'", date, time, lambertX, lambertY, idObs));
-            System.out.println("30");
             UseDatabase.updateQuery(String.format("UPDATE AObserve set lobservateur = %d WHERE lobservateur = %d", idObservateur, idObs));
-            System.out.println("31");
             Main.showPopup("Donnée mis a jour correctement", lastNameField, false);
-            System.out.println("32");
         } catch (IllegalArgumentException e) {
             // If one of the fields is invalid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);

@@ -1,4 +1,4 @@
-package test;
+/**package test;
 
 import controleur.Data;
 import org.junit.Test;
@@ -19,3 +19,4 @@ public class TestData {
         assertEquals("test, test2, test3, ", data.toString());
     }
 }
+*/
