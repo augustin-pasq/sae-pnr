@@ -20,55 +20,136 @@ import java.util.UUID;
 
 
 public class EditGCIObsController extends InteractivePage {
+   /**
+     * The list of nest content possibilities
+     */
+    ObservableList<ContenuNid> natureList = FXCollections.observableArrayList(ContenuNid.values());
+    /**
+     * The list of possibilities to whether the nest is observed or not
+     */
+    ObservableList<String> nidObserveList = FXCollections.observableArrayList("Oui", "Non");
+    /**
+     * List of possibilities of reasons to stop the observation
+     */
+    ObservableList<String> raisonList = FXCollections.observableArrayList("Envol", "Inconnu", "Maree", "Pietinement",
+            "Prédation");
+    /**
+     * List of possibilities of reasons to whether
+     */
+    ObservableList<String> nidProtegeList = FXCollections.observableArrayList("Oui", "Non");
+
+    /**
+     * The last naame of the observer
+     */
+    @FXML
+    private TextField lastNameField;
+
+    /**
+     * The first name of the observer
+     */
+    @FXML
+    private TextField firstNameField;
+
+    /**
+     * The date of the observation
+     */
+    @FXML
+    private DatePicker dateField;
+
+    /**
+     * The time of the observation
+     */
+    @FXML
+    private TextField timeField;
+
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
+    @FXML
+    private TextField lambertXField;
+
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
+    @FXML
+    private TextField lambertYField;
+
+    /**
+     * The nature of the observation
+     */
+    @FXML
+    private ComboBox<ContenuNid> natureComboBox;
+
+    /**
+     * The amount of items (nature attribute) observed
+     */
+    @FXML
+    private TextField nombreField;
+
+    /**
+     * Indicates if the nid is already observed
+     */
+    @FXML
+    private ComboBox<String> nidObserveComboBox;
+
+    /**
+     * The ID of the nest
+     */
+    @FXML
+    private TextField leNidField;
+
+    /**
+     * The name of the beach
+     */
+    @FXML
+    private TextField plageField;
+
+    /**
+     * The reason why the observation was stopped
+     */
+    @FXML
+    private ComboBox<String> raisonComboBox;
+
+    /**
+     * The amount of flight in the nest
+     */
+    @FXML
+    private TextField nbEnvolField;
+
+    /**
+     * Indicates if the nest is protected
+     */
+    @FXML
+    private ComboBox<String> nidProtegeComboBox;
+
+    /**
+     * The code of the male ring
+     */
+    @FXML
+    private TextField bagueMaleField;
+
+    /**
+     * The code of the female ring
+     */
+    @FXML
+    private TextField bagueFemelleField;
+
+    /**
+     * obsGField
+     */
+    @FXML
+    private TextField obsGField;
+
 
     private static ArrayList<String> observation;
 
-    ObservableList<ContenuNid> natureList = FXCollections.observableArrayList(ContenuNid.values());
-    ObservableList<String> nidObserveList = FXCollections.observableArrayList("Oui", "Non");
-    ObservableList<String> raisonList = FXCollections.observableArrayList("Envol", "Inconnu", "Maree", "Pietinement", "Prédation");
-    ObservableList<String> nidProtegeList = FXCollections.observableArrayList("Oui", "Non");
-
-    @FXML
-    private TextField lastNameField;
-    @FXML
-    private TextField firstNameField;
-    @FXML
-    private DatePicker dateField;
-    @FXML
-    private TextField timeField;
-    @FXML
-    private TextField lambertXField;
-    @FXML
-    private TextField lambertYField;
-    @FXML
-    private ComboBox<ContenuNid> natureComboBox;
-    @FXML
-    private TextField nombreField;
-    @FXML
-    private ComboBox<String> nidObserveComboBox;
-    @FXML
-    private TextField obsGField;
-    @FXML
-    private TextField leNidField;
-    @FXML
-    private TextField plageField;
-    @FXML
-    private ComboBox<String> raisonComboBox;
-    @FXML
-    private TextField nbEnvolField;
-    @FXML
-    private ComboBox<String> nidProtegeComboBox;
-    @FXML
-    private TextField bagueMaleField;
-    @FXML
-    private TextField bagueFemelleField;
-    @FXML
-    private Button validateButton;
-
-    private static int idObs;
-
+    /**
+     * Allows you to retrieve all the data of an observation by making a query in
+     * the database
+     * 
+     * @param numObs Observation number
+     */
     public static void setObs(int numObs) {
-        idObs = numObs;
         try {
             observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
         } catch (SQLException e) {
@@ -76,6 +157,13 @@ public class EditGCIObsController extends InteractivePage {
         }
     }
 
+    /**
+     * Allows you to initialise the attributes of the page, firstly the ComboBoxes
+     * and then by initialising the fields with the data from the database
+     *
+     * @param url             the url of the page
+     * @param ressourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
         super.initialize(url, ressourceBundle);
@@ -129,6 +217,14 @@ public class EditGCIObsController extends InteractivePage {
         lambertYField.setText(observation.get(16));
 
     }
+    
+    
+    
+    /**
+     * Validate the data and add it to the database
+     *
+     * @param event the event that triggered the method
+     */
     @FXML
     private void validate (ActionEvent event) {
         String lastName = lastNameField.getText().toUpperCase();
@@ -208,6 +304,13 @@ public class EditGCIObsController extends InteractivePage {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Validate the data
+     *
+     * @param event the event that triggered the method
+     */
+    @FXML
     private void checkFields (String lastName, String firstName, LocalDate date, String time,
                               String lambertX, String lambertY, String nombre,
                               String idNid, String plage, String nbEnvol,
@@ -257,6 +360,12 @@ public class EditGCIObsController extends InteractivePage {
             throw new IllegalArgumentException("La bague femelle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
 
     }
+
+     /**
+     * Go back to the previous page
+     *
+     * @param event the event that triggered the action
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }
