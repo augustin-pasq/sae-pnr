@@ -226,7 +226,7 @@ public class EditHippocampeObsController extends InteractivePage {
         if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
-        if (date == null)
+        if (date == null )
             throw new IllegalArgumentException("La date est obligatoire");
 
         if (time == null)

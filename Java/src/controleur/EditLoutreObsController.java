@@ -19,7 +19,8 @@ import java.util.ResourceBundle;
 
 /**
  * Controller for the DataLoutre page
- *x
+ * x
+ *
  * @author Groupe SAE PNR 1D1
  */
 public class EditLoutreObsController extends InteractivePage {
@@ -109,16 +110,19 @@ public class EditLoutreObsController extends InteractivePage {
 
         System.out.println(observation.toString());
 
-        LocalDate saisie = LocalDate.parse(observation.get(6));
-        dateField = new DatePicker(saisie);
-        timeField.setText(observation.get(7));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate saisie = LocalDate.parse(observation.get(6), formatter);
+        dateField.setValue(saisie);
+        String[] time = observation.get(7).split(":");
+        timeField.setText(time[0] + ":" + time[1]);
         lambertXField.setText(observation.get(8));
         lambertYField.setText(observation.get(9));
         communeField.setText(observation.get(1));
         lieuDitField.setText(observation.get(2));
         indiceComboBox.getSelectionModel().select(observation.get(3));
-        validateButton.setText(observation.get(4));
         indiceComboBox.setItems(indiceList);
+        lastNameField.setText(observation.get(4));
+        firstNameField.setText(observation.get(5));
     }
 
     /**
@@ -143,9 +147,23 @@ public class EditLoutreObsController extends InteractivePage {
             // Check the validity of the data
             checkFields(lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit);
 
-            UseDatabase.updateQuery(String.format("UPDATE Obs_Loutre SET commune = '%s', lieuDit = '%s', indice = '%s' WHERE ObsL = '%s", commune, lieuDit, indice, idObs));
-            UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE ObsL = '%s", date, time, lambertX, lambertY));
+            // Try to get the observer's id if it exists
+            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
+            int idObservateur;
+            if (observateur.size() == 1) {
+                // If the observer doesn't exist, create it, with a unique id
+                idObservateur = Math.abs(UUID.randomUUID().hashCode());
+                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
+                        idObservateur, lastName, firstName));
+            } else {
+                // If the observer exists, get its id
+                idObservateur = Integer.parseInt(observateur.get(1).get(0));
+            }
 
+            UseDatabase.updateQuery(String.format("UPDATE Obs_Loutre SET commune = '%s', lieuDit = '%s', indice = '%s' WHERE ObsL = '%s'", commune, lieuDit, indice, idObs));
+            UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE idObs = '%s'", date, time, lambertX, lambertY, idObs));
+            UseDatabase.updateQuery(String.format("UPDATE AObserve set lobservateur = %d WHERE lobservateur = %d", idObservateur, idObs));
+            Main.showPopup("Donnée mis a jour correctement", lastNameField, false);
         } catch (IllegalArgumentException e) {
             // If one of the fields is invalid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);

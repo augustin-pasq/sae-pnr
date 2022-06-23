@@ -85,6 +85,7 @@ public class EditChouetteObsController extends InteractivePage {
         timeField.setText(observation.get(7));
         lambertXField.setText(observation.get(8));
         lambertYField.setText(observation.get(9));
+
         EspeceChouette saisieChouette = EspeceChouette.valueOf(observation.get(4).toUpperCase());
         especeComboBox.getSelectionModel().select(saisieChouette);
         protocoleComboBox.getSelectionModel().select(observation.get(0));

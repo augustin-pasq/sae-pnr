@@ -11,8 +11,11 @@ import modele.donnee.UseDatabase;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 
 public class EditGCIObsController extends InteractivePage {
@@ -25,46 +28,48 @@ public class EditGCIObsController extends InteractivePage {
     ObservableList<String> nidProtegeList = FXCollections.observableArrayList("Oui", "Non");
 
     @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private DatePicker dateField;
+    @FXML
+    private TextField timeField;
+    @FXML
+    private TextField lambertXField;
+    @FXML
+    private TextField lambertYField;
+    @FXML
     private ComboBox<ContenuNid> natureComboBox;
+    @FXML
+    private TextField nombreField;
     @FXML
     private ComboBox<String> nidObserveComboBox;
     @FXML
+    private TextField obsGField;
+    @FXML
+    private TextField leNidField;
+    @FXML
+    private TextField plageField;
+    @FXML
     private ComboBox<String> raisonComboBox;
     @FXML
+    private TextField nbEnvolField;
+    @FXML
     private ComboBox<String> nidProtegeComboBox;
+    @FXML
+    private TextField bagueMaleField;
+    @FXML
+    private TextField bagueFemelleField;
+    @FXML
+    private Button validateButton;
 
-    @FXML
-    private Label nom;
-    @FXML
-    private Label prenom;
-    @FXML
-    private Label date;
-    @FXML
-    private Label heure;
-    @FXML
-    private Label coordX;
-    @FXML
-    private Label coordY;
-    @FXML
-    private Label nature;
-    @FXML
-    private Label nombre;
-    @FXML
-    private Label dejaObserve;
-    @FXML
-    private Label idNid;
-    @FXML
-    private Label plage;
-    @FXML
-    private Label raisonStop;
-    @FXML
-    private Label nbEnvols;
-    @FXML
-    private Label protege;
-    @FXML
-    private Label male;
-    @FXML
-    private Label femelle;
+    private static int idObs;
+
+    public static void setObs(int numObs) {
+        idObs = numObs;
+        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle ressourceBundle) {
@@ -74,31 +79,115 @@ public class EditGCIObsController extends InteractivePage {
         nidObserveComboBox.setItems(nidObserveList);
         raisonComboBox.setItems(raisonList);
         nidProtegeComboBox.setItems(nidProtegeList);
-        /*
-        nom.setText(observation.get(11));
-        prenom.setText(observation.get(12));
-        date.setText(observation.get(13));
-        heure.setText(observation.get(14));
-        coordX.setText(observation.get(15));
-        coordY.setText(observation.get(16));
-        nature.setText(observation.get(1));
-        nombre.setText(observation.get(2));
-        dejaObserve.setText(observation.get(3));
-        idNid.setText(observation.get(4));
-        plage.setText(observation.get(5));
-        raisonStop.setText(observation.get(6));
-        nbEnvols.setText(observation.get(7));
-        protege.setText(observation.get(8));
-        male.setText(observation.get(9));
-        femelle.setText(observation.get(10));
-        */
-    }
 
-    public static void setObs(int numObs) {
+
+        obsGField.setText(observation.get(0));
+
+        ContenuNid saisieNature = null;
+        String tmpNatureNid = observation.get(1);
+        if (tmpNatureNid.equals("nid")){
+            saisieNature = ContenuNid.NID_SEUL;
+        } else if(tmpNatureNid.equals("oeuf")) {
+            saisieNature = ContenuNid.OEUF;
+        } else if (tmpNatureNid.equals("poussin")) {
+            saisieNature = ContenuNid.POUSSIN;
+        }
+        natureComboBox.getSelectionModel().select(saisieNature);
+
+        nombreField.setText(observation.get(2));
+
+        nidObserveComboBox.getSelectionModel().select(observation.get(3));
+
+        leNidField.setText(observation.get(4));
+        plageField.setText(observation.get(5));
+
+        raisonComboBox.getSelectionModel().select(observation.get(6));
+
+        nbEnvolField.setText(observation.get(7));
+
+        nidProtegeComboBox.getSelectionModel().select(observation.get(8));
+
+        bagueMaleField.setText(observation.get(9));
+        bagueFemelleField.setText(observation.get(10));
+        lastNameField.setText(observation.get(11));
+        firstNameField.setText(observation.get(12));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate saisie = LocalDate.parse(observation.get(13), formatter);
+        dateField.setValue(saisie);
+        timeField.setText(observation.get(14));
+
+        lambertXField.setText(observation.get(15));
+        lambertYField.setText(observation.get(16));
+
+    }
+    @FXML
+    private void validate (ActionEvent event) {
+        String lastName = lastNameField.getText().toUpperCase();
+        String firstName = firstNameField.getText().toUpperCase();
+        LocalDate date = dateField.getValue();
+        String time = timeField.getText();
+        String lambertX = lambertXField.getText();
+        String lambertY = lambertYField.getText();
+        String nombre = nombreField.getText();
+        String id = obsGField.getText();
+        String plage = plageField.getText();
+        String nbEnvol = nbEnvolField.getText();
+        String bagueMale = bagueMaleField.getText();
+        String bagueFemelle = bagueFemelleField.getText();
+        Integer leNid = Integer.parseInt(leNidField.getText());
+        String nature = natureComboBox.getValue() == null ? "" : natureComboBox.getValue().toString();
+        String raisonArret = raisonComboBox.getValue() == null ? "" : raisonComboBox.getValue().toString();
+
+        Integer nidObservé = null;
+        if (nidObserveComboBox.getValue() != null) {
+            nidObservé = nidObserveComboBox.getValue().equals("Oui") ? 1 : 0;
+        }
+
+        Integer nidProtege = null;
+        if (nidProtegeComboBox.getValue() != null) {
+            nidProtege = nidProtegeComboBox.getValue().equals("Oui") ? 1 : 0;
+        }
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+            // Check the validity of the data
+            //checkFields(lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit);
+
+            // Try to get the observer's id if it exists
+            ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
+            int idObservateur;
+            if (observateur.size() == 1) {
+                // If the observer doesn't exist, create it, with a unique id
+                idObservateur = Math.abs(UUID.randomUUID().hashCode());
+                UseDatabase.updateQuery(String.format("INSERT INTO Observateur (idObservateur, nom, prenom) VALUES (%d, '%s', '%s')",
+                        idObservateur, lastName, firstName));
+            } else {
+                // If the observer exists, get its id
+                idObservateur = Integer.parseInt(observateur.get(1).get(0));
+            }
+
+            UseDatabase.updateQuery(String.format("UPDATE Nid_GCI SET nomPlage = '%s', raisonArretObservation = '%s' , nbEnvol = %d , protection = %d , bagueMale = '%s' ," +
+                    "bagueFemelle = '%s' WHERE idNid = %d'", plage, raisonArret, nbEnvol, nidProtege, bagueMale, bagueFemelle, leNid));
+
+            UseDatabase.updateQuery(String.format("UPDATE Obs_GCI SET nature = '%s', nombre = %d, leNid = '%s'", nature, nombre, leNid));
+
+            UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE idObs = '%s'", date, time, lambertX, lambertY, idObs));
+
+            UseDatabase.updateQuery(String.format("UPDATE AObserve set lobservateur = %d WHERE lobservateur = %d", idObservateur, idObs));
+            Main.showPopup("Donnée mis a jour correctement", lastNameField, false);
+        } catch (IllegalArgumentException e) {
+            // If one of the fields is invalid, show a popup with the error message
+            Main.showPopup(e.getMessage(), event, true);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            // If an SQL exception has been thrown, show a popup with an error message
+            Main.showPopup("Une erreur est survenue au moment de l'enregistrement des données", event, true);
+            System.err.println(e.getMessage());
+        } catch (NullPointerException e) {
+            Main.showPopup("Merci de remplir tous les champs", event, true);
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Catch all other exceptions and show a popup with a generic error message
+            Main.showPopup("Une erreur inconnue est survenue", event, true);
+            e.printStackTrace();
         }
     }
 

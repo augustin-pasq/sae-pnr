@@ -10,7 +10,6 @@ import modele.donnee.EspeceBatracien;
 import modele.donnee.UseDatabase;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
