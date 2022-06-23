@@ -69,7 +69,7 @@
                 </font>
             </Label>
         </HBox>
-        <HBox prefHeight="743.0" prefWidth="1240.0" spacing="60.0">
+        <HBox alignment="CENTER" prefHeight="743.0" prefWidth="1240.0" spacing="60.0">
             <VBox alignment="CENTER" prefHeight="264.0" prefWidth="731.0" spacing="50.0">
                 <opaqueInsets>
                     <Insets bottom="40.0" />
@@ -113,12 +113,15 @@
                     </Button>
                 </AnchorPane>
             </VBox>
-            <ImageView fitHeight="654.0" fitWidth="684.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../data/Bar_Chart.png" />
+            <ImageView fitHeight="397.0" fitWidth="507.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../data/LocationObservationDistribution.png" />
             <HBox.margin>
-               <Insets right="20.0" />
+               <Insets bottom="50.0" right="100.0" />
             </HBox.margin>
             </ImageView>
+         <VBox.margin>
+            <Insets bottom="50.0" />
+         </VBox.margin>
         </HBox>
     </VBox>
 </AnchorPane>
