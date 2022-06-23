@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class SpeciesManagementController extends InteractivePage {
+
     private final HashMap<Button, EspeceObservee> especes = new HashMap<>();
     private final HashMap<Button, EspeceObservee> especeDelete = new HashMap<>();
     @FXML
