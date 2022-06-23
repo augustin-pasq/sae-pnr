@@ -10,6 +10,7 @@ import modele.donnee.ContenuNid;
 import modele.donnee.UseDatabase;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -94,7 +95,11 @@ public class EditGCIObsController extends InteractivePage {
     }
 
     public static void setObs(int numObs) {
-        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+        try {
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void goBack(ActionEvent event) {

@@ -11,6 +11,7 @@ import modele.donnee.UseDatabase;
 
 import java.io.*;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -87,7 +88,7 @@ public class AdminPanelController implements Initializable {
             }
 
             Main.showPopup("Les données on été exportées correctement", this.exitButton, false);
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             Main.showPopup("Erreur lors de l'export", this.exitButton, true);
             e.printStackTrace();
         } catch (NullPointerException e) {

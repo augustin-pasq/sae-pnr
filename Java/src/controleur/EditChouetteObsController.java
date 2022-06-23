@@ -60,7 +60,11 @@ public class EditChouetteObsController extends InteractivePage {
     private static ArrayList<String> observation;
 
     public static void setObs(int numObs) {
-        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";").get(1);
+        try {
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";").get(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void goBack(ActionEvent event) {

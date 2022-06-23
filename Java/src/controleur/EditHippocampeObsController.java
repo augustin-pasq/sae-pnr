@@ -60,7 +60,11 @@ public class EditHippocampeObsController extends InteractivePage {
 
 
     public static void setObs(int numObs) {
-        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";").get(1);
+        try {
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";").get(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void goBack(ActionEvent event) {
