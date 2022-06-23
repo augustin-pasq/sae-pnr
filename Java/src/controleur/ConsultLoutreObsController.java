@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 
 /**
  * Controller for the ConsultLoutreObs page
+ *
+ * @author Groupe SAE PNR 1D1
  */
 public class ConsultLoutreObsController extends InteractivePage {
 
