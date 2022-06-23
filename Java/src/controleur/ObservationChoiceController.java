@@ -18,15 +18,38 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the ObservationChoice page
+ */
 public class ObservationChoiceController extends InteractivePage {
 
+    /*
+     * The select query results
+     */
     private static ArrayList<ArrayList<String>> allObservations;
+
+    /*
+     * The specie
+     */
     private static String espece;
+
+    /**
+     * The container which contains the scroll pane
+     */
     @FXML
     private VBox scrollPaneContainer;
+
+    /**
+     * The contains which contains the columns description
+     */
     @FXML
     private HBox legendeContainer;
 
+    /**
+     * Select the observations from the specie
+     * 
+     * @param esp the specie
+     */
     public static void setAllObservations(String esp) {
         espece = esp;
         try {
@@ -36,6 +59,12 @@ public class ObservationChoiceController extends InteractivePage {
         }
     }
 
+    /**
+     * Select the observations from the specie with the restriction
+     * 
+     * @param esp the specie
+     * @param restriction the restriction
+     */
     public static void setAllObservations(String esp, String restriction) {
         espece = esp;
         try {
@@ -45,6 +74,10 @@ public class ObservationChoiceController extends InteractivePage {
         }
     }
 
+    /**
+     * Inherited method from Initializable
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -74,6 +107,7 @@ public class ObservationChoiceController extends InteractivePage {
         scrollPaneContainer.getChildren().add(scrollPane);
     }
 
+    
     private Button createButton(@NotNull ArrayList<ArrayList<String>> observation) {
         Button button = new Button();
         ArrayList<String> obs = observation.get(1);

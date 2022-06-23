@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import modele.donnee.UseDatabase;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,22 +17,57 @@ import java.util.ResourceBundle;
 public class ConsultLoutreObsController extends InteractivePage {
 
     @FXML
+    /**
+     * The last name of the observer
+     */
     private Label nom;
+
     @FXML
+    /**
+     * The first name of the observer
+     */
     private Label prenom;
+
     @FXML
+    /**
+     * The date of the observation
+     */
     private Label date;
+
     @FXML
+    /**
+     * The time of the observation
+     */
     private Label heure;
+
     @FXML
+    /**
+     * The X Lambert93 coordinates of the observation
+     */
     private Label coordX;
+
     @FXML
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */
     private Label coordY;
+
     @FXML
+    /**
+     * The village where the otter is observed
+     */
     private Label commune;
+
     @FXML
+    /**
+     * The hamlet where the otter is observed
+     */
     private Label lieudit;
+
     @FXML
+    /**
+     * Indicates if the index is positive, negative or not determined
+     */
     private Label indice;
 
     /**
@@ -69,7 +103,8 @@ public class ConsultLoutreObsController extends InteractivePage {
      */
     public static void setObs(int numObs) {
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";")
+                    .get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
