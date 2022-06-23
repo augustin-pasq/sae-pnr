@@ -1,4 +1,4 @@
-/**package test;
+package test;
 
 import controleur.Data;
 import controleur.DataBatracienController;
@@ -100,4 +100,4 @@ public class TestData {
                 "1", "0", "0", "null");
     }
 }
-*/
+
