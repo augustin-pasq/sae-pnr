@@ -71,7 +71,7 @@ public class ConsultChouetteObsController extends InteractivePage {
     private Label typeObs;
 
     /**
-     * The sex of the owl
+     * The gender of the owl
      */
     @FXML
     private Label sexe;

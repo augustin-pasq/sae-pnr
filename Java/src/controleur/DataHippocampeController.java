@@ -39,9 +39,13 @@ public class DataHippocampeController extends InteractivePage {
      */
     ObservableList<Sexe> sexeList = FXCollections.observableArrayList(Sexe.values());
     /**
-     * List of possibilities whether the
+     * List of the possible states of gestation
      */
     ObservableList<String> gestantList = FXCollections.observableArrayList("Gestant", "Non gestant");
+
+    /**
+     * List of the possible types of fishing
+     */
     ObservableList<Peche> typePecheList = FXCollections.observableArrayList(Peche.values());
 
     /**
@@ -87,7 +91,7 @@ public class DataHippocampeController extends InteractivePage {
     private ComboBox<EspeceHippocampe> especeComboBox;
 
     /**
-     * The sexe of the seahorse
+     * The gender of the seahorse
      */
     @FXML
     private ComboBox<Sexe> sexeComboBox;
