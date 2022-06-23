@@ -13,7 +13,6 @@ import modele.donnee.Sexe;
 import modele.donnee.TypeObservation;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,26 +49,69 @@ public class DataChouetteController extends InteractivePage {
      */
     ObservableList<TypeObservation> typeObservationList = FXCollections.observableArrayList(TypeObservation.values());
 
+    /**
+     * The first name of the observer
+     */
     @FXML
     private TextField lastNameField;
+    
+    /**
+     * The last name of the observer
+     */
     @FXML
     private TextField firstNameField;
+    
+    /**
+     * The date of the observation
+     */    
     @FXML
     private DatePicker dateField;
+    
+    /**
+     * The time of the observation
+     */    
     @FXML
     private TextField timeField;
+    
+    /**
+     * The X Lambert93 coordinates of the observation
+     */    
     @FXML
     private TextField lambertXField;
+    
+    /**
+     * The Y Lambert93 coordinates of the observation
+     */    
     @FXML
     private TextField lambertYField;
+    
+    /**
+     * The species of the observation
+     */    
     @FXML
     private ComboBox<EspeceChouette> especeComboBox;
+    
+    /**
+     * Indicates if the observation protocol is followed
+     */    
     @FXML
     private ComboBox<String> protocoleComboBox;
+    
+    /**
+     * The type of the observation
+     */    
     @FXML
     private ComboBox<TypeObservation> typeObservationComboBox;
+    
+    /**
+     * The sex of the owl
+     */    
     @FXML
     private ComboBox<Sexe> sexeComboBox;
+    
+    /**
+     * The button to validate the insert
+     */
     @FXML
     private Button validateButton;
 
