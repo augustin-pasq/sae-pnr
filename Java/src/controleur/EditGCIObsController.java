@@ -4,10 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import modele.donnee.ContenuNid;
 import modele.donnee.UseDatabase;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -68,7 +68,11 @@ public class EditGCIObsController extends InteractivePage {
 
     public static void setObs(int numObs) {
         idObs = numObs;
-        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+        try {
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -190,7 +194,55 @@ public class EditGCIObsController extends InteractivePage {
             e.printStackTrace();
         }
     }
+    private void checkFields (String lastName, String firstName, LocalDate date, String time,
+                              String lambertX, String lambertY, String nombre,
+                              String idNid, String plage, String nbEnvol,
+                              String bagueMale, String bagueFemelle, String nidObservé) throws IllegalArgumentException  {
+        if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
+            throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
+        if (!firstName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
+            throw new IllegalArgumentException("Le prénom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (date == null)
+            throw new IllegalArgumentException("La date est obligatoire");
+
+        if (time == null)
+            throw new IllegalArgumentException("L'heure est obligatoire");
+        if (!time.matches("\\d{2}:\\d{2}"))
+            throw new IllegalArgumentException("L'heure doit être au format hh:mm");
+        String[] timeSplit = time.split(":");
+        int h = Integer.parseInt(timeSplit[0]);
+        int m = Integer.parseInt(timeSplit[1]);
+        if (!(0 <= h && h < 24 && 0 <= m && m < 60)) {
+            throw new IllegalArgumentException("L'heure doit être valide");
+        }
+
+        if (!lambertX.matches("\\d+(\\.\\d+)?"))
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
+
+        if (!lambertY.matches("\\d+(\\.\\d+)?"))
+            throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+
+        if (!nombre.matches("\\d+") && !nombre.isEmpty())
+            throw new IllegalArgumentException("Le nombre d'individus ne peut pas être vide et doit être un entier");
+
+        if (!idNid.matches("\\d+") && !idNid.isEmpty())
+            throw new IllegalArgumentException("L'identifiant de nid ne peut pas être vide et doit être un entier");
+
+        if (!plage.matches("[a-zA-Z\\-éèàçëê\\ ]+") && !plage.isEmpty())
+            throw new IllegalArgumentException("La plage ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
+
+        if (!nbEnvol.matches("\\d+") && !nbEnvol.isEmpty())
+            throw new IllegalArgumentException("Le nombre d'envol ne peut pas être vide et doit être un entier");
+
+        if (!bagueMale.matches("[a-zA-Z\\d\\-/#]+") && !bagueMale.isEmpty())
+            throw new IllegalArgumentException("La bague mâle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
+
+        if (!bagueFemelle.matches("[a-zA-Z\\d\\-/#]+") && !bagueFemelle.isEmpty())
+            throw new IllegalArgumentException("La bague femelle ne peut pas être vide et ne doit contenir que des lettres, chiffres, -, / et #");
+
+    }
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }
