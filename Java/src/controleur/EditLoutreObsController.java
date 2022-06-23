@@ -115,8 +115,12 @@ public class EditLoutreObsController extends InteractivePage {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate saisie = LocalDate.parse(observation.get(6), formatter);
         dateField.setValue(saisie);
-        String[] time = observation.get(7).split(":");
-        timeField.setText(time[0] + ":" + time[1]);
+        String t = null;
+        if (observation.get(7) != null) {
+            String[] time = observation.get(7).split(":");
+            t = time[0] + ":" + time[1];
+        }
+        timeField.setText(t);
         lambertXField.setText(observation.get(8));
         lambertYField.setText(observation.get(9));
         communeField.setText(observation.get(1));
@@ -165,6 +169,7 @@ public class EditLoutreObsController extends InteractivePage {
             UseDatabase.updateQuery(String.format("UPDATE Obs_Loutre SET commune = '%s', lieuDit = '%s', indice = '%s' WHERE ObsL = '%s'", commune, lieuDit, indice, idObs));
             UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE idObs = '%s'", date, time, lambertX, lambertY, idObs));
             UseDatabase.updateQuery(String.format("UPDATE AObserve set lobservateur = %d WHERE lobservateur = %d", idObservateur, idObs));
+
             Main.showPopup("Donnée mis a jour correctement", lastNameField, false);
         } catch (IllegalArgumentException e) {
             // If one of the fields is invalid, show a popup with the error message
