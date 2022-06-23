@@ -222,9 +222,15 @@ public class EditLoutreObsController extends InteractivePage {
 
         if (!lambertX.matches("\\d+(\\.\\d+)?"))
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert X doit être un nombre");
+        float lambertXInt = Float.parseFloat(lambertX);
+        if (0 > lambertXInt || lambertXInt > 1300000)
+            throw new IllegalArgumentException("La coordonnée Lambert X doit être comprise entre 0 et 1300000");
 
         if (!lambertY.matches("\\d+(\\.\\d+)?"))
             throw new IllegalArgumentException("La coordonnée ne peut pas être vide et Lambert Y doit être un nombre");
+        float lambertYInt = Float.parseFloat(lambertY);
+        if (lambertYInt < 6000000 || lambertYInt > 7200000)
+            throw new IllegalArgumentException("La coordonnée Lambert Y doit être comprise entre 6000000 et 7200000");
 
         if (!commune.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("La commune ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
