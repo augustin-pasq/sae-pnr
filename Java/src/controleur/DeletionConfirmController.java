@@ -11,19 +11,38 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the DeletionConfirm page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class DeletionConfirmController implements Initializable {
     @FXML
+    /**
+     * Button to not delete the observation
+     */
     private Button doNotDeleteButton;
 
     @FXML
+    /**
+     * Button to delete the observation
+     */
     private Button deleteButton;
 
     @FXML
+    /**
+     * Allows you to cancel and go back
+     * @param event the event that triggered the action
+     */
     public void abort(ActionEvent event) {
         Main.goBack(event);
     }
 
     @FXML
+    /**
+     * Allows you to delete an observation from the database
+     * @param event the event that triggered the action
+     */
     public void delete(ActionEvent event) {
         Data data = (Data) this.deleteButton.getScene().getUserData();
         String id = (String) data.get(4);
@@ -82,6 +101,12 @@ public class DeletionConfirmController implements Initializable {
     }
 
     @Override
+    /**
+     * Initialise the scene
+     *
+     * @param url            the url of the page
+     * @param resourceBundle the resource bundle of the page
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }
