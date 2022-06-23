@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the ConsultLoutreObs page
+ */
 public class ConsultLoutreObsController extends InteractivePage {
 
     @FXML
@@ -31,8 +34,17 @@ public class ConsultLoutreObsController extends InteractivePage {
     @FXML
     private Label indice;
 
+    /**
+     * The observation to display
+     */
     private static ArrayList<String> observation;
 
+    /**
+     * Initialise the scene
+     *
+     * @param url            the url of the page
+     * @param resourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -48,6 +60,11 @@ public class ConsultLoutreObsController extends InteractivePage {
         indice.setText(observation.get(3));
     }
 
+    /**
+     * Set the observation to display
+     *
+     * @param numObs the id of the observation
+     */
     public static void setObs(int numObs) {
         try {
             observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
@@ -56,6 +73,11 @@ public class ConsultLoutreObsController extends InteractivePage {
         }
     }
 
+    /**
+     * Go back to the previous page
+     *
+     * @param event the event that triggered the action
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }

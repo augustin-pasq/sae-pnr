@@ -10,8 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the ConsultBatracienObs page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class ConsultBatracienObsController extends InteractivePage {
 
+    /**
+     * The observation to display
+     */
+    private static ArrayList<String> observation;
     @FXML
     private Label nom;
     @FXML
@@ -61,8 +70,25 @@ public class ConsultBatracienObsController extends InteractivePage {
     @FXML
     private Label vegetation;
 
-    private static ArrayList<String> observation;
+    /**
+     * Sets the observation to display
+     *
+     * @param numObs the observation number
+     */
+    public static void setObs(int numObs) {
+        try {
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE ObsB = " + numObs + ";").get(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    /**
+     * Initializes the controller class.
+     *
+     * @param url            the url of the page
+     * @param resourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -92,15 +118,12 @@ public class ConsultBatracienObsController extends InteractivePage {
         natureVegetation.setText(observation.get(19));
         vegetation.setText(observation.get(20));
     }
-    
-    public static void setObs(int numObs) {
-        try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE ObsB = " + numObs + ";").get(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
+    /**
+     * Handles the back button click
+     *
+     * @param event the event that triggers the action
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }

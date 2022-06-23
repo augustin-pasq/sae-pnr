@@ -10,8 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the ConsultHippocampeObs page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class ConsultHippocampeObsController extends InteractivePage {
 
+    /**
+     * The observation to display
+     */
+    private static ArrayList<String> observation;
     @FXML
     private Label nom;
     @FXML
@@ -37,8 +46,25 @@ public class ConsultHippocampeObsController extends InteractivePage {
     @FXML
     private Label gestant;
 
-    private static ArrayList<String> observation;
+    /**
+     * Set the observation to display
+     *
+     * @param numObs the id of the observation to display
+     */
+    public static void setObs(int numObs) {
+        try {
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";").get(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    /**
+     * Initialise the scene
+     *
+     * @param url            the url of the page
+     * @param resourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -57,14 +83,11 @@ public class ConsultHippocampeObsController extends InteractivePage {
         gestant.setText(observation.get(6));
     }
 
-    public static void setObs(int numObs) {
-        try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromHippocampe WHERE ObsH = " + numObs + ";").get(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    /**
+     * Handle the back button
+     *
+     * @param event the event
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }

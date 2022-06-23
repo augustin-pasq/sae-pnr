@@ -1,5 +1,8 @@
 package controleur;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class to pass data between scenes
  *
@@ -9,7 +12,7 @@ public class Data {
     /**
      * The data to pass
      */
-    private final Object[] data;
+    private final ArrayList<Object> data;
     private boolean isAdmin = false;
 
     /**
@@ -17,7 +20,8 @@ public class Data {
      * @param data the data to pass
      */
     public Data(Object... data) {
-        this.data = data;
+        this.data = new ArrayList<>();
+        this.data.addAll(List.of(data));
     }
 
     /**
@@ -26,14 +30,14 @@ public class Data {
      * @return the data at index i
      */
     public Object get(int i) {
-        return data[i];
+        return data.get(i);
     }
 
     /**
      * Get all the data
      * @return all the data
      */
-    public Object[] getAll() {
+    public ArrayList<Object> getAll() {
         return data;
     }
 
@@ -42,7 +46,7 @@ public class Data {
      * @return the size of the data
      */
     public int size() {
-        return data.length;
+        return data.size();
     }
 
     /**

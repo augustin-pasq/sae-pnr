@@ -10,6 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the ConsultChouetteObs page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class ConsultChouetteObsController extends InteractivePage {
 
     @FXML
@@ -33,8 +38,17 @@ public class ConsultChouetteObsController extends InteractivePage {
     @FXML
     private Label sexe;
 
+    /**
+     * The observation to display
+     */
     private static ArrayList<String> observation;
 
+    /**
+     * Initializes the controller class.
+     *
+     * @param url            the url of the page
+     * @param resourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -49,6 +63,10 @@ public class ConsultChouetteObsController extends InteractivePage {
         sexe.setText(observation.get(5));
     }
 
+    /**
+     * Sets the observation to display
+     * @param numObs the id of observation to display
+     */
     public static void setObs(int numObs) {
         try {
             observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromChouette WHERE numObs = " + numObs + ";").get(1);
@@ -57,6 +75,10 @@ public class ConsultChouetteObsController extends InteractivePage {
         }
     }
 
+    /**
+     * Handles the back button click
+     * @param event the event that triggered the click
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }
