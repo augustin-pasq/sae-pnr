@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.geometry.Insets;
 import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
 
@@ -95,6 +96,7 @@ public class ObservationChoiceController extends InteractivePage {
 
 
         VBox observationsContainer = new VBox(10);
+        observationsContainer.setPadding(new Insets(0, 200, 0, 0));
         for (int i = 1; i < allObservations.size(); i++) {
             ArrayList<ArrayList<String>> observation = new ArrayList<>();
             observation.add(allObservations.get(0));
@@ -120,7 +122,7 @@ public class ObservationChoiceController extends InteractivePage {
         button.setAlignment(Pos.CENTER_LEFT);
         button.setContentDisplay(ContentDisplay.LEFT);
         button.setTextAlignment(TextAlignment.LEFT);
-        button.setPrefWidth(1225);
+        button.setPrefWidth(1100);
         button.setPrefHeight(76);
         button.setMnemonicParsing(false);
         button.setId("observation");
