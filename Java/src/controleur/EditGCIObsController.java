@@ -10,6 +10,8 @@ import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -89,12 +91,14 @@ public class EditGCIObsController extends InteractivePage {
 
         ContenuNid saisieNature = null;
         String tmpNatureNid = observation.get(1);
-        if (tmpNatureNid.equals("nid")){
-            saisieNature = ContenuNid.NID_SEUL;
-        } else if(tmpNatureNid.equals("oeuf")) {
-            saisieNature = ContenuNid.OEUF;
-        } else if (tmpNatureNid.equals("poussin")) {
-            saisieNature = ContenuNid.POUSSIN;
+        if (tmpNatureNid != null) {
+            if (tmpNatureNid.equals("nid")){
+                saisieNature = ContenuNid.NID_SEUL;
+            } else if(tmpNatureNid.equals("oeuf")) {
+                saisieNature = ContenuNid.OEUF;
+            } else if (tmpNatureNid.equals("poussin")) {
+                saisieNature = ContenuNid.POUSSIN;
+            }
         }
         natureComboBox.getSelectionModel().select(saisieNature);
 
@@ -119,7 +123,8 @@ public class EditGCIObsController extends InteractivePage {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate saisie = LocalDate.parse(observation.get(13), formatter);
         dateField.setValue(saisie);
-        timeField.setText(observation.get(14));
+        String[] time = observation.get(14).split(":");
+        timeField.setText(time[0] + ":" + time[1]);
 
         lambertXField.setText(observation.get(15));
         lambertYField.setText(observation.get(16));
@@ -139,13 +144,16 @@ public class EditGCIObsController extends InteractivePage {
         String nbEnvol = nbEnvolField.getText();
         String bagueMale = bagueMaleField.getText();
         String bagueFemelle = bagueFemelleField.getText();
-        Integer leNid = Integer.parseInt(leNidField.getText());
-        String nature = natureComboBox.getValue() == null ? "" : natureComboBox.getValue().toString();
+        String leNid = leNidField.getText();
+        String nature = null;
+        if (natureComboBox.getValue() != null) {
+            nature = natureComboBox.getValue().toString().split("_")[0];
+            nature = nature.substring(0, 1).toUpperCase() + nature.substring(1);
+        }
         String raisonArret = raisonComboBox.getValue() == null ? "" : raisonComboBox.getValue().toString();
-
-        Integer nidObservé = null;
+        Integer nidObserve = null;
         if (nidObserveComboBox.getValue() != null) {
-            nidObservé = nidObserveComboBox.getValue().equals("Oui") ? 1 : 0;
+            nidObserve = nidObserveComboBox.getValue().equals("Oui") ? 1 : 0;
         }
 
         Integer nidProtege = null;
@@ -154,8 +162,8 @@ public class EditGCIObsController extends InteractivePage {
         }
         try {
             // Check the validity of the data
-            //checkFields(lastName, firstName, date, time, lambertX, lambertY, commune, lieuDit);
-
+            checkFields(lastName, firstName, date, time, lambertX, lambertY, nombre,
+                        leNid, plage, nbEnvol, bagueMale, bagueFemelle, nidObserve, nidProtege, raisonArret, nature);
             // Try to get the observer's id if it exists
             ArrayList<ArrayList<String>> observateur = UseDatabase.selectQuery(String.format("SELECT idObservateur FROM Observateur WHERE nom = '%s' AND prenom = '%s' LIMIT 1", lastName, firstName));
             int idObservateur;
@@ -168,16 +176,25 @@ public class EditGCIObsController extends InteractivePage {
                 // If the observer exists, get its id
                 idObservateur = Integer.parseInt(observateur.get(1).get(0));
             }
-
             UseDatabase.updateQuery(String.format("UPDATE Nid_GCI SET nomPlage = '%s', raisonArretObservation = '%s' , nbEnvol = %d , protection = %d , bagueMale = '%s' ," +
-                    "bagueFemelle = '%s' WHERE idNid = %d'", plage, raisonArret, nbEnvol, nidProtege, bagueMale, bagueFemelle, leNid));
+                    "bagueFemelle = '%s' WHERE idNid = %d", plage, raisonArret, Integer.valueOf(nbEnvol), nidProtege, bagueMale, bagueFemelle, Integer.valueOf(leNid)));
+            System.out.println(nature);
 
-            UseDatabase.updateQuery(String.format("UPDATE Obs_GCI SET nature = '%s', nombre = %d, leNid = '%s'", nature, nombre, leNid));
+            Connection conn = UseDatabase.MySQLConnection();
+            String q3 = "UPDATE Obs_GCI SET nature = ?, nombre = ?, leNid = ? WHERE obsG = ?";
+            PreparedStatement p = conn.prepareStatement(q3);
+            p.setString(1, nature);
+            p.setInt(2, Integer.parseInt(nombre));
+            p.setInt(3, Integer.parseInt(leNid));
+            p.setInt(4, Integer.parseInt(id));
+            p.executeUpdate();
 
             UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE idObs = '%s'", date, time, lambertX, lambertY, idObs));
-
+            System.out.println("30");
             UseDatabase.updateQuery(String.format("UPDATE AObserve set lobservateur = %d WHERE lobservateur = %d", idObservateur, idObs));
+            System.out.println("31");
             Main.showPopup("Donnée mis a jour correctement", lastNameField, false);
+            System.out.println("32");
         } catch (IllegalArgumentException e) {
             // If one of the fields is invalid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);
@@ -197,7 +214,7 @@ public class EditGCIObsController extends InteractivePage {
     private void checkFields (String lastName, String firstName, LocalDate date, String time,
                               String lambertX, String lambertY, String nombre,
                               String idNid, String plage, String nbEnvol,
-                              String bagueMale, String bagueFemelle, String nidObservé) throws IllegalArgumentException  {
+                              String bagueMale, String bagueFemelle, Integer nidObserve, Integer nidProtege, String raisonArret, String nature) throws IllegalArgumentException  {
         if (!lastName.matches("[a-zA-Z\\-éèàçëê\\ ]+"))
             throw new IllegalArgumentException("Le nom ne peut pas être vide et ne doit contenir que des lettres, espaces et tirets");
 
