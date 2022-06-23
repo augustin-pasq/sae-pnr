@@ -15,6 +15,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the FilterBatracien page
+ */
 public class FilterBatracienController extends InteractivePage {
 
     /**
@@ -243,7 +246,7 @@ public class FilterBatracienController extends InteractivePage {
     }
 
     /**
-     * Validate the data and add it to the database
+     * Validate the data filter the select query
      * @param event the event that triggered the method
      */
     @FXML

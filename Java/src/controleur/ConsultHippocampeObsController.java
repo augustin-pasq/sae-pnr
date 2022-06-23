@@ -64,7 +64,7 @@ public class ConsultHippocampeObsController extends InteractivePage {
     private Label especeHippocampe;
 
     /**
-     * The sexe of the seahorse
+     * The gender of the seahorse
      */
     @FXML
     private Label sexe;

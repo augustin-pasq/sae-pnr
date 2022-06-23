@@ -104,7 +104,7 @@ public class DataChouetteController extends InteractivePage {
     private ComboBox<TypeObservation> typeObservationComboBox;
 
     /**
-     * The sex of the owl
+     * The gender of the owl
      */
     @FXML
     private ComboBox<Sexe> sexeComboBox;
