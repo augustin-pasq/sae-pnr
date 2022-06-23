@@ -18,12 +18,12 @@
         <padding>
             <Insets bottom="50.0"/>
         </padding>
-        <Label prefHeight="55.0" prefWidth="270.0" text="Observation" textFill="#00936e">
+        <Label prefHeight="55.0" prefWidth="300.0" text="Observation" textFill="#00936e">
             <font>
                 <Font name="Berlin Sans FB" size="50.0"/>
             </font>
         </Label>
-        <Label id="principal" text="Loutre">
+        <Label id="principal" fx:id="especeLabel">
             <font>
                 <Font name="Berlin Sans FB" size="50.0"/>
             </font>
