@@ -87,7 +87,7 @@ public class UseDatabase {
      * @param query the query to make
      * @return an ArrayList of the results of the query
      */
-    public static ArrayList<ArrayList<String>> selectQuery(String query) {
+    public static ArrayList<ArrayList<String>> selectQuery(String query) throws SQLException {
         ArrayList<ArrayList<String>> output = null;
 
         try {
@@ -111,7 +111,7 @@ public class UseDatabase {
             }
 
             stmt.close();
-        } catch (SQLException e) {
+        } catch (SQLIntegrityConstraintViolationException e) {
             System.err.println("Error executing query:" + e.getMessage());
         }
 
@@ -136,6 +136,8 @@ public class UseDatabase {
             }
         } catch (NullPointerException e) {
             throw new NoInternetException("Not connected to internet");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return success;

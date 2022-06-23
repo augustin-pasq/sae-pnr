@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  *
  * @author Groupe SAE PNR 1D1
  */
-public abstract class InteractivePage implements Initializable {
+public class InteractivePage implements Initializable {
     /**
      * The back button
      */
@@ -39,7 +39,8 @@ public abstract class InteractivePage implements Initializable {
      */
     public void goHome(final ActionEvent event) {
         Data data = (Data) this.homeButton.getScene().getUserData();
-        this.isAdmin = data.isAdmin();
+        if (data != null)
+            this.isAdmin = data.isAdmin();
         if (isAdmin) {
             Main.switchScene("AdminPanel", homeButton);
         } else {

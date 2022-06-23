@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class DeleteLoutreObs extends Application {
+public class Success extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -17,17 +17,17 @@ public class DeleteLoutreObs extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load FXML file
-        URL pathFXML = getClass().getResource("DeleteLoutreObs.fxml");
+        URL pathFXML = getClass().getResource("Success.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
         AnchorPane root = (AnchorPane) fxmlLoader.load();
 
         // Add the stylesheet of the page
         Scene scene = new Scene(root);
-        URL pathCSS = getClass().getResource("StyleDataObs.css");
+        URL pathCSS = getClass().getResource("StyleSpeciesChoice.css");
         scene.getStylesheets().addAll(pathCSS.toExternalForm());
-        // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo
+        // primaryStage.getIcons().setAll(new Image(getClass().getResource("@../../../../data/Logo_PNR.png").toExternalForm())); // Application logo 
         primaryStage.setScene(scene);
-        //primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true); 
         primaryStage.setTitle("PNR");
         primaryStage.show();
     }

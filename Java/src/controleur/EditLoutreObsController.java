@@ -12,13 +12,10 @@ import modele.donnee.UseDatabase;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
-import java.sql.*;
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 /**
  * Controller for the DataLoutre page
@@ -89,7 +86,11 @@ public class EditLoutreObsController extends InteractivePage {
 
     public static void setObs(int numObs) {
         idObs = numObs;
-        observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
+        try {
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromLoutre WHERE ObsL = " + numObs + ";").get(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void goBack(ActionEvent event) {
