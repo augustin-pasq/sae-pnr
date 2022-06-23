@@ -10,8 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the ConsultGCIObs page
+ *
+ * @author Groupe SAE PNR 1D1
+ */
 public class ConsultGCIObsController extends InteractivePage {
 
+    /**
+     * The observation to display
+     */
+    private static ArrayList<String> observation;
     @FXML
     private Label nom;
     @FXML
@@ -45,8 +54,25 @@ public class ConsultGCIObsController extends InteractivePage {
     @FXML
     private Label femelle;
 
-    private static ArrayList<String> observation;
+    /**
+     * Set the observation to display
+     *
+     * @param numObs the id of the observation to display
+     */
+    public static void setObs(int numObs) {
+        try {
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    /**
+     * Initialise the scene
+     *
+     * @param url            the url of the page
+     * @param resourceBundle the resource bundle of the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -69,14 +95,11 @@ public class ConsultGCIObsController extends InteractivePage {
         femelle.setText(observation.get(10));
     }
 
-    public static void setObs(int numObs) {
-        try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromGCI WHERE ObsG = " + numObs + ";").get(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    /**
+     * Go back to the previous page
+     *
+     * @param event the event that triggered the action
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }

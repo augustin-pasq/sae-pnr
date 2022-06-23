@@ -17,12 +17,22 @@ public class ConsultDataController extends InteractivePage {
     @FXML
     private Button generateChartButton;
 
+    /**
+     * Got to the SpeciesChoice page
+     *
+     * @param event the event that triggered the action
+     */
     @FXML
     private void consultObs(ActionEvent event) {
         Data data = new Data("ConsultData");
         Main.switchScene("SpeciesChoice", consultObsButton, data);
     }
 
+    /**
+     * Got to the ChartGeneration page
+     *
+     * @param event the event that triggered the action
+     */
     @FXML
     private void generateChart(ActionEvent event) {
         Main.switchScene("GenerateChart", generateChartButton);

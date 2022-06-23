@@ -21,17 +21,50 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 
+/**
+ * Controller for the DataBatracien page
+ */
 public class DataBatracienController extends InteractivePage {
 
+    /**
+     * The list of batracien species
+     */
     ObservableList<EspeceBatracien> especeList = FXCollections.observableArrayList(EspeceBatracien.values());
+    /**
+     * The list of sky weather states
+     */
     ObservableList<String> meteoCielList = FXCollections.observableArrayList("dégagé", "semi-dégagé", "nuageux");
+    /**
+     * The list of temperature states
+     */
     ObservableList<String> meteoTemperatureList = FXCollections.observableArrayList("froid", "moyen", "chaud");
+    /**
+     * The list of wind states
+     */
     ObservableList<String> meteoVentList = FXCollections.observableArrayList("non", "léger", "moyen", "fort");
+    /**
+     * The list of rain states
+     */
     ObservableList<String> meteoPluieList = FXCollections.observableArrayList("non", "légère", "moyenne", "forte");
+    /**
+     * The list of option to whether the zone is temporary or not
+     */
     ObservableList<String> zoneTemporaireList = FXCollections.observableArrayList("Oui", "Non");
+    /**
+     * The list of types af ponds
+     */
     ObservableList<String> typeMareeList = FXCollections.observableArrayList("Prairie", "Etang", "Marais", "Mare");
+    /**
+     * The list of types of slopes
+     */
     ObservableList<String> typePenteList = FXCollections.observableArrayList("Raide", "Abrupte", "Douce");
+    /**
+     * The of covering types
+     */
     ObservableList<String> typeOuvertureList = FXCollections.observableArrayList("Abritee", "Semi-Abritee", "Ouverte");
+    /**
+     * The list of types of
+     */
     ObservableList<String> typeVegetationList = FXCollections.observableArrayList("environnement", "bordure", "ripisyle");
 
     @FXML
