@@ -17,11 +17,8 @@
         <Insets />
     </opaqueInsets>
     <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="405.0" prefWidth="662.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <padding>
-            <Insets left="20.0" right="20.0" />
-        </padding>
         <HBox prefHeight="299.0" prefWidth="1240.0">
-            <AnchorPane prefHeight="177.0" prefWidth="1240.0" HBox.hgrow="ALWAYS">
+            <AnchorPane prefHeight="78.0" prefWidth="1249.0" HBox.hgrow="ALWAYS">
                 <Button id="Back" fx:id="backButton" layoutX="459.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
                     <graphic>
                         <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
@@ -68,10 +65,13 @@
       <HBox fx:id="legendeContainer" prefHeight="100.0" prefWidth="200.0">
          <padding>
             <Insets right="50.0" />
-         </padding></HBox>
+         </padding>
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" />
+         </VBox.margin></HBox>
         <VBox fx:id="scrollPaneContainer" alignment="CENTER" prefHeight="917.0" prefWidth="1240.0" spacing="20.0">
-         <padding>
-            <Insets right="50.0" />
-         </padding></VBox>
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" />
+         </VBox.margin></VBox>
     </VBox>
 </AnchorPane>
