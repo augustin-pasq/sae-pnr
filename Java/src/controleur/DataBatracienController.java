@@ -381,7 +381,7 @@ public class DataBatracienController extends InteractivePage {
      * @param zoneProfondeur area depth of the observation
      * @param zoneSurface area surface of the observation
      * @param vegetation vegetation of the observation
-     * @return
+     * @return null, this is a unit test return
      * @throws IllegalArgumentException if one of the fields is invalid, with a
      *                                  detailed message
      */

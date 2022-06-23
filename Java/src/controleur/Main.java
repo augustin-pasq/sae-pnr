@@ -31,14 +31,17 @@ import java.util.ResourceBundle;
  * @author Groupe SAE PNR 1D1
  */
 public class Main extends Application implements Initializable {
+
     /**
-     * The main instance of the application
+     * The instance of the class
      */
     public static final Main instance = new Main();
+
     /**
-     * List of the previous scenes
+     * List containing the previous scenes which have been loaded 
      */
     public ArrayList<String> prevScene = new ArrayList<>(Collections.singleton("Login"));
+
     /**
      * The current scene
      */
@@ -109,7 +112,6 @@ public class Main extends Application implements Initializable {
             int lastIndex = Main.instance.prevScene.size() - 1;
             Button target = (Button) event.getSource();
             switchScene(Main.instance.prevScene.get(lastIndex), target, target.getScene().getUserData());
-
             lastIndex = Main.instance.prevScene.size() - 1;
             Main.instance.prevScene.remove(lastIndex);
             Main.instance.prevScene.remove(--lastIndex);
@@ -121,6 +123,7 @@ public class Main extends Application implements Initializable {
      *
      * @param message the message to display
      * @param event   the event that triggered the method
+     * @param error   true if the message is an error, false otherwise
      * @return the popup
      */
     public static Popup showPopup(String message, @NotNull Event event, boolean error) {
@@ -133,6 +136,7 @@ public class Main extends Application implements Initializable {
      *
      * @param message the message to display
      * @param target  An element belonging to the current scene
+     * @param error   if the popup is an error
      * @return the popup
      */
     public static Popup showPopup(String message, @NotNull Control target, boolean error) {

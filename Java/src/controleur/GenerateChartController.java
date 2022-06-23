@@ -11,6 +11,9 @@ import modele.donnee.EspeceObservee;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the GenerateChart page
+ */
 public class GenerateChartController extends InteractivePage {
 
     ObservableList<EspeceObservee> especeList = FXCollections.observableArrayList(EspeceObservee.values());
@@ -33,6 +36,11 @@ public class GenerateChartController extends InteractivePage {
         ordonneeComboBox.setItems(ordoneeList);
     }
 
+    /**
+     * Called when the generate button is clicked, make a chart
+     * 
+     * @param event the event
+     */
     @FXML
     public void makeChart(Event event) {
         Main.showPopup("Cette fonctionnalité n'est pas encore implémentée", this.homeButton, false);

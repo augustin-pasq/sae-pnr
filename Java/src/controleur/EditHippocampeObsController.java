@@ -189,6 +189,11 @@ public class EditHippocampeObsController extends InteractivePage {
 
     }
 
+    /**
+     * Validate the data and add it to the database
+     *
+     * @param event the event that triggered the method
+     */
     @FXML
     public void validate(ActionEvent event) {
         String lastName = lastNameField.getText().toUpperCase();

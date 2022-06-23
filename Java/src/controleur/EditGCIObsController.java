@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
-
+/**
+ * Controller for the EditGCIObs page
+ */
 public class EditGCIObsController extends InteractivePage {
    /**
      * The list of nest content possibilities
