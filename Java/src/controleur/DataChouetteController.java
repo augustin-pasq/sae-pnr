@@ -149,9 +149,9 @@ public class DataChouetteController extends InteractivePage {
         if (protocoleComboBox.getValue() != null) {
             protocole = protocoleComboBox.getValue().equals("Oui") ? 1 : 0;
         }
-        String typeObservation = typeObservationComboBox.getValue() == null ? ""
-                : typeObservationComboBox.getValue().toString();
-        String sexe = sexeComboBox.getValue() == null ? "" : sexeComboBox.getValue().toString();
+        String typeObservation = typeObservationComboBox.getValue() == null ? null
+                : typeObservationComboBox.getValue().toString().replace("_", " ET ").replace("VISUELLE", "VISUEL");;
+        String sexe = sexeComboBox.getValue() == null ? "INCONNU" : sexeComboBox.getValue().toString();
 
         try {
             checkFields(lastName, firstName, date, time, lambertX, lambertY);
@@ -197,11 +197,13 @@ public class DataChouetteController extends InteractivePage {
                     String.format("INSERT INTO Chouette (numIndividu, espece, sexe) VALUES ('%s', '%s', '%s')",
                             numIndividu, espece, sexe));
 
-            String typeObs = typeObservation.replace("_", " ET ").replace("VISUELLE", "VISUEL");
-            System.out.println(typeObs);
-            UseDatabase.updateQuery(String.format(
-                    "INSERT INTO Obs_Chouette (numObs, leNumIndividu, typeObs, protocole) VALUES ('%s', '%s', '%s', '%s')",
-                    idObs, numIndividu, typeObs, protocole));
+            String q2 = "INSERT INTO Obs_Chouette (numObs, leNumIndividu, typeObs, protocole) VALUES (?, ?, ?, ?)";
+            PreparedStatement prep2 = conn.prepareStatement(q2);
+            prep2.setInt(1, idObs);
+            prep2.setString(2, numIndividu);
+            prep2.setString(3, typeObservation);
+            prep2.setObject(4, protocole);
+            prep2.executeUpdate();
 
             Main.showPopup("Observation enregistrée correctement", event, false);
 

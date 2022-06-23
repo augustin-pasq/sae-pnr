@@ -170,7 +170,7 @@ public class EditLoutreObsController extends InteractivePage {
             UseDatabase.updateQuery(String.format("UPDATE Observation SET dateObs = '%s', heureObs = '%s', lieu_Lambert_X = '%s', lieu_Lambert_Y = '%s' WHERE idObs = '%s'", date, time, lambertX, lambertY, idObs));
             UseDatabase.updateQuery(String.format("UPDATE AObserve set lobservateur = %d WHERE lobservateur = %d", idObservateur, idObs));
 
-            Main.showPopup("Donnée mis a jour correctement", lastNameField, false);
+            Main.showPopup("Données mises à jour correctement", lastNameField, false);
         } catch (IllegalArgumentException e) {
             // If one of the fields is invalid, show a popup with the error message
             Main.showPopup(e.getMessage(), event, true);
