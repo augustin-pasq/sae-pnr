@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -17,6 +18,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -97,7 +99,7 @@ public class Main extends Application implements Initializable {
         if (Main.instance.prevScene.size() > 1) {
             int lastIndex = Main.instance.prevScene.size() - 1;
             Button target = (Button) event.getSource();
-            switchScene(Main.instance.prevScene.get(lastIndex), target, (Data) target.getScene().getUserData());
+            switchScene(Main.instance.prevScene.get(lastIndex), target, target.getScene().getUserData());
 
             lastIndex = Main.instance.prevScene.size() - 1;
             Main.instance.prevScene.remove(lastIndex);
@@ -176,10 +178,14 @@ public class Main extends Application implements Initializable {
     public void start(Stage primaryStage) throws IOException {
         Scene scene = loadScene("Login");
         primaryStage.setScene(scene);
-        primaryStage.setTitle("PNR");
+        primaryStage.setTitle("Parc Naturel Régional du Golfe du Morbihan");
+
+        // Set the icon
+        File logo = new File("data/Logo_PNR.png");
+        Image image = new Image(logo.toURI().toString());
+        primaryStage.getIcons().add(image);
+
         primaryStage.show();
-        // set the icon to the logo located in data directory
-        //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/data/logo.png")));
     }
 
     /**
@@ -197,7 +203,6 @@ public class Main extends Application implements Initializable {
      * @param name the name of the scene
      */
     private Scene loadScene(@NotNull String name) throws IOException {
-        System.out.println("Loading scene " + name);
         // Load FXML file
         URL pathFXML = getClass().getResource("../vue/" + name + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(pathFXML);
