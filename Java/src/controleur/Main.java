@@ -181,7 +181,7 @@ public class Main extends Application implements Initializable {
         primaryStage.setTitle("Parc Naturel Régional du Golfe du Morbihan");
 
         // Set the icon
-        File logo = new File("data/Logo_PNR.png");
+        File logo = new File("data/icon.png");
         Image image = new Image(logo.toURI().toString());
         primaryStage.getIcons().add(image);
 

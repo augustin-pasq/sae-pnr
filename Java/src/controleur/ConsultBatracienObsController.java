@@ -21,52 +21,148 @@ public class ConsultBatracienObsController extends InteractivePage {
      * The observation to display
      */
     private static ArrayList<String> observation;
+
+    /**
+     * The last name of the observer
+     */
     @FXML
     private Label nom;
+
+    /**
+     * The first name of the observer
+     */
     @FXML
     private Label prenom;
+
+    /**
+     * The date of the observation
+     */
     @FXML
     private Label date;
+
+    /**
+     * The time of the observation
+     */
     @FXML
     private Label heure;
+
+    /**
+     * The X coordinate of the observation
+     */
     @FXML
     private Label coordX;
+
+    /**
+     * The Y coordinate of the observation
+     */
     @FXML
     private Label coordY;
+
+    /**
+     * The specie of the observation
+     */
     @FXML
     private Label especeBatracien;
+
+    /**
+     * The number of adults of the observation
+     */
     @FXML
     private Label nbAdultes;
+
+    /**
+     * The number of amplexus of the observation
+     */
     @FXML
     private Label nbAmplexus;
+
+    /**
+     * The number of clutch of the observation
+     */
     @FXML
     private Label nbPontes;
+
+    /**
+     * The number of tadpole of the observation
+     */
     @FXML
     private Label nbTetards;
+
+    /**
+     * The water temperature of the observation
+     */
     @FXML
     private Label temperature;
+
+    /**
+     * The sky condition of the observation
+     */
     @FXML
     private Label ciel;
+
+    /**
+     * The air temperature of the observation
+     */
     @FXML
     private Label meteoTemperature;
+
+    /**
+     * The wind intensity of the observation
+     */
     @FXML
     private Label vent;
+
+    /**
+     * The rain intensity of the observation
+     */
     @FXML
     private Label pluie;
+
+    /**
+     * The temporary humid area value of the observation
+     */
     @FXML
     private Label temporaire;
+
+    /**
+     * The depth of the area
+     */
     @FXML
     private Label profondeur;
+
+    /**
+     * The surface of the area
+     */
     @FXML
     private Label surface;
+
+    /**
+     * The tide's type of the area
+     */
     @FXML
     private Label maree;
+
+    /**
+     * The slope of the area
+     */
     @FXML
     private Label pente;
+
+    /**
+     * The opening of the area
+     */
     @FXML
     private Label ouverture;
+
+    /**
+     * The vegetation of the area
+     */
     @FXML
     private Label natureVegetation;
+
+    /**
+     * The vegetation's type of the area
+     */
     @FXML
     private Label vegetation;
 
@@ -77,7 +173,8 @@ public class ConsultBatracienObsController extends InteractivePage {
      */
     public static void setObs(int numObs) {
         try {
-            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE ObsB = " + numObs + ";").get(1);
+            observation = UseDatabase.selectQuery("SELECT * FROM vue_allFromBatracien WHERE ObsB = " + numObs + ";")
+                    .get(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
