@@ -16,64 +16,64 @@ import java.util.ResourceBundle;
  */
 public class ConsultChouetteObsController extends InteractivePage {
 
-    @FXML
     /**
      * The first name of the observer
      */
+    @FXML
     private Label nom;
 
-    @FXML
     /**
      * The last name of the observer
      */
-    private Label prenom;
     @FXML
-
+    private Label prenom;
+    
     /**
      * The date of the observation
      */
+    @FXML
     private Label date;
 
-    @FXML
     /**
      * The time of the observation
      */
+    @FXML
     private Label heure;
 
-    @FXML
     /**
      * The X Lambert93 coordinates of the observation
      */
+    @FXML
     private Label coordX;
 
-    @FXML
     /**
      * The Y Lambert93 coordinates of the observation
      */
+    @FXML
     private Label coordY;
 
-    @FXML
     /**
      * The species of the observation
      */
+    @FXML
     private Label especeChouette;
 
-    @FXML
     /**
      * Indicates if the observation protocol is followed
      */
+    @FXML
     private Label protocole;
 
-    @FXML
     /**
      * The type of the observation
      */
+    @FXML
     private Label typeObs;
 
-    @FXML
     /**
      * The sex of the owl
      */
+    @FXML
     private Label sexe;
 
     /**

@@ -21,100 +21,100 @@ public class ConsultGCIObsController extends InteractivePage {
      */
     private static ArrayList<String> observation;
 
-    @FXML
     /**
      * The last naame of the observer
      */
+    @FXML
     private Label nom;
 
-    @FXML
     /**
      * The first name of the observer
      */
+    @FXML
     private Label prenom;
 
-    @FXML
     /**
      * The date of the observation
      */
+    @FXML
     private Label date;
 
-    @FXML
     /**
      * The time of the observation
      */
+    @FXML
     private Label heure;
 
-    @FXML
     /**
      * The X Lambert93 coordinates of the observation
      */
+    @FXML
     private Label coordX;
 
-    @FXML
     /**
      * The Y Lambert93 coordinates of the observation
      */
+    @FXML
     private Label coordY;
 
-    @FXML
     /**
      * The nature of the observation
      */
+    @FXML
     private Label nature;
 
-    @FXML
     /**
      * The amount of items (nature attribute) observed
      */
+    @FXML
     private Label nombre;
 
-    @FXML
     /**
      * Indicates if the nid is already observed
      */
+    @FXML
     private Label dejaObserve;
 
-    @FXML
     /**
      * The ID of the nest
      */
+    @FXML
     private Label idNid;
 
-    @FXML
     /**
      * The name of the beach
      */
+    @FXML
     private Label plage;
 
-    @FXML
     /**
      * The reason why the observation was stopped
      */
+    @FXML
     private Label raisonStop;
 
-    @FXML
     /**
      * The amount of flight in the nest
      */
+    @FXML
     private Label nbEnvols;
 
-    @FXML
     /**
      * Indicates if the nest is protected
      */
+    @FXML
     private Label protege;
 
-    @FXML
     /**
      * The code of the male ring
      */
+    @FXML
     private Label male;
 
-    @FXML
     /**
      * The code of the female ring
      */
+    @FXML
     private Label femelle;
 
     /**

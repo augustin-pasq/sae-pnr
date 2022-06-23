@@ -21,76 +21,76 @@ public class ConsultHippocampeObsController extends InteractivePage {
      */
     private static ArrayList<String> observation;
 
-    @FXML
     /**
      * The last name of the observer
      */
+    @FXML
     private Label nom;
 
-    @FXML
     /**
      * The first name of the observer
      */
+    @FXML
     private Label prenom;
 
-    @FXML
     /**
      * The date of the observation
      */
+    @FXML
     private Label date;
 
-    @FXML
     /**
      * The time of the observation
      */
+    @FXML
     private Label heure;
 
-    @FXML
     /**
      * The X Lambert93 coordinates of the observation
      */
+    @FXML
     private Label coordX;
 
-    @FXML
     /**
      * The Y Lambert93 coordinates of the observation
      */
+    @FXML
     private Label coordY;
 
-    @FXML
     /**
      * The spec of the seahorse
      */
+    @FXML
     private Label especeHippocampe;
 
-    @FXML
     /**
      * The sexe of the seahorse
      */
+    @FXML
     private Label sexe;
 
-    @FXML
     /**
      * The temperature of the water
      */
+    @FXML
     private Label eau;
 
-    @FXML
     /**
      * The type of fishing of the seahorse
      */
+    @FXML
     private Label peche;
 
-    @FXML
     /**
      * The size of the seahorse
      */
+    @FXML
     private Label taille;
 
-    @FXML
     /**
      * Indicates if the seahorse is gestant
      */
+    @FXML
     private Label gestant;
 
     /**

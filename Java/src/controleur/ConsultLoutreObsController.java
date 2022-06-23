@@ -16,58 +16,58 @@ import java.util.ResourceBundle;
  */
 public class ConsultLoutreObsController extends InteractivePage {
 
-    @FXML
     /**
      * The last name of the observer
      */
+    @FXML
     private Label nom;
 
-    @FXML
     /**
      * The first name of the observer
      */
+    @FXML
     private Label prenom;
 
-    @FXML
     /**
      * The date of the observation
      */
+    @FXML
     private Label date;
 
-    @FXML
     /**
      * The time of the observation
      */
+    @FXML
     private Label heure;
 
-    @FXML
     /**
      * The X Lambert93 coordinates of the observation
      */
+    @FXML
     private Label coordX;
 
-    @FXML
     /**
      * The Y Lambert93 coordinates of the observation
      */
+    @FXML
     private Label coordY;
 
-    @FXML
     /**
      * The village where the otter is observed
      */
+    @FXML
     private Label commune;
 
-    @FXML
     /**
      * The hamlet where the otter is observed
      */
+    @FXML
     private Label lieudit;
 
-    @FXML
     /**
      * Indicates if the index is positive, negative or not determined
      */
+    @FXML
     private Label indice;
 
     /**
