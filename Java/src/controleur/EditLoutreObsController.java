@@ -87,6 +87,12 @@ public class EditLoutreObsController extends InteractivePage {
 
     private static ArrayList<String> observation;
 
+    /**
+     * Allows you to retrieve all the data of an observation by making a query in
+     * the database
+     * 
+     * @param numObs Observation number
+     */
     public static void setObs(int numObs) {
         idObs = numObs;
         try {
@@ -96,6 +102,11 @@ public class EditLoutreObsController extends InteractivePage {
         }
     }
 
+    /**
+     * Go back to the previous page
+     *
+     * @param event the event that triggered the action
+     */
     public void goBack(ActionEvent event) {
         Main.goBack(event);
     }
