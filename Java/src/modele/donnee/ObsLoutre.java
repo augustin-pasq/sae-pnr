@@ -23,7 +23,7 @@ public class ObsLoutre extends Observation {
      * @param lieu the place of the observation
      * @param observateurs the list of the observers
      * @param indice the indice of the observation
-     * @see modele.donnee.Observation(int, java.sql.Date, java.sql.Time, java.lang.String, java.util.ArrayList)
+     * @see modele.donnee.Observation
      */
     public ObsLoutre(int id, Date date, Time heure, Lieu lieu, ArrayList<Observateur> observateurs, IndiceLoutre indice) {
         super(id, date, heure, lieu, observateurs);
